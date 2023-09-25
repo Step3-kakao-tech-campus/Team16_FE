@@ -1,11 +1,14 @@
-import { useEffect, useRef } from 'react';
+import { useRef, useEffect } from 'react';
 
 const drawRadarChart = (
-  canvas: HTMLCanvasElement,
+  canvas: HTMLCanvasElement | null,
   labels: string[],
   data: number[],
   willAnimate: boolean,
 ): void => {
+  if (!canvas) {
+    return;
+  }
   const ctx = canvas.getContext('2d');
   if (!ctx) {
     return;
@@ -130,25 +133,31 @@ const drawRadarChart = (
   animate();
 };
 
-const DetailedPetPage = () => {
+const RadarChart = ({
+  setCanvas,
+  width,
+  height,
+  canvas,
+  labels,
+  data,
+  willAnimate,
+}: {
+  setCanvas: (canvasRef: HTMLCanvasElement | null) => void;
+  width: number;
+  height: number;
+  canvas: HTMLCanvasElement | null;
+  labels: string[];
+  data: number[];
+  willAnimate: boolean;
+}) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    if (!canvasRef.current) {
-      return;
-    }
-    drawRadarChart(canvasRef.current, labels, data, true);
-  }, []);
+    setCanvas(canvasRef.current);
+    drawRadarChart(canvas, labels, data, willAnimate);
+  }, [canvasRef.current]);
 
-  const labels = ['귀여움', '침착함', '유머감각', '외모', '의젓함'];
-  const data = [3, 2, 3, 5, 4]; // 각 항목의 데이터 값
-
-  return (
-    <div>
-      <h1>Detailed Pet Page</h1>
-      <canvas ref={canvasRef} width="500" height="500"></canvas>
-    </div>
-  );
+  return <canvas ref={canvasRef} width={width} height={height} />;
 };
 
-export default DetailedPetPage;
+export default RadarChart;
