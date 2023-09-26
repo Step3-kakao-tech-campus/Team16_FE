@@ -71,8 +71,8 @@ const DetailPetData = () => {
   };
   const radarChartProps: RadarChartProps = {
     setCanvas,
-    width: 480,
-    height: 480,
+    width: 400,
+    height: 400,
     canvas,
     labels,
     data: mockDetailPetInfo.polygonProfile,
