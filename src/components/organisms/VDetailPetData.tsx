@@ -1,10 +1,26 @@
 import RadarChart from 'components/atoms/RadarChart';
 import DetailPetInfo from 'components/molecules/DetailPetInfo';
-import { radarChartProps, mockDetailPetInfoProps } from './DetailPetData';
+
+export interface RadarChartProps {
+  setCanvas: React.Dispatch<React.SetStateAction<HTMLCanvasElement | null>>;
+  width: number;
+  height: number;
+  canvas: HTMLCanvasElement | null;
+  labels: string[];
+  data: number[];
+  willAnimate: boolean;
+}
+export interface MockDetailPetInfoProps {
+  name: string;
+  age: string;
+  sex: string;
+  weight: number;
+  description: string;
+}
 
 interface Props {
-  mockDetailPetInfoProps: mockDetailPetInfoProps;
-  radarChartProps: radarChartProps;
+  mockDetailPetInfoProps: MockDetailPetInfoProps;
+  radarChartProps: RadarChartProps;
 }
 
 const VDetailPetData = ({ mockDetailPetInfoProps, radarChartProps }: Props) => {
