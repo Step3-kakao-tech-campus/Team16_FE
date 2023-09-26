@@ -55,7 +55,7 @@ const VDetailPetInfo = (data: MockDetailPetInfoProps) => {
             {` ${data.protectionExpirationDate}`}
           </div>
         </div>
-        <div>{data.description}</div>
+        <div className="w-full">{data.description}</div>
       </div>
     </div>
   );

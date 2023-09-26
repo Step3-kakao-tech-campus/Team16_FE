@@ -16,7 +16,7 @@ export interface MockDetailPetInfoProps {
   age: string;
   sex: string;
   weight: number;
-  description: string;
+  description: JSX.Element[];
   protectionExpirationDate: string | null;
   vaccinationStatus: string;
   neutralizationStatus: string;
