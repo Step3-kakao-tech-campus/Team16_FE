@@ -1,11 +1,11 @@
 import DetailPetData from 'components/organisms/DetailPetData';
 
-const DetailedPetPage = () => {
+const DetailPetPage = () => {
   return (
     <div>
-      <DetailPetData />
+      <DetailPetData petId={1} />
     </div>
   );
 };
 
-export default DetailedPetPage;
+export default DetailPetPage;
