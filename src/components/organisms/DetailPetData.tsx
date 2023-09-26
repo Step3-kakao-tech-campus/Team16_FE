@@ -1,11 +1,13 @@
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import VDetailPetData, {
   MockDetailPetInfoProps,
   RadarChartProps,
 } from './VDetailPetData';
 // import { useQuery } from '@tanstack/react-query';
 
-const DetailPetData = ({ petId }: { petId: number }) => {
+const DetailPetData = () => {
+  const params = useParams();
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
   // const { data } = useQuery({
   //   queryKey: ['pet', petId],
@@ -42,14 +44,27 @@ const DetailPetData = ({ petId }: { petId: number }) => {
 } */
 
   const labels = ['귀여움', '침착함', '유머감각', '외모', '의젓함'];
-  const mData = [3, 2, 3, 5, 4];
 
   const mockDetailPetInfo: MockDetailPetInfoProps = {
+    shelterId: 1,
     name: '뽀삐',
     age: '3살',
-    sex: '수컷',
+    sex: 'Male',
     weight: 5,
     description: '뽀삐는 귀여움이 넘치는 강아지입니다.',
+    protectionExpirationDate: '2023-10-25',
+    vaccinationStatus: 'YES',
+    neutralizationStatus: 'YES',
+    adoptionStatus: 'NO',
+    profileImageUrl: 'https://...',
+    size: '수박만함',
+    polygonProfile: {
+      intelligence: 1,
+      affinity: 3,
+      athletic: 4,
+      adaptability: 3,
+      activeness: 2,
+    },
   };
   const radarChartProps: RadarChartProps = {
     setCanvas,
@@ -57,7 +72,7 @@ const DetailPetData = ({ petId }: { petId: number }) => {
     height: 240,
     canvas,
     labels,
-    data: mData,
+    data: mockDetailPetInfo.polygonProfile,
     willAnimate: true,
   };
 
