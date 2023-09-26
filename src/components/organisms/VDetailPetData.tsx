@@ -34,7 +34,7 @@ interface Props {
 const VDetailPetData = ({ mockDetailPetInfoProps, radarChartProps }: Props) => {
   return (
     <div className="flex flex-col items-center">
-      <img src="assets/logo512.png" alt="z" />
+      <img src={mockDetailPetInfoProps.profileImageUrl} alt="z" />
       <DetailPetInfo {...mockDetailPetInfoProps} />
       <RadarChart {...radarChartProps} />
     </div>

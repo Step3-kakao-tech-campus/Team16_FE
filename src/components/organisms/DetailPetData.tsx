@@ -56,7 +56,7 @@ const DetailPetData = () => {
     vaccinationStatus: 'YES',
     neutralizationStatus: 'YES',
     adoptionStatus: 'NO',
-    profileImageUrl: 'https://...',
+    profileImageUrl: '/assets/logo512.png',
     size: '수박만함',
     polygonProfile: {
       intelligence: 1,
