@@ -10,7 +10,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<DetailPetPage />} />
+          <Route path="/pet/:id" element={<DetailPetPage />} />
         </Routes>
       </BrowserRouter>
     </RecoilRoot>

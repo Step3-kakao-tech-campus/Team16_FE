@@ -12,7 +12,8 @@
     "ecmaVersion": "latest",
     "ecmaFeatures": {
       "jsx": true
-    }
+    },
+    "project": "./tsconfig.json"
   },
   "rules": {
     "react/jsx-uses-vars": "error",
