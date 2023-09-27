@@ -1,13 +1,33 @@
 import { useNavigate } from 'react-router-dom';
 import Banner from 'components/atoms/Banner';
 import LoginInputForm from 'components/organisms/LoginInputForm';
-import React from 'react';
+import React, { ReactComponentElement, useState } from 'react';
+
+interface UserInfo {
+  email: string;
+  password: string;
+}
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  // const emailReg = /^[\w.-]+@[\w.-]+\.\w+$/g; // email형식
+  // userIdRegex.test(e.target.value) -> state에 따라 true false 값 가져오기 -> validation 함수 필요
+
+  const emailValidate = (text: string) => {
+    const emailReg = /^[\w.-]+@[\w.-]+\.\w+$/g;
+    if (!emailReg.test(text)) {
+      return <div>Error Message</div>;
+    }
+    return <div>success</div>;
+  };
 
   return (
-    <div>
+    <div
+      style={{
+        backgroundImage: 'url(assets/backgroundLogo.png)',
+        backgroundRepeat: 'no-repeat',
+      }}
+    >
       <Banner className="font-bold text-2xl">로그인</Banner>
       <Banner className="font-semibold text-lg">
         애니모리 친구들이 기다리고 있어요 :)
@@ -17,7 +37,8 @@ const LoginPage = () => {
         onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
           e.preventDefault();
           // email, password 보내기
-          console.log('submit');
+          // emailValidate();
+          console.log(e.target);
         }}
       />
 
