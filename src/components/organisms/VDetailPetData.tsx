@@ -1,5 +1,7 @@
-import RadarChart from 'components/atoms/RadarChart';
+import RadarChart, { PolygonProfile } from 'components/atoms/RadarChart';
 import DetailPetInfo from 'components/molecules/DetailPetInfo';
+import ModalPortal from 'commons/ModalPortal';
+import ImageModal from 'commons/ImageModal';
 
 export interface RadarChartProps {
   setCanvas: React.Dispatch<React.SetStateAction<HTMLCanvasElement | null>>;
@@ -7,28 +9,57 @@ export interface RadarChartProps {
   height: number;
   canvas: HTMLCanvasElement | null;
   labels: string[];
-  data: number[];
+  data: PolygonProfile;
   willAnimate: boolean;
 }
 export interface MockDetailPetInfoProps {
+  shelterId: number;
   name: string;
   age: string;
   sex: string;
   weight: number;
-  description: string;
+  description: JSX.Element[];
+  protectionExpirationDate: string | null;
+  vaccinationStatus: string;
+  neutralizationStatus: string;
+  adoptionStatus: string;
+  profileImageUrl: string;
+  size: string;
+  polygonProfile: PolygonProfile;
 }
 
 interface Props {
   mockDetailPetInfoProps: MockDetailPetInfoProps;
   radarChartProps: RadarChartProps;
+  modal: boolean;
+  setModalOpen: () => void;
+  setModalClose: () => void;
+  imageUrl: string;
 }
 
-const VDetailPetData = ({ mockDetailPetInfoProps, radarChartProps }: Props) => {
+const VDetailPetData = ({
+  mockDetailPetInfoProps,
+  radarChartProps,
+  modal,
+  setModalOpen,
+  setModalClose,
+  imageUrl,
+}: Props) => {
   return (
-    <div className="flex flex-col items-center">
-      <img src="assets/logo512.png" alt="z" />
-      <DetailPetInfo {...mockDetailPetInfoProps} />
-      <RadarChart {...radarChartProps} />
+    <div className="flex min-w-[375px] items-center flex-col justify-center md:flex-row">
+      <img
+        className="w-1/2 h-1/2"
+        src={mockDetailPetInfoProps.profileImageUrl}
+        alt="z"
+        onClick={setModalOpen}
+      />
+      <ModalPortal>
+        {modal && <ImageModal imageUrl={imageUrl} onClose={setModalClose} />}
+      </ModalPortal>
+      <div className="flex flex-col items-center">
+        <DetailPetInfo {...mockDetailPetInfoProps} />
+        <RadarChart {...radarChartProps} />
+      </div>
     </div>
   );
 };

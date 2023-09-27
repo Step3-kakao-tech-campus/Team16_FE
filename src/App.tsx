@@ -1,23 +1,24 @@
 import './App.css';
 import { RecoilRoot } from 'recoil';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import DetailedPetPage from 'pages/DetailPetPage';
-import Home from 'pages/HomePage';
-import LoginPage from 'pages/LoginPage';
-import SignupPage from 'pages/SignupPage';
+import DetailPetPage from 'pages/DetailPetPage';
+import Home from 'pages/Home';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <RecoilRoot>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<DetailedPetPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-        </Routes>
-      </BrowserRouter>
-    </RecoilRoot>
+    <QueryClientProvider client={queryClient}>
+      <RecoilRoot>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/pet/:id" element={<DetailPetPage />} />
+          </Routes>
+        </BrowserRouter>
+      </RecoilRoot>
+    </QueryClientProvider>
   );
 }
 

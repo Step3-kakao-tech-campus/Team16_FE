@@ -1,5 +1,13 @@
 import { useRef, useEffect } from 'react';
 
+export interface PolygonProfile {
+  intelligence: number;
+  affinity: number;
+  athletic: number;
+  adaptability: number;
+  activeness: number;
+}
+
 const drawRadarChart = (
   canvas: HTMLCanvasElement | null,
   labels: string[],
@@ -68,7 +76,7 @@ const drawRadarChart = (
     ctx.setLineDash([5, 5]);
     for (let i = 0; i < 5; i += 1) {
       ctx.beginPath();
-      for (let j = 0; j < labels.length; i += 1) {
+      for (let j = 0; j < labels.length; j += 1) {
         const angle = j * step;
         const x = centerX + ((radius * (i + 1)) / 5) * Math.cos(angle - 0.32);
         const y = centerY + ((radius * (i + 1)) / 5) * Math.sin(angle - 0.32);
@@ -147,14 +155,21 @@ const RadarChart = ({
   height: number;
   canvas: HTMLCanvasElement | null;
   labels: string[];
-  data: number[];
+  data: PolygonProfile;
   willAnimate: boolean;
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
+  const dataArr = new Array(5).fill(0);
+  dataArr[0] = data.intelligence;
+  dataArr[1] = data.affinity;
+  dataArr[2] = data.athletic;
+  dataArr[3] = data.adaptability;
+  dataArr[4] = data.activeness;
+
   useEffect(() => {
     setCanvas(canvasRef.current);
-    drawRadarChart(canvas, labels, data, willAnimate);
+    drawRadarChart(canvas, labels, dataArr, willAnimate);
   }, [canvasRef.current]);
 
   return <canvas ref={canvasRef} width={width} height={height} />;

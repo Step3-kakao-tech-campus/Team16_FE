@@ -1,14 +1,7 @@
+import { MockDetailPetInfoProps } from 'components/organisms/VDetailPetData';
 import VDetailPetInfo from './VDetailPetInfo';
 
-interface DetailPetInfoProps {
-  name: string;
-  age: string;
-  sex: string;
-  weight: number;
-  description: string;
-}
-
-const DetailPetInfo = (data: DetailPetInfoProps) => {
+const DetailPetInfo = (data: MockDetailPetInfoProps) => {
   return <VDetailPetInfo {...data} />;
 };
 
