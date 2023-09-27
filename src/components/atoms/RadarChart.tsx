@@ -1,5 +1,13 @@
 import { useRef, useEffect } from 'react';
 
+export interface PolygonProfile {
+  intelligence: number;
+  affinity: number;
+  athletic: number;
+  adaptability: number;
+  activeness: number;
+}
+
 const drawRadarChart = (
   canvas: HTMLCanvasElement | null,
   labels: string[],
@@ -30,7 +38,7 @@ const drawRadarChart = (
     ctx.font = '12px Arial';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    for (let i = 0; i < labels.length; i++) {
+    for (let i = 0; i < labels.length; i += 1) {
       const angle = i * step;
       const x = centerX + radius * 1.1 * Math.cos(angle - 0.32);
       const y = centerY + radius * 1.1 * Math.sin(angle - 0.32);
@@ -42,7 +50,7 @@ const drawRadarChart = (
     ctx.lineWidth = 2;
     ctx.setLineDash([]);
     ctx.beginPath();
-    for (let i = 0; i < labels.length; i++) {
+    for (let i = 0; i < labels.length; i += 1) {
       const angle = i * step;
       const value = data[i];
       const x =
@@ -66,9 +74,9 @@ const drawRadarChart = (
     ctx.strokeStyle = '#ccc';
     ctx.lineWidth = 2;
     ctx.setLineDash([5, 5]);
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 5; i += 1) {
       ctx.beginPath();
-      for (let j = 0; j < labels.length; j++) {
+      for (let j = 0; j < labels.length; j += 1) {
         const angle = j * step;
         const x = centerX + ((radius * (i + 1)) / 5) * Math.cos(angle - 0.32);
         const y = centerY + ((radius * (i + 1)) / 5) * Math.sin(angle - 0.32);
@@ -84,7 +92,7 @@ const drawRadarChart = (
 
     // 중점에서 꼭짓점으로 선 그리기
     ctx.setLineDash([]);
-    for (let i = 0; i < labels.length; i++) {
+    for (let i = 0; i < labels.length; i += 1) {
       const angle = i * step;
       const x = centerX + radius * Math.cos(angle - 0.32);
       const y = centerY + radius * Math.sin(angle - 0.32);
@@ -95,7 +103,7 @@ const drawRadarChart = (
     }
 
     // 점 찍고 숫자 쓰기
-    for (let i = 0; i < labels.length; i++) {
+    for (let i = 0; i < labels.length; i += 1) {
       const angle = i * step;
       const value = data[i];
       const x =
@@ -147,14 +155,21 @@ const RadarChart = ({
   height: number;
   canvas: HTMLCanvasElement | null;
   labels: string[];
-  data: number[];
+  data: PolygonProfile;
   willAnimate: boolean;
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
+  const dataArr = new Array(5).fill(0);
+  dataArr[0] = data.intelligence;
+  dataArr[1] = data.affinity;
+  dataArr[2] = data.athletic;
+  dataArr[3] = data.adaptability;
+  dataArr[4] = data.activeness;
+
   useEffect(() => {
     setCanvas(canvasRef.current);
-    drawRadarChart(canvas, labels, data, willAnimate);
+    drawRadarChart(canvas, labels, dataArr, willAnimate);
   }, [canvasRef.current]);
 
   return <canvas ref={canvasRef} width={width} height={height} />;
