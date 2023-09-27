@@ -11,6 +11,7 @@ const DetailPetData = () => {
   const params = useParams();
   const petId = params.id;
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
+  const [modal, setModal] = useState(false);
 
   // const { data } = useQuery({
   //   queryKey: ['pet', petId],
@@ -83,6 +84,10 @@ const DetailPetData = () => {
   const vDetailPetDataProps = {
     radarChartProps,
     mockDetailPetInfoProps: mockDetailPetInfo,
+    modal,
+    setModalOpen: () => setModal(true),
+    setModalClose: () => setModal(false),
+    imageUrl: mockDetailPetInfo.profileImageUrl,
   };
 
   return <VDetailPetData {...vDetailPetDataProps} />;
