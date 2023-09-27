@@ -6,7 +6,7 @@ const VDetailPetInfo = (data: MockDetailPetInfoProps) => {
     <div>
       <h2 className="text-3xl my-10">{data.name}</h2>
       <div className="flex flex-col items-center">
-        <div className="flex h-20 gap-10 justify-around">
+        <div className="flex h-20 md:gap-10 justify-around">
           <div className="w-28">
             <span className="font-bold">나이</span> {data.age}{' '}
           </div>
@@ -15,7 +15,7 @@ const VDetailPetInfo = (data: MockDetailPetInfoProps) => {
           </div>
         </div>
 
-        <div className="flex h-20 gap-10 justify-around">
+        <div className="flex h-20 md:gap-10 justify-around">
           <div className="w-28">
             <span className="font-bold">몸무게</span> {data.weight}kg{' '}
           </div>
@@ -34,7 +34,7 @@ const VDetailPetInfo = (data: MockDetailPetInfoProps) => {
           </div>
         </div>
 
-        <div className="flex h-20 gap-10 justify-around">
+        <div className="flex h-20 md:gap-10 justify-around">
           <div className="w-28">
             <span className="font-bold">백신접종</span>
             {` ${data.vaccinationStatus}`}{' '}
@@ -45,7 +45,7 @@ const VDetailPetInfo = (data: MockDetailPetInfoProps) => {
           </div>
         </div>
 
-        <div className="flex h-20 gap-10 justify-around">
+        <div className="flex h-20 md:gap-10 justify-around">
           <div className="w-28">
             <span className="font-bold">입양 여부</span>
             {` ${data.adoptionStatus}`}{' '}
