@@ -1,7 +1,7 @@
 import './App.css';
 import { RecoilRoot } from 'recoil';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import DetailedPetPage from 'pages/DetailedPetPage';
+import DetailedPetPage from 'pages/DetailPetPage';
 import Home from 'pages/HomePage';
 import LoginPage from 'pages/LoginPage';
 import SignupPage from 'pages/SignupPage';
