@@ -32,8 +32,9 @@ interface Props {
   mockDetailPetInfoProps: MockDetailPetInfoProps;
   radarChartProps: RadarChartProps;
   modal: boolean;
-  setModalOpen: () => void;
-  setModalClose: () => void;
+  handleModalImageClick: () => void;
+  handleModalCloseClick: () => void;
+  handleModalOutsideClick: (event: React.MouseEvent<HTMLDivElement>) => void;
   imageUrl: string;
 }
 
@@ -41,8 +42,9 @@ const VDetailPetData = ({
   mockDetailPetInfoProps,
   radarChartProps,
   modal,
-  setModalOpen,
-  setModalClose,
+  handleModalImageClick,
+  handleModalCloseClick,
+  handleModalOutsideClick,
   imageUrl,
 }: Props) => {
   return (
@@ -51,10 +53,16 @@ const VDetailPetData = ({
         className="relative w-96 cursor-pointer"
         src={mockDetailPetInfoProps.profileImageUrl}
         alt="z"
-        onClick={setModalOpen}
+        onClick={handleModalImageClick}
       />
       <ModalPortal>
-        {modal && <ImageModal imageUrl={imageUrl} onClose={setModalClose} />}
+        {modal && (
+          <ImageModal
+            imageUrl={imageUrl}
+            handleModalCloseClick={handleModalCloseClick}
+            handleModalOutsideClick={handleModalOutsideClick}
+          />
+        )}
       </ModalPortal>
       <div className="flex flex-col items-center">
         <DetailPetInfo {...mockDetailPetInfoProps} />
