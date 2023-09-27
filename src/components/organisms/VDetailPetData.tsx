@@ -50,7 +50,7 @@ const VDetailPetData = ({
   return (
     <div className="flex min-w-[375px] items-center flex-col justify-center md:flex-row">
       <img
-        className="relative w-96 cursor-pointer"
+        className="relative w-96 cursor-pointer lg:mr-20"
         src={mockDetailPetInfoProps.profileImageUrl}
         alt="z"
         onClick={handleModalImageClick}
