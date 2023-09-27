@@ -1,24 +1,25 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import StringWithLineBreak from 'components/atoms/StringWithLineBrake';
+import { useQuery } from '@tanstack/react-query';
 import VDetailPetData, {
   MockDetailPetInfoProps,
   RadarChartProps,
 } from './VDetailPetData';
-// import { useQuery } from '@tanstack/react-query';
 
 const DetailPetData = () => {
   const params = useParams();
+  const petId = params.id;
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
+
   // const { data } = useQuery({
   //   queryKey: ['pet', petId],
   //   queryFn: () => {
-  //     return fetch(`http://localhost:8080/pet/${petId}`).then((res) =>
-  //       res.json(),
-  //     );
+  //     return fetch(
+  //       `http://ec2-3-37-14-140.ap-northeast-2.compute.amazonaws.com/api/short-forms`,
+  //     ).then((res) => res.json());
   //   },
   // });
-
   /*
   {
   "shelterId" : 1,
