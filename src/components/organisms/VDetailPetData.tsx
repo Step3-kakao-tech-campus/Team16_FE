@@ -16,7 +16,7 @@ export interface MockDetailPetInfoProps {
   age: string;
   sex: string;
   weight: number;
-  description: string;
+  description: JSX.Element[];
   protectionExpirationDate: string | null;
   vaccinationStatus: string;
   neutralizationStatus: string;
@@ -33,8 +33,12 @@ interface Props {
 
 const VDetailPetData = ({ mockDetailPetInfoProps, radarChartProps }: Props) => {
   return (
-    <div className="flex items-center flex-col justify-center md:flex-row">
-      <img src={mockDetailPetInfoProps.profileImageUrl} alt="z" />
+    <div className="flex min-w-[375px] items-center flex-col justify-center md:flex-row">
+      <img
+        className="w-1/2 h-1/2"
+        src={mockDetailPetInfoProps.profileImageUrl}
+        alt="z"
+      />
       <div className="flex flex-col items-center">
         <DetailPetInfo {...mockDetailPetInfoProps} />
         <RadarChart {...radarChartProps} />

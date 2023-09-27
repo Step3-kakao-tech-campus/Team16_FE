@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import StringWithLineBreak from 'components/atoms/StringWithLineBrake';
 import VDetailPetData, {
   MockDetailPetInfoProps,
   RadarChartProps,
@@ -51,7 +52,9 @@ const DetailPetData = () => {
     age: '3살',
     sex: 'Male',
     weight: 5,
-    description: '뽀삐는 귀여움이 넘치는 강아지입니다.',
+    description: StringWithLineBreak(
+      '뽀삐는 귀여움이 넘치는 강아지입니다. \n착하게 말도 잘 듣고요\n자신의 일을 묵묵히 하는 타입입니다.\n다 크면 10kg 넘을 듯해요.\n개농장에서구조했슴',
+    ),
     protectionExpirationDate: '2023-10-25',
     vaccinationStatus: 'YES',
     neutralizationStatus: 'YES',
@@ -68,8 +71,8 @@ const DetailPetData = () => {
   };
   const radarChartProps: RadarChartProps = {
     setCanvas,
-    width: 240,
-    height: 240,
+    width: 400,
+    height: 400,
     canvas,
     labels,
     data: mockDetailPetInfo.polygonProfile,
