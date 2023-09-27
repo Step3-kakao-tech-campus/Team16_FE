@@ -10,7 +10,7 @@ const VDetailPetInfo = (data: MockDetailPetInfoProps) => {
           <div className="w-28">
             <span className="font-bold">나이</span> {data.age}{' '}
           </div>
-          <div className="w-52">
+          <div className="w-60">
             <span className="font-bold">성별</span> {data.sex}
           </div>
         </div>
@@ -19,7 +19,7 @@ const VDetailPetInfo = (data: MockDetailPetInfoProps) => {
           <div className="w-28">
             <span className="font-bold">몸무게</span> {data.weight}kg{' '}
           </div>
-          <div className="w-52">
+          <div className="w-60">
             <span className="font-bold">분양지역</span> 광주북구동물보호소
             <br />
             <span className="text-xs font-bold text-yellow-600">
@@ -39,7 +39,7 @@ const VDetailPetInfo = (data: MockDetailPetInfoProps) => {
             <span className="font-bold">백신접종</span>
             {` ${data.vaccinationStatus}`}{' '}
           </div>
-          <div className="w-52">
+          <div className="w-60">
             <span className="font-bold">중성화</span>
             {` ${data.neutralizationStatus}`}
           </div>
@@ -50,7 +50,7 @@ const VDetailPetInfo = (data: MockDetailPetInfoProps) => {
             <span className="font-bold">입양 여부</span>
             {` ${data.adoptionStatus}`}{' '}
           </div>
-          <div className="w-52">
+          <div className="w-60">
             <span className="font-bold">보호종료일</span>
             {` ${data.protectionExpirationDate}`}
           </div>
