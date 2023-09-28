@@ -25,13 +25,13 @@ const VDetailPetInfo = (data: MockDetailPetInfoProps) => {
           <div className="">
             <div className="flex">
               <span className="w-20 block font-bold">분양지역</span>
-              <span className="w-36 block">광주북구동물보호소</span>
+              <span className="w-36 block">{data.shelterInfo.name}</span>
             </div>
             <span className="text-xs font-bold text-yellow-600">
               {'애니모리에 등록된 보호소입니다. '}
             </span>
             <Link
-              to={`/shelter/${data.shelterId}`}
+              to={`/shelter/${data.shelterInfo.id}`}
               className="text-xs font-bold text-blue-700"
             >
               정보 보기
@@ -50,7 +50,7 @@ const VDetailPetInfo = (data: MockDetailPetInfoProps) => {
           </div>
         </div>
 
-        <div className="flex h-20 justify-around">
+        <div className="flex h-14 justify-around">
           <div className="flex">
             <span className="w-16 block font-bold">입양 여부</span>
             <span className="w-16 block">{data.adoptionStatus}</span>
@@ -60,6 +60,14 @@ const VDetailPetInfo = (data: MockDetailPetInfoProps) => {
             <span className="w-36 block">{data.protectionExpirationDate}</span>
           </div>
         </div>
+
+        <div className="hidden md:flex w-[22rem] h-10 mb-10">
+          <div className="flex">
+            <span className="w-16 block font-bold">연락처</span>
+            <span className="w-36 block">{data.shelterInfo.contact}</span>
+          </div>
+        </div>
+
         <div className="w-full">{data.description}</div>
       </div>
     </div>

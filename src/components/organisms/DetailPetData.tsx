@@ -23,7 +23,11 @@ const DetailPetData = () => {
   // });
   /*
   {
-  "shelterId" : 1,
+  "shelterInfo" : {
+		"id" : 1,
+	  "name" : "광주어찌고보호소",
+	  "contact" : "010-2312-2146",
+	}
   "name": "멍멍이",
   "age": "0년6개월",
   "type": "DOG",
@@ -42,14 +46,18 @@ const DetailPetData = () => {
     "athletic": 1, // "운동신경 점수",
     "adaptability": 1, //"적응력 점수",
     "activeness": 1, // "활발함 점수"
-  }
-  
-} */
+  }  
+ }
+ */
 
   const labels = ['귀여움', '침착함', '유머감각', '외모', '의젓함'];
 
   const mockDetailPetInfo: MockDetailPetInfoProps = {
-    shelterId: 1,
+    shelterInfo: {
+      id: 1,
+      name: '광주어찌고보호소',
+      contact: '010-2312-2146',
+    },
     name: '뽀삐',
     age: '3살',
     sex: 'Male',
