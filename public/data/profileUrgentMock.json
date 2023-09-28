@@ -1,0 +1,67 @@
+{
+  "success": true,
+  "response": {
+    "sosList": {
+      "pets": [
+        {
+          "petId": "펫 아이디",
+          "petName": "펫 이름",
+          "shelterId": "보호소 아이디",
+          "shelterName": "보호소 아이디",
+          "protectionExpirationDate": "안락사 날짜"
+        },
+        {
+          "petId": "펫 아이디",
+          "petName": "펫 이름",
+          "shelterId": "보호소 아이디",
+          "shelterName": "보호소 아이디",
+          "protectionExpirationDate": "안락사 날짜"
+        },
+        {
+          "petId": "펫 아이디",
+          "petName": "펫 이름",
+          "shelterId": "보호소 아이디",
+          "shelterName": "보호소 아이디",
+          "protectionExpirationDate": "안락사 날짜"
+        },
+        {
+          "petId": "펫 아이디",
+          "petName": "펫 이름",
+          "shelterId": "보호소 아이디",
+          "shelterName": "보호소 아이디",
+          "protectionExpirationDate": "안락사 날짜"
+        },
+        {
+          "petId": "펫 아이디",
+          "petName": "펫 이름",
+          "shelterId": "보호소 아이디",
+          "shelterName": "보호소 아이디",
+          "protectionExpirationDate": "안락사 날짜"
+        },
+        {
+          "petId": "펫 아이디",
+          "petName": "펫 이름",
+          "shelterId": "보호소 아이디",
+          "shelterName": "보호소 아이디",
+          "protectionExpirationDate": "안락사 날짜"
+        },
+        {
+          "petId": "펫 아이디",
+          "petName": "펫 이름",
+          "shelterId": "보호소 아이디",
+          "shelterName": "보호소 아이디",
+          "protectionExpirationDate": "안락사 날짜"
+        },
+        {
+          "petId": "펫 아이디",
+          "petName": "펫 이름",
+          "shelterId": "보호소 아이디",
+          "shelterName": "보호소 아이디",
+          "protectionExpirationDate": "안락사 날짜"
+        }
+      ]
+    },
+    "totalPages": 4
+  },
+  "error": null
+}
