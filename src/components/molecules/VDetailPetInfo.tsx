@@ -68,6 +68,12 @@ const VDetailPetInfo = (data: MockDetailPetInfoProps) => {
           </div>
         </div>
 
+        <a href={`tel:${data.shelterInfo.contact}`}>
+          <span className="block border border-2 border-gray-500 font-bold md:hidden flex w-[22rem] h-10 mb-10 bg-green-500 rounded-md items-center justify-center">
+            문의하기
+          </span>
+        </a>
+
         <div className="w-full">{data.description}</div>
       </div>
     </div>
