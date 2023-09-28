@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import Banner from 'components/atoms/Banner';
 import LoginInputForm from 'components/organisms/LoginInputForm';
-import React, { ReactComponentElement, useState } from 'react';
+import React from 'react';
 
 interface UserInfo {
   email: string;
@@ -44,7 +44,8 @@ const LoginPage = () => {
 
       <div className="signUp-button">
         <span>게정이 없다면? </span>
-        <button onClick={() => navigate('/signup')}>회원가입 하러가기</button>
+        <button onClick={() => navigate('/signup')}>회원가입</button>{' '}
+        <span>하러가기</span>
       </div>
     </div>
   );

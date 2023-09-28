@@ -1,4 +1,4 @@
-import LoginInputGroup from 'components/molecules/LogInInputGroup';
+import LoginInputGroup from 'components/molecules/LoginInputGroup';
 import React, { useState } from 'react';
 
 type SubmitProps = {

@@ -11,7 +11,7 @@ type Props = {
 
 const LoginInputGroup = ({ id, name, type, placeholder, onChange }: Props) => {
   return (
-    <Container className={`${id} style`}>
+    <Container className={`${id} flex flex-col`}>
       <label htmlFor={id} className="font-semibold">
         {name}
       </label>

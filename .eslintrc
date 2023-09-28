@@ -13,7 +13,7 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "project": "./tsconfig.json"
+    "project": ["./tsconfig.json", "tailwind.config.js"]
   },
   "rules": {
     "react/jsx-uses-vars": "error",
