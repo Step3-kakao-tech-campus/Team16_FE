@@ -85,8 +85,13 @@ const DetailPetData = () => {
     radarChartProps,
     mockDetailPetInfoProps: mockDetailPetInfo,
     modal,
-    setModalOpen: () => setModal(true),
-    setModalClose: () => setModal(false),
+    handleModalImageClick: () => setModal(true),
+    handleModalCloseClick: () => setModal(false),
+    handleModalOutsideClick: (event: React.MouseEvent<HTMLDivElement>) => {
+      if (event.target === event.currentTarget) {
+        setModal(false);
+      }
+    },
     imageUrl: mockDetailPetInfo.profileImageUrl,
   };
 
