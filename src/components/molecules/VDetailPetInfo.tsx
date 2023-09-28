@@ -6,22 +6,27 @@ const VDetailPetInfo = (data: MockDetailPetInfoProps) => {
     <div>
       <h2 className="text-3xl my-10">{data.name}</h2>
       <div className="flex flex-col items-center">
-        <div className="flex h-20 gap-10 justify-around">
-          <div className="w-28">
-            <span className="font-bold">나이</span> {data.age}{' '}
+        <div className="flex h-14 justify-around">
+          <div className="flex">
+            <span className="w-16 block font-bold">나이</span>
+            <span className="w-16 block">{data.age}</span>
           </div>
-          <div className="w-52">
-            <span className="font-bold">성별</span> {data.sex}
+          <div className="flex">
+            <span className="w-20 block font-bold">성별</span>
+            <span className="w-36 block">{data.sex}</span>
           </div>
         </div>
 
-        <div className="flex h-20 gap-10 justify-around">
-          <div className="w-28">
-            <span className="font-bold">몸무게</span> {data.weight}kg{' '}
+        <div className="flex h-14 justify-around">
+          <div className="flex">
+            <span className="w-16 block font-bold">몸무게</span>
+            <span className="w-16 block">{data.weight}kg</span>
           </div>
-          <div className="w-52">
-            <span className="font-bold">분양지역</span> 광주북구동물보호소
-            <br />
+          <div className="">
+            <div className="flex">
+              <span className="w-20 block font-bold">분양지역</span>
+              <span className="w-36 block">광주북구동물보호소</span>
+            </div>
             <span className="text-xs font-bold text-yellow-600">
               {'애니모리에 등록된 보호소입니다. '}
             </span>
@@ -34,25 +39,25 @@ const VDetailPetInfo = (data: MockDetailPetInfoProps) => {
           </div>
         </div>
 
-        <div className="flex h-20 gap-10 justify-around">
-          <div className="w-28">
-            <span className="font-bold">백신접종</span>
-            {` ${data.vaccinationStatus}`}{' '}
+        <div className="flex h-14 justify-around">
+          <div className="flex">
+            <span className="w-16 block font-bold">백신접종</span>
+            <span className="w-16 block">{data.vaccinationStatus}</span>
           </div>
-          <div className="w-52">
-            <span className="font-bold">중성화</span>
-            {` ${data.neutralizationStatus}`}
+          <div className="flex">
+            <span className="w-20 block font-bold">중성화</span>
+            <span className="w-36 block">{data.neutralizationStatus}</span>
           </div>
         </div>
 
-        <div className="flex h-20 gap-10 justify-around">
-          <div className="w-28">
-            <span className="font-bold">입양 여부</span>
-            {` ${data.adoptionStatus}`}{' '}
+        <div className="flex h-20 justify-around">
+          <div className="flex">
+            <span className="w-16 block font-bold">입양 여부</span>
+            <span className="w-16 block">{data.adoptionStatus}</span>
           </div>
-          <div className="w-52">
-            <span className="font-bold">보호종료일</span>
-            {` ${data.protectionExpirationDate}`}
+          <div className="flex">
+            <span className="w-20 block font-bold">보호종료일</span>
+            <span className="w-36 block">{data.protectionExpirationDate}</span>
           </div>
         </div>
         <div className="w-full">{data.description}</div>
