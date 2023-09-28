@@ -1,6 +1,7 @@
 import ProfileCard from 'components/molecules/ProfileCard';
 
 export interface ProfileListProps {
+  image: string;
   id: number;
   name: string;
   age: number;
