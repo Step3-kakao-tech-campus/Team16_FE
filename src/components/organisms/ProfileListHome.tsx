@@ -1,7 +1,15 @@
 import VProfileListHome, { ProfileListProps } from './VProfileListHome';
 
 const ProfileListHome = () => {
+  //   const [sosList, setSosList] = useState([]);
+
+  //   useEffect(() => {
+  //     fetch('public/data/profileHomeMock.json')
+  //       .then((res) => res.json()) // javascript객체로 변환
+  //       .then(setSosList); // list에 저장
+  //   }, []);
   const profileListProps: ProfileListProps = {
+    image: '/assets/pet.png',
     id: 1,
     name: '보리',
     age: 1,
