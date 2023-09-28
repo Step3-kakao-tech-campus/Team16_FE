@@ -5,6 +5,9 @@ module.exports = {
       colors: {
         'brand-color': '#E3A13D',
       },
+      fontFamily: {
+        sans: ['Pretendard', 'sans-serif'],
+      },
     },
   },
   plugins: [],

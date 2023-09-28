@@ -1,3 +1,22 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+/*
+normal, bold만 적용시켜놨습니다.
+추후에 필요한 것들은 추가하면 됩니다.
+프로젝트 완성 후 사용하지 않는 폰트는 삭제하겠습니다.
+*/
+@font-face {
+  font-family: 'Pretendard';
+  src: url(../public/assets/fonts/Pretendard-Regular.woff) format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url(../public/assets/fonts/Pretendard-Bold.woff) format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
