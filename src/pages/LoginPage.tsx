@@ -17,7 +17,7 @@ const LoginPage = () => {
 
   return (
     <div
-      className="flex flex-col max-w-[100rem] justify-center items-center gap-4 h-screen"
+      className="flex flex-col justify-center items-center gap-4 h-screen"
       style={{
         backgroundImage: 'url(assets/images/backgroundLogo.png)',
         backgroundRepeat: 'no-repeat',
