@@ -50,7 +50,14 @@ const Postcode = ({ userAddress, setUserAddress }: StateProps) => {
     open({ onComplete: handleComplete });
   };
 
-  return <button onClick={handleClick}>우편번호 찾기</button>;
+  return (
+    <button
+      className="bg-brand-color text-white rounded  min-w-[120px] p-1"
+      onClick={handleClick}
+    >
+      우편번호 찾기
+    </button>
+  );
 };
 
 export default Postcode;

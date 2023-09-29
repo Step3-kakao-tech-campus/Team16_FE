@@ -42,13 +42,14 @@ const SignupInputForm = () => {
   };
   return (
     <form
+      className="flex flex-col gap-4 w-full max-w-[400px]"
       onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         // 회원가입 정보 보내는 API 적용해야 됨
         console.log(e.target);
       }}
     >
-      <div className="email-confirm">
+      <div className="email-confirm flex place-items-end justify-center">
         <InputGroup
           id="email"
           name="이메일"
@@ -56,7 +57,9 @@ const SignupInputForm = () => {
           placeholder="이메일을 입력해주세요."
           onChange={handleChange}
         />
-        <button className=" bg-brand-color font-Pretendard">중복 확인</button>
+        <button className="bg-brand-color text-white rounded min-w-[100px] min-h-[44px]">
+          중복 확인
+        </button>
       </div>
       <InputGroup
         id="password"
@@ -90,7 +93,9 @@ const SignupInputForm = () => {
         userAddress={userAddress}
         setUserAddress={setUserAddress}
       />
-      <button>회원가입</button>
+      <button className="bg-brand-color text-white w-full rounded-md p-2">
+        회원가입
+      </button>
     </form>
   );
 };

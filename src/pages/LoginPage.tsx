@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import Banner from 'components/atoms/Banner';
 import LoginInputForm from 'components/organisms/LoginInputForm';
-import React from 'react';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -18,6 +17,7 @@ const LoginPage = () => {
 
   return (
     <div
+      className="flex flex-col max-w-[100rem] justify-center items-center gap-4 h-screen"
       style={{
         backgroundImage: 'url(assets/images/backgroundLogo.png)',
         backgroundRepeat: 'no-repeat',
@@ -30,10 +30,12 @@ const LoginPage = () => {
 
       <LoginInputForm />
 
-      <div className="signUp-button">
-        <span>계정이 없다면? </span>
-        <button onClick={() => navigate('/signup')}>회원가입</button>{' '}
-        <span>하러가기</span>
+      <div className="signUp-button flex justify-between min-w-[15rem]">
+        <span className="text-gray-400">계정이 없다면? </span>
+        <span className="font-medium text-brand-color">
+          <button onClick={() => navigate('/signup')}>회원가입</button>{' '}
+          <span>하러가기</span>
+        </span>
       </div>
     </div>
   );

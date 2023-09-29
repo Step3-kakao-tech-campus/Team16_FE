@@ -16,6 +16,7 @@ const LoginInputForm = () => {
   // submit에 userInfo를 넣어주거나 button에서 보내도록 하는 것 필요!!!!
   return (
     <form
+      className="flex flex-col gap-4 w-full max-w-[400px]"
       onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         // email, password 보내기
@@ -41,7 +42,9 @@ const LoginInputForm = () => {
           handleChange(e);
         }}
       />
-      <button>로그인</button>
+      <button className="bg-brand-color text-white w-full rounded-md p-2">
+        로그인
+      </button>
     </form>
   );
 };
