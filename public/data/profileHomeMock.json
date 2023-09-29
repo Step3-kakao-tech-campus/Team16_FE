@@ -1,0 +1,59 @@
+{
+    "success": true,
+    "response": {
+      "sosList": [
+        {
+          "id": 1,
+          "name": "펫 이름",
+          "age": 2,
+          "shelter": "보호소 이름",
+          "state": "안락사 날짜"
+        },
+        {
+            "id": 1,
+            "name": "펫 이름",
+            "age": 2,
+            "shelter": "보호소 이름",
+            "state": "안락사 날짜"
+          },
+          {
+            "id": 1,
+            "name": "펫 이름",
+            "age": 2,
+            "shelter": "보호소 이름",
+            "state": "안락사 날짜"
+          },
+          {
+            "id": 1,
+            "name": "펫 이름",
+            "age": 2,
+            "shelter": "보호소 이름",
+            "state": "안락사 날짜"
+          }
+      ],
+      "newList": [
+        {
+            "id": 1,
+            "name": "펫 이름",
+            "age": 2,
+            "shelter": "보호소 이름",
+            "adoptionStatus": "NO"
+          },
+          {
+            "id": 1,
+            "name": "펫 이름",
+            "age": 2,
+            "shelter": "보호소 이름",
+            "adoptionStatus": "NO"
+          },
+          {
+            "id": 1,
+            "name": "펫 이름",
+            "age": 2,
+            "shelter": "보호소 이름",
+            "adoptionStatus": "NO"
+          }
+      ]
+    },
+    "error": null
+  }
