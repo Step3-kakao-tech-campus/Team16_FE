@@ -1,13 +1,13 @@
 import VProfileListHome, { ProfileListProps } from './VProfileListHome';
 
 const ProfileListHome = () => {
-  //   const [sosList, setSosList] = useState([]);
+  // const [list, setlist] = useState([]);
 
-  //   useEffect(() => {
-  //     fetch('public/data/profileHomeMock.json')
-  //       .then((res) => res.json()) // javascript객체로 변환
-  //       .then(setSosList); // list에 저장
-  //   }, []);
+  // useEffect(() => {
+  //   fetch('public/data/profileHomeMock.json')
+  //     .then((res) => res.json()) // javascript객체로 변환
+  //     .then(setlist); // list에 저장
+  // }, []);
   const profileListProps: ProfileListProps = {
     image: '/assets/pet.png',
     id: 1,
@@ -18,6 +18,7 @@ const ProfileListHome = () => {
   };
 
   // JSX를 VAC로 교체
+
   return <VProfileListHome {...profileListProps} />;
 };
 export default ProfileListHome;

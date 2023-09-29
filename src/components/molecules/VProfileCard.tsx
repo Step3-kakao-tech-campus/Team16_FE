@@ -14,8 +14,8 @@ const VProfileCard = ({
   shelter,
   state,
 }: VProfileInfoProps) => (
-  <div className="flex items-center gap-4 p-4 sm:p-6 lg:p-8">
-    <img className="relative w-35 cursor-pointer lg:mr-20" src={image} alt="" />
+  <a href="/pet/1" className="flex items-center gap-2 p-2 sm:p-3">
+    <img className="relative w-35 cursor-pointer mr-3" src={image} alt="" />
     <div>
       <div className="flex flex-col-reverse">
         {name} ({age}살)
@@ -23,7 +23,7 @@ const VProfileCard = ({
       <div className="text-sm text-gray-400">{shelter}</div>
       <div className="font-bold">{state}</div>
     </div>
-  </div>
+  </a>
 );
 
 export default VProfileCard;
