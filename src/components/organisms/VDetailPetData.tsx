@@ -13,7 +13,11 @@ export interface RadarChartProps {
   willAnimate: boolean;
 }
 export interface MockDetailPetInfoProps {
-  shelterId: number;
+  shelterInfo: {
+    id: number;
+    name: string;
+    contact: string;
+  };
   name: string;
   age: string;
   sex: string;
