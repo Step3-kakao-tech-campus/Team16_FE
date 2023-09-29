@@ -1,12 +1,17 @@
-import React from 'react';
-import { useDaumPostcodePopup } from 'react-daum-postcode';
+import { Address, useDaumPostcodePopup } from 'react-daum-postcode';
 
-const Postcode = () => {
+// State 받아서 주소 적용하기
+type StateProps = {
+  userAddress: any;
+  setUserAddress: any;
+};
+
+const Postcode = ({ userAddress, setUserAddress }: StateProps) => {
   const scriptUrl =
     'https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';
   const open = useDaumPostcodePopup(scriptUrl);
 
-  const handleComplete = (data: any) => {
+  const handleComplete = (data: Address) => {
     let fullAddress = data.address;
     let extraAddress = '';
 
@@ -18,15 +23,20 @@ const Postcode = () => {
         extraAddress +=
           extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName;
       }
-      fullAddress += extraAddress !== '' ? ` (${extraAddress})` : ''; // (성수동1가)
+      fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
     }
+    // roadname에서 sido + sigungu를 빼야 도로명 주소 전체가 나옴
+    const roadname = fullAddress.replace(`${data.sido} ${data.sigungu} `, '');
 
-    console.log('Data', data); // 여기서 data 형식 확인하기
-    console.log(data.sido); // 서울
-    console.log(data.sigungu); // 성동구
-    console.log(data.roadname); // 왕십리로2길 20
-    console.log(data.zonecode); // 우편번호
-    console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
+    setUserAddress({
+      ...userAddress,
+      zonecode: data.zonecode,
+      sido: data.sido,
+      sigungu: data.sigungu,
+      roadname,
+    });
+    // 여기서 data 형식 확인하기, 나중에 확인할 수도 있으니 주석처리
+    // console.log('Data', data);
   };
 
   const handleClick = () => {

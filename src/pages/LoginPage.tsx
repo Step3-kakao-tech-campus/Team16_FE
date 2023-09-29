@@ -3,11 +3,6 @@ import Banner from 'components/atoms/Banner';
 import LoginInputForm from 'components/organisms/LoginInputForm';
 import React from 'react';
 
-interface UserInfo {
-  email: string;
-  password: string;
-}
-
 const LoginPage = () => {
   const navigate = useNavigate();
   // const emailReg = /^[\w.-]+@[\w.-]+\.\w+$/g; // email형식
@@ -24,7 +19,7 @@ const LoginPage = () => {
   return (
     <div
       style={{
-        backgroundImage: 'url(assets/backgroundLogo.png)',
+        backgroundImage: 'url(assets/images/backgroundLogo.png)',
         backgroundRepeat: 'no-repeat',
       }}
     >
@@ -33,17 +28,10 @@ const LoginPage = () => {
         애니모리 친구들이 기다리고 있어요 :)
       </Banner>
 
-      <LoginInputForm
-        onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
-          e.preventDefault();
-          // email, password 보내기
-          // emailValidate();
-          console.log(e.target);
-        }}
-      />
+      <LoginInputForm />
 
       <div className="signUp-button">
-        <span>게정이 없다면? </span>
+        <span>계정이 없다면? </span>
         <button onClick={() => navigate('/signup')}>회원가입</button>{' '}
         <span>하러가기</span>
       </div>
