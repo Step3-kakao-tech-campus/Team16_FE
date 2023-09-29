@@ -1,4 +1,8 @@
-import VShelterInfo, { ShelterInfoProps } from './VShelterInfo';
+import VShelterInfo, {
+  ProfileListProps,
+  Props,
+  ShelterInfoProps,
+} from './VShelterInfo';
 
 const ShelterInfo = () => {
   //   const [sosList, setSosList] = useState([]);
@@ -14,8 +18,21 @@ const ShelterInfo = () => {
     adress: '광주광역시 어디구 어디로',
     call: '010-3916-5330',
   };
+  const profileListProps: ProfileListProps = {
+    image: '/assets/pet.png',
+    id: 1,
+    name: '보리',
+    age: 1,
+    shelter: '광주보호소',
+    state: '입양완료',
+  };
+
+  const props: Props = {
+    shelterInfoProps,
+    profileListProps,
+  };
 
   // JSX를 VAC로 교체
-  return <VShelterInfo {...shelterInfoProps} />;
+  return <VShelterInfo {...props} />;
 };
 export default ShelterInfo;
