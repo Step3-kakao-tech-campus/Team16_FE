@@ -1,10 +1,18 @@
 import { Link } from 'react-router-dom';
 import ModalPortal from 'commons/ModalPortal';
 import { useState } from 'react';
-import CategoryModal, { CategoryModalProps } from 'commons/CategoryModal';
+import CategoryModal, {
+  CategoryModalProps,
+  RegionType,
+  CategoryModalType,
+} from 'commons/CategoryModal';
 
 const GNB = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedRegion, setSelectedRegion] = useState<RegionType>('전국');
+  const [speciesOrRegion, setSpeciesOrRegion] =
+    useState<CategoryModalType>('species');
+
   const handleCategoryButtonClick = () => {
     setIsModalOpen(true);
   };
@@ -20,6 +28,9 @@ const GNB = () => {
   const categoryModalProps: CategoryModalProps = {
     handleModalCloseClick,
     handleModalOutsideClick,
+    setSelectedRegion,
+    speciesOrRegion,
+    setSpeciesOrRegion,
   };
   return (
     <>
