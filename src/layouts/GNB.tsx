@@ -1,12 +1,25 @@
 import { Link } from 'react-router-dom';
 import ModalPortal from 'commons/ModalPortal';
 import { useState } from 'react';
-import CategoryModal from 'commons/CategoryModal';
+import CategoryModal, { CategoryModalProps } from 'commons/CategoryModal';
 
 const GNB = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleCategoryButtonClick = () => {
     setIsModalOpen(true);
+  };
+  const handleModalCloseClick = () => {
+    setIsModalOpen(false);
+  };
+  const handleModalOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      setIsModalOpen(false);
+    }
+  };
+
+  const categoryModalProps: CategoryModalProps = {
+    handleModalCloseClick,
+    handleModalOutsideClick,
   };
   return (
     <>
@@ -28,7 +41,7 @@ const GNB = () => {
       </div>
       {isModalOpen && (
         <ModalPortal>
-          <CategoryModal />
+          <CategoryModal {...categoryModalProps} />
         </ModalPortal>
       )}
     </>
