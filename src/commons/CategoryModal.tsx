@@ -76,6 +76,7 @@ const CategoryModal = ({
         ) : (
           // 배열에 담아서 map으로 뿌려주기 2
           // 지역까지 선택하고나면 모달 끄기
+          // useState로 관리하지 말고 recoil로 관리해야 할 듯
           <div className="flex flex-col">
             <button onClick={() => setSelectedRegion('전국')}>전국</button>
             <button onClick={() => setSelectedRegion('서울')}>서울</button>
