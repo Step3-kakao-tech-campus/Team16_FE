@@ -1,10 +1,17 @@
 import { Address, useDaumPostcodePopup } from 'react-daum-postcode';
 
-// State 받아서 주소 적용하기
-type StateProps = {
-  userAddress: any;
-  setUserAddress: any;
+type AddressProps = {
+  zonecode: string;
+  sido: string;
+  sigungu: string;
+  roadname: string;
+  detail: string;
 };
+
+interface StateProps {
+  userAddress: AddressProps;
+  setUserAddress: React.Dispatch<React.SetStateAction<AddressProps>>;
+}
 
 const Postcode = ({ userAddress, setUserAddress }: StateProps) => {
   const scriptUrl =
