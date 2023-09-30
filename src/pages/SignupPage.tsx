@@ -7,7 +7,7 @@ const SignupPage = () => {
 
   return (
     <div
-      className="flex flex-col justify-center items-center gap-4 h-screen"
+      className="flex flex-col justify-center items-center gap-4 min-h-screen"
       style={{
         backgroundImage: 'url(assets/images/backgroundLogo.png)',
         backgroundRepeat: 'no-repeat',
