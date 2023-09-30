@@ -1,40 +1,25 @@
+import { useRecoilState } from 'recoil';
+import regionAtom, { RegionType } from 'recoil/regionAtom';
+import speciesAtom, { SpeciesType } from 'recoil/speciesAtom';
+
 export interface CategoryModalProps {
   handleModalCloseClick: () => void;
   handleModalOutsideClick: (e: React.MouseEvent<HTMLDivElement>) => void;
-  setSelectedRegion: (region: RegionType) => void;
   speciesOrRegion: CategoryModalType;
   setSpeciesOrRegion: (speciesOrRegion: CategoryModalType) => void;
 }
 
-export type RegionType =
-  | '서울'
-  | '경기'
-  | '인천'
-  | '강원'
-  | '충북'
-  | '충남'
-  | '대전'
-  | '경북'
-  | '경남'
-  | '대구'
-  | '울산'
-  | '부산'
-  | '전북'
-  | '전남'
-  | '광주'
-  | '제주'
-  | '세종'
-  | '전국';
-export type SpeciesType = '강아지' | '고양이' | '기타';
 export type CategoryModalType = 'species' | 'region';
 
 const CategoryModal = ({
   handleModalCloseClick,
   handleModalOutsideClick,
-  setSelectedRegion,
   speciesOrRegion,
   setSpeciesOrRegion,
 }: CategoryModalProps) => {
+  const [, setSpecies] = useRecoilState(speciesAtom);
+  const [, setRegion] = useRecoilState(regionAtom);
+
   const speciesList: SpeciesType[] = ['강아지', '고양이', '기타'];
   const regionList: RegionType[] = [
     '전국',
@@ -57,12 +42,12 @@ const CategoryModal = ({
     '세종',
   ];
 
-  const handleSpeciesClick = (species: string) => {
-    // 선택한 종류 recoil에 저장
+  const handleSpeciesClick = (species: SpeciesType) => {
+    setSpecies(species);
     setSpeciesOrRegion('region');
   };
   const handleRegionClick = (region: RegionType) => {
-    setSelectedRegion(region);
+    setRegion(region);
     handleModalCloseClick();
   };
   return (
@@ -97,8 +82,6 @@ const CategoryModal = ({
           </button>
         </div>
         {speciesOrRegion === 'species' && (
-          // 배열에 담아서 map으로 뿌려주기 1
-          // 종류 선택하면 지역 선택으로 넘어가기
           <div className="flex flex-col">
             {speciesList.map((species) => {
               return (
@@ -113,7 +96,6 @@ const CategoryModal = ({
           </div>
         )}
         {speciesOrRegion === 'region' && (
-          // useState로 관리하지 말고 recoil로 관리해야 할 듯
           <div className="flex flex-col">
             {regionList.map((region) => {
               return (

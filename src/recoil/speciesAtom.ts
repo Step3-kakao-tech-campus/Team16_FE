@@ -1,5 +1,6 @@
 import { atom } from 'recoil';
-import { SpeciesType } from 'commons/CategoryModal';
+
+export type SpeciesType = '강아지' | '고양이' | '기타';
 
 const speciesAtom = atom<SpeciesType>({
   key: 'speciesAtom',
