@@ -16,10 +16,12 @@ const GNB = () => {
   };
   const handleModalCloseClick = () => {
     setIsModalOpen(false);
+    setSpeciesOrRegion('species');
   };
   const handleModalOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       setIsModalOpen(false);
+      setSpeciesOrRegion('species');
     }
   };
 
