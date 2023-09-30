@@ -9,7 +9,7 @@ type Props = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const LoginInputGroup = ({ id, name, type, placeholder, onChange }: Props) => {
+const InputGroup = ({ id, name, type, placeholder, onChange }: Props) => {
   return (
     <Container className={'flex flex-col gap-1'}>
       <label htmlFor={id} className="text-sm font-semibold">
@@ -26,4 +26,4 @@ const LoginInputGroup = ({ id, name, type, placeholder, onChange }: Props) => {
   );
 };
 
-export default LoginInputGroup;
+export default InputGroup;
