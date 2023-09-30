@@ -1,7 +1,7 @@
 import { SpeciesType } from 'recoil/speciesAtom';
 import { RegionType } from 'recoil/regionAtom';
 
-export interface CategoryModalListProps {
+export interface VCategoryModalListProps {
   speciesOrRegion: CategoryModalType;
   speciesList: SpeciesType[];
   handleSpeciesClick: (species: SpeciesType) => void;
@@ -11,7 +11,7 @@ export interface CategoryModalListProps {
 
 export type CategoryModalType = 'species' | 'region';
 
-const CatetegoryModalList = (props: CategoryModalListProps) => {
+const VCatetegoryModalList = (props: VCategoryModalListProps) => {
   const {
     speciesOrRegion,
     speciesList,
@@ -56,4 +56,4 @@ const CatetegoryModalList = (props: CategoryModalListProps) => {
   );
 };
 
-export default CatetegoryModalList;
+export default VCatetegoryModalList;

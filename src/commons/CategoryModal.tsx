@@ -3,8 +3,8 @@ import regionAtom, { RegionType } from 'recoil/regionAtom';
 import speciesAtom, { SpeciesType } from 'recoil/speciesAtom';
 import CategoryModalList, {
   CategoryModalType,
-  CategoryModalListProps,
-} from 'components/molecules/CategoryModalList';
+  VCategoryModalListProps,
+} from 'components/molecules/VCategoryModalList';
 
 export interface CategoryModalProps {
   handleModalCloseClick: () => void;
@@ -53,7 +53,7 @@ const CategoryModal = ({
     handleModalCloseClick();
   };
 
-  const categoryModalListProps: CategoryModalListProps = {
+  const categoryModalListProps: VCategoryModalListProps = {
     speciesOrRegion,
     speciesList,
     handleSpeciesClick,

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import ModalPortal from 'commons/ModalPortal';
 import { useState } from 'react';
 import CategoryModal, { CategoryModalProps } from 'commons/CategoryModal';
-import { CategoryModalType } from 'components/molecules/CategoryModalList';
+import { CategoryModalType } from 'components/molecules/VCategoryModalList';
 
 const GNB = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
