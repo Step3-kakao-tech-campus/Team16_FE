@@ -1,22 +1,10 @@
 import AddressInputGroup from 'components/molecules/AddressInputGroup';
 import InputGroup from 'components/molecules/InputGroup';
-import { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { shelterSignupState } from 'recoil/shelterState';
 
 const SignupInputForm = () => {
-  const [shelterInfo, setShelterInfo] = useState({
-    email: '',
-    password: '',
-    passwordConfirm: '',
-    shelter: '',
-    shelterContact: '',
-  });
-  const [userAddress, setUserAddress] = useState({
-    zonecode: '',
-    sido: '',
-    sigungu: '',
-    roadname: '',
-    detail: '',
-  });
+  const [shelterInfo, setShelterInfo] = useRecoilState(shelterSignupState);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const target = event.target as HTMLInputElement;
@@ -27,14 +15,11 @@ const SignupInputForm = () => {
       case 'password':
         setShelterInfo((prev) => ({ ...prev, password: target.value }));
         break;
-      case 'password-confirm':
-        setShelterInfo((prev) => ({ ...prev, passwordConfirm: target.value }));
-        break;
       case 'shelter':
-        setShelterInfo((prev) => ({ ...prev, shelter: target.value }));
+        setShelterInfo((prev) => ({ ...prev, name: target.value }));
         break;
       case 'shelter-contact':
-        setShelterInfo((prev) => ({ ...prev, shelterContact: target.value }));
+        setShelterInfo((prev) => ({ ...prev, contact: target.value }));
         break;
       default:
         break;
@@ -46,7 +31,29 @@ const SignupInputForm = () => {
       onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         // 회원가입 정보 보내는 API 적용해야 됨
-        console.log(e.target);
+        fetch(
+          'http://ec2-3-37-14-140.ap-northeast-2.compute.amazonaws.com/api/docs/shelter/login',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              ...shelterInfo,
+              email: shelterInfo.email,
+              password: shelterInfo.password,
+              name: shelterInfo.name,
+              contact: shelterInfo.contact,
+              // zonecode: shelterInfo.zonecode,
+              address: shelterInfo.address,
+            }),
+          },
+        ).then((res) => {
+          console.log(res);
+          // if (res.status === 200) {
+          //   navigate('/');
+          // }
+        });
       }}
     >
       <div className="email-confirm flex place-items-end justify-center">
@@ -89,10 +96,7 @@ const SignupInputForm = () => {
         placeholder="보호소에 연락 가능한 연락처를 입력해주세요."
         onChange={handleChange}
       />
-      <AddressInputGroup
-        userAddress={userAddress}
-        setUserAddress={setUserAddress}
-      />
+      <AddressInputGroup />
       <button className="bg-brand-color text-white w-full rounded-md p-2">
         회원가입
       </button>

@@ -1,19 +1,9 @@
 import { Address, useDaumPostcodePopup } from 'react-daum-postcode';
+import { useRecoilState } from 'recoil';
+import { shelterSignupState } from 'recoil/shelterState';
 
-type AddressProps = {
-  zonecode: string;
-  sido: string;
-  sigungu: string;
-  roadname: string;
-  detail: string;
-};
-
-interface StateProps {
-  userAddress: AddressProps;
-  setUserAddress: React.Dispatch<React.SetStateAction<AddressProps>>;
-}
-
-const Postcode = ({ userAddress, setUserAddress }: StateProps) => {
+const Postcode = () => {
+  const [shelterInfo, setShelterInfo] = useRecoilState(shelterSignupState);
   const scriptUrl =
     'https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';
   const open = useDaumPostcodePopup(scriptUrl);
@@ -35,15 +25,16 @@ const Postcode = ({ userAddress, setUserAddress }: StateProps) => {
     // roadname에서 sido + sigungu를 빼야 도로명 주소 전체가 나옴
     const roadname = fullAddress.replace(`${data.sido} ${data.sigungu} `, '');
 
-    setUserAddress({
-      ...userAddress,
+    setShelterInfo({
+      ...shelterInfo,
       zonecode: data.zonecode,
-      sido: data.sido,
-      sigungu: data.sigungu,
-      roadname,
+      address: {
+        province: data.sido,
+        city: data.sigungu,
+        roadName: roadname,
+        detail: '',
+      },
     });
-    // 여기서 data 형식 확인하기, 나중에 확인할 수도 있으니 주석처리
-    // console.log('Data', data);
   };
 
   const handleClick = () => {

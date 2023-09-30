@@ -1,21 +1,11 @@
 import Container from 'components/atoms/Container';
 import Postcode from 'components/atoms/PostCode';
 import React from 'react';
+import { useRecoilState } from 'recoil';
+import { shelterSignupState } from 'recoil/shelterState';
 
-type AddressProps = {
-  zonecode: string;
-  sido: string;
-  sigungu: string;
-  roadname: string;
-  detail: string;
-};
-
-interface StateProps {
-  userAddress: AddressProps;
-  setUserAddress: React.Dispatch<React.SetStateAction<AddressProps>>;
-}
-
-const AddressInputGroup = ({ userAddress, setUserAddress }: StateProps) => {
+const AddressInputGroup = () => {
+  const [shelterInfo, setShelterInfo] = useRecoilState(shelterSignupState);
   return (
     <Container className="flex flex-col gap-4 w-full">
       <div className="flex flex-col gap-2">
@@ -29,9 +19,9 @@ const AddressInputGroup = ({ userAddress, setUserAddress }: StateProps) => {
             name="우편번호"
             type="text"
             placeholder="우편번호"
-            value={userAddress.zonecode}
+            value={shelterInfo.zonecode}
           />
-          <Postcode userAddress={userAddress} setUserAddress={setUserAddress} />
+          <Postcode />
         </div>
       </div>
       <div className="user-address flex justify-between max-w-full">
@@ -42,7 +32,7 @@ const AddressInputGroup = ({ userAddress, setUserAddress }: StateProps) => {
           name="시/도"
           type="text"
           placeholder="시/도"
-          value={userAddress.sido}
+          value={shelterInfo.address.province}
         />
         <input
           disabled
@@ -51,7 +41,7 @@ const AddressInputGroup = ({ userAddress, setUserAddress }: StateProps) => {
           name="시/군/구"
           type="text"
           placeholder="시/군/구"
-          value={userAddress.sigungu}
+          value={shelterInfo.address.city}
         />
         <input
           disabled
@@ -60,7 +50,7 @@ const AddressInputGroup = ({ userAddress, setUserAddress }: StateProps) => {
           name="도로명 주소"
           type="text"
           placeholder="도로명 주소"
-          value={userAddress.roadname}
+          value={shelterInfo.address.roadName}
         />
       </div>
       <input
@@ -71,7 +61,13 @@ const AddressInputGroup = ({ userAddress, setUserAddress }: StateProps) => {
         placeholder="상세 주소(입력)"
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           const target = e.target as HTMLInputElement;
-          setUserAddress({ ...userAddress, detail: target.value });
+          setShelterInfo({
+            ...shelterInfo,
+            address: {
+              ...shelterInfo.address,
+              detail: target.value,
+            },
+          });
         }}
       />
     </Container>

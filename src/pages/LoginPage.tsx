@@ -4,16 +4,6 @@ import LoginInputForm from 'components/organisms/LoginInputForm';
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  // const emailReg = /^[\w.-]+@[\w.-]+\.\w+$/g; // email형식
-  // userIdRegex.test(e.target.value) -> state에 따라 true false 값 가져오기 -> validation 함수 필요
-
-  const emailValidate = (text: string) => {
-    const emailReg = /^[\w.-]+@[\w.-]+\.\w+$/g;
-    if (!emailReg.test(text)) {
-      return <div>Error Message</div>;
-    }
-    return <div>success</div>;
-  };
 
   return (
     <div
