@@ -8,6 +8,8 @@ import ProfileListPage from 'pages/ProfileListPage';
 import ShelterInfoPage from 'pages/ShelterInfoPage';
 import UrgentListPage from 'pages/UrgentListPage';
 import NewListPage from 'pages/NewListPage';
+import LoginPage from 'pages/LoginPage';
+import SignupPage from 'pages/SignupPage';
 
 const queryClient = new QueryClient();
 
@@ -23,6 +25,8 @@ function App() {
             <Route path="/shelter" element={<ShelterInfoPage />} />
             <Route path="/profile/urgent/:page" element={<UrgentListPage />} />
             <Route path="/profile/new/:page" element={<NewListPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
           </Routes>
         </BrowserRouter>
       </RecoilRoot>

@@ -13,14 +13,17 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "project": "./tsconfig.json"
+    "project": ["./tsconfig.json", "tailwind.config.js"]
   },
   "rules": {
     "react/jsx-uses-vars": "error",
     "react/prop-types": 0,
     "react/react-in-jsx-scope": 0,
     "@typescript-eslint/explicit-module-boundary-types": 0,
-    "prettier/prettier": ["error", { "endOfLine": "auto" }]
+    "prettier/prettier": [
+      "error",
+      { "endOfLine": "auto", "quoteProps": "consistent" }
+    ]
   },
   "settings": {
     "import/resolver": {

@@ -1,9 +1,15 @@
+import { useNavigate } from 'react-router-dom';
+import VSignupPage from './VSignupPage';
+
 const SignupPage = () => {
-  return (
-    <div>
-      <h1>회원가입 페이지</h1>
-    </div>
-  );
+  const navigate = useNavigate();
+  const redirectLoginPage = () => {
+    navigate('/login');
+  };
+  const SignupProps = {
+    redirectLoginPage,
+  };
+  return <VSignupPage {...SignupProps} />;
 };
 
 export default SignupPage;
