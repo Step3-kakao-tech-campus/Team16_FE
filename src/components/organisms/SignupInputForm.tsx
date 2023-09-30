@@ -1,10 +1,12 @@
 import AddressInputGroup from 'components/molecules/AddressInputGroup';
 import InputGroup from 'components/molecules/InputGroup';
+import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { shelterSignupState } from 'recoil/shelterState';
 
 const SignupInputForm = () => {
   const [shelterInfo, setShelterInfo] = useRecoilState(shelterSignupState);
+  const [confirm, setConfirm] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const target = event.target as HTMLInputElement;
@@ -20,6 +22,15 @@ const SignupInputForm = () => {
         break;
       case 'shelter-contact':
         setShelterInfo((prev) => ({ ...prev, contact: target.value }));
+        break;
+      // 비밀번호 일치하지 않는 경우, 표시하기 위해 해당 부분 구현
+      case 'password-confirm':
+        if (target.value !== shelterInfo.password) {
+          setConfirm(true);
+        } else {
+          setConfirm(false);
+        }
+
         break;
       default:
         break;
@@ -82,6 +93,9 @@ const SignupInputForm = () => {
         placeholder="비밀번호를 한번 더 입력해주세요."
         onChange={handleChange}
       />
+      {confirm && (
+        <div className="text-red-500">비밀번호가 일치하지 않습니다.</div>
+      )}
       <InputGroup
         id="shelter"
         name="보호소 이름"
