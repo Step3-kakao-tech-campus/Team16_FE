@@ -1,6 +1,10 @@
 import { useRecoilState } from 'recoil';
 import regionAtom, { RegionType } from 'recoil/regionAtom';
 import speciesAtom, { SpeciesType } from 'recoil/speciesAtom';
+import CategoryModalList, {
+  CategoryModalType,
+  CategoryModalListProps,
+} from 'components/molecules/CategoryModalList';
 
 export interface CategoryModalProps {
   handleModalCloseClick: () => void;
@@ -8,8 +12,6 @@ export interface CategoryModalProps {
   speciesOrRegion: CategoryModalType;
   setSpeciesOrRegion: (speciesOrRegion: CategoryModalType) => void;
 }
-
-export type CategoryModalType = 'species' | 'region';
 
 const CategoryModal = ({
   handleModalCloseClick,
@@ -50,6 +52,15 @@ const CategoryModal = ({
     setRegion(region);
     handleModalCloseClick();
   };
+
+  const categoryModalListProps: CategoryModalListProps = {
+    speciesOrRegion,
+    speciesList,
+    handleSpeciesClick,
+    regionList,
+    handleRegionClick,
+  };
+
   return (
     <div
       onClick={handleModalOutsideClick}
@@ -82,38 +93,7 @@ const CategoryModal = ({
           </button>
         </div>
 
-        {/* 밑 부분은 하나의 컴포넌트로 분리 가능해보임.
-            위에도 V컴포넌트로 분리 될 것 같긴 한데 굳이? */}
-        {speciesOrRegion === 'species' && (
-          <div className="grid grid-cols-1 justify-items-center content-around h-full md:grid-cols-2">
-            {speciesList.map((species) => {
-              return (
-                <button
-                  onClick={() => handleSpeciesClick(species)}
-                  key={species}
-                  className="w-40 h-40 md:w-52 md:h-52 border rounded-md hover:bg-gray-100"
-                >
-                  {species}
-                </button>
-              );
-            })}
-          </div>
-        )}
-        {speciesOrRegion === 'region' && (
-          <div className="flex flex-col">
-            {regionList.map((region) => {
-              return (
-                <button
-                  onClick={() => handleRegionClick(region)}
-                  key={region}
-                  className="flex flex-col justify-start pl-5 border border-b-white py-3 hover:bg-gray-100 hover:pl-6"
-                >
-                  {region}
-                </button>
-              );
-            })}
-          </div>
-        )}
+        <CategoryModalList {...categoryModalListProps} />
       </div>
     </div>
   );
