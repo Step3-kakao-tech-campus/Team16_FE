@@ -1,15 +1,11 @@
 import { Link } from 'react-router-dom';
 import ModalPortal from 'commons/ModalPortal';
 import { useState } from 'react';
-import CategoryModal, {
-  CategoryModalProps,
-  RegionType,
-  CategoryModalType,
-} from 'commons/CategoryModal';
+import CategoryModal, { CategoryModalProps } from 'commons/CategoryModal';
+import { CategoryModalType } from 'components/molecules/VCategoryModalList';
 
 const GNB = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedRegion, setSelectedRegion] = useState<RegionType>('전국');
   const [speciesOrRegion, setSpeciesOrRegion] =
     useState<CategoryModalType>('species');
 
@@ -18,17 +14,18 @@ const GNB = () => {
   };
   const handleModalCloseClick = () => {
     setIsModalOpen(false);
+    setSpeciesOrRegion('species');
   };
   const handleModalOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       setIsModalOpen(false);
+      setSpeciesOrRegion('species');
     }
   };
 
   const categoryModalProps: CategoryModalProps = {
     handleModalCloseClick,
     handleModalOutsideClick,
-    setSelectedRegion,
     speciesOrRegion,
     setSpeciesOrRegion,
   };
