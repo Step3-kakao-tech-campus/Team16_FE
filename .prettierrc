@@ -6,6 +6,7 @@
   "orderedImports": true,
   "semi": true,
   "singleQuote": true,
+  "quoteProps": "consistent",
   "tabWidth": 2,
   "trailingComma": "all",
   "useTabs": false,

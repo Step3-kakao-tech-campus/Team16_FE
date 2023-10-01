@@ -1,10 +1,14 @@
 module.exports = {
-  content: ['./src/**/*.{html,js}', './src/**/*.{js,jsx,ts,tsx}'],
+  content: ['./src/**/*.{html,js}', './src/**/*.{ts,tsx}'],
   theme: {
-    extend: {},
-    fontFamily: {
-      sans: ['Pretendard', 'sans-serif'],
-    }
+    extend: {
+      colors: {
+        'brand-color': '#E3A13D',
+      },
+      fontFamily: {
+        sans: ['Pretendard', 'sans-serif'],
+      },
+    },
   },
   plugins: [],
 };
