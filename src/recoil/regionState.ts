@@ -20,9 +20,9 @@ export type RegionType =
   | '세종'
   | '전국';
 
-const regionAtom = atom<RegionType>({
-  key: 'regionAtom',
+const regionState = atom<RegionType>({
+  key: 'regionState',
   default: '전국',
 });
 
-export default regionAtom;
+export default regionState;
