@@ -2,6 +2,7 @@ import ModalPortal from 'commons/ModalPortal';
 import { useState } from 'react';
 import CategoryModal, { CategoryModalProps } from 'commons/CategoryModal';
 import { CategoryModalType } from 'components/molecules/VCategoryModalList';
+import { useLocation } from 'react-router-dom';
 import VGNB, { VGNBProps } from './VGNB';
 
 const GNB = () => {
@@ -23,6 +24,8 @@ const GNB = () => {
     }
   };
 
+  const pathName = useLocation().pathname;
+
   const categoryModalProps: CategoryModalProps = {
     handleModalCloseClick,
     handleModalOutsideClick,
@@ -32,6 +35,9 @@ const GNB = () => {
 
   const vGNBProps: VGNBProps = {
     handleCategoryButtonClick,
+    isProfilePage: pathName === '/profile',
+    isFindShelterPage: pathName === '/find-shelter',
+    isRegisterPage: pathName === '/register',
   };
 
   return (
