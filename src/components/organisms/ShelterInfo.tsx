@@ -1,10 +1,20 @@
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import VShelterInfo, {
+  PageNationProps,
   ProfileListProps,
   Props,
   ShelterInfoProps,
 } from './VShelterInfo';
 
 const ShelterInfo = () => {
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태
+  const navigate = useNavigate();
+  // 페이지 변경 함수
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    navigate(`/profile/urgent/${page}`);
+  };
   //   const [sosList, setSosList] = useState([]);
 
   //   useEffect(() => {
@@ -27,9 +37,17 @@ const ShelterInfo = () => {
     state: '입양완료',
   };
 
+  const pageNationProps: PageNationProps = {
+    currentPage, // 현재 페이지 상태를 전달
+    lastPage: 10,
+    maxLength: 7,
+    setCurrentPage: handlePageChange, // 페이지 변경 함수를 전달
+  };
+
   const props: Props = {
     shelterInfoProps,
     profileListProps,
+    pageNationProps,
   };
 
   // JSX를 VAC로 교체
