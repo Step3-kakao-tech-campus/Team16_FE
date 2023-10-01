@@ -3,10 +3,10 @@ import GNB from 'layouts/GNB';
 
 const DetailPetPage = () => {
   return (
-    <div>
+    <>
       <GNB />
       <DetailPetData />
-    </div>
+    </>
   );
 };
 
