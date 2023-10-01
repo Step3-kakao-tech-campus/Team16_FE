@@ -1,6 +1,6 @@
 import { useRecoilState } from 'recoil';
-import regionAtom, { RegionType } from 'recoil/regionAtom';
-import speciesAtom, { SpeciesType } from 'recoil/speciesAtom';
+import regionAtom, { RegionType } from 'recoil/regionState';
+import speciesAtom, { SpeciesType } from 'recoil/speciesState';
 import CategoryModalList, {
   CategoryModalType,
   VCategoryModalListProps,

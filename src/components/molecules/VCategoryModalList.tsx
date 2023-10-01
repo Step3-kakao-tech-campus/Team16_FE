@@ -1,5 +1,5 @@
-import { SpeciesType } from 'recoil/speciesAtom';
-import { RegionType } from 'recoil/regionAtom';
+import { SpeciesType } from 'recoil/speciesState';
+import { RegionType } from 'recoil/regionState';
 
 export interface VCategoryModalListProps {
   speciesOrRegion: CategoryModalType;
