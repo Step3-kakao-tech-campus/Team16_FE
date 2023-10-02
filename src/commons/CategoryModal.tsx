@@ -1,6 +1,6 @@
 import { useRecoilState } from 'recoil';
-import regionAtom, { RegionType } from 'recoil/regionState';
-import speciesAtom, { SpeciesType } from 'recoil/speciesState';
+import regionState, { RegionType } from 'recoil/regionState';
+import speciesState, { SpeciesType } from 'recoil/speciesState';
 import CategoryModalList, {
   CategoryModalType,
   VCategoryModalListProps,
@@ -19,8 +19,8 @@ const CategoryModal = ({
   speciesOrRegion,
   setSpeciesOrRegion,
 }: CategoryModalProps) => {
-  const [, setSpecies] = useRecoilState(speciesAtom);
-  const [, setRegion] = useRecoilState(regionAtom);
+  const [, setSpecies] = useRecoilState(speciesState);
+  const [, setRegion] = useRecoilState(regionState);
 
   const speciesList: SpeciesType[] = ['강아지', '고양이', '기타'];
   const regionList: RegionType[] = [
