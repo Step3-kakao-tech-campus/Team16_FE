@@ -22,6 +22,7 @@ const VAddressInputGroup = ({ handleChange, shelterInfo }: Props) => {
             type="text"
             placeholder="우편번호"
             value={shelterInfo.zonecode}
+            onChange={handleChange}
           />
           <Postcode />
         </div>
@@ -35,6 +36,7 @@ const VAddressInputGroup = ({ handleChange, shelterInfo }: Props) => {
           type="text"
           placeholder="시/도"
           value={shelterInfo.address.province}
+          onChange={handleChange}
         />
         <input
           disabled
@@ -44,6 +46,7 @@ const VAddressInputGroup = ({ handleChange, shelterInfo }: Props) => {
           type="text"
           placeholder="시/군/구"
           value={shelterInfo.address.city}
+          onChange={handleChange}
         />
         <input
           disabled
@@ -53,6 +56,7 @@ const VAddressInputGroup = ({ handleChange, shelterInfo }: Props) => {
           type="text"
           placeholder="도로명 주소"
           value={shelterInfo.address.roadName}
+          onChange={handleChange}
         />
       </div>
       <input
