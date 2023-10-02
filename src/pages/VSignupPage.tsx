@@ -10,8 +10,9 @@ const VSignupPage = ({ redirectLoginPage }: Props) => {
     <div
       className="flex flex-col justify-center items-center gap-4 min-h-screen"
       style={{
-        backgroundImage: 'url(assets/images/backgroundLogo.png)',
+        backgroundImage: 'url(assets/images/backgroundImage.png)',
         backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
       }}
     >
       <Banner className="font-bold text-2xl">회원가입</Banner>
