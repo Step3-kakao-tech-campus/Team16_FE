@@ -1,6 +1,115 @@
-# Team16
-16조
-## 카카오 테크 캠퍼스 3단계 진행 보드
+# 전남대 16조 <span style="background-color:#fff5b1">TEAM 다글다글🐶🐱</span>
+![LOGO_IMAGE](https://github.com/Step3-kakao-tech-campus/Team16_FE/assets/81916309/fcee1491-fcac-4531-b2a5-23e4874d7fd7)
+### 새로운 가족을 기다리는 유기동물을 연결하는 서비스 Animory 입니다.
+</br>
+
+## 🔗 목차
+- [👨‍💻👩‍💻 FE 팀원 소개](https://github.com/Step3-kakao-tech-campus/Team16_FE/edit/feat/%2331/README.md#-fe-%ED%8C%80%EC%9B%90-%EC%86%8C%EA%B0%9C)
+- [💻 프로젝트 소개](https://github.com/Step3-kakao-tech-campus/Team16_FE/edit/feat/%2331/README.md#-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%86%8C%EA%B0%9C)
+- [📚 기술 스택](https://github.com/Step3-kakao-tech-campus/Team16_FE/edit/feat/%2331/README.md#-%EA%B8%B0%EC%88%A0-%EC%8A%A4%ED%83%9D)
+- [🗃️ 디자인 패턴 & 디렉토리 구조 소개](https://github.com/Step3-kakao-tech-campus/Team16_FE/edit/feat/%2331/README.md#%EF%B8%8F-%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4--%EB%94%94%EB%A0%89%ED%86%A0%EB%A6%AC-%EA%B5%AC%EC%A1%B0-%EC%86%8C%EA%B0%9C)
+- [📑 페이지별 기능 소개](https://github.com/Step3-kakao-tech-campus/Team16_FE/edit/feat/%2331/README.md#-%ED%8E%98%EC%9D%B4%EC%A7%80%EB%B3%84-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C)
+- [📝 요구사항 명세서](https://github.com/Step3-kakao-tech-campus/Team16_BE/wiki/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD-%EB%AA%85%EC%84%B8)
+- [📒 카카오 테크 캠퍼스 3단계 진행 커리큘럼 안내 사항](https://github.com/Step3-kakao-tech-campus/Team16_FE/edit/feat/%2331/README.md#-%EC%B9%B4%EC%B9%B4%EC%98%A4-%ED%85%8C%ED%81%AC-%EC%BA%A0%ED%8D%BC%EC%8A%A4-3%EB%8B%A8%EA%B3%84-%EC%A7%84%ED%96%89-%EB%B3%B4%EB%93%9C)
+</br>
+
+### 💻 프로젝트 소개
+💡 반려인이 되고자 하는 사람들과 새로운 가족을 기다리는 유기동물을 연결하는 웹서비스입니다.   
+</br>
+🙋‍♂️ 저희의 메인 기능은 이렇게 되어있어요!! 
+- 저희 서비스의 타겟층은 민간 유기동물 보호소입니다.
+- 유기동물의 **정적인 이미지**뿐만 아닌 **동적인 숏폼 영상**을 통한 컨텐츠로 사용자의 접근성을 높이는 것을 목표로 하고 있습니다. 
+- 지역, 동물별 카테고리를 통해 내가 원하는 지역 내 보호소에서 등록한 유기 동물의 사진과 영상을 확인할 수 있습니다.
+- 근처 위치에 있는 동물 보호소를 검색할 수 있고, 서비스를 이용하여 유기 동물을 등록한 보호소를 구분하여 찾아볼 수 있습니다.
+</br>
+
+### 👨‍💻👩‍💻 FE 팀원 소개
+<table>
+  <tbody>
+    <tr>
+      <td align="center"><a href="https://github.com/JeonDoGyun"><img src="https://avatars.githubusercontent.com/u/81916309?s=400&u=f7d48e3594c569f596361ade863d4615ade2702e&v=4" width="100px;" alt="테크리더 : 전도균"/><br /><sub><b>테크리더 : 전도균</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/LimSumi"><img src="https://avatars.githubusercontent.com/u/114466348?v=4" width="100px;" alt="팀원 : 임수미"/><br /><sub><b>팀원 : 임수미</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/hjiwon"><img src="https://avatars.githubusercontent.com/u/77186082?v=4" width="100px;" alt="팀원 : 황지원"/><br /><sub><b>팀원 : 황지원</b></sub></a><br /></td>
+    </tr>
+  </tbody>
+</table>
+</br>
+
+### 📚 기술 스택
+[![stackticon](https://firebasestorage.googleapis.com/v0/b/stackticon-81399.appspot.com/o/images%2F1696271782741?alt=media&token=cf0d1eea-7816-44f4-972a-8108d6e56312)](https://github.com/msdio/stackticon)
+- Typescript 언어를 사용한 React 라이브러리 통해 SPA 방식의 웹 애플리케이션입니다.
+- Recoil과 React Query를 통해 상태 관리를 하고 있습니다.
+- CSS 스타일 작업을 위해 Tailwind CSS를 사용하고 있습니다. 
+</br>
+
+### 🗃️ 디자인 패턴 & 디렉토리 구조 소개
+디자인 패턴 설명
+- `VAC Pattern`과 `Atomic Design Pattern`을 병합하여 사용하고 있습니다. 
+    - VAC 패턴을 사용하여 UI를 담당하는 부분과 비즈니스 로직을 담당하는 부분을 분리하여 사용하고 있습니다. 
+    - 컴포넌트 및 페이지는 Atomin 디자인 패턴을 사용하여 컴포넌트의 재사용성을 염두에 두고 관리하고 있습니다. 
+</br>
+
+디렉토리 구조   
+- 아래의 구조는 디자인 패턴을 고려하여 작성한 가이드라인입니다.
+- 폴더명은 바뀌지 않지만, 내부 파일의 이름은 변경될 수 있습니다. 
+
+```
+├── /public
+│   ├── index.html
+│   ├── /assets
+│   │   ├── /images
+│   │   │   ├── image1
+│   │   │   └── image2
+│   │   ├── /logos
+│   │   │   ├── logo1
+│   └── └── └── logo2
+├── /src
+│   ├── /apis
+│   ├── /components
+│   │   ├── /atoms
+│   │   ├── /molecules
+│   │   ├── /organisms
+│   │   ├── /templates
+│   │   │   ├── SomeTemplate.tsx
+│   │   └── └── VSomeTemplate.tsx
+│   ├── /pages
+│   │   ├── HomePage.tsx
+│   │   └── DetailedPetPage.tsx
+│   ├── /layouts
+│   └── └── GNB.tsx
+│   ├── /recoil
+│   │   ├── PetShelterState.tsx
+│   └── └── PetInfoState.tsx
+│   ├── /commons
+│   │   ├── someFunction.ts
+│   └── └── regex.ts
+│   ├── /hooks
+│   └── └── useFetch.ts
+│   ├── App.css
+│   ├── App.tsx
+│   ├── App.test.tsx
+│   ├── index.css
+└── └── index.tsx
+├── .eslintrc
+├── .gitignore
+├── .prettierrc
+├── package-lock.json
+├── package.json
+├── README.md
+├── tailwind.config.js
+└── tsconfig.json
+```
+
+</br>
+
+### 📑 페이지별 기능 소개
+
+</br>
+
+***
+
+
+## 📒 카카오 테크 캠퍼스 3단계 진행 보드
 
 </br>
 
