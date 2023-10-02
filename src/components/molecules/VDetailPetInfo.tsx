@@ -4,7 +4,7 @@ import { MockDetailPetInfoProps } from 'components/organisms/VDetailPetData';
 const VDetailPetInfo = (data: MockDetailPetInfoProps) => {
   return (
     <div>
-      <h2 className="text-3xl my-10">{data.name}</h2>
+      <h2 className="text-3xl mb-10">{data.name}</h2>
       <div className="flex flex-col items-center">
         <div className="flex h-14 justify-around">
           <div className="flex">

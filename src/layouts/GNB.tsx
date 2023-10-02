@@ -9,6 +9,7 @@ const GNB = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [speciesOrRegion, setSpeciesOrRegion] =
     useState<CategoryModalType>('species');
+  const [isToggleOpen, setIsToggleOpen] = useState(false);
 
   const handleCategoryButtonClick = () => {
     setIsModalOpen(true);
@@ -38,6 +39,8 @@ const GNB = () => {
     isProfilePage: pathName === '/profile',
     isFindShelterPage: pathName === '/find-shelter',
     isRegisterPage: pathName === '/register',
+    isToggleOpen,
+    handleToggleClick: () => setIsToggleOpen((prev) => !prev),
   };
 
   return (
