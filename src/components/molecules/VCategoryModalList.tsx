@@ -31,7 +31,7 @@ const VCatetegoryModalList = (props: VCategoryModalListProps) => {
               <div key={species} className="flex flex-col items-center">
                 <button
                   onClick={() => handleSpeciesClick(species)}
-                  className="w-40 h-40 md:w-52 md:h-52 lg:w-72 lg:h-72 border rounded-md hover:bg-gray-100"
+                  className="w-40 h-40 md:w-52 md:h-52 lg:w-72 lg:h-72 border shadow rounded-lg hover:bg-gray-100"
                 >
                   <img src={`${speciesImageList[index]}`} alt="" />
                 </button>
