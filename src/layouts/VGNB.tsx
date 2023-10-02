@@ -1,3 +1,4 @@
+import LogoButton from 'components/atoms/LogoButton';
 import { Link } from 'react-router-dom';
 
 export interface VGNBProps {
@@ -22,14 +23,11 @@ const VGNB = (props: VGNBProps) => {
   return (
     <>
       {/* 좁은 화면 */}
-      <div className="w-full justify-center flex">
-        <div className="flex w-11/12 my-5 lg:hidden justify-between">
-          <Link to="/">
-            <img src="" alt="" />
-            <h1 className="text-brand-color font-bold text-2xl">애니모리</h1>
-          </Link>
+      <div className="w-full lg:hidden h-10 my-5 justify-center flex">
+        <div className="flex w-11/12 justify-between items-center">
+          <LogoButton />
           <button className="text-3xl" onClick={handleToggleClick}>
-            =
+            <img className="w-8" src="/assets/images/menu.png" alt="메뉴" />
           </button>
         </div>
       </div>
@@ -79,12 +77,9 @@ const VGNB = (props: VGNBProps) => {
         </div>
       )}
       {/* 넓은 화면 */}
-      <div className="flex w-full my-5 justify-center">
+      <div className="flex w-full h-10 my-5 justify-center">
         <div className="lg:flex w-11/12 hidden items-center justify-between text-xl gap-10">
-          <Link to="/">
-            <img src="" alt="" />
-            <h1 className="text-brand-color font-bold text-2xl">애니모리</h1>
-          </Link>
+          <LogoButton />
 
           <ol className="flex gap-4">
             <li>
