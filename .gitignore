@@ -14,8 +14,12 @@
 # misc
 .DS_Store
 
-# env
-
+# env variable file
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
 
 npm-debug.log*
 yarn-debug.log*
