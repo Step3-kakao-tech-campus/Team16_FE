@@ -4,6 +4,7 @@ import CategoryModal, { CategoryModalProps } from 'commons/CategoryModal';
 import { CategoryModalType } from 'components/molecules/VCategoryModalList';
 import { useLocation } from 'react-router-dom';
 import VGNB, { VGNBProps } from './VGNB';
+import VLargeGNB, { VLargeGNBProps } from './VLargeGNB';
 
 const GNB = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -42,10 +43,17 @@ const GNB = () => {
     isToggleOpen,
     handleToggleClick: () => setIsToggleOpen((prev) => !prev),
   };
+  const vLargeGNBProps: VLargeGNBProps = {
+    handleCategoryButtonClick,
+    isProfilePage: pathName === '/profile',
+    isFindShelterPage: pathName === '/find-shelter',
+    isRegisterPage: pathName === '/register',
+  };
 
   return (
     <>
       <VGNB {...vGNBProps} />
+      <VLargeGNB {...vLargeGNBProps} />
       {isModalOpen && (
         <ModalPortal>
           <CategoryModal {...categoryModalProps} />
