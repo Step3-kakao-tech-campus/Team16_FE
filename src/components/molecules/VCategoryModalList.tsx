@@ -20,19 +20,23 @@ const VCatetegoryModalList = (props: VCategoryModalListProps) => {
     handleRegionClick,
   } = props;
 
+  const speciesImageList = ['/assets/images/dog.png', '/assets/images/cat.png'];
+
   return (
     <>
       {speciesOrRegion === 'species' && (
         <div className="grid grid-cols-1 justify-items-center content-around h-full md:grid-cols-2">
-          {speciesList.map((species) => {
+          {speciesList.map((species, index) => {
             return (
-              <button
-                onClick={() => handleSpeciesClick(species)}
-                key={species}
-                className="w-40 h-40 md:w-52 md:h-52 border rounded-md hover:bg-gray-100"
-              >
-                {species}
-              </button>
+              <div key={species} className="flex flex-col items-center">
+                <button
+                  onClick={() => handleSpeciesClick(species)}
+                  className="w-40 h-40 md:w-52 md:h-52 lg:w-72 lg:h-72 border shadow rounded-lg hover:bg-gray-100"
+                >
+                  <img src={`${speciesImageList[index]}`} alt="" />
+                </button>
+                <span>{species}</span>
+              </div>
             );
           })}
         </div>
