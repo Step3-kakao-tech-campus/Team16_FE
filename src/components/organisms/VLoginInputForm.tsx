@@ -28,6 +28,7 @@ const VLoginInputForm = ({
         onChange={(e) => {
           handleChange(e);
         }}
+        autocomplete="email"
       />
       {isEmailEmpty && <div className="text-red-500">{errorText}</div>}
       <InputGroup
@@ -38,6 +39,7 @@ const VLoginInputForm = ({
         onChange={(e) => {
           handleChange(e);
         }}
+        autocomplete="current-password"
       />
       {isPasswordEmpty && (
         <div className="text-red-500">비밀번호를 입력해주세요.</div>
