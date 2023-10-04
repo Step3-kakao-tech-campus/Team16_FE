@@ -30,10 +30,13 @@ const VCatetegoryModalList = (props: VCategoryModalListProps) => {
   return (
     <>
       {speciesOrRegion === 'species' && (
-        <div className="grid grid-cols-1 justify-items-center content-around h-full md:grid-cols-2">
+        <div className="grid grid-cols-1 h-full md:grid-cols-2">
           {speciesList.map((species, index) => {
             return (
-              <div key={species} className="flex flex-col items-center">
+              <div
+                key={species}
+                className="flex flex-col items-center justify-center"
+              >
                 <button
                   onClick={() => handleSpeciesClick(species)}
                   className="w-40 h-40 md:w-52 md:h-52 lg:w-72 lg:h-72 border shadow rounded-lg hover:bg-gray-100"
