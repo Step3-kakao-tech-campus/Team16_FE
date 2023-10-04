@@ -22,7 +22,7 @@ const CategoryModal = ({
   const [, setSpecies] = useRecoilState(speciesState);
   const [, setRegion] = useRecoilState(regionState);
 
-  const speciesList: SpeciesType[] = ['강아지', '고양이', '기타'];
+  const speciesList: SpeciesType[] = ['강아지', '고양이', '기타', '전체'];
   const regionList: RegionType[] = [
     '전국',
     '서울',
