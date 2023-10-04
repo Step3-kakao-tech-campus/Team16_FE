@@ -20,7 +20,12 @@ const VCatetegoryModalList = (props: VCategoryModalListProps) => {
     handleRegionClick,
   } = props;
 
-  const speciesImageList = ['/assets/images/dog.png', '/assets/images/cat.png'];
+  const speciesImageList = [
+    '/assets/images/dog.png',
+    '/assets/images/cat.png',
+    '/assets/images/racoon.png',
+    '/assets/images/all.png',
+  ];
 
   return (
     <>
