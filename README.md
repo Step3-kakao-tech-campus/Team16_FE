@@ -4,13 +4,13 @@
 </br>
 
 ## 🔗 목차
-- [👨‍💻👩‍💻 FE 팀원 소개](https://github.com/Step3-kakao-tech-campus/Team16_FE/edit/feat/%2331/README.md#-fe-%ED%8C%80%EC%9B%90-%EC%86%8C%EA%B0%9C)
-- [💻 프로젝트 소개](https://github.com/Step3-kakao-tech-campus/Team16_FE/edit/feat/%2331/README.md#-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%86%8C%EA%B0%9C)
-- [📚 기술 스택](https://github.com/Step3-kakao-tech-campus/Team16_FE/edit/feat/%2331/README.md#-%EA%B8%B0%EC%88%A0-%EC%8A%A4%ED%83%9D)
-- [🗃️ 디자인 패턴 & 디렉토리 구조 소개](https://github.com/Step3-kakao-tech-campus/Team16_FE/edit/feat/%2331/README.md#%EF%B8%8F-%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4--%EB%94%94%EB%A0%89%ED%86%A0%EB%A6%AC-%EA%B5%AC%EC%A1%B0-%EC%86%8C%EA%B0%9C)
-- [📑 페이지별 기능 소개](https://github.com/Step3-kakao-tech-campus/Team16_FE/edit/feat/%2331/README.md#-%ED%8E%98%EC%9D%B4%EC%A7%80%EB%B3%84-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C)
+- [👨‍💻👩‍💻 FE 팀원 소개](#-fe-%ED%8C%80%EC%9B%90-%EC%86%8C%EA%B0%9C)
+- [💻 프로젝트 소개](#-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%86%8C%EA%B0%9C)
+- [📚 기술 스택](#-%EA%B8%B0%EC%88%A0-%EC%8A%A4%ED%83%9D)
+- [🗃️ 디자인 패턴 & 디렉토리 구조 소개](#%EF%B8%8F-%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4--%EB%94%94%EB%A0%89%ED%86%A0%EB%A6%AC-%EA%B5%AC%EC%A1%B0-%EC%86%8C%EA%B0%9C)
+- [📑 페이지별 기능 소개](#-%ED%8E%98%EC%9D%B4%EC%A7%80%EB%B3%84-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C)
 - [📝 요구사항 명세서](https://github.com/Step3-kakao-tech-campus/Team16_BE/wiki/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD-%EB%AA%85%EC%84%B8)
-- [📒 카카오 테크 캠퍼스 3단계 진행 커리큘럼 안내 사항](https://github.com/Step3-kakao-tech-campus/Team16_FE/edit/feat/%2331/README.md#-%EC%B9%B4%EC%B9%B4%EC%98%A4-%ED%85%8C%ED%81%AC-%EC%BA%A0%ED%8D%BC%EC%8A%A4-3%EB%8B%A8%EA%B3%84-%EC%A7%84%ED%96%89-%EB%B3%B4%EB%93%9C)
+- [📒 카카오 테크 캠퍼스 3단계 진행 커리큘럼 안내 사항](#-%EC%B9%B4%EC%B9%B4%EC%98%A4-%ED%85%8C%ED%81%AC-%EC%BA%A0%ED%8D%BC%EC%8A%A4-3%EB%8B%A8%EA%B3%84-%EC%A7%84%ED%96%89-%EB%B3%B4%EB%93%9C)
 </br>
 
 ### 💻 프로젝트 소개
@@ -103,6 +103,122 @@
 </br>
 
 ### 📑 페이지별 기능 소개
+- 기획 단계에서 `Figma`을 통해 UI에 대한 와이어프레임을 제작하였습니다.
+- 아래 이미지는 페이지별 UI 설계 이미지와 사용되는 컴포넌트 및 기능에 대한 설명입니다. 
+- 자세한 사항은 [TEAM-16-Wireframe](https://www.figma.com/file/A0w3m1DU5JJm2zzvo9lnGE/16%EC%A1%B0-%EC%83%88%EA%B8%B0%ED%9A%8D?type=design&node-id=684%3A1302&mode=design&t=OXljL8TPJH6AsihE-1)을 통해 확인하실 수 있습니다. 
+</br>
+
+1. 메인 페이지
+
+   <img width="450" alt="main-page" src="https://github.com/Step3-kakao-tech-campus/Team16_FE/assets/81916309/9836ad76-7103-4db2-8de2-108243a3e1cb">
+
+- 메인 홈 화면입니다. 
+- 마우스 휠, 드래그 제스처를 통해 위아래로 숏폼을 랜덤하게 보여줄 수 있습니다.
+- 영상에 마우스를 올렸을 때 상세 정보를 볼 수 있는 화살표 기호가 나오게 되고, 기호를 누르게 되면 오른쪽으로 넘어가면서 영상에 나오는 동물의 상세 정보를 볼 수 있습니다.
+
+</br>
+
+2. 상세 정보 페이지
+
+   <img width="450" alt="image" src="https://github.com/Step3-kakao-tech-campus/Team16_FE/assets/81916309/73fa44a9-4096-4fbe-bd1a-96656973ccfe">
+
+- 영상에서 화살표 기호를 눌렀을 때 나오는 페이지입니다.
+- 등록된 동물의 상세 정보를 볼 수 있고, 보호소 연락하기 버튼을 누르게 되면 등록된 번호로 전화를 연결해줍니다.
+- 동물의 성격에 대해 오각형 형태로 보여주어 사용자가 보기 편한 직관성을 가지고 있습니다. 
+
+</br>
+
+3. 근처 동물 보호소 찾기 페이지
+
+   <img width="450" alt="image" src="https://github.com/Step3-kakao-tech-campus/Team16_FE/assets/81916309/46567a69-aebf-4bbd-b288-86d1e8b7bab2">
+
+- 사용자의 현재 위치를 중심으로 근처 동물 보호소 위치를 알려주는 페이지입니다.
+- 검색된 보호소는 보호소의 이름, 주소, 연락처를 보여주게 됩니다. 
+- 검색된 보호소 중 현재 서비스를 이용하여 동물을 등록한 보호소는 별도의 표시를 통해 구분합니다.
+
+</br>
+
+4. 보호소 프로필 페이지
+
+   <img width="450" alt="image" src="https://github.com/Step3-kakao-tech-campus/Team16_FE/assets/81916309/d8fd3872-74e1-4baf-ada8-e61db9877be3">
+
+- 보호소에 대한 정보와 보호소에서 등록한 유기 동물을 그룹화하여 보여주는 페이지입니다.
+- 페이지네이션을 통해 등록된 유기 동물 리스트를 관리합니다. 
+
+</br>
+
+5. 프로필 리스트 페이지
+
+   <img width="450" alt="image" src="https://github.com/Step3-kakao-tech-campus/Team16_FE/assets/81916309/cdea2d38-69fc-45ae-865a-c6e830480357">
+   <img width="450" alt="image" src="https://github.com/Step3-kakao-tech-campus/Team16_FE/assets/81916309/9a897d39-8edd-450d-8b63-e99c72354b3d">
+
+- 사이트에 등록된 유기 동물의 리스트를 사진과 함께 볼 수 있는 페이지입니다.
+- 안락사 예정이 가까운 동물을 따로 분류해서 보여주고 있습니다.
+- 새롭게 추가된 유기 동물을 볼 수 있는 탭을 따로 만들었습니다.
+- 더보기를 누르면 추가로 등록된 유기 동물을 찾아볼 수 있고, 페이지네이션을 통해 등록된 유기 동물 리스트를 관리합니다. 
+
+</br>
+
+6. 등록하기 페이지
+
+   <img width="300" alt="image" src="https://github.com/Step3-kakao-tech-campus/Team16_FE/assets/81916309/80a87ef3-2990-44f8-a9f4-740ecd5e0906">
+   <img width="350" alt="image" src="https://github.com/Step3-kakao-tech-campus/Team16_FE/assets/81916309/a10b6302-8976-485a-9b62-1c131ec88156">
+
+- 유기 동물의 정보를 입력하여 사이트에 등록하는 페이지입니다.
+- 비디오와 이미지를 등록할 수 있는 버튼이 있고, 제한 용량에 대해 텍스트로 명시해주고 있습니다.
+- 등록하기 버튼을 통해 정보를 등록하고, 추가로 등록할 동물이 있는지 물어보는 모달창을 통해 사용자가 확인할 수 있도록 합니다.
+
+</br>
+
+7. 수정하기 페이지
+
+   <img width="450" alt="image" src="https://github.com/Step3-kakao-tech-campus/Team16_FE/assets/81916309/6f2fe250-121c-47ad-8710-f9a48d876026">
+
+- 등록하기 페이지에서 등록했던 정보를 수정할 수 있는 페이지입니다.
+- 수정완료 버튼을 통해 정보를 수정하여 다시 등록할 수 있습니다. 
+
+</br>
+
+8. 로그인 페이지
+
+   <img width="450" alt="image" src="https://github.com/Step3-kakao-tech-campus/Team16_FE/assets/81916309/a23d7cdc-6e14-44db-9148-a26547dbd58e">
+
+- 이메일, 비밀번호, 보호소 정보를 입력하여 회원가입 할 수 있습니다.
+- 이메일 중복 확인 요청을 보냈을 때 validation 처리를 사용자에게 알려줍니다.
+- 회원가입 버튼을 눌렀을 때, `이메일 형식에 맞지 않음`, `비밀번호 형식에 어긋남` 등의 validation 처리를 사용자에게 알려줍니다.
+- 우편번호 찾기를 통해 보호소의 우편번호, 주소를 기입할 수 있는 모달창이 화면에 나오게 됩니다. 
+- 로그인 버튼을 통해 로그인 페이지로 이동할 수 있습니다. 
+  
+</br>
+
+9. 회원가입 페이지
+
+   <img width="350" alt="image" src="https://github.com/Step3-kakao-tech-campus/Team16_FE/assets/81916309/b15f4b83-0cd3-4e74-a2dc-c81ed578bfe1">
+
+- 이메일, 비밀번호를 입력하여 로그인할 수 있습니다.
+- 로그인 요청을 보냈을 때 `등록되지 않은 이메일`, `비밀번호가 다름` 등의 validation 처리를 사용자에게 알려줍니다.
+- 회원가입 버튼을 통해 회원가입 페이지로 이동할 수 있습니다.
+
+
+</br>
+
+10. GNB(Global Navigation Bar)
+
+    <img width="450" alt="image" src="https://github.com/Step3-kakao-tech-campus/Team16_FE/assets/81916309/abbc8077-66a0-487b-a2fb-49cc375c0628">
+
+- 카테고리, 프로필 목록, 주변 보호소 찾기, 등록하기, 로그인, 회원가입 페이지입니다.
+- 각 기능에 대한 버튼을 누르게 되면, 해당 역할을 하는 페이지로 이동하게 됩니다. 
+- Layout으로 홈 화면과 같은 계층으로 두어서 동작합니다. 
+
+</br>
+
+11. 카테고리 Modal
+
+    <img width="436" alt="image" src="https://github.com/Step3-kakao-tech-campus/Team16_FE/assets/81916309/d8121898-cc0e-4b87-bc34-05771e77e4f4">
+    <img width="395" alt="image" src="https://github.com/Step3-kakao-tech-campus/Team16_FE/assets/81916309/698a6822-c5f4-4dc7-8179-b14d1a0109bc">
+
+- GNB에 있는 카테고리 탭을 누르게 되면, 지역과 동물 카테고리를 지정할 수 있는 모달창이 나오게 됩니다.
+- 선택된 카테고리에 따라 홈 화면에서 보여지는 동물 숏폼 리스트가 변경됩니다. 
 
 </br>
 
