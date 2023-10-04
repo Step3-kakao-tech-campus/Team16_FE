@@ -66,7 +66,7 @@ const CategoryModal = ({
       onClick={handleModalOutsideClick}
       className="w-screen h-screen fixed top-0 left-0 flex justify-center items-center bg-black bg-opacity-50"
     >
-      <div className="flex flex-col w-3/5 h-4/5 fixed bg-white rounded-md overflow-auto">
+      <div className="w-3/5 h-4/5 bg-white rounded-md overflow-auto">
         <div className="flex justify-between p-5">
           <div className="flex gap-3">
             <button
