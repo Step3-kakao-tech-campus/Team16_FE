@@ -6,9 +6,17 @@ type Props = {
   type: string;
   placeholder: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  autocomplete: string;
 };
 
-const Input = ({ id, name, type, placeholder, onChange }: Props) => {
+const Input = ({
+  id,
+  name,
+  type,
+  placeholder,
+  onChange,
+  autocomplete,
+}: Props) => {
   return (
     <input
       className="border-2 rounded-md border-gray-300 p-2"
@@ -17,6 +25,7 @@ const Input = ({ id, name, type, placeholder, onChange }: Props) => {
       type={type}
       placeholder={placeholder}
       onChange={onChange}
+      autoComplete={autocomplete}
     />
   );
 };

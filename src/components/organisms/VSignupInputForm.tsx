@@ -22,6 +22,7 @@ const VSignupInputForm = ({ handleChange, handleSubmit, confirm }: Props) => {
           type="text"
           placeholder="이메일을 입력해주세요."
           onChange={handleChange}
+          autocomplete="email"
         />
         <button className="bg-brand-color text-white rounded min-w-[100px] min-h-[44px]">
           중복 확인
@@ -33,6 +34,7 @@ const VSignupInputForm = ({ handleChange, handleSubmit, confirm }: Props) => {
         type="password"
         placeholder="비밀번호를 입력해주세요."
         onChange={handleChange}
+        autocomplete="new-password"
       />
       <InputGroup
         id="password-confirm"
@@ -40,6 +42,7 @@ const VSignupInputForm = ({ handleChange, handleSubmit, confirm }: Props) => {
         type="password"
         placeholder="비밀번호를 한번 더 입력해주세요."
         onChange={handleChange}
+        autocomplete="new-password"
       />
       {confirm && (
         <div className="text-red-500">비밀번호가 일치하지 않습니다.</div>
@@ -50,6 +53,7 @@ const VSignupInputForm = ({ handleChange, handleSubmit, confirm }: Props) => {
         type="text"
         placeholder="보호소 이름을 입력해주세요."
         onChange={handleChange}
+        autocomplete="organization"
       />
       <InputGroup
         id="shelter-contact"
@@ -57,6 +61,7 @@ const VSignupInputForm = ({ handleChange, handleSubmit, confirm }: Props) => {
         type="text"
         placeholder="보호소에 연락 가능한 연락처를 입력해주세요."
         onChange={handleChange}
+        autocomplete="tel-national"
       />
       <AddressInputGroup />
       <button className="bg-brand-color text-white w-full rounded-md p-2">
