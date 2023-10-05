@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useMutation } from '@tanstack/react-query';
+import VImageVideoInput from './VImageVideoInput';
 
 interface PetPostProps {
   name: string;
@@ -44,6 +45,7 @@ const mockPetData: PetPostProps = {
 const ImageVideoInput = () => {
   const [selectedImageFile, setSelectedImageFile] = useState(null);
   const [selectedVideoFile, setSelectedVideoFile] = useState(null);
+  const imageRef = useRef<HTMLInputElement>(null);
 
   const { mutate } = useMutation(async (formData: FormData): Promise<any> => {
     const res = await fetch(
@@ -74,8 +76,13 @@ const ImageVideoInput = () => {
     const data = await mutate(formData);
     console.log(data);
   };
+  const handleCustomButtonClick = (
+    fileRef: React.RefObject<HTMLInputElement> | null,
+  ) => {
+    fileRef?.current?.click();
+  };
 
-  const handleChange = (e: any) => {
+  const handleInputChange = (e: any) => {
     if (e.target.files[0].type.includes('image')) {
       setSelectedImageFile(e.target.files[0]);
     } else if (e.target.files[0].type.includes('video')) {
@@ -83,13 +90,12 @@ const ImageVideoInput = () => {
     }
   };
   return (
-    <div className="flex flex-col">
-      <button onClick={handleUploadButtonClick}>확인</button>
-      <div>
-        <input type="file" onChange={handleChange} accept="image/*" />
-        <input type="file" onChange={handleChange} accept="video/*" />
-      </div>
-    </div>
+    <VImageVideoInput
+      handleInputChange={handleInputChange}
+      handleUploadButtonClick={handleUploadButtonClick}
+      fileRef={imageRef}
+      handleCustomButtonClick={handleCustomButtonClick}
+    />
   );
 };
 
