@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 const Datepicker = () => {
   const dayOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -32,13 +32,14 @@ const Datepicker = () => {
     currentDate.getFullYear(),
     currentDate.getMonth() + 1,
     0,
-  ).getDay();
+  );
 
   const prevMonthEndDate = new Date(
     currentDate.getFullYear(),
     currentDate.getMonth(),
     0,
   );
+
   const nextMonthStartDate = new Date(
     currentDate.getFullYear(),
     currentDate.getMonth() + 1,
@@ -46,6 +47,7 @@ const Datepicker = () => {
   );
 
   const makeCalendar = () => {
+    // 이전 달 날짜 가져오기
     const days: Date[] = Array.from(
       { length: currentMonthStartDate },
       (_, i) => {
@@ -57,6 +59,16 @@ const Datepicker = () => {
       },
     ).reverse();
 
+    // 이번 달 날짜 가져오기
+    days.push(
+      ...Array.from(
+        { length: currentMonthEndDate.getDate() },
+        (_, i) =>
+          new Date(currentDate.getFullYear(), currentDate.getMonth(), i + 1),
+      ),
+    );
+
+    // 다음 달 날짜 가져오기
     const remainingDays = 7 - (days.length % 7);
     if (remainingDays < 7) {
       days.push(
@@ -102,12 +114,136 @@ const Datepicker = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(makeCalendar());
-  }, []);
+  const makeCalendarDays = (days: Date[]) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    return days.map((day: Date, index: number) => {
+      // 지난 달에서 가져온 날짜
+      if (day.getMonth() < currentDate.getMonth()) {
+        return (
+          <td key={index} className="prevMonthDay text-gray-400 py-2">
+            <button
+              className="w-full h-full"
+              onClick={(event: React.MouseEvent<HTMLElement>) => {
+                const target = event.target as HTMLButtonElement;
+                console.log(target.textContent);
+              }}
+            >
+              {day.getDate()}
+            </button>
+          </td>
+        );
+      }
+
+      // 다음 달에서 가져온 날짜
+      if (day.getMonth() > currentDate.getMonth()) {
+        return (
+          <td key={index} className="nextMonthDay text-gray-400 py-2">
+            <button
+              className="w-full h-full"
+              onClick={(event: React.MouseEvent<HTMLElement>) => {
+                const target = event.target as HTMLButtonElement;
+                console.log(target.textContent);
+              }}
+            >
+              {day.getDate()}
+            </button>
+          </td>
+        );
+      }
+
+      // 이번 달이 아닌 다른 달의 날짜 건들 때 사용
+      // if (today.getMonth() !== currentDate.getMonth()) {
+      //   return (
+      //     <td key={index} className="prevMonth text-gray-400 py-2">
+      //       {day.getDate()}
+      //     </td>
+      //   );
+      // }
+
+      // 이번달 중 날짜가 지난 날
+      if (
+        day < today &&
+        day.getFullYear() === today.getFullYear() &&
+        day.getMonth() === today.getMonth()
+      ) {
+        return (
+          <td key={index} className="prevDay py-2">
+            <button
+              className="w-full h-full"
+              onClick={(event: React.MouseEvent<HTMLElement>) => {
+                const target = event.target as HTMLButtonElement;
+                console.log(target.textContent);
+              }}
+            >
+              {day.getDate()}
+            </button>
+          </td>
+        );
+      }
+
+      // 오늘 날짜
+      if (
+        day.getFullYear() === today.getFullYear() &&
+        day.getMonth() === today.getMonth() &&
+        day.getDate() === today.getDate()
+      ) {
+        return (
+          <td
+            key={index}
+            className="today bg-brand-color rounded-full text-white py-2"
+          >
+            <button
+              className="w-full h-full"
+              onClick={(event: React.MouseEvent<HTMLElement>) => {
+                const target = event.target as HTMLButtonElement;
+                console.log(target.textContent);
+              }}
+            >
+              {day.getDate()}
+            </button>
+          </td>
+        );
+      }
+
+      // 아직 오지 않은 이번 달 날짜
+      return (
+        <td key={index} className="futureDay py-2">
+          <button
+            className="w-full h-full"
+            onClick={(event: React.MouseEvent<HTMLElement>) => {
+              const target = event.target as HTMLButtonElement;
+              console.log(target.textContent);
+            }}
+          >
+            {day.getDate()}
+          </button>
+        </td>
+      );
+    });
+  };
+
+  const divideWeek = (calendarDays: JSX.Element[]) => {
+    return calendarDays.reduce(
+      (acc: JSX.Element[][], cur: JSX.Element, index: number) => {
+        if (index % 7 === 0) {
+          acc.push([cur]);
+        } else {
+          acc[acc.length - 1].push(cur);
+        }
+        return acc;
+      },
+      [],
+    );
+  };
+
+  const calendarDays = makeCalendar();
+  const calendarTags = makeCalendarDays(calendarDays);
+  const calendarRows = divideWeek(calendarTags);
 
   return (
-    <div className="calendar border-1 w-[500px] h-[500px] shadow-lg">
+    <div className="calendar border-1 min-w-[350px] min-h-[350px] max-w-[350px] max-h-[500px] shadow-lg">
       <div className="calendarNav">
         <div className="calendarNav-title flex flex-row justify-around p-4">
           <button
@@ -127,21 +263,23 @@ const Datepicker = () => {
           </button>
         </div>
       </div>
-      <div className="calendarDate">
-        <table className="flex flex-col">
-          <thead>
-            <tr className="weeks flex justify-around"></tr>
-          </thead>
-          <tbody>
-            <tr>날짜</tr>
-            <tr>{currentMonthStartDate}</tr>
-            <tr>{currentMonthEndDate}</tr>
 
-            {/* 7개 단위로 날짜 보여주도록 해야 됨 */}
-            <tr className="days flex justify-around"></tr>
-          </tbody>
-        </table>
-      </div>
+      <table className="flex flex-col gap-2 font-medium">
+        <thead className="grid grid-cols-7 grid-rows-1 text-center">
+          {dayOfWeek.map((row: string, index: number) => (
+            <tr key={index} className="weeks">
+              {row}
+            </tr>
+          ))}
+        </thead>
+        <tbody className="h-full grid gap-2">
+          {calendarRows.map((row: JSX.Element[], index: number) => (
+            <tr key={index} className="text-center grid grid-cols-7 gap-2">
+              {row}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
