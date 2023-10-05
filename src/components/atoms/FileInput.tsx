@@ -35,16 +35,26 @@ const FileInput = (props: FileInputProps) => {
 
       {/* 업로드된 이미지 보여주기 */}
       {/* {isFileSelected && (
-          <img
-            src={
-              fileRef.current?.files?.[0]
-                ? URL.createObjectURL(fileRef.current?.files?.[0])
-                : ''
-            }
-            alt="preview"
-          />
-        )} */}
-      {/* 비디오 업로드 필드에 label 추가 */}
+        <img
+          src={
+            fileRef.current?.files?.[0]
+              ? URL.createObjectURL(fileRef.current?.files?.[0])
+              : ''
+          }
+          alt="preview"
+        />
+      )} */}
+      {/* 업로드된 비디오 보여주기 */}
+      {/* {isFileSelected && (
+        <video
+          src={
+            fileRef.current?.files?.[0]
+              ? URL.createObjectURL(fileRef.current?.files?.[0])
+              : ''
+          }
+          controls
+        ></video>
+      )} */}
     </>
   );
 };

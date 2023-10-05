@@ -3,18 +3,22 @@ import FileInput from 'components/atoms/FileInput';
 interface VImageVideoInputProps {
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleUploadButtonClick: () => void;
-  fileRef: React.RefObject<HTMLInputElement>;
+  imageRef: React.RefObject<HTMLInputElement>;
+  videoRef: React.RefObject<HTMLInputElement>;
   handleCustomButtonClick: (file: React.RefObject<HTMLInputElement>) => void;
-  isFileSelected: boolean;
+  isImageSelected: boolean;
+  isVideoSelected: boolean;
 }
 
 const VImageVideoInput = (props: VImageVideoInputProps) => {
   const {
     handleInputChange,
     handleUploadButtonClick,
-    fileRef,
+    imageRef,
+    videoRef,
     handleCustomButtonClick,
-    isFileSelected,
+    isImageSelected,
+    isVideoSelected,
   } = props;
 
   return (
@@ -23,19 +27,17 @@ const VImageVideoInput = (props: VImageVideoInputProps) => {
       <FileInput
         handleInputChange={handleInputChange}
         handleCustomButtonClick={handleCustomButtonClick}
-        fileRef={fileRef}
-        isFileSelected={isFileSelected}
+        fileRef={imageRef}
+        isFileSelected={isImageSelected}
         fileType="image"
       />
-      <div>
-        <label htmlFor="videoUpload">비디오 업로드:</label>
-        <input
-          type="file"
-          id="videoUpload"
-          onChange={handleInputChange}
-          accept="video/*"
-        />
-      </div>
+      <FileInput
+        handleInputChange={handleInputChange}
+        handleCustomButtonClick={handleCustomButtonClick}
+        fileRef={videoRef}
+        isFileSelected={isVideoSelected}
+        fileType="video"
+      />
     </div>
   );
 };

@@ -46,6 +46,7 @@ const ImageVideoInput = () => {
   const [selectedImageFile, setSelectedImageFile] = useState(null);
   const [selectedVideoFile, setSelectedVideoFile] = useState(null);
   const imageRef = useRef<HTMLInputElement>(null);
+  const videoRef = useRef<HTMLInputElement>(null);
 
   const { mutate } = useMutation(async (formData: FormData): Promise<any> => {
     const res = await fetch(
@@ -93,9 +94,11 @@ const ImageVideoInput = () => {
     <VImageVideoInput
       handleInputChange={handleInputChange}
       handleUploadButtonClick={handleUploadButtonClick}
-      fileRef={imageRef}
+      imageRef={imageRef}
+      videoRef={videoRef}
       handleCustomButtonClick={handleCustomButtonClick}
-      isFileSelected={!!selectedImageFile}
+      isImageSelected={!!selectedImageFile}
+      isVideoSelected={!!selectedVideoFile}
     />
   );
 };
