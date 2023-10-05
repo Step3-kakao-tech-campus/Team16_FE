@@ -95,6 +95,7 @@ const ImageVideoInput = () => {
       handleUploadButtonClick={handleUploadButtonClick}
       fileRef={imageRef}
       handleCustomButtonClick={handleCustomButtonClick}
+      isFileSelected={!!selectedImageFile}
     />
   );
 };
