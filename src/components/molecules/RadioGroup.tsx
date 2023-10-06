@@ -1,21 +1,31 @@
+// src/components/RadioGroup.tsx
 import Radio from 'components/atoms/Radio';
+import React, { ChangeEvent } from 'react';
 
-export interface RadioProps {
-  name?: string;
-  label: string;
-  value: string;
-  selected?: boolean;
+interface RadioGroupProps {
+  options: { label: string; value: string }[];
+  selectedOption: string;
+  onChange: (value: string) => void;
 }
 
-const RadioGroup = (radioProps: RadioProps) => {
+const RadioGroup: React.FC<RadioGroupProps> = ({
+  options,
+  selectedOption,
+  onChange,
+}) => {
   return (
     <div>
-      <Radio
-        name={radioProps.name}
-        value={radioProps.value}
-        label={radioProps.label}
-        selected={radioProps.selected}
-      />
+      {options.map((option) => (
+        <Radio
+          key={option.value}
+          label={option.label}
+          value={option.value}
+          selected={selectedOption === option.value}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            onChange(e.target.value)
+          }
+        />
+      ))}
     </div>
   );
 };

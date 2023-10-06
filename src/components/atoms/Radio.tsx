@@ -3,19 +3,21 @@ interface RadioProps {
   label: string;
   value: string;
   selected?: boolean;
+  onChange: (e: any) => void;
 }
 
-const Radio = (radioProps: RadioProps) => {
+const Radio = ({ name, label, value, selected, onChange }: RadioProps) => {
   return (
     <div>
       <label htmlFor="radio">
         <input
           type="radio"
-          name={radioProps.name}
-          value={radioProps.value}
-          defaultChecked={radioProps.selected}
+          name={name}
+          value={value}
+          defaultChecked={selected}
+          onChange={onChange}
         />
-        {radioProps.label}
+        {label}
       </label>
     </div>
   );
