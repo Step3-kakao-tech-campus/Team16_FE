@@ -1,4 +1,5 @@
 import ProfileCard from 'components/molecules/ProfileCard';
+import Pagination from './Pagenation';
 
 export interface ProfileListProps {
   image: string;
@@ -8,73 +9,44 @@ export interface ProfileListProps {
   shelter: string;
   state: string;
 }
+export interface PageNationProps {
+  setCurrentPage: (page: number) => void;
+  currentPage: number;
+  lastPage: number;
+  maxLength: number;
+}
 
-const VUrgentList = (profileListProps: ProfileListProps) => (
-  <div className="m-20">
-    <h2 className="font-bold text-xl sm:text-2xl m-10 mr-20">
-      긴급 도움이 필요해요!
-    </h2>
-    <div className="grid grid-cols-1 gap-1 sm:grid-cols-2 m-10">
-      <ProfileCard {...profileListProps} />
-      <ProfileCard {...profileListProps} />
-      <ProfileCard {...profileListProps} />
-      <ProfileCard {...profileListProps} />
-      <ProfileCard {...profileListProps} />
-      <ProfileCard {...profileListProps} />
-      <ProfileCard {...profileListProps} />
-      <ProfileCard {...profileListProps} />
+export interface Props {
+  profileListProps: ProfileListProps;
+  pageNationProps: PageNationProps;
+}
+
+const VUrgentList = (props: Props) => {
+  return (
+    <div className="m-20">
+      <h2 className="font-bold text-xl sm:text-2xl m-10 mr-20">
+        긴급 도움이 필요해요!
+      </h2>
+      <div className="grid grid-cols-1 gap-1 sm:grid-cols-2 m-10">
+        <ProfileCard {...props.profileListProps} />
+        <ProfileCard {...props.profileListProps} />
+        <ProfileCard {...props.profileListProps} />
+        <ProfileCard {...props.profileListProps} />
+        <ProfileCard {...props.profileListProps} />
+        <ProfileCard {...props.profileListProps} />
+        <ProfileCard {...props.profileListProps} />
+        <ProfileCard {...props.profileListProps} />
+      </div>
+      <div className="flex justify-center">
+        <Pagination
+          currentPage={props.pageNationProps.currentPage}
+          lastPage={props.pageNationProps.lastPage}
+          maxLength={7}
+          setCurrentPage={props.pageNationProps.setCurrentPage}
+        />
+      </div>
     </div>
-    <ol className="flex justify-center gap-1 text-xs font-medium">
-      <li>
-        <a
-          href="Todo"
-          className="inline-flex h-8 w-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180"
-        >
-          이전
-        </a>
-      </li>
-
-      <li>
-        <a
-          href="/profile/urgent/1"
-          className="block h-8 w-8 rounded border border-gray-100 bg-white text-center leading-8 text-gray-900"
-        >
-          1
-        </a>
-      </li>
-
-      <li className="block h-8 w-8 rounded border-orange-400 bg-orange-400 text-center leading-8 text-white">
-        2
-      </li>
-
-      <li>
-        <a
-          href="/profile/urgent/2"
-          className="block h-8 w-8 rounded border border-gray-100 bg-white text-center leading-8 text-gray-900"
-        >
-          3
-        </a>
-      </li>
-
-      <li>
-        <a
-          href="/profile/urgent/3"
-          className="block h-8 w-8 rounded border border-gray-100 bg-white text-center leading-8 text-gray-900"
-        >
-          4
-        </a>
-      </li>
-
-      <li>
-        <a
-          href="Todo"
-          className="inline-flex h-8 w-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180"
-        >
-          다음
-        </a>
-      </li>
-    </ol>
-  </div>
-);
+  );
+};
 
 export default VUrgentList;

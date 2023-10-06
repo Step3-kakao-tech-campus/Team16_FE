@@ -1,10 +1,10 @@
 import { atom } from 'recoil';
 
-export type SpeciesType = '강아지' | '고양이' | '기타';
+export type SpeciesType = '강아지' | '고양이' | '기타' | '전체';
 
-const speciesAtom = atom<SpeciesType>({
-  key: 'speciesAtom',
-  default: '강아지',
+const speciesState = atom<SpeciesType>({
+  key: 'speciesState',
+  default: '전체',
 });
 
-export default speciesAtom;
+export default speciesState;

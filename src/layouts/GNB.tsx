@@ -1,13 +1,16 @@
-import { Link } from 'react-router-dom';
 import ModalPortal from 'commons/ModalPortal';
 import { useState } from 'react';
 import CategoryModal, { CategoryModalProps } from 'commons/CategoryModal';
 import { CategoryModalType } from 'components/molecules/VCategoryModalList';
+import { useLocation } from 'react-router-dom';
+import VGNB, { VGNBProps } from './VGNB';
+import VLargeGNB, { VLargeGNBProps } from './VLargeGNB';
 
 const GNB = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [speciesOrRegion, setSpeciesOrRegion] =
     useState<CategoryModalType>('species');
+  const [isToggleOpen, setIsToggleOpen] = useState(false);
 
   const handleCategoryButtonClick = () => {
     setIsModalOpen(true);
@@ -23,30 +26,34 @@ const GNB = () => {
     }
   };
 
+  const pathName = useLocation().pathname;
+
   const categoryModalProps: CategoryModalProps = {
     handleModalCloseClick,
     handleModalOutsideClick,
     speciesOrRegion,
     setSpeciesOrRegion,
   };
+
+  const vGNBProps: VGNBProps = {
+    handleCategoryButtonClick,
+    isProfilePage: pathName === '/profile',
+    isFindShelterPage: pathName === '/find-shelter',
+    isRegisterPage: pathName === '/register',
+    isToggleOpen,
+    handleToggleClick: () => setIsToggleOpen((prev) => !prev),
+  };
+  const vLargeGNBProps: VLargeGNBProps = {
+    handleCategoryButtonClick,
+    isProfilePage: pathName === '/profile',
+    isFindShelterPage: pathName === '/find-shelter',
+    isRegisterPage: pathName === '/register',
+  };
+
   return (
     <>
-      <div>
-        <ol>
-          <li>
-            <button onClick={handleCategoryButtonClick}>카테고리</button>
-          </li>
-          <li>
-            <Link to="/anything">프로필 목록</Link>
-          </li>
-          <li>
-            <Link to="/anything">내 주변 보호소 찾기</Link>
-          </li>
-          <li>
-            <Link to="/anything">등록하기</Link>
-          </li>
-        </ol>
-      </div>
+      <VGNB {...vGNBProps} />
+      <VLargeGNB {...vLargeGNBProps} />
       {isModalOpen && (
         <ModalPortal>
           <CategoryModal {...categoryModalProps} />

@@ -1,6 +1,6 @@
 import { useRecoilState } from 'recoil';
-import regionAtom, { RegionType } from 'recoil/regionState';
-import speciesAtom, { SpeciesType } from 'recoil/speciesState';
+import regionState, { RegionType } from 'recoil/regionState';
+import speciesState, { SpeciesType } from 'recoil/speciesState';
 import CategoryModalList, {
   CategoryModalType,
   VCategoryModalListProps,
@@ -19,10 +19,10 @@ const CategoryModal = ({
   speciesOrRegion,
   setSpeciesOrRegion,
 }: CategoryModalProps) => {
-  const [, setSpecies] = useRecoilState(speciesAtom);
-  const [, setRegion] = useRecoilState(regionAtom);
+  const [, setSpecies] = useRecoilState(speciesState);
+  const [, setRegion] = useRecoilState(regionState);
 
-  const speciesList: SpeciesType[] = ['강아지', '고양이', '기타'];
+  const speciesList: SpeciesType[] = ['강아지', '고양이', '기타', '전체'];
   const regionList: RegionType[] = [
     '전국',
     '서울',
@@ -66,7 +66,7 @@ const CategoryModal = ({
       onClick={handleModalOutsideClick}
       className="w-screen h-screen fixed top-0 left-0 flex justify-center items-center bg-black bg-opacity-50"
     >
-      <div className="flex flex-col w-3/5 h-4/5 fixed bg-white rounded-md overflow-auto">
+      <div className="w-3/5 h-4/5 bg-white rounded-md overflow-auto">
         <div className="flex justify-between p-5">
           <div className="flex gap-3">
             <button

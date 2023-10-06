@@ -32,20 +32,17 @@ const LoginInputForm = () => {
       setIsPasswordEmpty(true);
     }
     // email, password 보내기
-    fetch(
-      'http://ec2-3-37-14-140.ap-northeast-2.compute.amazonaws.com/api/docs/shelter/login',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...userInfo,
-          email: userInfo.email,
-          password: userInfo.password,
-        }),
+    fetch(`${process.env.REACT_APP_URI}/account/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
-    ).then((res) => {
+      body: JSON.stringify({
+        ...userInfo,
+        email: userInfo.email,
+        password: userInfo.password,
+      }),
+    }).then((res) => {
       console.log(res);
       // if (res.status === 200) {
       //   navigate('/');

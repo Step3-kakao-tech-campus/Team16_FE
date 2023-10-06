@@ -10,6 +10,7 @@ import UrgentListPage from 'pages/UrgentListPage';
 import NewListPage from 'pages/NewListPage';
 import LoginPage from 'pages/LoginPage';
 import SignupPage from 'pages/SignupPage';
+import RegisterPage from 'pages/RegisterPage';
 
 const queryClient = new QueryClient();
 
@@ -22,9 +23,10 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/pet/:id" element={<DetailPetPage />} />
             <Route path="/profile" element={<ProfileListPage />} />
-            <Route path="/shelter" element={<ShelterInfoPage />} />
+            <Route path="/shelter/:id" element={<ShelterInfoPage />} />
             <Route path="/profile/urgent/:page" element={<UrgentListPage />} />
             <Route path="/profile/new/:page" element={<NewListPage />} />
+            <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
           </Routes>
