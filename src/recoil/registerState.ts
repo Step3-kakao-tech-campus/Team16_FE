@@ -21,7 +21,7 @@ export interface RegisterType {
   };
 }
 
-const registerType = atom<RegisterType>({
+const registerState = atom<RegisterType>({
   key: 'registerState',
   default: {
     name: '',
@@ -44,4 +44,4 @@ const registerType = atom<RegisterType>({
   },
 });
 
-export default registerType;
+export default registerState;

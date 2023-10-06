@@ -1,15 +1,20 @@
 import AddressInputGroup from 'components/molecules/AddressInputGroup';
 import InputGroup from 'components/molecules/InputGroup';
 import React from 'react';
-import { ShelterSignupType } from 'recoil/shelterState';
 
-type Props = {
+interface Props {
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  duplicateCheck: () => void;
   confirm: boolean;
-};
+}
 
-const VSignupInputForm = ({ handleChange, handleSubmit, confirm }: Props) => {
+const VSignupInputForm = ({
+  handleChange,
+  handleSubmit,
+  duplicateCheck,
+  confirm,
+}: Props) => {
   return (
     <form
       className="flex flex-col gap-4 w-full max-w-[400px]"
@@ -24,7 +29,11 @@ const VSignupInputForm = ({ handleChange, handleSubmit, confirm }: Props) => {
           onChange={handleChange}
           autocomplete="email"
         />
-        <button className="bg-brand-color text-white rounded min-w-[100px] min-h-[44px]">
+        <button
+          type="button" // type을 버튼으로 지정해주면 handleSubmit이 작동하지 않음 -> onClick만 동작
+          className="bg-brand-color text-white rounded min-w-[100px] min-h-[44px]"
+          onClick={duplicateCheck}
+        >
           중복 확인
         </button>
       </div>
