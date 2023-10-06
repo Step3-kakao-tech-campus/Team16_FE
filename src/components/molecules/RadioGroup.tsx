@@ -1,5 +1,6 @@
 // src/components/RadioGroup.tsx
 import Radio from 'components/atoms/Radio';
+import RadioButton from 'components/atoms/RadioButton';
 import React, { ChangeEvent } from 'react';
 
 interface RadioGroupProps {
@@ -16,7 +17,7 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
   return (
     <div>
       {options.map((option) => (
-        <Radio
+        <RadioButton
           key={option.value}
           label={option.label}
           value={option.value}
