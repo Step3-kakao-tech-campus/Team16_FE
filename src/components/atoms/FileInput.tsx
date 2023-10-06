@@ -30,7 +30,7 @@ const FileInput = (props: FileInputProps) => {
           isFileSelected ? 'bg-green-500' : 'bg-stone-500'
         }`}
         onClick={() => handleCustomButtonClick(fileRef)}
-      ></div>
+      />
       {isFileSelected && <span>{fileRef.current?.files?.[0]?.name}</span>}
 
       {/* 업로드된 이미지 보여주기 */}
