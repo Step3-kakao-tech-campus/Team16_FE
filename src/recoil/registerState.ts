@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-export type RegisterType = {
+export interface RegisterType {
   name: string;
   age: string; // 0년2개월 ("x년y개월")
   type: string; // DOG | CAT | ETC
@@ -19,7 +19,7 @@ export type RegisterType = {
     adaptability: number; // "적응력 점수",
     activeness: number; // "활발함 점수"
   };
-};
+}
 
 const registerType = atom<RegisterType>({
   key: 'registerState',

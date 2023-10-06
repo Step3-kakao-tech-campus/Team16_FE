@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-export type ShelterSignupType = {
+export interface ShelterSignupType {
   email: string;
   password: string;
   name: string;
@@ -12,7 +12,7 @@ export type ShelterSignupType = {
     roadName: string;
     detail: string;
   };
-};
+}
 
 export type ShelterLoginType = {
   email: string;
