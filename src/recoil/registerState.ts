@@ -19,6 +19,7 @@ export interface RegisterType {
     adaptability: number; // "적응력 점수",
     activeness: number; // "활발함 점수"
   };
+  isComplete: boolean;
 }
 
 const registerState = atom<RegisterType>({
@@ -41,6 +42,7 @@ const registerState = atom<RegisterType>({
       adaptability: 1,
       activeness: 1,
     },
+    isComplete: false,
   },
 });
 
