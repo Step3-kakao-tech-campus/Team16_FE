@@ -29,9 +29,16 @@ const FileInput = (props: FileInputProps) => {
       />
       {isFileSelected ? (
         <>
-          <img src="/assets/images/check.png" alt="" className="w-12 h-12" />
-          <span>{fileRef.current?.files?.[0]?.name}</span>
-          <button onClick={() => handleCustomButtonClick(fileRef)}>
+          <img
+            src="/assets/images/check.png"
+            alt=""
+            className="w-12 h-12 mb-5"
+          />
+          <span className="font-bold">{fileRef.current?.files?.[0]?.name}</span>
+          <button
+            onClick={() => handleCustomButtonClick(fileRef)}
+            className="border-brand-color border rounded-md w-20 py-2 font-bold text-brand-color my-5"
+          >
             재업로드
           </button>
         </>
@@ -42,14 +49,17 @@ const FileInput = (props: FileInputProps) => {
             alt=""
             className="w-12 h-12 mb-5"
           />
-          <label htmlFor={`${fileType}Upload`}>
+          <label
+            htmlFor={`${fileType}Upload`}
+            className="font-bold w-5/6 text-center"
+          >
             {!isFileSelected && labelText}
           </label>
           <button
             onClick={() => handleCustomButtonClick(fileRef)}
-            className="border-brand-color border rounded-md w-20 py-1 font-bold text-brand-color my-5"
+            className="border-brand-color border rounded-md w-20 py-2 font-bold text-brand-color my-5"
           >
-            업로드
+            Upload
           </button>
         </>
       )}

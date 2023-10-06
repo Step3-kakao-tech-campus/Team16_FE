@@ -22,7 +22,7 @@ const VImageVideoInput = (props: VImageVideoInputProps) => {
   } = props;
 
   return (
-    <div className="flex flex-col">
+    <div className="flex gap-10 flex-col md:flex-row items-center justify-center">
       <button onClick={handleUploadButtonClick}>확인</button>
       <FileInput
         handleInputChange={handleInputChange}
