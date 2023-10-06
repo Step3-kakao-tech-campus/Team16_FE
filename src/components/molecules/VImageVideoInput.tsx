@@ -30,6 +30,7 @@ const VImageVideoInput = (props: VImageVideoInputProps) => {
         fileRef={imageRef}
         isFileSelected={isImageSelected}
         fileType="image"
+        labelText="애니모리 친구들 프로필에 올라갈 사진을 업로드해주세요."
       />
       <FileInput
         handleInputChange={handleInputChange}
@@ -37,6 +38,7 @@ const VImageVideoInput = (props: VImageVideoInputProps) => {
         fileRef={videoRef}
         isFileSelected={isVideoSelected}
         fileType="video"
+        labelText="애니모리의 숏폼에 올라갈 짧은 동영상을 업로드해주세요."
       />
     </div>
   );

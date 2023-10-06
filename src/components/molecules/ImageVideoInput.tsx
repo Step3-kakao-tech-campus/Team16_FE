@@ -84,6 +84,8 @@ const ImageVideoInput = () => {
   };
 
   const handleInputChange = (e: any) => {
+    if (!e.target.files[0]) return;
+
     if (e.target.files[0].type.includes('image')) {
       setSelectedImageFile(e.target.files[0]);
     } else if (e.target.files[0].type.includes('video')) {

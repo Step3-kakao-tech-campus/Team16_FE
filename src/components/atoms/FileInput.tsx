@@ -4,6 +4,7 @@ interface FileInputProps {
   fileRef: React.RefObject<HTMLInputElement>;
   isFileSelected: boolean;
   fileType: string;
+  labelText: string;
 }
 
 const FileInput = (props: FileInputProps) => {
@@ -13,25 +14,45 @@ const FileInput = (props: FileInputProps) => {
     fileRef,
     isFileSelected,
     fileType,
+    labelText,
   } = props;
 
   return (
-    <>
-      <label htmlFor={`${fileType}Upload`}>이미지 업로드:</label>
+    <div className="border shadow-lg rounded-lg w-80 h-60 flex flex-col items-center justify-center">
       <input
         type="file"
         id={`${fileType}Upload`}
         onChange={handleInputChange}
         accept={`${fileType}/*`}
         ref={fileRef}
+        className="hidden"
       />
-      <div
-        className={`w-20 h-20 ${
-          isFileSelected ? 'bg-green-500' : 'bg-stone-500'
-        }`}
-        onClick={() => handleCustomButtonClick(fileRef)}
-      />
-      {isFileSelected && <span>{fileRef.current?.files?.[0]?.name}</span>}
+      {isFileSelected ? (
+        <>
+          <img src="/assets/images/check.png" alt="" className="w-12 h-12" />
+          <span>{fileRef.current?.files?.[0]?.name}</span>
+          <button onClick={() => handleCustomButtonClick(fileRef)}>
+            재업로드
+          </button>
+        </>
+      ) : (
+        <>
+          <img
+            src="/assets/images/upload.png"
+            alt=""
+            className="w-12 h-12 mb-5"
+          />
+          <label htmlFor={`${fileType}Upload`}>
+            {!isFileSelected && labelText}
+          </label>
+          <button
+            onClick={() => handleCustomButtonClick(fileRef)}
+            className="border-brand-color border rounded-md w-20 py-1 font-bold text-brand-color my-5"
+          >
+            업로드
+          </button>
+        </>
+      )}
 
       {/* 업로드된 이미지 보여주기 */}
       {/* {isFileSelected && (
@@ -55,7 +76,7 @@ const FileInput = (props: FileInputProps) => {
           controls
         ></video>
       )} */}
-    </>
+    </div>
   );
 };
 
