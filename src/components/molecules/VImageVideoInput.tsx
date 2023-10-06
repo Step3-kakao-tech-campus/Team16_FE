@@ -2,7 +2,6 @@ import FileInput from 'components/atoms/FileInput';
 
 interface VImageVideoInputProps {
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleUploadButtonClick: () => void;
   imageRef: React.RefObject<HTMLInputElement>;
   videoRef: React.RefObject<HTMLInputElement>;
   handleCustomButtonClick: (file: React.RefObject<HTMLInputElement>) => void;
@@ -13,7 +12,6 @@ interface VImageVideoInputProps {
 const VImageVideoInput = (props: VImageVideoInputProps) => {
   const {
     handleInputChange,
-    handleUploadButtonClick,
     imageRef,
     videoRef,
     handleCustomButtonClick,
@@ -23,7 +21,6 @@ const VImageVideoInput = (props: VImageVideoInputProps) => {
 
   return (
     <div className="flex gap-10 flex-col md:flex-row items-center justify-center">
-      <button onClick={handleUploadButtonClick}>확인</button>
       <FileInput
         handleInputChange={handleInputChange}
         handleCustomButtonClick={handleCustomButtonClick}
