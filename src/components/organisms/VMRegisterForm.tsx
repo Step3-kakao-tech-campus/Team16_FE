@@ -9,8 +9,8 @@ type RegisterProps = {
 const MRegisterForm = ({ handleChange }: RegisterProps) => {
   return (
     <div className="flex flex-col items-center gap-8 mt-10">
-      <div className="flex flex-col sm:flex-row  justify-center gap-5 sm:gap-20 w-1/2 text-sm  mb-5">
-        <div className="">
+      <div className="flex  justify-center sm:gap-20 w-1/2 text-sm  mb-5">
+        <div className=" flex-col sm:flex-row flex gap-5 w-full ">
           <InputGroup
             id="name"
             name="이름"
@@ -21,8 +21,7 @@ const MRegisterForm = ({ handleChange }: RegisterProps) => {
             }}
             autocomplete="name"
           />
-        </div>
-        <div className="text-sm">
+
           <InputGroup
             id="age"
             name="나이"
@@ -33,26 +32,30 @@ const MRegisterForm = ({ handleChange }: RegisterProps) => {
             }}
             autocomplete="age"
           />
+          <SelectBox />
         </div>
-        <SelectBox />
       </div>
       <div className="flex justify-center gap-5 sm:gap-20 w-1/2 text-sm  mb-5">
-        <RadioGroup />
+        <div className="w-full">
+          <RadioGroup />
+        </div>
       </div>
       <div className="flex justify-center gap-5 sm:gap-20 w-1/2 text-sm  mb-5">
-        <InputGroup
-          id="size"
-          name="크기"
-          type="text"
-          placeholder="주변 사물과 비교해서 작성해주셔도 좋아요!"
-          onChange={(e) => {
-            handleChange(e);
-          }}
-          autocomplete="size"
-        />
+        <div className="w-full">
+          <InputGroup
+            id="size"
+            name="크기"
+            type="text"
+            placeholder="주변 사물과 비교해서 작성해주셔도 좋아요!"
+            onChange={(e) => {
+              handleChange(e);
+            }}
+            autocomplete="size"
+          />
+        </div>
       </div>
-      <div className="flex flex-col sm:flex-row justify-center gap-5 sm:gap-20 w-1/2 text-sm  mb-5">
-        <div className="">
+      <div className="flex flex-col sm:flex-row justify-center gap-5 sm:gap-10 w-1/2 text-sm  mb-5">
+        <div className=" w-full">
           <InputGroup
             id="weight"
             name="몸무게"
@@ -64,7 +67,7 @@ const MRegisterForm = ({ handleChange }: RegisterProps) => {
             autocomplete="weight"
           />
         </div>
-        <div className="">
+        <div className=" w-full">
           <InputGroup
             id="vaccinationStatus"
             name="접종여부"
