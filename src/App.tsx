@@ -30,7 +30,7 @@ function App() {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
-            <Route path="/map" element={<MapPage />} />
+            <Route path="/find-shelter" element={<MapPage />} />
           </Routes>
         </BrowserRouter>
       </RecoilRoot>
