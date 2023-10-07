@@ -24,36 +24,16 @@ const MRegisterForm = ({ handleChange }: RegisterProps) => {
             />
           </div>
           <div className="flex w-2/4 whitespace-nowrap">
-            <div className=" w-2/6">
-              <InputGroup
-                id="year"
-                name="나이"
-                type="number"
-                placeholder="연도"
-                onChange={(e) => {
-                  handleChange(e);
-                }}
-                autocomplete="age"
-              />
-            </div>
-            <text className="flex h-14 items-end font-semibold whitespace-nowrap">
-              년도
-            </text>
-            <div className=" w-2/6">
-              <InputGroup
-                id="month"
-                name="ㅤ"
-                type="number"
-                placeholder="개월"
-                onChange={(e) => {
-                  handleChange(e);
-                }}
-                autocomplete="age"
-              />
-            </div>
-            <text className="flex h-14 items-end font-semibold whitespace-nowrap">
-              개월
-            </text>
+            <InputGroup
+              id="age"
+              name="나이"
+              type="text"
+              placeholder="'00년 00개월'과 같이 작성해주세요."
+              onChange={(e) => {
+                handleChange(e);
+              }}
+              autocomplete="age"
+            />
           </div>
           <SelectBox />
         </div>
