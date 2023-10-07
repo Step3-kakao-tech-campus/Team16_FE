@@ -5,10 +5,7 @@ import VMRegisterForm from './VMRegisterForm';
 
 const MRegisterForm = () => {
   const [petInfo, setPetInfo] = useRecoilState(registerState);
-
-  // isComplete 상태를 관리
-  const [isComplete, setIsComplete] = useState(false);
-  console.log(isComplete);
+  console.log(petInfo);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -58,25 +55,25 @@ const MRegisterForm = () => {
     const fieldName = target.id;
     const newValue = target.value;
     setPetInfo((prev) => ({ ...prev, [fieldName]: newValue }));
-    const allFieldsFilled = Object.values(petInfo).every((value, index) => {
-      console.log(value, index);
-      console.log(Object.keys(petInfo));
-      // if index is the last one, return true
+
+    // useState의 set함수로 petInfo를 업데이트해도, handleChange가 실행될 때의 petInfo는 업데이트 전의 petInfo를 가리킵니다.
+    // 따라서 tempPetInfo를 만들어서 최신의 petInfo를 사용하도록 했습니다.
+    const tempPetInfo = { ...petInfo, [fieldName]: newValue };
+    const allFieldsFilled = Object.values(tempPetInfo).every((value, index) => {
+      // isComplete는 petInfo의 모든 필드가 채워져 있을 때 true
       if (index === Object.values(petInfo).length - 1) {
         return true;
       }
       return !!value;
     });
     if (allFieldsFilled) {
-      console.log('All fields filled');
-      setIsComplete(true);
+      setPetInfo((prev) => ({ ...prev, isComplete: true }));
     }
   };
 
   const MRegisterProps = {
     handleChange,
     handleSubmit,
-    isComplete,
   };
 
   return <VMRegisterForm {...MRegisterProps} />;
