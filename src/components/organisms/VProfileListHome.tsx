@@ -12,7 +12,7 @@ export interface ProfileListProps {
 const VProfileListHome = (profileListProps: ProfileListProps) => {
   return (
     <div className="m-20">
-      <h2 className="font-bold text-xl sm:text-2xl m-10 mr-20">
+      <h2 className="font-bold text-xl sm:text-2xl m-10 mr-20  whitespace-nowrap">
         긴급 도움이 필요해요!
         <a
           href="profile/urgent/1"
@@ -27,10 +27,10 @@ const VProfileListHome = (profileListProps: ProfileListProps) => {
         <ProfileCard {...profileListProps} />
         <ProfileCard {...profileListProps} />
       </div>
-      <h2 className="font-bold text-xl sm:text-2xl m-10 mr-20">
+      <h2 className="font-bold text-xl sm:text-2xl m-10 mr-20  whitespace-nowrap">
         신규 애니모리 친구들
         <a
-          href="new/1"
+          href="/profile/new/1"
           className="font-normal text-sm flex sm:float-right mt-3 sm:mt-0 text-gray-600"
         >
           더보기
