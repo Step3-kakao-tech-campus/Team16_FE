@@ -3,7 +3,7 @@ import { atom } from 'recoil';
 export interface RegisterType {
   name: string;
   age: string; // 0년2개월 ("x년y개월")
-  type: string; // DOG | CAT | ETC
+  type: string; // DOG | CAT
   weight: number; // float 허용 6.52 (단위:kg)
   size: string; // String
   sex: string; // MALE | FEMALE
