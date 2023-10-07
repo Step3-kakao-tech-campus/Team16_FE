@@ -1,9 +1,11 @@
+import Radio from 'components/atoms/Radio';
 import DayModalInput from 'components/molecules/DayModalInput';
 
 const RegisterPage = () => {
   return (
     <div>
-      <DayModalInput />
+      <Radio />
+      {/* <DayModalInput /> */}
     </div>
   );
 };
