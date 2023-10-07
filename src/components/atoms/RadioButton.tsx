@@ -17,6 +17,7 @@ const RadioButton = ({
     <div>
       <label htmlFor="radio">
         <input
+          className=" accent-brand-color"
           type="radio"
           name={name}
           value={value}
