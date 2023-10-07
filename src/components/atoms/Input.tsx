@@ -1,13 +1,4 @@
-import React, { ReactEventHandler } from 'react';
-
-type Props = {
-  id: string;
-  name: string;
-  type: string;
-  placeholder: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  autocomplete: string;
-};
+import { InputGroupProps } from 'components/molecules/InputGroup';
 
 const Input = ({
   id,
@@ -16,7 +7,7 @@ const Input = ({
   placeholder,
   onChange,
   autocomplete,
-}: Props) => {
+}: InputGroupProps) => {
   return (
     <input
       className="border-2 rounded-md border-gray-300 p-2"

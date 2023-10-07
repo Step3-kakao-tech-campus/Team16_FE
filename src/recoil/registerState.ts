@@ -10,6 +10,7 @@ export interface RegisterType {
   vaccinationStatus: string; // String
   adoptionStatus: string; // YES | NO
   neutralizationStatus: string; // YES | NO | UNKNOWN
+  protectionExpirationDate: string; // 보호만료일 null 가능 2023-10-25
   description: string; // String
   polygonProfile: {
     // 1 ~ 5 정수
@@ -34,6 +35,7 @@ const registerState = atom<RegisterType>({
     vaccinationStatus: '',
     adoptionStatus: '',
     neutralizationStatus: '',
+    protectionExpirationDate: '',
     description: '',
     polygonProfile: {
       intelligence: 1,

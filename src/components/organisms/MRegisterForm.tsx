@@ -5,7 +5,6 @@ import VMRegisterForm from './VMRegisterForm';
 
 const MRegisterForm = () => {
   const [petInfo, setPetInfo] = useRecoilState(registerState);
-  console.log(petInfo);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
