@@ -18,28 +18,25 @@ const MRegisterForm = () => {
       setIsComplete(true);
 
       // 서버로 데이터 전송
-      fetch(
-        'http://ec2-3-37-14-140.ap-northeast-2.compute.amazonaws.com/api/pet',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            ...petInfo,
-            name: petInfo.name,
-            age: petInfo.age,
-            type: petInfo.type,
-            sex: petInfo.sex,
-            adoptionStatus: petInfo.adoptionStatus,
-            neutralizationStatus: petInfo.neutralizationStatus,
-            weight: petInfo.weight,
-            size: petInfo.size,
-            vaccinationStatus: petInfo.vaccinationStatus,
-            description: petInfo.description,
-          }),
+      fetch(`${process.env.REACT_APP_URI}/pet`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      )
+        body: JSON.stringify({
+          ...petInfo,
+          name: petInfo.name,
+          age: petInfo.age,
+          type: petInfo.type,
+          sex: petInfo.sex,
+          adoptionStatus: petInfo.adoptionStatus,
+          neutralizationStatus: petInfo.neutralizationStatus,
+          weight: petInfo.weight,
+          size: petInfo.size,
+          vaccinationStatus: petInfo.vaccinationStatus,
+          description: petInfo.description,
+        }),
+      })
         .then((res) => {
           console.log(res);
         })

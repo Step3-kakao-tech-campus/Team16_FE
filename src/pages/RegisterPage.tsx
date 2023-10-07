@@ -1,4 +1,5 @@
-import Calendar from 'components/atoms/Calendar';
+import Radio from 'components/atoms/Radio';
+import DayModalInput from 'components/molecules/DayModalInput';
 import MRegisterForm from 'components/organisms/MRegisterForm';
 import RegisterHeader from 'components/organisms/RegisterHeader';
 
@@ -7,7 +8,8 @@ const RegisterPage = () => {
     <div>
       <RegisterHeader />
       <MRegisterForm />
-      <Calendar />
+      <DayModalInput />
+      <Radio />
     </div>
   );
 };
