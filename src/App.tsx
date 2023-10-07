@@ -11,6 +11,7 @@ import NewListPage from 'pages/NewListPage';
 import LoginPage from 'pages/LoginPage';
 import SignupPage from 'pages/SignupPage';
 import RegisterPage from 'pages/RegisterPage';
+import MapPage from 'pages/MapPage';
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ function App() {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
+            <Route path="/map" element={<MapPage />} />
           </Routes>
         </BrowserRouter>
       </RecoilRoot>
