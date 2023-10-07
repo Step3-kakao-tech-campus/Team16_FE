@@ -1,10 +1,10 @@
 import { useRecoilState } from 'recoil';
 import { useState } from 'react';
-import registerType from 'recoil/registerState';
+import registerState from 'recoil/registerState';
 import VMRegisterForm from './VMRegisterForm';
 
 const MRegisterForm = () => {
-  const [petInfo, setPetInfo] = useRecoilState(registerType);
+  const [petInfo, setPetInfo] = useRecoilState(registerState);
 
   // isComplete 상태를 관리
   const [isComplete, setIsComplete] = useState(false);
@@ -29,6 +29,14 @@ const MRegisterForm = () => {
             ...petInfo,
             name: petInfo.name,
             age: petInfo.age,
+            type: petInfo.type,
+            sex: petInfo.sex,
+            adoptionStatus: petInfo.adoptionStatus,
+            neutralizationStatus: petInfo.neutralizationStatus,
+            weight: petInfo.weight,
+            size: petInfo.size,
+            vaccinationStatus: petInfo.vaccinationStatus,
+            description: petInfo.description,
           }),
         },
       )
