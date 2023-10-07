@@ -19,9 +19,10 @@ export interface RegisterType {
     adaptability: number; // "적응력 점수",
     activeness: number; // "활발함 점수"
   };
+  isComplete: boolean;
 }
 
-const registerType = atom<RegisterType>({
+const registerState = atom<RegisterType>({
   key: 'registerState',
   default: {
     name: '',
@@ -41,7 +42,8 @@ const registerType = atom<RegisterType>({
       adaptability: 1,
       activeness: 1,
     },
+    isComplete: false,
   },
 });
 
-export default registerType;
+export default registerState;

@@ -1,12 +1,28 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { shelterSignupState } from 'recoil/shelterState';
-// eslint-disable-next-line import/no-cycle
 import VSignupInputForm from './VSignupInputForm';
 
 const SignupInputForm = () => {
   const [shelterInfo, setShelterInfo] = useRecoilState(shelterSignupState);
   const [confirm, setConfirm] = useState(false);
+
+  const duplicateCheck = () => {
+    // shelterInfo.email
+    fetch(`${process.env.REACT_APP_URI}account/email`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: shelterInfo.email,
+      }),
+    })
+      .then((res) => {
+        res.json();
+      })
+      .then((data) => console.log('Data', data));
+  };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const target = event.target as HTMLInputElement;
@@ -39,35 +55,35 @@ const SignupInputForm = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // 회원가입 정보 보내는 API 적용해야 됨
-    fetch(
-      'http://ec2-3-37-14-140.ap-northeast-2.compute.amazonaws.com/api/docs/shelter/login',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...shelterInfo,
-          email: shelterInfo.email,
-          password: shelterInfo.password,
-          name: shelterInfo.name,
-          contact: shelterInfo.contact,
-          // zonecode: shelterInfo.zonecode,
-          address: shelterInfo.address,
-        }),
+    fetch(`${process.env.REACT_APP_URI}account/shelter`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
-    ).then((res) => {
-      console.log(res);
-      // if (res.status === 200) {
-      //   navigate('/');
-      // }
-    });
+      body: JSON.stringify({
+        ...shelterInfo,
+        email: shelterInfo.email,
+        password: shelterInfo.password,
+        name: shelterInfo.name,
+        contact: shelterInfo.contact,
+        zonecode: shelterInfo.zonecode,
+        address: shelterInfo.address,
+      }),
+    })
+      .then((res) => {
+        // const token = res.headers.get('Authorization');
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+      });
   };
 
   const SignupInputFormProps = {
     shelterInfo,
     handleChange,
     handleSubmit,
+    duplicateCheck,
     confirm,
   };
 
