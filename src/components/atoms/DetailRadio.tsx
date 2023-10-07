@@ -6,7 +6,7 @@ interface RadioProps {
   onChange: (e: any) => void;
 }
 
-const RadioButton = ({
+const DetailRadio = ({
   name,
   label,
   value,
@@ -30,4 +30,4 @@ const RadioButton = ({
   );
 };
 
-export default RadioButton;
+export default DetailRadio;

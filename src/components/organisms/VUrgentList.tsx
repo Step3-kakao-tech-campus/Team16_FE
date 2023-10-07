@@ -24,7 +24,7 @@ export interface Props {
 const VUrgentList = (props: Props) => {
   return (
     <div className="m-20">
-      <h2 className="font-bold text-xl sm:text-2xl m-10 mr-20">
+      <h2 className="font-bold text-xl sm:text-2xl m-10 mr-20  whitespace-nowrap">
         긴급 도움이 필요해요!
       </h2>
       <div className="grid grid-cols-1 gap-1 sm:grid-cols-2 m-10">

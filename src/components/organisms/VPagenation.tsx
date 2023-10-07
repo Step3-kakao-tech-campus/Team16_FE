@@ -101,7 +101,7 @@ export default function Pagination({
   const pageNums = getPaginationItems(currentPage, lastPage, maxLength);
 
   return (
-    <nav className="pagination" aria-label="Pagination">
+    <nav className="pagination  whitespace-nowrap" aria-label="Pagination">
       <PageButton
         disabled={currentPage === 1}
         onClick={() => setCurrentPage(currentPage - 1)}
