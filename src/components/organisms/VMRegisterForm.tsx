@@ -8,9 +8,9 @@ type RegisterProps = {
 
 const MRegisterForm = ({ handleChange }: RegisterProps) => {
   return (
-    <div className="justify-center w-full">
-      <div className="flex flex-col-3 gap-10 max-w-[600px]  text-sm  mb-5">
-        <div className=" max-w-[250px]">
+    <div className="flex flex-col items-center gap-8 mt-10">
+      <div className="flex flex-col sm:flex-row  justify-center gap-5 sm:gap-20 w-1/2 text-sm  mb-5">
+        <div className="">
           <InputGroup
             id="name"
             name="이름"
@@ -19,10 +19,10 @@ const MRegisterForm = ({ handleChange }: RegisterProps) => {
             onChange={(e) => {
               handleChange(e);
             }}
-            autocomplete="email"
+            autocomplete="name"
           />
         </div>
-        <div className=" max-w-[100px] text-sm">
+        <div className="text-sm">
           <InputGroup
             id="age"
             name="나이"
@@ -31,15 +31,15 @@ const MRegisterForm = ({ handleChange }: RegisterProps) => {
             onChange={(e) => {
               handleChange(e);
             }}
-            autocomplete="email"
+            autocomplete="age"
           />
         </div>
         <SelectBox />
       </div>
-      <div className=" mb-5">
+      <div className="flex justify-center gap-5 sm:gap-20 w-1/2 text-sm  mb-5">
         <RadioGroup />
       </div>
-      <div className=" max-w-[450px] mb-5  text-sm">
+      <div className="flex justify-center gap-5 sm:gap-20 w-1/2 text-sm  mb-5">
         <InputGroup
           id="size"
           name="크기"
@@ -48,32 +48,32 @@ const MRegisterForm = ({ handleChange }: RegisterProps) => {
           onChange={(e) => {
             handleChange(e);
           }}
-          autocomplete="email"
+          autocomplete="size"
         />
       </div>
-      <div className="flex flex-col-3 gap-8 max-w-[600px] mb-5 text-sm">
-        <div className=" max-w-[210px]">
+      <div className="flex flex-col sm:flex-row justify-center gap-5 sm:gap-20 w-1/2 text-sm  mb-5">
+        <div className="">
           <InputGroup
             id="weight"
             name="몸무게"
             type="number"
-            placeholder="kg단위로 입력해주세요"
+            placeholder="kg 단위로 입력해주세요"
             onChange={(e) => {
               handleChange(e);
             }}
-            autocomplete="email"
+            autocomplete="weight"
           />
         </div>
-        <div className=" max-w-[210px]">
+        <div className="">
           <InputGroup
-            id="vaccination"
+            id="vaccinationStatus"
             name="접종여부"
-            type="number"
+            type="text"
             placeholder="접종차수를 입력해주세요"
             onChange={(e) => {
               handleChange(e);
             }}
-            autocomplete="email"
+            autocomplete="vaccinationStatus"
           />
         </div>
       </div>

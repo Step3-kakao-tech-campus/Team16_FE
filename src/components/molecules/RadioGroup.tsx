@@ -18,10 +18,10 @@ const RadioGroup = () => {
   };
 
   return (
-    <div className="flex gap-10">
+    <div className="flex flex-col sm:flex-row sm:gap-20 justify-center">
       <div>
-        <h2 className="font-semibold text-sm my-3">성별</h2>
-        <div className="flex gap-3 text-sm">
+        <h2 className="font-semibold my-3  whitespace-nowrap">성별</h2>
+        <div className="grid grid-cols-2 gap-8 text-sm  sm:whitespace-nowrap">
           <RadioButton
             label="남"
             name="sex" // 고유한 name 속성 설정
@@ -40,8 +40,10 @@ const RadioGroup = () => {
       </div>
 
       <div>
-        <h2 className="font-semibold text-sm my-3">입양 상태</h2>
-        <div className="flex gap-5 text-sm">
+        <h2 className="font-semibold text-sm my-3 whitespace-nowrap">
+          입양 상태
+        </h2>
+        <div className="grid grid-cols-2  gap-5 text-sm sm:whitespace-nowrap">
           <RadioButton
             label="입양"
             name="adoptionStatus" // 고유한 name 속성 설정
@@ -59,8 +61,10 @@ const RadioGroup = () => {
         </div>
       </div>
       <div>
-        <h2 className="font-semibold text-sm my-3">중성화 상태</h2>
-        <div className="flex gap-4 text-sm">
+        <h2 className="font-semibold text-sm my-3 whitespace-nowrap">
+          중성화 상태
+        </h2>
+        <div className="grid grid-cols-3 gap-8 text-sm sm:whitespace-nowrap">
           <RadioButton
             label="했어요"
             name="neutralizationStatus" // 고유한 name 속성 설정
