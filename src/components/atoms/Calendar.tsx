@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+import registerState from 'recoil/registerState';
 
-const Datepicker = () => {
+interface Props {
+  handleClick: () => void;
+}
+
+const Calendar = ({ handleClick }: Props) => {
   const dayOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const months = [
     'January',
@@ -19,6 +25,7 @@ const Datepicker = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [currentYear, setCurrentYear] = useState(currentDate.getFullYear());
   const [currentMonth, setCurrentMonth] = useState(currentDate.getMonth());
+  const setProtectionDate = useSetRecoilState(registerState);
 
   // 일요일 기준 0부터 시작하는 Index
   // 여기에서 더한 값을 7로 나눈 나머지가 요일이 될 듯
@@ -125,9 +132,9 @@ const Datepicker = () => {
           <td key={index} className="prevMonthDay text-gray-400 py-2">
             <button
               className="w-full h-full"
-              onClick={(event: React.MouseEvent<HTMLElement>) => {
-                const target = event.target as HTMLButtonElement;
-                console.log(target.textContent);
+              onClick={() => {
+                prevMonth(currentDate.getMonth());
+                // 날짜 클릭 연도 문제 해결해야 됨
               }}
             >
               {day.getDate()}
@@ -142,9 +149,9 @@ const Datepicker = () => {
           <td key={index} className="nextMonthDay text-gray-400 py-2">
             <button
               className="w-full h-full"
-              onClick={(event: React.MouseEvent<HTMLElement>) => {
-                const target = event.target as HTMLButtonElement;
-                console.log(target.textContent);
+              onClick={() => {
+                nextMonth(currentDate.getMonth());
+                // 날짜 클릭 연도 문제 해결해야 됨 -> day.getMonth() 고려해보기
               }}
             >
               {day.getDate()}
@@ -152,15 +159,6 @@ const Datepicker = () => {
           </td>
         );
       }
-
-      // 이번 달이 아닌 다른 달의 날짜 건들 때 사용
-      // if (today.getMonth() !== currentDate.getMonth()) {
-      //   return (
-      //     <td key={index} className="prevMonth text-gray-400 py-2">
-      //       {day.getDate()}
-      //     </td>
-      //   );
-      // }
 
       // 이번달 중 날짜가 지난 날
       if (
@@ -172,9 +170,15 @@ const Datepicker = () => {
           <td key={index} className="prevDay py-2">
             <button
               className="w-full h-full"
-              onClick={(event: React.MouseEvent<HTMLElement>) => {
-                const target = event.target as HTMLButtonElement;
-                console.log(target.textContent);
+              onClick={() => {
+                const date = `${day.getFullYear()}-${
+                  day.getMonth() + 1
+                }-${day.getDate()}`;
+                setProtectionDate((prev) => ({
+                  ...prev,
+                  protectionExpirationDate: date,
+                }));
+                handleClick();
               }}
             >
               {day.getDate()}
@@ -196,9 +200,15 @@ const Datepicker = () => {
           >
             <button
               className="w-full h-full"
-              onClick={(event: React.MouseEvent<HTMLElement>) => {
-                const target = event.target as HTMLButtonElement;
-                console.log(target.textContent);
+              onClick={() => {
+                const date = `${day.getFullYear()}-${
+                  day.getMonth() + 1
+                }-${day.getDate()}`;
+                setProtectionDate((prev) => ({
+                  ...prev,
+                  protectionExpirationDate: date,
+                }));
+                handleClick();
               }}
             >
               {day.getDate()}
@@ -212,9 +222,15 @@ const Datepicker = () => {
         <td key={index} className="futureDay py-2">
           <button
             className="w-full h-full"
-            onClick={(event: React.MouseEvent<HTMLElement>) => {
-              const target = event.target as HTMLButtonElement;
-              console.log(target.textContent);
+            onClick={() => {
+              const date = `${day.getFullYear()}-${
+                day.getMonth() + 1
+              }-${day.getDate()}`;
+              setProtectionDate((prev) => ({
+                ...prev,
+                protectionExpirationDate: date,
+              }));
+              handleClick();
             }}
           >
             {day.getDate()}
@@ -268,7 +284,7 @@ const Datepicker = () => {
         <thead className="grid grid-cols-7 grid-rows-1 text-center">
           {dayOfWeek.map((row: string, index: number) => (
             <tr key={index} className="weeks">
-              {row}
+              <td>{row}</td>
             </tr>
           ))}
         </thead>
@@ -284,4 +300,4 @@ const Datepicker = () => {
   );
 };
 
-export default Datepicker;
+export default Calendar;

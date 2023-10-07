@@ -1,9 +1,9 @@
-import Calendar from 'components/atoms/Calendar';
+import DayModalInput from 'components/molecules/DayModalInput';
 
 const RegisterPage = () => {
   return (
     <div>
-      <Calendar />
+      <DayModalInput />
     </div>
   );
 };
