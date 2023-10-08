@@ -1,4 +1,4 @@
-import ProfileListHome from 'pages/profileList/ProfileListHome';
+import ProfileListHome from 'pages/ProfileList/ProfileListHome';
 import GNB from 'layouts/GNB';
 
 const ProfileListPage = () => {

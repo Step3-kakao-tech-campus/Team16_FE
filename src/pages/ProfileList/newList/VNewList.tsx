@@ -1,4 +1,4 @@
-import ProfileCard from 'pages/profileList/ProfileCard';
+import ProfileCard from 'pages/ProfileList/ProfileCard';
 import Pagination from '../../../commons/Pagenation';
 
 export interface ProfileListProps {
