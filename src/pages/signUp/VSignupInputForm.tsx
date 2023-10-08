@@ -1,4 +1,4 @@
-import AddressInputGroup from 'components/molecules/AddressInputGroup';
+import AddressInputGroup from 'pages/signUp/AddressInputGroup';
 import InputGroup from 'commons/InputGroup';
 import React from 'react';
 
