@@ -1,7 +1,7 @@
-import RadarChart, { PolygonProfile } from 'components/atoms/RadarChart';
-import DetailPetInfo from 'components/molecules/DetailPetInfo';
-import ModalPortal from 'commons/ModalPortal';
-import ImageModal from 'commons/ImageModal';
+import RadarChart, { PolygonProfile } from 'pages/detailPet/RadarChart';
+import DetailPetInfo from 'pages/detailPet/DetailPetInfo';
+import ModalPortal from 'commons/modals/ModalPortal';
+import ImageModal from 'commons/modals/ImageModal';
 
 export interface RadarChartProps {
   setCanvas: React.Dispatch<React.SetStateAction<HTMLCanvasElement | null>>;

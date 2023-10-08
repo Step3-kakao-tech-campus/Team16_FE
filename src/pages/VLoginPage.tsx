@@ -1,4 +1,4 @@
-import Banner from 'components/atoms/Banner';
+import Banner from 'commons/Banner';
 import LoginInputForm from 'components/organisms/LoginInputForm';
 
 type Props = {

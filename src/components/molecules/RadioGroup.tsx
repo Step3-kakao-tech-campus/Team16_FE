@@ -1,4 +1,4 @@
-import DetailRadio from 'components/atoms/DetailRadio';
+import DetailRadio from 'commons/DetailRadio';
 import { useRecoilState } from 'recoil';
 import registerState from 'recoil/registerState';
 

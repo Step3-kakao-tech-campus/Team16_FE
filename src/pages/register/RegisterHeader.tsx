@@ -1,8 +1,8 @@
 import { useState, useRef } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import ImageVideoInput from 'components/molecules/ImageVideoInput';
-import ModalPortal from 'commons/ModalPortal';
-import RegisterModal, { RegisterModalProps } from 'commons/RegisterModal';
+import ImageVideoInput from 'pages/register/ImageVideoInput';
+import ModalPortal from 'commons/modals/ModalPortal';
+import RegisterModal, { RegisterModalProps } from 'commons/modals/RegisterModal';
 import { useRecoilValue } from 'recoil';
 import registerState from 'recoil/registerState';
 import { useNavigate } from 'react-router-dom';

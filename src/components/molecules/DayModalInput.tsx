@@ -1,4 +1,4 @@
-import Calendar from 'components/atoms/Calendar';
+import Calendar from 'commons/Calendar';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import registerState from 'recoil/registerState';
