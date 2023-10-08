@@ -9,7 +9,7 @@ const SignupInputForm = () => {
 
   const duplicateCheck = () => {
     // shelterInfo.email
-    fetch(`${process.env.REACT_APP_URI}account/email`, {
+    fetch(`${process.env.REACT_APP_URI}/account/email`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ const SignupInputForm = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // 회원가입 정보 보내는 API 적용해야 됨
-    fetch(`${process.env.REACT_APP_URI}account/shelter`, {
+    fetch(`${process.env.REACT_APP_URI}/account/shelter`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
