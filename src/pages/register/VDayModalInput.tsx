@@ -1,17 +1,15 @@
-import Calendar from 'components/atoms/Calendar';
-import { useState } from 'react';
+import Calendar from 'pages/register/Calendar';
 import { useRecoilValue } from 'recoil';
 import registerState from 'recoil/registerState';
 
-const DayModalInput = () => {
-  const [open, setOpen] = useState(false);
-  // recoil에서 date 부분만 가져와서 쓰도록
+interface Props {
+  open: boolean;
+  handleClick: () => void;
+}
+
+const VDayModalInput = ({ open, handleClick }: Props) => {
   const protectionDate = useRecoilValue(registerState);
   const { protectionExpirationDate } = protectionDate;
-
-  const handleClick = () => {
-    setOpen((prev) => !prev);
-  };
 
   return (
     <div className="flex justify-center items-center gap-2">
@@ -25,7 +23,7 @@ const DayModalInput = () => {
         type="text"
         placeholder="날짜를 선택해주세요."
         onClick={handleClick}
-        value={protectionExpirationDate}
+        defaultValue={protectionExpirationDate}
         autoComplete="date"
       />
       <dialog open={open} className="">
@@ -35,4 +33,4 @@ const DayModalInput = () => {
   );
 };
 
-export default DayModalInput;
+export default VDayModalInput;

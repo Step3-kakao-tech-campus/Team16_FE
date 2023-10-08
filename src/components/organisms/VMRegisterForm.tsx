@@ -1,4 +1,4 @@
-import InputGroup from 'components/molecules/InputGroup';
+import InputGroup from 'commons/InputGroup';
 import RadioGroup from 'components/molecules/RadioGroup';
 import SelectBox from 'components/molecules/SelectBox';
 

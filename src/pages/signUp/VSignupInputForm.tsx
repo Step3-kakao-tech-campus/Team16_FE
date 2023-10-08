@@ -1,5 +1,5 @@
 import AddressInputGroup from 'components/molecules/AddressInputGroup';
-import InputGroup from 'components/molecules/InputGroup';
+import InputGroup from 'commons/InputGroup';
 import React from 'react';
 
 interface Props {

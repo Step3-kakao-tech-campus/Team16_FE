@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import LogoButton from 'components/atoms/LogoButton';
+import LogoButton from 'commons/LogoButton';
 
 export interface VLargeGNBProps {
   handleCategoryButtonClick: () => void;

@@ -1,8 +1,8 @@
+import Radio from 'commons/Radio';
 import DayModalInput from 'pages/register/DayModalInput';
 import MRegisterForm from 'components/organisms/MRegisterForm';
+import RegisterHeader from 'pages/register/RegisterHeader';
 import GNB from 'layouts/GNB';
-import StatusSelectGroup from './register/StatusSelectGroup';
-import RegisterHeader from './register/RegisterHeader';
 
 const RegisterPage = () => {
   return (
@@ -11,7 +11,7 @@ const RegisterPage = () => {
       <RegisterHeader />
       <MRegisterForm />
       <DayModalInput />
-      <StatusSelectGroup />
+      <Radio />
     </div>
   );
 };

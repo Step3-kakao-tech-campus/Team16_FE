@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import registerState from 'recoil/registerState';
+import {
+  CurrentMonthDays,
+  NextMonthDays,
+  PrevMonthDays,
+} from '../../commons/MonthDays';
 
 interface Props {
   handleClick: () => void;
@@ -27,32 +32,35 @@ const Calendar = ({ handleClick }: Props) => {
   const [currentMonth, setCurrentMonth] = useState(currentDate.getMonth());
   const setProtectionDate = useSetRecoilState(registerState);
 
-  // 일요일 기준 0부터 시작하는 Index
-  // 여기에서 더한 값을 7로 나눈 나머지가 요일이 될 듯
+  // 달의 시작 닐찌 요일 index
   const currentMonthStartDate = new Date(
     currentDate.getFullYear(),
     currentDate.getMonth(),
     1,
   ).getDay();
 
+  // 달의 마지막 날짜
   const currentMonthEndDate = new Date(
     currentDate.getFullYear(),
     currentDate.getMonth() + 1,
     0,
   );
 
+  // 지난 날 마지막 날짜
   const prevMonthEndDate = new Date(
     currentDate.getFullYear(),
     currentDate.getMonth(),
     0,
   );
 
+  // 다음 달 시작 날짜
   const nextMonthStartDate = new Date(
     currentDate.getFullYear(),
     currentDate.getMonth() + 1,
     1,
   );
 
+  // 캘린더 생성
   const makeCalendar = () => {
     // 이전 달 날짜 가져오기
     const days: Date[] = Array.from(
@@ -94,6 +102,7 @@ const Calendar = ({ handleClick }: Props) => {
     return days;
   };
 
+  // 이전 달로 이동
   const prevMonth = (month: number) => {
     const prevIndex = month - 1;
     if (prevIndex < 0) {
@@ -107,6 +116,8 @@ const Calendar = ({ handleClick }: Props) => {
       setCurrentDate(new Date(currentYear, prevIndex)); // 시작, 끝나는 요일 정하기
     }
   };
+
+  // 다음 달로 이동
   const nextMonth = (month: number) => {
     const nextIndex = month + 1;
     if (nextIndex > 11) {
@@ -121,6 +132,7 @@ const Calendar = ({ handleClick }: Props) => {
     }
   };
 
+  // 날짜 받아오기
   const makeCalendarDays = (days: Date[]) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -129,34 +141,26 @@ const Calendar = ({ handleClick }: Props) => {
       // 지난 달에서 가져온 날짜
       if (day.getMonth() < currentDate.getMonth()) {
         return (
-          <td key={index} className="prevMonthDay text-gray-400 py-2">
-            <button
-              className="w-full h-full"
-              onClick={() => {
-                prevMonth(currentDate.getMonth());
-                // 날짜 클릭 연도 문제 해결해야 됨
-              }}
-            >
-              {day.getDate()}
-            </button>
-          </td>
+          <PrevMonthDays
+            key={index}
+            day={day}
+            index={index}
+            className={'prevMonthDay text-gray-400 py-2'}
+            prevMonth={() => prevMonth(currentDate.getMonth())}
+          />
         );
       }
 
       // 다음 달에서 가져온 날짜
       if (day.getMonth() > currentDate.getMonth()) {
         return (
-          <td key={index} className="nextMonthDay text-gray-400 py-2">
-            <button
-              className="w-full h-full"
-              onClick={() => {
-                nextMonth(currentDate.getMonth());
-                // 날짜 클릭 연도 문제 해결해야 됨 -> day.getMonth() 고려해보기
-              }}
-            >
-              {day.getDate()}
-            </button>
-          </td>
+          <NextMonthDays
+            key={index}
+            day={day}
+            index={index}
+            className={'nextMonthDay text-gray-400 py-2'}
+            nextMonth={() => nextMonth(currentDate.getMonth())}
+          />
         );
       }
 
@@ -167,23 +171,14 @@ const Calendar = ({ handleClick }: Props) => {
         day.getMonth() === today.getMonth()
       ) {
         return (
-          <td key={index} className="prevDay py-2">
-            <button
-              className="w-full h-full"
-              onClick={() => {
-                const date = `${day.getFullYear()}-${
-                  day.getMonth() + 1
-                }-${day.getDate()}`;
-                setProtectionDate((prev) => ({
-                  ...prev,
-                  protectionExpirationDate: date,
-                }));
-                handleClick();
-              }}
-            >
-              {day.getDate()}
-            </button>
-          </td>
+          <CurrentMonthDays
+            key={index}
+            day={day}
+            index={index}
+            className={'prevDay py-2'}
+            setProtectionDate={setProtectionDate}
+            handleClick={handleClick}
+          />
         );
       }
 
@@ -194,48 +189,27 @@ const Calendar = ({ handleClick }: Props) => {
         day.getDate() === today.getDate()
       ) {
         return (
-          <td
+          <CurrentMonthDays
             key={index}
-            className="today bg-brand-color rounded-full text-white py-2"
-          >
-            <button
-              className="w-full h-full"
-              onClick={() => {
-                const date = `${day.getFullYear()}-${
-                  day.getMonth() + 1
-                }-${day.getDate()}`;
-                setProtectionDate((prev) => ({
-                  ...prev,
-                  protectionExpirationDate: date,
-                }));
-                handleClick();
-              }}
-            >
-              {day.getDate()}
-            </button>
-          </td>
+            day={day}
+            index={index}
+            className={'today bg-brand-color rounded-full text-white py-2'}
+            setProtectionDate={setProtectionDate}
+            handleClick={handleClick}
+          />
         );
       }
 
       // 아직 오지 않은 이번 달 날짜
       return (
-        <td key={index} className="futureDay py-2">
-          <button
-            className="w-full h-full"
-            onClick={() => {
-              const date = `${day.getFullYear()}-${
-                day.getMonth() + 1
-              }-${day.getDate()}`;
-              setProtectionDate((prev) => ({
-                ...prev,
-                protectionExpirationDate: date,
-              }));
-              handleClick();
-            }}
-          >
-            {day.getDate()}
-          </button>
-        </td>
+        <CurrentMonthDays
+          key={index}
+          day={day}
+          index={index}
+          className={'futureDay py-2'}
+          setProtectionDate={setProtectionDate}
+          handleClick={handleClick}
+        />
       );
     });
   };
