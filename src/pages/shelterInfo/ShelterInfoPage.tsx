@@ -1,5 +1,5 @@
 import GNB from 'layouts/GNB';
-import ShelterInfo from './shelterInfo/ShelterInfo';
+import ShelterInfo from './ShelterInfo';
 
 const ShelterInfoPage = () => {
   return (

@@ -5,12 +5,12 @@ import Home from 'pages/home/Home';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import DetailPetPage from 'pages/detailPet/DetailPetPage';
 import ProfileListPage from 'pages/ProfileList/ProfileListPage';
-import LoginPage from 'pages/LoginPage';
+import LoginPage from 'pages/login/LoginPage';
 import MapPage from 'pages/map/MapPage';
 import NewListPage from 'pages/ProfileList/newList/NewListPage';
-import RegisterPage from 'pages/RegisterPage';
-import ShelterInfoPage from 'pages/ShelterInfoPage';
-import SignupPage from 'pages/SignupPage';
+import RegisterPage from 'pages/register/RegisterPage';
+import ShelterInfoPage from 'pages/shelterInfo/ShelterInfoPage';
+import SignupPage from 'pages/signUp/SignupPage';
 import UrgentListPage from 'pages/ProfileList/urgentList/UrgentListPage';
 
 const queryClient = new QueryClient();
