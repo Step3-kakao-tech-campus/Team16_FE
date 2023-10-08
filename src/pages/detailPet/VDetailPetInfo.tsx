@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { MockDetailPetInfoProps } from 'components/organisms/VDetailPetData';
+import { MockDetailPetInfoProps } from 'pages/detailPet/VDetailPetData';
 
 const VDetailPetInfo = (data: MockDetailPetInfoProps) => {
   return (

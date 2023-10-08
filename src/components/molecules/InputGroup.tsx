@@ -1,5 +1,5 @@
-import Container from 'components/atoms/Container';
-import Input from 'components/atoms/Input';
+import Container from 'commons/Container';
+import Input from 'commons/Input';
 
 export interface InputGroupProps {
   id: string;

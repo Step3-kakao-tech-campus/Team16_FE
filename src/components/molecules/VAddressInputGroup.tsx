@@ -1,5 +1,5 @@
-import Container from 'components/atoms/Container';
-import Postcode from 'components/atoms/PostCode';
+import Container from 'commons/Container';
+import Postcode from 'commons/PostCode';
 import { ShelterSignupType } from 'recoil/shelterState';
 
 type Props = {

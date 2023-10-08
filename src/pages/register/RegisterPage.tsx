@@ -1,7 +1,7 @@
-import Radio from 'components/atoms/Radio';
+import Radio from 'commons/Radio';
 import DayModalInput from 'components/molecules/DayModalInput';
 import MRegisterForm from 'components/organisms/MRegisterForm';
-import RegisterHeader from 'components/organisms/RegisterHeader';
+import RegisterHeader from 'pages/register/RegisterHeader';
 import GNB from 'layouts/GNB';
 
 const RegisterPage = () => {
