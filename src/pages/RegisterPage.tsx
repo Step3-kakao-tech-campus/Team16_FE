@@ -1,17 +1,9 @@
-import DayModalInput from 'pages/register/DayModalInput';
-import MRegisterForm from 'pages/register/MRegisterForm';
-import GNB from 'layouts/GNB';
-import StatusSelectGroup from './register/StatusSelectGroup';
-import RegisterHeader from './register/RegisterHeader';
+import Calendar from 'components/atoms/Calendar';
 
 const RegisterPage = () => {
   return (
     <div>
-      <GNB />
-      <RegisterHeader />
-      <MRegisterForm />
-      <DayModalInput />
-      <StatusSelectGroup />
+      <Calendar />
     </div>
   );
 };

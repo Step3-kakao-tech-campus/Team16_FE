@@ -1,4 +1,4 @@
-import LogoButton from 'commons/LogoButton';
+import LogoButton from 'components/atoms/LogoButton';
 import { Link } from 'react-router-dom';
 
 export interface VGNBProps {
