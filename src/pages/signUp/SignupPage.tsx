@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import VSignupPage from '../VSignupPage';
+import VSignupPage from './VSignupPage';
 
 const SignupPage = () => {
   const navigate = useNavigate();
