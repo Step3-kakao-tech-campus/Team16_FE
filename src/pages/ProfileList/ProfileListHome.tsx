@@ -4,6 +4,7 @@ const ProfileListHome = () => {
   // const [list, setlist] = useState([]);
 
   // useEffect(() => {
+  //
   //   fetch('public/data/profileHomeMock.json')
   //     .then((res) => res.json()) // javascript객체로 변환
   //     .then(setlist); // list에 저장
