@@ -1,6 +1,6 @@
-import ShelterCard from 'components/molecules/ShelterCard';
-import ProfileCard from 'components/molecules/ProfileCard';
-import Pagination from './Pagenation';
+import Pagination from 'commons/VPagenation';
+import ProfileCard from 'pages/ProfileList/ProfileCard';
+import VShelterCard from './VShelterCard';
 
 export interface ShelterInfoProps {
   name: string;
@@ -34,7 +34,7 @@ const VShelterInfo = (props: Props) => {
   return (
     <div>
       <div>
-        <ShelterCard {...props.shelterInfoProps} />
+        <VShelterCard {...props.shelterInfoProps} />
       </div>
       <div className=" m-20 -mt-10">
         <h2 className="font-bold text-xl sm:text-2xl ml-20">관리중인 동물</h2>

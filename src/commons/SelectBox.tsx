@@ -1,5 +1,5 @@
 import { useRecoilState } from 'recoil';
-import registerType from 'recoil/registerState';
+import registerState from 'recoil/registerState';
 
 const typeOptions = [
   { label: '개', value: 'DOG' },
@@ -9,7 +9,7 @@ const typeOptions = [
 ];
 
 const SelectBox = () => {
-  const [selectedType, setSelectedType] = useRecoilState(registerType);
+  const [selectedType, setSelectedType] = useRecoilState(registerState);
 
   const handleTypeChange = (value: string) => {
     setSelectedType((prevType) => ({

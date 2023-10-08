@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRecoilState } from 'recoil';
 import { shelterSignupState } from 'recoil/shelterState';
-import VAddressInputGroup from './VAddressInputGroup';
+import VAddressInputGroup from '../../pages/signUp/VAddressInputGroup';
 
 const AddressInputGroup = () => {
   const [shelterInfo, setShelterInfo] = useRecoilState(shelterSignupState);

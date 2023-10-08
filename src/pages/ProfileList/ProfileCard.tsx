@@ -1,4 +1,4 @@
-import { ProfileListProps } from 'components/organisms/VProfileListHome';
+import { ProfileListProps } from 'pages/ProfileList/VProfileListHome';
 import { useNavigate } from 'react-router-dom';
 import VProfileCard from './VProfileCard';
 
