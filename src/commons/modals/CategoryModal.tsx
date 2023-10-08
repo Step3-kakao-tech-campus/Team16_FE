@@ -4,7 +4,7 @@ import speciesState, { SpeciesType } from 'recoil/speciesState';
 import CategoryModalList, {
   CategoryModalType,
   VCategoryModalListProps,
-} from 'commons/VCategoryModalList';
+} from 'commons/modals/VCategoryModalList';
 
 export interface CategoryModalProps {
   handleModalCloseClick: () => void;
