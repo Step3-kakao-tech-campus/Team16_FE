@@ -1,5 +1,5 @@
-import Banner from 'components/atoms/Banner';
-import LoginInputForm from 'components/organisms/LoginInputForm';
+import Banner from 'commons/Banner';
+import LoginInputForm from 'pages/login/LoginInputForm';
 
 type Props = {
   redirectSignupPage: () => void;
