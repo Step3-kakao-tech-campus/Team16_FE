@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import StringWithLineBreak from 'components/atoms/StringWithLineBrake';
+import StringWithLineBreak from 'commons/StringWithLineBreak';
 import { useQuery } from '@tanstack/react-query';
 import VDetailPetData, {
   MockDetailPetInfoProps,

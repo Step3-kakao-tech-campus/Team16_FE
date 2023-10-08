@@ -1,4 +1,4 @@
-import InputGroup from 'components/molecules/InputGroup';
+import InputGroup from 'commons/InputGroup';
 
 type Props = {
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;

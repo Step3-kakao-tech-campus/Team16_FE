@@ -1,4 +1,4 @@
-import { InputGroupProps } from 'components/molecules/InputGroup';
+import { InputGroupProps } from 'commons/InputGroup';
 
 const Input = ({
   id,

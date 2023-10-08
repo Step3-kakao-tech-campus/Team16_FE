@@ -1,4 +1,4 @@
-import DetailPetData from 'components/organisms/DetailPetData';
+import DetailPetData from 'pages/detailPet/DetailPetData';
 import GNB from 'layouts/GNB';
 
 const DetailPetPage = () => {

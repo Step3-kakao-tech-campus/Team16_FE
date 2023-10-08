@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import registerState from 'recoil/registerState';
-import StatusScore from '../atoms/StatusScore';
+import StatusScore from './StatusScore';
 
 const StatusSelectGroup = () => {
   const [profileStatus, setProfileStatus] = useRecoilState(registerState);

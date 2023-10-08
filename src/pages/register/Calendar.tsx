@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import registerState from 'recoil/registerState';
-import { CurrentMonthDays, NextMonthDays, PrevMonthDays } from './MonthDays';
+import {
+  CurrentMonthDays,
+  NextMonthDays,
+  PrevMonthDays,
+} from '../../commons/MonthDays';
 
 interface Props {
   handleClick: () => void;

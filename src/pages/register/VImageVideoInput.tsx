@@ -1,4 +1,4 @@
-import FileInput from 'components/atoms/FileInput';
+import FileInput from 'pages/register/FileInput';
 
 interface VImageVideoInputProps {
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;

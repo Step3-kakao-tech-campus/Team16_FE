@@ -1,6 +1,8 @@
-import ModalPortal from 'commons/ModalPortal';
+import ModalPortal from 'commons/modals/ModalPortal';
 import { useState } from 'react';
-import CategoryModal, { CategoryModalProps } from 'commons/CategoryModal';
+import CategoryModal, {
+  CategoryModalProps,
+} from 'commons/modals/CategoryModal';
 import { CategoryModalType } from 'components/molecules/VCategoryModalList';
 import { useLocation } from 'react-router-dom';
 import VGNB, { VGNBProps } from './VGNB';
