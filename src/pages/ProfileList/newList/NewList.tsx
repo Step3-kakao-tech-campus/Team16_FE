@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import VNewList, { PageNationProps, Props } from './VNewList';
-import { ProfileListProps } from './VProfileListHome';
+import { ProfileListProps } from '../VProfileListHome';
 
 const NewList = () => {
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태

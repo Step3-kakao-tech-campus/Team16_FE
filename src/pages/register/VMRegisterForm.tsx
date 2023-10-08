@@ -1,6 +1,6 @@
 import InputGroup from 'commons/InputGroup';
-import RadioGroup from 'components/molecules/RadioGroup';
-import SelectBox from 'components/molecules/SelectBox';
+import RadioGroup from 'pages/register/RadioGroup';
+import SelectBox from 'commons/SelectBox';
 
 type RegisterProps = {
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;

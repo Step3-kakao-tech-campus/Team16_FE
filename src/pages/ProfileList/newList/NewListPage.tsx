@@ -1,4 +1,4 @@
-import NewList from 'components/organisms/NewList';
+import NewList from 'pages/ProfileList/newList/NewList';
 import GNB from 'layouts/GNB';
 
 const NewListPage = () => {

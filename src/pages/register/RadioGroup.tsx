@@ -1,6 +1,6 @@
-import DetailRadio from 'commons/DetailRadio';
-import { useRecoilState } from 'recoil';
 import registerState from 'recoil/registerState';
+import { useRecoilState } from 'recoil';
+import DetailRadio from './DetailRadio';
 
 const RadioGroup = () => {
   const [registerData, setRegisterData] = useRecoilState(registerState);

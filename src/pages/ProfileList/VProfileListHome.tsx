@@ -1,4 +1,4 @@
-import ProfileCard from 'components/molecules/ProfileCard';
+import ProfileCard from 'pages/ProfileList/ProfileCard';
 
 export interface ProfileListProps {
   image: string;

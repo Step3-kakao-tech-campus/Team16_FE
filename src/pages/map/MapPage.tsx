@@ -1,4 +1,4 @@
-import Map from 'components/molecules/Map';
+import Map from 'pages/map/Map';
 import GNB from 'layouts/GNB';
 
 const MapPage = () => {

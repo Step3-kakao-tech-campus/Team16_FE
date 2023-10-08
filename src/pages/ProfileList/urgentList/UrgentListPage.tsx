@@ -1,4 +1,4 @@
-import UrgentList from 'components/organisms/UrgentList';
+import UrgentList from 'pages/ProfileList/urgentList/UrgentList';
 import GNB from 'layouts/GNB';
 
 const UrgentListPage = () => {
