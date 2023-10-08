@@ -1,7 +1,7 @@
 import './App.css';
 import { RecoilRoot } from 'recoil';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import Home from 'pages/Home';
+import Home from 'pages/home/Home';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import DetailPetPage from 'pages/detailPet/DetailPetPage';
 import ProfileListPage from 'pages/ProfileList/ProfileListPage';
