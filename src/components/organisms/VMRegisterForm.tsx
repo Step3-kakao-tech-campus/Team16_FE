@@ -20,7 +20,7 @@ const MRegisterForm = ({ handleChange }: RegisterProps) => {
               onChange={(e) => {
                 handleChange(e);
               }}
-              autocomplete="name"
+              autocomplete="on"
             />
           </div>
           <div className="flex w-2/4 whitespace-nowrap">
@@ -32,7 +32,7 @@ const MRegisterForm = ({ handleChange }: RegisterProps) => {
               onChange={(e) => {
                 handleChange(e);
               }}
-              autocomplete="age"
+              autocomplete="on"
             />
           </div>
           <SelectBox />
@@ -53,7 +53,7 @@ const MRegisterForm = ({ handleChange }: RegisterProps) => {
             onChange={(e) => {
               handleChange(e);
             }}
-            autocomplete="size"
+            autocomplete="on"
           />
         </div>
       </div>
@@ -67,7 +67,7 @@ const MRegisterForm = ({ handleChange }: RegisterProps) => {
             onChange={(e) => {
               handleChange(e);
             }}
-            autocomplete="weight"
+            autocomplete="off"
           />
         </div>
         <div className=" w-full">
@@ -79,7 +79,7 @@ const MRegisterForm = ({ handleChange }: RegisterProps) => {
             onChange={(e) => {
               handleChange(e);
             }}
-            autocomplete="vaccinationStatus"
+            autocomplete="off"
           />
         </div>
       </div>
@@ -93,7 +93,7 @@ const MRegisterForm = ({ handleChange }: RegisterProps) => {
             onChange={(e) => {
               handleChange(e);
             }}
-            autocomplete="description"
+            autocomplete="off"
           />
         </div>
       </div>
