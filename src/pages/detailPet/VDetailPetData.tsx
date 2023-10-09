@@ -12,7 +12,7 @@ export interface RadarChartProps {
   data: PolygonProfile;
   willAnimate: boolean;
 }
-export interface MockDetailPetInfoProps {
+export interface DetailPetInfoProps {
   shelterInfo: {
     id: number;
     name: string;
@@ -33,7 +33,7 @@ export interface MockDetailPetInfoProps {
 }
 
 interface Props {
-  mockDetailPetInfoProps: MockDetailPetInfoProps;
+  detailPetInfoProps: DetailPetInfoProps;
   radarChartProps: RadarChartProps;
   modal: boolean;
   handleModalImageClick: () => void;
@@ -43,7 +43,7 @@ interface Props {
 }
 
 const VDetailPetData = ({
-  mockDetailPetInfoProps,
+  detailPetInfoProps,
   radarChartProps,
   modal,
   handleModalImageClick,
@@ -55,7 +55,7 @@ const VDetailPetData = ({
     <div className="flex min-w-[375px] items-center flex-col justify-center md:flex-row">
       <img
         className="relative w-96 cursor-pointer lg:mr-20"
-        src={mockDetailPetInfoProps.profileImageUrl}
+        src={detailPetInfoProps.profileImageUrl}
         alt="z"
         onClick={handleModalImageClick}
       />
@@ -69,7 +69,7 @@ const VDetailPetData = ({
         )}
       </ModalPortal>
       <div className="flex flex-col items-center">
-        <DetailPetInfo {...mockDetailPetInfoProps} />
+        <DetailPetInfo {...detailPetInfoProps} />
         <RadarChart {...radarChartProps} />
       </div>
     </div>

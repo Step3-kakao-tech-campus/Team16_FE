@@ -2,10 +2,7 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import StringWithLineBreak from 'commons/StringWithLineBreak';
 import { useQuery } from '@tanstack/react-query';
-import VDetailPetData, {
-  MockDetailPetInfoProps,
-  RadarChartProps,
-} from './VDetailPetData';
+import VDetailPetData, { RadarChartProps } from './VDetailPetData';
 
 const DetailPetData = () => {
   const params = useParams();
@@ -36,7 +33,7 @@ const DetailPetData = () => {
 
   const vDetailPetDataProps = {
     radarChartProps,
-    mockDetailPetInfoProps: data.response,
+    detailPetInfoProps: data.response,
     modal,
     handleModalImageClick: () => setModal(true),
     handleModalCloseClick: () => setModal(false),

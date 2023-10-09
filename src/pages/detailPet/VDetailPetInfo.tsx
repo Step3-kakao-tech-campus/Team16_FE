@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import { MockDetailPetInfoProps } from 'pages/detailPet/VDetailPetData';
+import { DetailPetInfoProps } from 'pages/detailPet/VDetailPetData';
 
-const VDetailPetInfo = (data: MockDetailPetInfoProps) => {
+const VDetailPetInfo = (data: DetailPetInfoProps) => {
   return (
     <div>
       <h2 className="text-3xl mb-10">{data.name}</h2>
