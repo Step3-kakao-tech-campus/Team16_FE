@@ -120,12 +120,17 @@ const Map: React.FC = () => {
           }
         }
 
+        // 마커 스타일 변경
+        const imageSrc = '/assets/images/racoon.png';
+        const imageSize = new kakao.maps.Size(64, 69);
+        const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
         // 지도에 마커를 표시하는 함수입니다
         function displayMarker(place: any) {
           // 마커를 생성하고 지도에 표시합니다
           const marker = new kakao.maps.Marker({
             map,
             position: new kakao.maps.LatLng(place.y, place.x),
+            image: markerImage,
           });
 
           // 마커에 클릭이벤트를 등록합니다
