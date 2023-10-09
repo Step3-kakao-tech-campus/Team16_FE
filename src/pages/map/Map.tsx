@@ -12,6 +12,12 @@ declare global {
 
 const Map: React.FC = () => {
   useEffect(() => {
+    // 현재 위치를 가져옵니다
+    navigator.geolocation.getCurrentPosition(function (position) {
+      const lat = position.coords.latitude; // 위도
+      const lon = position.coords.longitude; // 경도
+      console.log(lat, lon);
+    });
     const mapScript = document.createElement('script');
 
     mapScript.async = true;
@@ -35,7 +41,7 @@ const Map: React.FC = () => {
         const ps = new kakao.maps.services.Places();
 
         // 키워드로 장소를 검색합니다
-        ps.keywordSearch('동물보호소', placesSearchCB);
+        ps.keywordSearch('이태원', placesSearchCB);
 
         // 키워드 검색 완료 시 호출되는 콜백함수 입니다
         function placesSearchCB(
@@ -50,6 +56,7 @@ const Map: React.FC = () => {
 
             for (let i = 0; i < data.length; i += 1) {
               displayMarker(data[i]);
+              console.log(data[i]);
               bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
             }
 
@@ -59,7 +66,7 @@ const Map: React.FC = () => {
         }
 
         // 지도에 마커를 표시하는 함수입니다
-        function displayMarker(place: { y: any; x: any; place_name: any }) {
+        function displayMarker(place: any) {
           // 마커를 생성하고 지도에 표시합니다
           const marker = new kakao.maps.Marker({
             map,
@@ -70,7 +77,7 @@ const Map: React.FC = () => {
           kakao.maps.event.addListener(marker, 'click', function () {
             // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
             infowindow.setContent(
-              `<div style="padding:5px;font-size:12px;">${place.place_name}</div>`,
+              `<div style="padding:5px;font-size:12px;">${place.phone}</div>`,
             );
             infowindow.open(map, marker);
           });
