@@ -1,5 +1,5 @@
 import Pagination from 'commons/VPagenation';
-import ProfileCard from 'pages/profileList/ProfileCard';
+import ProfileCard from 'profileList/ProfileCard';
 import VShelterCard from './VShelterCard';
 
 export interface ShelterInfoProps {

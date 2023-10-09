@@ -1,5 +1,5 @@
-import ProfileCard from 'pages/profileList/ProfileCard';
-import Pagination from '../../../commons/Pagenation';
+import ProfileCard from 'profileList/ProfileCard';
+import Pagination from '../../commons/Pagenation';
 
 export interface ProfileListProps {
   image: string;

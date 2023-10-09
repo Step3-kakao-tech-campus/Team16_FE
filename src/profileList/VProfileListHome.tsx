@@ -1,4 +1,4 @@
-import ProfileCard from 'pages/profileList/ProfileCard';
+import ProfileCard from "./ProfileCard";
 
 export interface ProfileListProps {
   image: string;

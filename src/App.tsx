@@ -4,14 +4,14 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Home from 'pages/home/Home';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import DetailPetPage from 'pages/detailPet/DetailPetPage';
-import ProfileListPage from 'pages/profileList/ProfileListPage';
 import LoginPage from 'pages/login/LoginPage';
 import MapPage from 'pages/map/MapPage';
-import NewListPage from 'pages/profileList/newList/NewListPage';
 import RegisterPage from 'pages/register/RegisterPage';
 import ShelterInfoPage from 'pages/shelterInfo/ShelterInfoPage';
 import SignupPage from 'pages/signUp/SignupPage';
-import UrgentListPage from 'pages/profileList/urgentList/UrgentListPage';
+import ProfileListPage from 'profileList/ProfileListPage';
+import UrgentListPage from 'profileList/urgentList/UrgentListPage';
+import NewListPage from 'profileList/newList/NewListPage';
 
 const queryClient = new QueryClient();
 
