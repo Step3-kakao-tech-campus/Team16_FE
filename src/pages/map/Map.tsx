@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable func-names */
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-use-before-define */
@@ -9,8 +12,19 @@ declare global {
     kakao: any;
   }
 }
+interface SearchedPlaceType {
+  address_name: string;
+  distance: string;
+  id: string;
+  place_name: string;
+  place_url: string;
+  road_address_name: string;
+  x: string;
+  y: string;
+}
 
 const Map: React.FC = () => {
+  const searchedPlace = useRef<SearchedPlaceType[]>([]);
   const [currentPosition, setCurrentPosition] = React.useState({
     lat: 0,
     lon: 0,
@@ -76,7 +90,28 @@ const Map: React.FC = () => {
 
             for (let i = 0; i < data.length; i += 1) {
               displayMarker(data[i]);
-              console.log(data[i]);
+              const {
+                address_name,
+                distance,
+                id,
+                place,
+                place_name,
+                place_url,
+                road_address_name,
+                x,
+                y,
+              } = data[i];
+              const placeInfo: SearchedPlaceType = {
+                address_name,
+                distance,
+                id,
+                place_name,
+                place_url,
+                road_address_name,
+                x,
+                y,
+              };
+              searchedPlace.current.push(placeInfo);
               bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
             }
 
@@ -100,6 +135,8 @@ const Map: React.FC = () => {
               `<div style="padding:5px;font-size:12px;">${place.place_name}</div>`,
             );
             infowindow.open(map, marker);
+            // 중간 지점으로 이동
+            map.setCenter(marker.getPosition());
           });
         }
       });
@@ -110,6 +147,9 @@ const Map: React.FC = () => {
   return (
     <div className="Map">
       <div id="map" className="w-96 h-96" />
+      <button onClick={() => console.log(searchedPlace.current)}>
+        검색된 장소들 콘솔에 출력하기
+      </button>
     </div>
   );
 };
