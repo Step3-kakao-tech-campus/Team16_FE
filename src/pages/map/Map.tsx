@@ -89,7 +89,12 @@ const Map: React.FC = () => {
             const bounds = new kakao.maps.LatLngBounds();
 
             for (let i = 0; i < data.length; i += 1) {
-              displayMarker(data[i]);
+              if (
+                data[i].place_name === '광주광역시동물보호소' ||
+                data[i].place_name === '광주청소년일시보호소'
+              ) {
+                displayMarker2(data[i]);
+              } else displayMarker(data[i]);
               const {
                 address_name,
                 distance,
@@ -131,6 +136,29 @@ const Map: React.FC = () => {
             map,
             position: new kakao.maps.LatLng(place.y, place.x),
             image: markerImage,
+          });
+
+          // 마커에 클릭이벤트를 등록합니다
+          kakao.maps.event.addListener(marker, 'click', function () {
+            // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+            infowindow.setContent(
+              `<div style="padding:5px;font-size:12px;">${place.place_name}</div>`,
+            );
+            infowindow.open(map, marker);
+            // 중간 지점으로 이동
+            map.setCenter(marker.getPosition());
+          });
+        }
+        // 등록되지 않은 보호소는 마커 스타일 다르게 표시
+        const imageSrc2 = '/assets/images/dog.png';
+        const imageSize2 = new kakao.maps.Size(64, 69);
+        const markerImage2 = new kakao.maps.MarkerImage(imageSrc2, imageSize2);
+        function displayMarker2(place: any) {
+          // 마커를 생성하고 지도에 표시합니다
+          const marker = new kakao.maps.Marker({
+            map,
+            position: new kakao.maps.LatLng(place.y, place.x),
+            image: markerImage2,
           });
 
           // 마커에 클릭이벤트를 등록합니다
