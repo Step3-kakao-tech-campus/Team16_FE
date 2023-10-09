@@ -27,34 +27,6 @@ const DetailPetData = () => {
       console.log(err);
     },
   });
-  /*
-  {
-  "shelterInfo" : {
-		"id" : 1,
-	  "name" : "광주어찌고보호소",
-	  "contact" : "010-2312-2146",
-	}
-  "name": "멍멍이",
-  "age": "0년6개월",
-  "type": "DOG",
-  "sex": "FEMALE",
-  "weight": 5.35,
-  "description": "귀여운 강아지입니다.",
-  "protectionExpirationDate": "2023-10-25", // 보호만료일 null 가능
-  "vaccinationStatus": "YES",
-  "neutralizationStatus": "YES",
-  "adoptionStatus": "NO",
-  "profileImageUrl": "https://...",
-  "size": "수박만함",
-  "polygonProfile": { // 1 ~ 5 정수
-    "intelligence": 1, // "영리함 점수"
-    "affinity": 1, // "친화력 점수",
-    "athletic": 1, // "운동신경 점수",
-    "adaptability": 1, //"적응력 점수",
-    "activeness": 1, // "활발함 점수"
-  }  
- }
- */
 
   const labels = ['귀여움', '침착함', '유머감각', '외모', '의젓함'];
 
