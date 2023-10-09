@@ -13,14 +13,20 @@ const DetailPetData = () => {
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
   const [modal, setModal] = useState(false);
 
-  // const { data } = useQuery({
-  //   queryKey: ['pet', petId],
-  //   queryFn: () => {
-  //     return fetch(
-  //       `${process.env.REACT_APP_URI}/short-forms`,
-  //     ).then((res) => res.json());
-  //   },
-  // });
+  const { data } = useQuery({
+    queryKey: ['pet', petId],
+    queryFn: () => {
+      return fetch(`${process.env.REACT_APP_URI}/pet/${petId}`).then((res) =>
+        res.json(),
+      );
+    },
+    onSuccess: (res) => {
+      console.log(res);
+    },
+    onError: (err) => {
+      console.log(err);
+    },
+  });
   /*
   {
   "shelterInfo" : {
