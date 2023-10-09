@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable no-new */
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 declare global {
   interface Window {
@@ -11,13 +11,20 @@ declare global {
 }
 
 const Map: React.FC = () => {
+  const [currentPosition, setCurrentPosition] = React.useState({
+    lat: 0,
+    lon: 0,
+  });
+
   useEffect(() => {
     // 현재 위치를 가져옵니다
-    navigator.geolocation.getCurrentPosition(function (position) {
-      const lat = position.coords.latitude; // 위도
-      const lon = position.coords.longitude; // 경도
-      console.log(lat, lon);
-    });
+    const getCurrentPosition = navigator.geolocation.getCurrentPosition(
+      function (position) {
+        const lat = position.coords.latitude; // 위도
+        const lon = position.coords.longitude; // 경도
+        setCurrentPosition({ lat, lon });
+      },
+    );
     const mapScript = document.createElement('script');
 
     mapScript.async = true;
@@ -26,10 +33,16 @@ const Map: React.FC = () => {
     document.head.appendChild(mapScript);
 
     const onLoadKakaoMap = () => {
+      if (!currentPosition.lat || !currentPosition.lon) {
+        return;
+      }
       window.kakao.maps.load(() => {
         const mapContainer = document.getElementById('map');
         const mapOption = {
-          center: new window.kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+          center: new window.kakao.maps.LatLng(
+            currentPosition.lat,
+            currentPosition.lon,
+          ), // 지도의 중심좌표
           level: 3, // 지도의 확대 레벨
         };
         const map = new window.kakao.maps.Map(mapContainer, mapOption);
@@ -41,7 +54,14 @@ const Map: React.FC = () => {
         const ps = new kakao.maps.services.Places();
 
         // 키워드로 장소를 검색합니다
-        ps.keywordSearch('이태원', placesSearchCB);
+        ps.keywordSearch('보호소', placesSearchCB, {
+          location: new kakao.maps.LatLng(
+            currentPosition.lat,
+            currentPosition.lon,
+          ),
+          radius: 20000,
+          sort: kakao.maps.services.SortBy.DISTANCE,
+        });
 
         // 키워드 검색 완료 시 호출되는 콜백함수 입니다
         function placesSearchCB(
@@ -77,7 +97,7 @@ const Map: React.FC = () => {
           kakao.maps.event.addListener(marker, 'click', function () {
             // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
             infowindow.setContent(
-              `<div style="padding:5px;font-size:12px;">${place.phone}</div>`,
+              `<div style="padding:5px;font-size:12px;">${place.place_name}</div>`,
             );
             infowindow.open(map, marker);
           });
@@ -85,7 +105,7 @@ const Map: React.FC = () => {
       });
     };
     mapScript.addEventListener('load', onLoadKakaoMap);
-  }, []);
+  }, [currentPosition.lat, currentPosition.lon]);
 
   return (
     <div className="Map">
