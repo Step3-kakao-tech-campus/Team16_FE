@@ -1,7 +1,7 @@
-import { MockDetailPetInfoProps } from 'pages/detailPet/VDetailPetData';
+import { DetailPetInfoProps } from 'pages/detailPet/VDetailPetData';
 import VDetailPetInfo from './VDetailPetInfo';
 
-const DetailPetInfo = (data: MockDetailPetInfoProps) => {
+const DetailPetInfo = (data: DetailPetInfoProps) => {
   return <VDetailPetInfo {...data} />;
 };
 

@@ -17,8 +17,8 @@ interface PetPostProps {
   size: string;
   sex: string;
   vaccinationStatus: string;
-  adoptionStatus: boolean;
-  neutralizationStatus: boolean;
+  adoptionStatus: string;
+  neutralizationStatus: string;
   description: string;
   petPolygonProfileDto: {
     intelligence: number;
@@ -27,18 +27,19 @@ interface PetPostProps {
     adaptability: number;
     activeness: number;
   };
+  protectionExpirationDate: string;
 }
 
 const mockPetData: PetPostProps = {
-  name: '이렇게 긴 문장도 받을 수 있나요? 얼마나 긴 문장까지 자바에서 받을 수 있을까요? 이렇게 긴 문장도 받을 수 있나요? 얼마나 긴 문장까지 자바에서 받을 수 있을까요? 이렇게 긴 문장도 받을 수 있나요? 얼마나 긴 문장까지 자바에서 받을 수 있을까요? 이렇게 긴 문장도 받을 수 있나요? 얼마나 긴 문장까지 자바에서 받을 수 있을까요? 이렇게 긴 문장도 받을 수 있나요? 얼마나 긴 문장까지 자바에서 받을 수 있을까요? ',
-  age: '1',
+  name: '뽀삐',
+  age: '1년1개월',
   type: 'DOG',
   weight: 1,
   size: '제가 보낸 요청',
-  sex: 'string',
-  vaccinationStatus: '안녕하세요',
-  adoptionStatus: false,
-  neutralizationStatus: false,
+  sex: 'MALE',
+  vaccinationStatus: 'YES',
+  adoptionStatus: 'YES',
+  neutralizationStatus: 'YES',
   description: '잘 받아졌을까요',
   petPolygonProfileDto: {
     intelligence: 1,
@@ -47,6 +48,7 @@ const mockPetData: PetPostProps = {
     adaptability: 1,
     activeness: 1,
   },
+  protectionExpirationDate: '2021-10-25',
 };
 
 const RegisterHeader = () => {
@@ -70,30 +72,38 @@ const RegisterHeader = () => {
 
   // 등록하기 관련
   const postPet = async (formData: FormData) => {
-    const res = await fetch('http://localhost:8080/api/v1/pets', {
+    const res = await fetch(`${process.env.REACT_APP_URI}/pet`, {
       method: 'POST',
       body: formData,
     });
     return res.json();
   };
-  const { data, mutate, isError, isLoading, isSuccess } = useMutation(postPet);
+  const { data, mutate, isError, isLoading, isSuccess } = useMutation(postPet, {
+    onError: (err: unknown) => {
+      console.log(err);
+    },
+    onSuccess: (res) => {
+      console.log(res);
+    },
+  });
   const handleRegisterButtonClick = async () => {
     if (!selectedImageFile || !selectedVideoFile || registerPetData.isComplete)
       return;
     // destructuring을 이용해서 isComplete를 제외한 나머지 데이터를 rest에 담음
     // api에 보낼 데이터는 rest + image + video
-    const { isComplete, ...rest } = registerPetData;
+    // const { isComplete, ...rest } = registerPetData;
+    console.log(mockPetData);
     const formData = new FormData();
-    formData.append('video', selectedVideoFile);
-    formData.append('image', selectedImageFile);
+    formData.append('profileVideo', selectedVideoFile);
+    formData.append('profileImage', selectedImageFile);
     formData.append(
-      'key',
-      new Blob([JSON.stringify(rest)], {
+      'petInfo',
+      new Blob([JSON.stringify(mockPetData)], {
         type: 'application/json',
       }),
     );
     try {
-      const res = await mutate(formData);
+      const res = mutate(formData);
       console.log(res);
     } catch (err: unknown) {
       console.log(err);
