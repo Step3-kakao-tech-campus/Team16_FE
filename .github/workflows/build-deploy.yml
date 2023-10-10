@@ -8,6 +8,10 @@ jobs:
   npm-build:
     runs-on: ubuntu-22.04 
 
+    # build 중 warning 무시
+    env:
+      CI: false
+
     steps:
       - uses: actions/checkout@v3.6.0
 
@@ -18,7 +22,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install    
+        run: npm install
 
       - name: Inject .env file from GitHub Secrets
         env:
