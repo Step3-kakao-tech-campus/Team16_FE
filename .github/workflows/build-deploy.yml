@@ -20,12 +20,14 @@ jobs:
       - name: Install dependencies
         run: npm install    
 
+      - name: Inject .env file from GitHub Secrets
+        env:
+          ENV_FILE: ${{ secrets.ENV_FILE }}
+          TARGET_DIR: ./
+        run: echo $ENV_FILE | base64 -d > $TARGET_DIR/.env
+
       - name: Try build
         run: npm run build
-        with:
-          env:
-            REACT_APP_URI: ${{ secrets.REACT_APP_URI }}
-            REACT_APP_KAKAO_KEY: ${{ secrets.REACT_APP_KAKAO_KEY }}
 
   deploy:
     needs: npm-build
