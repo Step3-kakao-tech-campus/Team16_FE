@@ -12,10 +12,10 @@ RUN npm ci
 RUN npm install -g serve
 
 # 프로젝트 npm build
-RUN npm run build
+RUN npm NODE_OPTIONS="--trace-warnings" run build
 
 # 서버 실행 시 사용하는 포트 지정
 EXPOSE 3000
 
 # 컨테이너를 시작할 때 빌드된 React App을 서빙
-CMD ["node" ,"--trace-warnings", "serve", "-s", "build"]
+CMD ["serve", "-s", "build"]
