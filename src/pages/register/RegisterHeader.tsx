@@ -87,7 +87,7 @@ const RegisterHeader = () => {
     },
   });
   const handleRegisterButtonClick = async () => {
-    if (!selectedImageFile || !selectedVideoFile || registerPetData.isComplete)
+    if (!selectedImageFile || !selectedVideoFile || !registerPetData.isComplete)
       return;
     // destructuring을 이용해서 isComplete를 제외한 나머지 데이터를 rest에 담음
     // api에 보낼 데이터는 rest + image + video
