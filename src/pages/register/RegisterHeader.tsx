@@ -75,6 +75,9 @@ const RegisterHeader = () => {
     const res = await fetch(`${process.env.REACT_APP_URI}/pet`, {
       method: 'POST',
       body: formData,
+      headers: {
+        Authorization: ``,
+      },
     });
     return res.json();
   };
@@ -87,12 +90,12 @@ const RegisterHeader = () => {
     },
   });
   const handleRegisterButtonClick = async () => {
+    console.log(selectedImageFile, selectedVideoFile, registerPetData);
     if (!selectedImageFile || !selectedVideoFile || !registerPetData.isComplete)
       return;
     // destructuring을 이용해서 isComplete를 제외한 나머지 데이터를 rest에 담음
     // api에 보낼 데이터는 rest + image + video
     // const { isComplete, ...rest } = registerPetData;
-    console.log(mockPetData);
     const formData = new FormData();
     formData.append('profileVideo', selectedVideoFile);
     formData.append('profileImage', selectedImageFile);
@@ -138,6 +141,7 @@ const RegisterHeader = () => {
     isLoading,
     isSuccess,
     isError,
+    data,
   };
   return (
     <>

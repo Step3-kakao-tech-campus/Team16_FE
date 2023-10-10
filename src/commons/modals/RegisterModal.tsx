@@ -7,6 +7,8 @@ export interface RegisterModalProps {
   isLoading: boolean;
   isSuccess: boolean;
   isError: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: any;
 }
 
 const RegisterModal = ({
@@ -18,8 +20,9 @@ const RegisterModal = ({
   isLoading,
   isSuccess,
   isError,
+  data,
 }: RegisterModalProps) => {
-  if (isError) {
+  if (isError || data?.success === false) {
     return (
       <div
         onClick={handleModalOutsideClick}
@@ -32,7 +35,7 @@ const RegisterModal = ({
             </button>
           </div>
           <span className="text-2xl text-brand-color">등록에 실패했습니다</span>
-          <div className="flex w-2/3 justify-between mt-8">
+          <div className="flex w-2/3 justify-center mt-8">
             <button
               className="bg-brand-color rounded-md font-bold text-white w-16 py-2"
               onClick={handleRegisterMoreButtonClick}
