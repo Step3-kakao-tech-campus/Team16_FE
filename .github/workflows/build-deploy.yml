@@ -5,17 +5,17 @@ on:
     branches: [ develop ]
 
 jobs:
-  gradle-test:
+  npm-build:
     runs-on: ubuntu-22.04 
 
     steps:
       - uses: actions/checkout@v3.6.0
 
       - name: Set up Node 20 
-        - uses: actions/setup-node@v3
-          with:            
-            node-version: '18'
-            cache: 'npm'
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm install    
@@ -27,8 +27,14 @@ jobs:
             REACT_APP_URI: ${{ secrets.REACT_APP_URI }}
             REACT_APP_KAKAO_KEY: ${{ secrets.REACT_APP_KAKAO_KEY }}
 
+  deploy:
+    needs: npm-build
+    runs-on: ubuntu-22.04
+
+    steps:
       - name: Deploy Trigger
         run: |
           curl -X POST http://ec2-3-37-14-140.ap-northeast-2.compute.amazonaws.com:20001/job/animory-fe-deploy/build \
           --user admin:${{ secrets.JENKINS_DEPLOY_KEY }}
+
 
