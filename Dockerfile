@@ -1,5 +1,5 @@
-# node 16 이미지를 기반으로 함
-FROM krmp-d2hub-idock.9rum.cc/goorm/node:16
+# node 20 이미지를 기반으로 함
+FROM node:20
 
 # 작업 디렉토리 설정
 WORKDIR /usr/src/app
