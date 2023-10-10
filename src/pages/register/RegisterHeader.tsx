@@ -76,7 +76,7 @@ const RegisterHeader = () => {
       method: 'POST',
       body: formData,
       // headers: {
-      //   Authorization: // jwt 토큰 bearer까지 포함해서 보내기
+      //   Authorization: // jwt 토큰 bearer까지 포함해서 보내기  .
       // },
     });
     return res.json();
