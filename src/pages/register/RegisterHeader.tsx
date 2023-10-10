@@ -130,9 +130,7 @@ const RegisterHeader = () => {
     handleModalOutsideClick,
     handleRegisterButtonClick,
     handleRegisterMoreButtonClick: () => {
-      setIsModalOpen(false);
-      setSelectedImageFile(null);
-      setSelectedVideoFile(null);
+      window.location.reload();
     },
     handleRegisterFinishButtonClick: () => {
       navigate('/');
