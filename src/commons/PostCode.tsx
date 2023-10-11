@@ -43,6 +43,7 @@ const Postcode = () => {
 
   return (
     <button
+      type="button"
       className="bg-brand-color text-white rounded  min-w-[120px] p-1"
       onClick={handleClick}
     >

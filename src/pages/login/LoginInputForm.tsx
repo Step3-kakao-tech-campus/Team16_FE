@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
+import { useNavigate } from 'react-router-dom';
 import { shelterLoginState } from 'recoil/shelterState';
 import VLoginInputForm from './VLoginInputForm';
+import { setCookie } from '../../commons/cookie/cookie';
 
 const LoginInputForm = () => {
   const [userInfo, setUserInfo] = useRecoilState(shelterLoginState);
@@ -9,7 +11,7 @@ const LoginInputForm = () => {
   const [isPasswordEmpty, setIsPasswordEmpty] = useState(false);
   const [errorText, setErrorText] = useState('이메일을 입력해주세요');
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const emailValidate = (text: string) => {
     const emailReg = /^[\w.-]+@[\w.-]+\.\w+$/g; // email형식
@@ -42,12 +44,24 @@ const LoginInputForm = () => {
         email: userInfo.email,
         password: userInfo.password,
       }),
-    }).then((res) => {
-      console.log(res);
-      // if (res.status === 200) {
-      //   navigate('/');
-      // }
-    });
+    })
+      .then((res) => {
+        const jwtToken = res.headers.get('Authorization');
+        if (jwtToken) {
+          const slicedToken = jwtToken.split(' ')[1];
+          setCookie('loginToken', slicedToken);
+        } else {
+          console.log('Token이 Null');
+        }
+
+        return res.json();
+      })
+      .then((data) => {
+        if (data.success) {
+          // const token = getCookie('loginToken');
+          navigate('/');
+        }
+      });
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

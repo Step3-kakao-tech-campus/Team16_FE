@@ -2,19 +2,27 @@ import AddressInputGroup from 'pages/signUp/AddressInputGroup';
 import InputGroup from 'commons/InputGroup';
 import React from 'react';
 
-interface Props {
+interface VSignupInputProps {
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   duplicateCheck: () => void;
-  confirm: boolean;
+  isValid: boolean;
+  checked: boolean;
+  passwordConfirm: boolean;
+  emailValidText: string;
+  emailInValidText: string;
 }
 
 const VSignupInputForm = ({
   handleChange,
   handleSubmit,
   duplicateCheck,
-  confirm,
-}: Props) => {
+  isValid,
+  checked,
+  passwordConfirm,
+  emailValidText,
+  emailInValidText,
+}: VSignupInputProps) => {
   return (
     <form
       className="flex flex-col gap-4 w-full max-w-[400px]"
@@ -37,6 +45,12 @@ const VSignupInputForm = ({
           중복 확인
         </button>
       </div>
+      {checked && isValid && (
+        <div className="text-green-500">{emailValidText}</div>
+      )}
+      {!checked && !isValid && (
+        <div className="text-red-500">{emailInValidText}</div>
+      )}
       <InputGroup
         id="password"
         name="비밀번호"
@@ -53,7 +67,7 @@ const VSignupInputForm = ({
         onChange={handleChange}
         autocomplete="new-password"
       />
-      {confirm && (
+      {!passwordConfirm && (
         <div className="text-red-500">비밀번호가 일치하지 않습니다.</div>
       )}
       <InputGroup
