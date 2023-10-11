@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable func-names */
@@ -21,14 +22,42 @@ interface SearchedPlaceType {
   road_address_name: string;
   x: string;
   y: string;
+  isRegistered?: boolean;
 }
 
 const Map: React.FC = () => {
   const searchedPlace = useRef<SearchedPlaceType[]>([]);
+  const [isLoading, setIsLoading] = React.useState(true);
   const [currentPosition, setCurrentPosition] = React.useState({
     lat: 35.1759293,
     lon: 126.9149701,
   });
+  if (searchedPlace.current.length > 0) {
+    const searchedPlaceIdArr = searchedPlace.current.map((place) =>
+      parseInt(place.id, 10),
+    );
+
+    fetch(`${process.env.REACT_APP_URI}/shelter/filter`, {
+      method: 'POST',
+      body: JSON.stringify(searchedPlaceIdArr),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((data: any) => {
+        searchedPlace.current.forEach((place, index) => {
+          data?.response.forEach((shelter: any) => {
+            setIsLoading(false);
+            if (place.id === shelter.kakaoLocationId.toString()) {
+              searchedPlace.current[index].isRegistered = true;
+            } else {
+              searchedPlace.current[index].isRegistered = false;
+            }
+          });
+        });
+      });
+  }
 
   useEffect(() => {
     // 현재 위치를 가져옵니다
@@ -50,7 +79,6 @@ const Map: React.FC = () => {
       if (!currentPosition.lat || !currentPosition.lon) {
         return;
       }
-      console.log(currentPosition.lat, currentPosition.lon);
       window.kakao.maps.load(() => {
         const mapContainer = document.getElementById('map');
         const mapOption = {
@@ -91,8 +119,9 @@ const Map: React.FC = () => {
 
             for (let i = 0; i < data.length; i += 1) {
               if (
-                data[i].place_name === '광주광역시동물보호소' ||
-                data[i].place_name === '광주청소년일시보호소'
+                searchedPlace.current.some((place) => {
+                  return place.id === data[i].id && place.isRegistered;
+                })
               ) {
                 displayMarker2(data[i]);
               } else displayMarker(data[i]);
@@ -117,7 +146,9 @@ const Map: React.FC = () => {
                 x,
                 y,
               };
-              searchedPlace.current.push(placeInfo);
+              if (data.length > searchedPlace.current.length) {
+                searchedPlace.current.push(placeInfo);
+              }
               bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
             }
 
@@ -173,16 +204,45 @@ const Map: React.FC = () => {
             map.setCenter(marker.getPosition());
           });
         }
+        // searchedPlace.current 순환하며 isRegistered에 대해서 마커 스타일 변경하기
+        const imageSrc3 = '/assets/images/all.png';
+        const imageSize3 = new kakao.maps.Size(64, 69);
+        const markerImage3 = new kakao.maps.MarkerImage(imageSrc3, imageSize3);
+        function displayMarker3(place: any) {
+          // 마커를 생성하고 지도에 표시합니다
+          const marker = new kakao.maps.Marker({
+            map,
+            position: new kakao.maps.LatLng(place.y, place.x),
+            image: markerImage3,
+          });
+
+          // 마커에 클릭이벤트를 등록합니다
+          kakao.maps.event.addListener(marker, 'click', function () {
+            // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+            infowindow.setContent(
+              `<div style="padding:5px;font-size:12px;">${place.place_name}</div>`,
+            );
+            infowindow.open(map, marker);
+            // 중간 지점으로 이동
+            map.setCenter(marker.getPosition());
+          });
+        }
       });
     };
     mapScript.addEventListener('load', onLoadKakaoMap);
-  }, [currentPosition.lat, currentPosition.lon]);
+  }, [isLoading]);
 
   return (
     <div className="Map">
       <div id="map" className="w-96 h-96" />
-      <button onClick={() => console.log(searchedPlace.current)}>
-        검색된 장소들 콘솔에 출력하기
+      <button
+        onClick={() => {
+          searchedPlace.current?.forEach((place) => {
+            if (place.isRegistered) console.log(place);
+          });
+        }}
+      >
+        등록된 장소만 콘솔에 출력하기
       </button>
     </div>
   );
