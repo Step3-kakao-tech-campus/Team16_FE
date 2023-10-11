@@ -142,7 +142,9 @@ const Map: React.FC = () => {
                 x,
                 y,
               };
-              searchedPlace.current.push(placeInfo);
+              if (data.length > searchedPlace.current.length) {
+                searchedPlace.current.push(placeInfo);
+              }
               bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
             }
 
