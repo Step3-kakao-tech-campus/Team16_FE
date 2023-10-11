@@ -68,7 +68,7 @@ const VDetailPetData = ({
           />
         )}
       </ModalPortal>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col w-5/6 items-center">
         <DetailPetInfo {...detailPetInfoProps} />
         <RadarChart {...radarChartProps} />
       </div>
