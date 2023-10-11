@@ -26,8 +26,8 @@ interface SearchedPlaceType {
 const Map: React.FC = () => {
   const searchedPlace = useRef<SearchedPlaceType[]>([]);
   const [currentPosition, setCurrentPosition] = React.useState({
-    lat: 0,
-    lon: 0,
+    lat: 35.1759293,
+    lon: 126.9149701,
   });
 
   useEffect(() => {
@@ -50,6 +50,7 @@ const Map: React.FC = () => {
       if (!currentPosition.lat || !currentPosition.lon) {
         return;
       }
+      console.log(currentPosition.lat, currentPosition.lon);
       window.kakao.maps.load(() => {
         const mapContainer = document.getElementById('map');
         const mapOption = {
