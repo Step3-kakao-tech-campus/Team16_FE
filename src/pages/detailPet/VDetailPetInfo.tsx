@@ -3,8 +3,8 @@ import { DetailPetInfoProps } from 'pages/detailPet/VDetailPetData';
 
 const VDetailPetInfo = (data: DetailPetInfoProps) => {
   return (
-    <div>
-      <h2 className="text-3xl mb-10">{data.name}</h2>
+    <div className="flex flex-col items-center">
+      <h2 className="text-3xl w-full md:w-5/6 mb-10">{data.name}</h2>
       <div className="flex flex-col items-center">
         <div className="flex h-14 justify-around">
           <div className="flex">
@@ -17,12 +17,12 @@ const VDetailPetInfo = (data: DetailPetInfoProps) => {
           </div>
         </div>
 
-        <div className="flex h-24 justify-around">
+        <div className="flex justify-around">
           <div className="flex">
             <span className="w-24 block font-bold">몸무게</span>
             <span className="w-24 block">{data.weight}kg</span>
           </div>
-          <div className="">
+          <div>
             <div className="flex">
               <span className="w-20 block font-bold">분양지역</span>
               <span className="w-36 block">{data.shelterInfo.name}</span>
@@ -74,7 +74,7 @@ const VDetailPetInfo = (data: DetailPetInfoProps) => {
           </span>
         </a>
 
-        <div className="w-full">{data.description}</div>
+        <div className="w-full md:w-5/6">{data.description}</div>
       </div>
     </div>
   );
