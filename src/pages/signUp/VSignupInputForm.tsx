@@ -2,13 +2,15 @@ import AddressInputGroup from 'pages/signUp/AddressInputGroup';
 import InputGroup from 'commons/InputGroup';
 import React from 'react';
 
-interface Props {
+interface VSignupInputProps {
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   duplicateCheck: () => void;
   isValid: boolean;
   checked: boolean;
   passwordConfirm: boolean;
+  emailValidText: string;
+  emailInValidText: string;
 }
 
 const VSignupInputForm = ({
@@ -18,7 +20,9 @@ const VSignupInputForm = ({
   isValid,
   checked,
   passwordConfirm,
-}: Props) => {
+  emailValidText,
+  emailInValidText,
+}: VSignupInputProps) => {
   return (
     <form
       className="flex flex-col gap-4 w-full max-w-[400px]"
@@ -41,8 +45,11 @@ const VSignupInputForm = ({
           중복 확인
         </button>
       </div>
+      {checked && isValid && (
+        <div className="text-green-500">{emailValidText}</div>
+      )}
       {!checked && !isValid && (
-        <div className="text-red-500">이메일 형식을 확인해주세요.</div>
+        <div className="text-red-500">{emailInValidText}</div>
       )}
       <InputGroup
         id="password"

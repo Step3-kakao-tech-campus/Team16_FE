@@ -9,17 +9,37 @@ export interface EmailConfirmProps {
   checked: boolean;
 }
 
-// confirm state의 경우, 일치하지 않을 때 false
+interface EmailValidProps {
+  validText: string;
+  inValidText: string;
+  emailConfirmObj: EmailConfirmProps;
+}
+
 const SignupInputForm = () => {
   const [shelterInfo, setShelterInfo] = useRecoilState(shelterSignupState);
+  // confirm state의 경우, 일치하지 않을 때 false
+  // isValid: 중복검사 통과했는가?
+  // checked: 이메일 중복 검사를 했는가?
   const [emailConfirm, setEmailConfirm] = useState<EmailConfirmProps>({
     isValid: true,
     checked: false,
   });
   const [passwordConfirm, setPasswordConfirm] = useState(true);
   const { isValid, checked } = emailConfirm;
+  const [emailValidText, setEmailValidText] = useState('');
+  const [emailInValidText, setEmailInValidText] = useState('');
 
   const navigate = useNavigate();
+
+  const getEmailValidText = ({
+    validText,
+    inValidText,
+    emailConfirmObj,
+  }: EmailValidProps) => {
+    setEmailValidText(validText);
+    setEmailInValidText(inValidText);
+    setEmailConfirm(emailConfirmObj);
+  };
 
   const duplicateCheck = () => {
     // shelterInfo.email
@@ -37,16 +57,32 @@ const SignupInputForm = () => {
       })
       .then((data) => {
         if (!data.success) {
-          alert(data.error.message); // 이 부분 어떻게 하죠?
-          setEmailConfirm({
-            isValid: false,
-            checked: false,
+          getEmailValidText({
+            validText: '',
+            inValidText: data.error.message,
+            emailConfirmObj: {
+              isValid: false,
+              checked: false,
+            },
+          });
+        } else if (!shelterInfo.email) {
+          getEmailValidText({
+            validText: '',
+            inValidText: '',
+            // 안 넣으면 빈칸으로 공간 차지해서 이렇게 조건 넣어줌
+            emailConfirmObj: {
+              isValid: false,
+              checked: true,
+            },
           });
         } else {
-          alert('사용 가능합니다.');
-          setEmailConfirm({
-            isValid: true,
-            checked: true,
+          getEmailValidText({
+            validText: '사용 가능한 이메일입니다.',
+            inValidText: '',
+            emailConfirmObj: {
+              isValid: true,
+              checked: true,
+            },
           });
         }
       });
@@ -108,7 +144,7 @@ const SignupInputForm = () => {
         })
         .then((data) => {
           if (!data.success) {
-            // alert(data.error.message);
+            alert(data.error.message); // 이 부분은 주소 받는 거 때문에 그냥 텍스트만 넣기 애매함
             return;
           }
           navigate('/login');
@@ -124,6 +160,8 @@ const SignupInputForm = () => {
     passwordConfirm,
     isValid,
     checked,
+    emailValidText,
+    emailInValidText,
   };
 
   return <VSignupInputForm {...SignupInputFormProps} />;
