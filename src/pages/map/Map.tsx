@@ -35,7 +35,6 @@ const Map: React.FC = () => {
       parseInt(place.id, 10),
     );
 
-    console.log(searchedPlaceIdArr);
     fetch(`${process.env.REACT_APP_URI}/shelter/filter`, {
       method: 'POST',
       body: JSON.stringify(searchedPlaceIdArr),
@@ -77,7 +76,6 @@ const Map: React.FC = () => {
       if (!currentPosition.lat || !currentPosition.lon) {
         return;
       }
-      console.log(currentPosition.lat, currentPosition.lon);
       window.kakao.maps.load(() => {
         const mapContainer = document.getElementById('map');
         const mapOption = {
