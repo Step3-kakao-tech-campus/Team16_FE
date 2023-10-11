@@ -36,35 +36,35 @@ const StatusScore = ({ status, selectedOption, handleChange }: StatusProps) => {
           type="radio"
           value="1"
           className={getButtonColor('1')}
-          onChange={() => handleChange(status, '1')}
+          onClick={() => handleChange(status, '1')}
         />
         <Dash />
         <input
           type="radio"
           value="2"
           className={getButtonColor('2')}
-          onChange={() => handleChange(status, '2')}
+          onClick={() => handleChange(status, '2')}
         />
         <Dash />
         <input
           type="radio"
           value="3"
           className={getButtonColor('3')}
-          onChange={() => handleChange(status, '3')}
+          onClick={() => handleChange(status, '3')}
         />
         <Dash />
         <input
           type="radio"
           value="4"
           className={getButtonColor('4')}
-          onChange={() => handleChange(status, '4')}
+          onClick={() => handleChange(status, '4')}
         />
         <Dash />
         <input
           type="radio"
           value="5"
           className={getButtonColor('5')}
-          onChange={() => handleChange(status, '5')}
+          onClick={() => handleChange(status, '5')}
         />
         <span className="text-sm font-semibold mx-1">High</span>
       </div>
