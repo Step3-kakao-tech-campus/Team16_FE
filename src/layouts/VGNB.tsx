@@ -1,4 +1,5 @@
 import LogoButton from 'commons/LogoButton';
+import { getLoginState, removeUser } from 'commons/cookie/getUser';
 import { Link } from 'react-router-dom';
 
 export interface VGNBProps {
@@ -36,8 +37,11 @@ const VGNB = (props: VGNBProps) => {
           <div className="lg:hidden w-full flex flex-col items-center text-xl gap-8">
             <div className="flex justify-center w-full gap-2">
               <Link to="/login">
-                <button className="border border-2 box-border border-brand-color text-brand-color rounded-md w-28 py-1">
-                  로그인
+                <button
+                  className="border border-2 box-border border-brand-color text-brand-color rounded-md w-28 py-1"
+                  onClick={removeUser}
+                >
+                  {getLoginState()}
                 </button>
               </Link>
               <Link to="/signup">

@@ -6,14 +6,18 @@ interface Props {
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   duplicateCheck: () => void;
-  confirm: boolean;
+  isValid: boolean;
+  checked: boolean;
+  passwordConfirm: boolean;
 }
 
 const VSignupInputForm = ({
   handleChange,
   handleSubmit,
   duplicateCheck,
-  confirm,
+  isValid,
+  checked,
+  passwordConfirm,
 }: Props) => {
   return (
     <form
@@ -37,6 +41,9 @@ const VSignupInputForm = ({
           중복 확인
         </button>
       </div>
+      {!checked && !isValid && (
+        <div className="text-red-500">이메일 형식을 확인해주세요.</div>
+      )}
       <InputGroup
         id="password"
         name="비밀번호"
@@ -53,7 +60,7 @@ const VSignupInputForm = ({
         onChange={handleChange}
         autocomplete="new-password"
       />
-      {confirm && (
+      {!passwordConfirm && (
         <div className="text-red-500">비밀번호가 일치하지 않습니다.</div>
       )}
       <InputGroup

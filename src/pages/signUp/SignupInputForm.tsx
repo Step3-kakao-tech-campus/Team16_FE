@@ -1,11 +1,25 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { shelterSignupState } from 'recoil/shelterState';
 import VSignupInputForm from './VSignupInputForm';
 
+export interface EmailConfirmProps {
+  isValid: boolean;
+  checked: boolean;
+}
+
+// confirm state의 경우, 일치하지 않을 때 false
 const SignupInputForm = () => {
   const [shelterInfo, setShelterInfo] = useRecoilState(shelterSignupState);
-  const [confirm, setConfirm] = useState(false);
+  const [emailConfirm, setEmailConfirm] = useState<EmailConfirmProps>({
+    isValid: true,
+    checked: false,
+  });
+  const [passwordConfirm, setPasswordConfirm] = useState(true);
+  const { isValid, checked } = emailConfirm;
+
+  const navigate = useNavigate();
 
   const duplicateCheck = () => {
     // shelterInfo.email
@@ -23,7 +37,17 @@ const SignupInputForm = () => {
       })
       .then((data) => {
         if (!data.success) {
-          alert('이메일 중복되었음'); // 이 부분 어떻게 하죠?
+          alert(data.error.message); // 이 부분 어떻게 하죠?
+          setEmailConfirm({
+            isValid: false,
+            checked: false,
+          });
+        } else {
+          alert('사용 가능합니다.');
+          setEmailConfirm({
+            isValid: true,
+            checked: true,
+          });
         }
       });
   };
@@ -46,9 +70,9 @@ const SignupInputForm = () => {
       // 비밀번호 일치하지 않는 경우, 표시하기 위해 해당 부분 구현
       case 'password-confirm':
         if (target.value !== shelterInfo.password) {
-          setConfirm(true);
+          setPasswordConfirm(false);
         } else {
-          setConfirm(false);
+          setPasswordConfirm(true);
         }
         break;
       default:
@@ -58,29 +82,38 @@ const SignupInputForm = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // 회원가입 정보 보내는 API 적용해야 됨
-    fetch(`${process.env.REACT_APP_URI}/account/shelter`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        ...shelterInfo,
-        email: shelterInfo.email,
-        password: shelterInfo.password,
-        name: shelterInfo.name,
-        contact: shelterInfo.contact,
-        zonecode: shelterInfo.zonecode,
-        address: shelterInfo.address,
-      }),
-    })
-      .then((res) => {
-        // const token = res.headers.get('Authorization');
-        return res.json();
+    // 중복 확인이 되지 않았을 때
+    if (!emailConfirm.checked) {
+      alert('이메일 중복을 확인해주세요');
+    }
+    // 제대로 확인되었을 때
+    if (emailConfirm.isValid && passwordConfirm) {
+      fetch(`${process.env.REACT_APP_URI}/account/shelter`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...shelterInfo,
+          email: shelterInfo.email,
+          password: shelterInfo.password,
+          name: shelterInfo.name,
+          contact: shelterInfo.contact,
+          zonecode: shelterInfo.zonecode,
+          address: shelterInfo.address,
+        }),
       })
-      .then((data) => {
-        console.log(data);
-      });
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          if (!data.success) {
+            // alert(data.error.message);
+            return;
+          }
+          navigate('/login');
+        });
+    }
   };
 
   const SignupInputFormProps = {
@@ -88,7 +121,9 @@ const SignupInputForm = () => {
     handleChange,
     handleSubmit,
     duplicateCheck,
-    confirm,
+    passwordConfirm,
+    isValid,
+    checked,
   };
 
   return <VSignupInputForm {...SignupInputFormProps} />;
