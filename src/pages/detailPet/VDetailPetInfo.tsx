@@ -17,12 +17,12 @@ const VDetailPetInfo = (data: DetailPetInfoProps) => {
           </div>
         </div>
 
-        <div className="flex h-14 justify-around">
+        <div className="flex justify-around">
           <div className="flex">
             <span className="w-16 block font-bold">몸무게</span>
             <span className="w-16 block">{data.weight}kg</span>
           </div>
-          <div className="">
+          <div>
             <div className="flex">
               <span className="w-20 block font-bold">분양지역</span>
               <span className="w-36 block">{data.shelterInfo.name}</span>
