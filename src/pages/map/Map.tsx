@@ -21,6 +21,7 @@ interface SearchedPlaceType {
   road_address_name: string;
   x: string;
   y: string;
+  isRegistered?: boolean;
 }
 
 const Map: React.FC = () => {
@@ -29,6 +30,32 @@ const Map: React.FC = () => {
     lat: 35.1759293,
     lon: 126.9149701,
   });
+  if (searchedPlace.current.length > 0) {
+    const searchedPlaceIdArr = searchedPlace.current.map((place) =>
+      parseInt(place.id, 10),
+    );
+
+    console.log(searchedPlaceIdArr);
+    fetch(`${process.env.REACT_APP_URI}/shelter/filter`, {
+      method: 'POST',
+      body: JSON.stringify(searchedPlaceIdArr),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .then((data: any) => {
+        searchedPlace.current.forEach((place, index) => {
+          data?.forEach((shelter: any) => {
+            if (place.id === shelter.id) {
+              searchedPlace.current[index].isRegistered = true;
+            }
+          });
+        });
+      });
+  }
 
   useEffect(() => {
     // 현재 위치를 가져옵니다
