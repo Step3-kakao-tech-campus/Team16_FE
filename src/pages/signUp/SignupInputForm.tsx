@@ -19,9 +19,13 @@ const SignupInputForm = () => {
       }),
     })
       .then((res) => {
-        res.json();
+        return res.json();
       })
-      .then((data) => console.log('Data', data));
+      .then((data) => {
+        if (!data.success) {
+          alert('이메일 중복되었음'); // 이 부분 어떻게 하죠?
+        }
+      });
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
