@@ -26,20 +26,19 @@ interface SearchedPlaceType {
 const Map: React.FC = () => {
   const searchedPlace = useRef<SearchedPlaceType[]>([]);
   const [currentPosition, setCurrentPosition] = React.useState({
-    lat: 0,
-    lon: 0,
+    lat: 35.1759293,
+    lon: 126.9149701,
   });
 
   useEffect(() => {
     // 현재 위치를 가져옵니다
-    if (!navigator.geolocation) {
-      alert('위치 정보를 사용할 수 없습니다');
-    }
-    navigator.geolocation.getCurrentPosition(function (position) {
-      const lat = position.coords.latitude; // 위도
-      const lon = position.coords.longitude; // 경도
-      setCurrentPosition({ lat, lon });
-    });
+    const getCurrentPosition = navigator.geolocation.getCurrentPosition(
+      function (position) {
+        const lat = position.coords.latitude; // 위도
+        const lon = position.coords.longitude; // 경도
+        setCurrentPosition({ lat, lon });
+      },
+    );
     const mapScript = document.createElement('script');
 
     mapScript.async = true;
@@ -51,14 +50,15 @@ const Map: React.FC = () => {
       if (!currentPosition.lat || !currentPosition.lon) {
         return;
       }
+      console.log(currentPosition.lat, currentPosition.lon);
       window.kakao.maps.load(() => {
         const mapContainer = document.getElementById('map');
         const mapOption = {
           center: new window.kakao.maps.LatLng(
             currentPosition.lat,
             currentPosition.lon,
-          ),
-          level: 3,
+          ), // 지도의 중심좌표
+          level: 3, // 지도의 확대 레벨
         };
         const map = new window.kakao.maps.Map(mapContainer, mapOption);
         const { kakao } = window;
@@ -68,7 +68,7 @@ const Map: React.FC = () => {
         // 장소 검색 객체를 생성합니다
         const ps = new kakao.maps.services.Places();
 
-        // '보호소' 키워드로 장소를 검색합니다
+        // 키워드로 장소를 검색합니다
         ps.keywordSearch('보호소', placesSearchCB, {
           location: new kakao.maps.LatLng(
             currentPosition.lat,
@@ -139,7 +139,9 @@ const Map: React.FC = () => {
             image: markerImage,
           });
 
+          // 마커에 클릭이벤트를 등록합니다
           kakao.maps.event.addListener(marker, 'click', function () {
+            // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
             infowindow.setContent(
               `<div style="padding:5px;font-size:12px;">${place.place_name}</div>`,
             );
@@ -160,11 +162,14 @@ const Map: React.FC = () => {
             image: markerImage2,
           });
 
+          // 마커에 클릭이벤트를 등록합니다
           kakao.maps.event.addListener(marker, 'click', function () {
+            // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
             infowindow.setContent(
               `<div style="padding:5px;font-size:12px;">${place.place_name}</div>`,
             );
             infowindow.open(map, marker);
+            // 중간 지점으로 이동
             map.setCenter(marker.getPosition());
           });
         }
