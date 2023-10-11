@@ -51,10 +51,8 @@ const Map: React.FC = () => {
             setIsLoading(false);
             if (place.id === shelter.kakaoLocationId.toString()) {
               searchedPlace.current[index].isRegistered = true;
-              console.log(searchedPlace.current[index]);
             } else {
               searchedPlace.current[index].isRegistered = false;
-              console.log(searchedPlace.current[index]);
             }
           });
         });
@@ -120,10 +118,8 @@ const Map: React.FC = () => {
             const bounds = new kakao.maps.LatLngBounds();
 
             for (let i = 0; i < data.length; i += 1) {
-              console.log(data);
               if (
                 searchedPlace.current.some((place) => {
-                  console.log(place.id, data[i].id);
                   return place.id === data[i].id && place.isRegistered;
                 })
               ) {
