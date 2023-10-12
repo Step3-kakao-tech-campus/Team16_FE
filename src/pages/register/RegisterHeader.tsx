@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import registerState from 'recoil/registerState';
 import ImageVideoInput from './ImageVideoInput';
+import { getCookie } from '../../commons/cookie/cookie';
 
 interface PetPostProps {
   name: string;
@@ -71,26 +72,21 @@ const RegisterHeader = () => {
   };
 
   // 등록하기 관련
+  console.log(getCookie('loginToken'));
   const postPet = async (formData: FormData) => {
+    const loginToken = getCookie('loginToken');
+    console.log(`Bearer ${loginToken}`);
     const res = await fetch(`${process.env.REACT_APP_URI}/pet`, {
       method: 'POST',
       body: formData,
       headers: {
-        Authorization: ``,
+        Authorization: `Bearer ${loginToken}`,
       },
     });
     return res.json();
   };
-  const { data, mutate, isError, isLoading, isSuccess } = useMutation(postPet, {
-    onError: (err: unknown) => {
-      console.log(err);
-    },
-    onSuccess: (res) => {
-      console.log(res);
-    },
-  });
+  const { data, mutate, isError, isLoading, isSuccess } = useMutation(postPet);
   const handleRegisterButtonClick = async () => {
-    console.log(selectedImageFile, selectedVideoFile, registerPetData);
     if (!selectedImageFile || !selectedVideoFile || !registerPetData.isComplete)
       return;
     // destructuring을 이용해서 isComplete를 제외한 나머지 데이터를 rest에 담음
@@ -99,9 +95,16 @@ const RegisterHeader = () => {
     const formData = new FormData();
     formData.append('profileVideo', selectedVideoFile);
     formData.append('profileImage', selectedImageFile);
+    const { isComplete, ...restRegisterPetData } = registerPetData;
+    const registerPetDataWithPetPolygonProfileDto = {
+      ...restRegisterPetData,
+      petPolygonProfileDto: {
+        ...restRegisterPetData.polygonProfile,
+      },
+    };
     formData.append(
       'petInfo',
-      new Blob([JSON.stringify(mockPetData)], {
+      new Blob([JSON.stringify(registerPetDataWithPetPolygonProfileDto)], {
         type: 'application/json',
       }),
     );
