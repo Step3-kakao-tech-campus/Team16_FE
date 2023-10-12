@@ -29,6 +29,7 @@ interface SearchedPlaceType {
 const Map: React.FC = () => {
   const [searchedPlace, setSearchedPlace] = useState<SearchedPlaceType[]>([]);
   const [isLoading, setIsLoading] = React.useState(true);
+  const [isLoading2, setIsLoading2] = React.useState(true);
   const [notMutated, setNotMutated] = React.useState(false);
   const [currentPosition, setCurrentPosition] = React.useState({
     lat: 35.1759293,
@@ -80,7 +81,6 @@ const Map: React.FC = () => {
             }
           }
         }
-        setIsLoading((prev) => !prev);
       },
     },
   );
@@ -249,9 +249,16 @@ const Map: React.FC = () => {
           });
         }
       });
+      setTimeout(() => {
+        console.log('settimeout');
+        setIsLoading(false);
+      }, 500);
+      setTimeout(() => {
+        setIsLoading2(false);
+      }, 1000);
     };
     mapScript.addEventListener('load', onLoadKakaoMap);
-  }, [isLoading]);
+  }, [isLoading, isLoading2]);
 
   return (
     <div className="Map">
