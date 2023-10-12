@@ -4,12 +4,12 @@ import { DetailPetInfoProps } from 'pages/detailPet/VDetailPetData';
 const VDetailPetInfo = (data: DetailPetInfoProps) => {
   return (
     <div className="flex flex-col items-center">
-      <h2 className="text-3xl w-full md:w-5/6 mb-10">{data.name}</h2>
-      <div className="flex flex-col items-center">
+      <h2 className="text-3xl w-full mb-10">{data.name}</h2>
+      <div className="flex flex-col items-center text-sm md:text-base">
         <div className="flex h-14 justify-around">
           <div className="flex">
-            <span className="w-24 block font-bold">나이</span>
-            <span className="w-24 block">{data.age}</span>
+            <span className="w-16 block font-bold">나이</span>
+            <span className="w-20 block">{data.age}</span>
           </div>
           <div className="flex">
             <span className="w-20 block font-bold">성별</span>
@@ -19,8 +19,8 @@ const VDetailPetInfo = (data: DetailPetInfoProps) => {
 
         <div className="flex justify-around">
           <div className="flex">
-            <span className="w-24 block font-bold">몸무게</span>
-            <span className="w-24 block">{data.weight}kg</span>
+            <span className="w-16 block font-bold">몸무게</span>
+            <span className="w-20 block">{data.weight}kg</span>
           </div>
           <div>
             <div className="flex">
@@ -41,8 +41,8 @@ const VDetailPetInfo = (data: DetailPetInfoProps) => {
 
         <div className="flex h-14 justify-around">
           <div className="flex">
-            <span className="w-24 block font-bold">백신접종</span>
-            <span className="w-24 block">{data.vaccinationStatus}</span>
+            <span className="w-16 block font-bold">백신접종</span>
+            <span className="w-20 block">{data.vaccinationStatus}</span>
           </div>
           <div className="flex">
             <span className="w-20 block font-bold">중성화</span>
@@ -52,8 +52,8 @@ const VDetailPetInfo = (data: DetailPetInfoProps) => {
 
         <div className="flex h-14 justify-around">
           <div className="flex">
-            <span className="w-24 block font-bold">입양 여부</span>
-            <span className="w-24 block">{data.adoptionStatus}</span>
+            <span className="w-16 block font-bold">입양 여부</span>
+            <span className="w-20 block">{data.adoptionStatus}</span>
           </div>
           <div className="flex">
             <span className="w-20 block font-bold">보호종료일</span>
@@ -61,9 +61,9 @@ const VDetailPetInfo = (data: DetailPetInfoProps) => {
           </div>
         </div>
 
-        <div className="hidden md:flex w-[22rem] h-10 mb-10">
+        <div className="hidden md:flex w-full h-10 mb-10">
           <div className="flex">
-            <span className="w-24 block font-bold">연락처</span>
+            <span className="w-16 block font-bold">연락처</span>
             <span className="w-36 block">{data.shelterInfo.contact}</span>
           </div>
         </div>
@@ -74,7 +74,7 @@ const VDetailPetInfo = (data: DetailPetInfoProps) => {
           </span>
         </a>
 
-        <div className="w-full md:w-5/6">{data.description}</div>
+        <div className="w-full">{data.description}</div>
       </div>
     </div>
   );
