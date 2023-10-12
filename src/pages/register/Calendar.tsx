@@ -7,11 +7,11 @@ import {
   PrevMonthDays,
 } from '../../commons/MonthDays';
 
-interface Props {
+interface CalendarProps {
   handleClick: () => void;
 }
 
-const Calendar = ({ handleClick }: Props) => {
+const Calendar = ({ handleClick }: CalendarProps) => {
   const dayOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const months = [
     'January',
