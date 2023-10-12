@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable func-names */
@@ -5,7 +6,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable no-new */
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
 
 declare global {
   interface Window {
@@ -21,24 +23,75 @@ interface SearchedPlaceType {
   road_address_name: string;
   x: string;
   y: string;
+  isRegistered?: boolean;
 }
 
 const Map: React.FC = () => {
-  const searchedPlace = useRef<SearchedPlaceType[]>([]);
+  const [searchedPlace, setSearchedPlace] = useState<SearchedPlaceType[]>([]);
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLoading2, setIsLoading2] = React.useState(true);
+  const [notMutated, setNotMutated] = React.useState(false);
   const [currentPosition, setCurrentPosition] = React.useState({
     lat: 35.1759293,
     lon: 126.9149701,
   });
+  const {
+    data,
+    isLoading: isMutateLoading,
+    mutate,
+    isSuccess,
+  } = useMutation(
+    ['shelter'],
+    () => {
+      console.log(searchedPlace);
+      return fetch(`${process.env.REACT_APP_URI}/shelter/filter`, {
+        method: 'POST',
+        body: JSON.stringify(searchedPlace.map((place) => place.id)),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then((res) => res.json());
+    },
+    {
+      onSuccess: (data) => {
+        console.log(data);
+        if (data.response.length > 0) {
+          for (let i = 0; i < data.response.length; i += 1) {
+            for (let j = 0; j < searchedPlace.length; j += 1) {
+              console.log(
+                data.response[i].kakaoLocationId,
+                searchedPlace[j].id,
+              );
+              if (
+                data.response[i].kakaoLocationId.toString() ===
+                searchedPlace[j].id
+              ) {
+                setSearchedPlace((prev) => {
+                  const temp = [...prev];
+                  temp[j].isRegistered = true;
+                  return temp;
+                });
+              } else {
+                setSearchedPlace((prev) => {
+                  const temp = [...prev];
+                  temp[j].isRegistered = false;
+                  return temp;
+                });
+              }
+            }
+          }
+        }
+      },
+    },
+  );
+  console.log(searchedPlace);
+  if (notMutated) {
+    mutate();
+    setNotMutated(false);
+    console.log('mutate');
+  }
 
   useEffect(() => {
-    // 현재 위치를 가져옵니다
-    const getCurrentPosition = navigator.geolocation.getCurrentPosition(
-      function (position) {
-        const lat = position.coords.latitude; // 위도
-        const lon = position.coords.longitude; // 경도
-        setCurrentPosition({ lat, lon });
-      },
-    );
     const mapScript = document.createElement('script');
 
     mapScript.async = true;
@@ -79,11 +132,7 @@ const Map: React.FC = () => {
         });
 
         // 키워드 검색 완료 시 호출되는 콜백함수 입니다
-        function placesSearchCB(
-          data: string | any[],
-          status: any,
-          pagination: any,
-        ) {
+        function placesSearchCB(data: string | any[], status: any) {
           if (status === kakao.maps.services.Status.OK) {
             // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
             // LatLngBounds 객체에 좌표를 추가합니다
@@ -91,8 +140,9 @@ const Map: React.FC = () => {
 
             for (let i = 0; i < data.length; i += 1) {
               if (
-                data[i].place_name === '광주광역시동물보호소' ||
-                data[i].place_name === '광주청소년일시보호소'
+                searchedPlace.some((place) => {
+                  return place.id === data[i].id && place.isRegistered;
+                })
               ) {
                 displayMarker2(data[i]);
               } else displayMarker(data[i]);
@@ -117,11 +167,14 @@ const Map: React.FC = () => {
                 x,
                 y,
               };
-              searchedPlace.current.push(placeInfo);
+              if (data.length > searchedPlace.length) {
+                setSearchedPlace((prev) => [...prev, placeInfo]);
+              }
               bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
             }
 
             // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+            setNotMutated(true);
             map.setBounds(bounds);
           }
         }
@@ -173,17 +226,45 @@ const Map: React.FC = () => {
             map.setCenter(marker.getPosition());
           });
         }
+        // searchedPlace.current 순환하며 isRegistered에 대해서 마커 스타일 변경하기
+        const imageSrc3 = '/assets/images/all.png';
+        const imageSize3 = new kakao.maps.Size(64, 69);
+        const markerImage3 = new kakao.maps.MarkerImage(imageSrc3, imageSize3);
+        function displayMarker3(place: any) {
+          // 마커를 생성하고 지도에 표시합니다
+          const marker = new kakao.maps.Marker({
+            map,
+            position: new kakao.maps.LatLng(place.y, place.x),
+            image: markerImage3,
+          });
+
+          // 마커에 클릭이벤트를 등록합니다
+          kakao.maps.event.addListener(marker, 'click', function () {
+            // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+            infowindow.setContent(
+              `<div style="padding:5px;font-size:12px;">${place.place_name}</div>`,
+            );
+            infowindow.open(map, marker);
+            // 중간 지점으로 이동
+            map.setCenter(marker.getPosition());
+          });
+        }
       });
+      setTimeout(() => {
+        console.log('settimeout');
+        setIsLoading(false);
+      }, 500);
+      setTimeout(() => {
+        setIsLoading2(false);
+      }, 1000);
     };
     mapScript.addEventListener('load', onLoadKakaoMap);
-  }, [currentPosition.lat, currentPosition.lon]);
+  }, [isLoading, isLoading2]);
 
   return (
     <div className="Map">
       <div id="map" className="w-96 h-96" />
-      <button onClick={() => console.log(searchedPlace.current)}>
-        검색된 장소들 콘솔에 출력하기
-      </button>
+      <button>등록된 장소만 콘솔에 출력하기</button>
     </div>
   );
 };

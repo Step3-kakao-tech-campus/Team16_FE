@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import LogoButton from 'commons/LogoButton';
+import { getLoginState, removeUser } from 'commons/cookie/getUser';
 
 export interface VLargeGNBProps {
   handleCategoryButtonClick: () => void;
@@ -61,8 +62,11 @@ const VLargeGNB = (props: VLargeGNBProps) => {
 
         <div className="flex gap-4 font-bold">
           <Link to="/login">
-            <button className="border border-2 box-content border-brand-color text-brand-color rounded-md py-1 px-4 transition duration-300 hover:bg-brand-color hover:text-white">
-              로그인
+            <button
+              className="border border-2 box-content border-brand-color text-brand-color rounded-md py-1 px-4 transition duration-300 hover:bg-brand-color hover:text-white"
+              onClick={removeUser}
+            >
+              {getLoginState()}
             </button>
           </Link>
           <Link to="/signup">

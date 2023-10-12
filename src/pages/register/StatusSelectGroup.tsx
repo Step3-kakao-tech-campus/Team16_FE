@@ -20,18 +20,17 @@ const StatusSelectGroup = () => {
         setProfileStatus((prev) => ({
           ...prev,
           polygonProfile: {
-            ...polygonProfile,
+            ...prev.polygonProfile,
             intelligence: Number(option),
           },
         }));
-
         break;
       case 'affinity':
         setAffinityOption(option);
         setProfileStatus((prev) => ({
           ...prev,
           polygonProfile: {
-            ...polygonProfile,
+            ...prev.polygonProfile,
             affinity: Number(option),
           },
         }));
@@ -41,7 +40,7 @@ const StatusSelectGroup = () => {
         setProfileStatus((prev) => ({
           ...prev,
           polygonProfile: {
-            ...polygonProfile,
+            ...prev.polygonProfile,
             athletic: Number(option),
           },
         }));
@@ -51,7 +50,7 @@ const StatusSelectGroup = () => {
         setProfileStatus((prev) => ({
           ...prev,
           polygonProfile: {
-            ...polygonProfile,
+            ...prev.polygonProfile,
             adaptability: Number(option),
           },
         }));
@@ -61,7 +60,7 @@ const StatusSelectGroup = () => {
         setProfileStatus((prev) => ({
           ...prev,
           polygonProfile: {
-            ...polygonProfile,
+            ...prev.polygonProfile,
             activeness: Number(option),
           },
         }));

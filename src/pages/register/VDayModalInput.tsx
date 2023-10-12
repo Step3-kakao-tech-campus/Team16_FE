@@ -2,12 +2,12 @@ import Calendar from 'pages/register/Calendar';
 import { useRecoilValue } from 'recoil';
 import registerState from 'recoil/registerState';
 
-interface Props {
+interface DayModalProps {
   open: boolean;
   handleClick: () => void;
 }
 
-const VDayModalInput = ({ open, handleClick }: Props) => {
+const VDayModalInput = ({ open, handleClick }: DayModalProps) => {
   const protectionDate = useRecoilValue(registerState);
   const { protectionExpirationDate } = protectionDate;
 
