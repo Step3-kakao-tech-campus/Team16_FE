@@ -12,7 +12,7 @@ export interface RegisterType {
   neutralizationStatus: string; // YES | NO | UNKNOWN
   protectionExpirationDate: string; // 보호만료일 null 가능 2023-10-25
   description: string; // String
-  polygonProfile: {
+  petPolygonProfileDto: {
     // 1 ~ 5 정수
     intelligence: number; // "영리함 점수"
     affinity: number; // "친화력 점수",
@@ -37,7 +37,7 @@ const registerState = atom<RegisterType>({
     neutralizationStatus: '',
     protectionExpirationDate: '',
     description: '',
-    polygonProfile: {
+    petPolygonProfileDto: {
       intelligence: 3,
       affinity: 3,
       athletic: 3,
