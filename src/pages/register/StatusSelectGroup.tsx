@@ -7,13 +7,13 @@ const StatusSelectGroup = () => {
   const [profileStatus, setProfileStatus] = useRecoilState(registerState);
   const { petPolygonProfileDto } = profileStatus;
 
-  const [intelligenceOption, setIntelligenceOption] = useState('3');
-  const [affinityOption, setAffinityOption] = useState('3');
-  const [athleticOption, setAthleticOption] = useState('3');
-  const [adaptabilityOption, setAdaptabilityOption] = useState('3');
-  const [activenessOption, setActivenessOption] = useState('3');
+  const [intelligenceOption, setIntelligenceOption] = useState(3);
+  const [affinityOption, setAffinityOption] = useState(3);
+  const [athleticOption, setAthleticOption] = useState(3);
+  const [adaptabilityOption, setAdaptabilityOption] = useState(3);
+  const [activenessOption, setActivenessOption] = useState(3);
 
-  const handleOptionChange = (status: string, option: string) => {
+  const handleOptionChange = (status: string, option: number) => {
     switch (status) {
       case 'intelligence':
         setIntelligenceOption(option);
