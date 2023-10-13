@@ -54,7 +54,7 @@ const RegisterHeader = () => {
     const registerPetDataWithPetPolygonProfileDto = {
       ...restRegisterPetData,
       petPolygonProfileDto: {
-        ...restRegisterPetData.polygonProfile,
+        ...restRegisterPetData.petPolygonProfileDto,
       },
     };
     formData.append(
