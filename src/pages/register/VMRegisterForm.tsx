@@ -8,10 +8,10 @@ type RegisterProps = {
 
 const MRegisterForm = ({ handleChange }: RegisterProps) => {
   return (
-    <div className="flex flex-col items-center gap-8 mt-10">
-      <div className="flex  justify-center sm:gap-20 w-1/2 text-sm  mb-5">
-        <div className=" flex-col sm:flex-row flex gap-5 w-full ">
-          <div className="">
+    <div className="sm:mx-auto flex flex-col items-center gap-8 mt-10">
+      <div className="flex justify-center items-center w-3/4 text-sm  mb-5 sm:gap-20 sm:w-1/2  ">
+        <div className=" flex-col  justify-center sm:flex-row flex gap-5 w-full ">
+          <div className="w-full justify-center">
             <InputGroup
               id="name"
               name="이름"
@@ -23,7 +23,7 @@ const MRegisterForm = ({ handleChange }: RegisterProps) => {
               autocomplete="on"
             />
           </div>
-          <div className="flex w-2/4 whitespace-nowrap">
+          <div className="flex w-3/4 gap-5 whitespace-nowrap items-center ml-10 justify-center">
             <InputGroup
               id="age"
               name="나이"
@@ -34,16 +34,16 @@ const MRegisterForm = ({ handleChange }: RegisterProps) => {
               }}
               autocomplete="on"
             />
+            <SelectBox />
           </div>
-          <SelectBox />
         </div>
       </div>
-      <div className="flex justify-center gap-5 sm:gap-20 w-1/2 text-sm  mb-5">
+      <div className="flex justify-center items-center sm:gap-20 w-3/4 sm:w-1/2 text-sm mb-5">
         <div className="w-full">
           <RadioGroup />
         </div>
       </div>
-      <div className="flex justify-center gap-5 sm:gap-20 w-1/2 text-sm  mb-5">
+      <div className="flex justify-center gap-5 sm:gap-20 w-3/4 sm:w-1/2 text-sm  mb-5">
         <div className="w-full">
           <InputGroup
             id="size"
@@ -57,7 +57,7 @@ const MRegisterForm = ({ handleChange }: RegisterProps) => {
           />
         </div>
       </div>
-      <div className="flex flex-col sm:flex-row justify-center gap-5 sm:gap-10 w-1/2 text-sm  mb-5">
+      <div className="flex flex-col sm:flex-row justify-center gap-5 sm:gap-10 w-3/4 sm:w-1/2 text-sm  mb-5">
         <div className=" w-full">
           <InputGroup
             id="weight"
@@ -83,7 +83,7 @@ const MRegisterForm = ({ handleChange }: RegisterProps) => {
           />
         </div>
       </div>
-      <div className="flex justify-center gap-5 sm:gap-20 w-1/2 text-sm  mb-5">
+      <div className="flex justify-center gap-5 sm:gap-20 w-3/4 sm:w-1/2 text-sm  mb-5">
         <div className="w-full">
           <InputGroup
             id="description"
