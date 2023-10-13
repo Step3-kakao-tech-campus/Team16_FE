@@ -1,17 +1,32 @@
-import React, { useState } from 'react';
+import StatusScore from 'pages/register/StatusScore';
+import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import registerState from 'recoil/registerState';
-import StatusScore from './StatusScore';
 
-const StatusSelectGroup = () => {
+interface PetStatusType {
+  intelligence: number;
+  affinity: number;
+  athletic: number;
+  adaptability: number;
+  activeness: number;
+}
+
+interface PetStatusProps {
+  petStatus: PetStatusType;
+}
+
+const PatchStatusSelectGroup = ({ petStatus }: PetStatusProps) => {
   const [profileStatus, setProfileStatus] = useRecoilState(registerState);
   const { petPolygonProfileDto } = profileStatus;
 
-  const [intelligenceOption, setIntelligenceOption] = useState(3);
-  const [affinityOption, setAffinityOption] = useState(3);
-  const [athleticOption, setAthleticOption] = useState(3);
-  const [adaptabilityOption, setAdaptabilityOption] = useState(3);
-  const [activenessOption, setActivenessOption] = useState(3);
+  const { intelligence, affinity, athletic, adaptability, activeness } =
+    petStatus;
+
+  const [intelligenceOption, setIntelligenceOption] = useState(intelligence);
+  const [affinityOption, setAffinityOption] = useState(affinity);
+  const [athleticOption, setAthleticOption] = useState(athletic);
+  const [adaptabilityOption, setAdaptabilityOption] = useState(adaptability);
+  const [activenessOption, setActivenessOption] = useState(activeness);
 
   const handleOptionChange = (status: string, option: number) => {
     switch (status) {
@@ -21,7 +36,7 @@ const StatusSelectGroup = () => {
           ...prev,
           polygonProfile: {
             ...prev.petPolygonProfileDto,
-            intelligence: Number(option),
+            intelligence: option,
           },
         }));
         break;
@@ -31,7 +46,7 @@ const StatusSelectGroup = () => {
           ...prev,
           polygonProfile: {
             ...prev.petPolygonProfileDto,
-            affinity: Number(option),
+            affinity: option,
           },
         }));
         break;
@@ -41,7 +56,7 @@ const StatusSelectGroup = () => {
           ...prev,
           polygonProfile: {
             ...prev.petPolygonProfileDto,
-            athletic: Number(option),
+            athletic: option,
           },
         }));
         break;
@@ -51,7 +66,7 @@ const StatusSelectGroup = () => {
           ...prev,
           polygonProfile: {
             ...prev.petPolygonProfileDto,
-            adaptability: Number(option),
+            adaptability: option,
           },
         }));
         break;
@@ -61,7 +76,7 @@ const StatusSelectGroup = () => {
           ...prev,
           polygonProfile: {
             ...prev.petPolygonProfileDto,
-            activeness: Number(option),
+            activeness: option,
           },
         }));
         break;
@@ -69,6 +84,10 @@ const StatusSelectGroup = () => {
         break;
     }
   };
+
+  useEffect(() => {
+    console.log('propsData: ', petStatus);
+  }, []);
 
   return (
     <div>
@@ -106,4 +125,4 @@ const StatusSelectGroup = () => {
   );
 };
 
-export default StatusSelectGroup;
+export default PatchStatusSelectGroup;
