@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import registerState from 'recoil/registerState';
 import ImageVideoInput from './ImageVideoInput';
-import { getCookie } from '../../commons/cookie/cookie';
 
 const RegisterHeader = () => {
   const [selectedImageFile, setSelectedImageFile] = useState(null);
