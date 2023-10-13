@@ -1,4 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
+import { getCookie } from 'commons/cookie/cookie';
 import ModalPortal from 'commons/modals/ModalPortal';
 import RegisterModal, {
   RegisterModalProps,
@@ -76,7 +77,7 @@ const RegisterHeader = () => {
       method: 'POST',
       body: formData,
       headers: {
-        Authorization: ``,
+        Authorization: `Bearer ${getCookie('loginToken')}`,
       },
     });
     return res.json();
