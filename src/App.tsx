@@ -12,6 +12,7 @@ import RegisterPage from 'pages/register/RegisterPage';
 import ShelterInfoPage from 'pages/shelterInfo/ShelterInfoPage';
 import SignupPage from 'pages/signUp/SignupPage';
 import UrgentListPage from 'pages/profileList/urgentList/UrgentListPage';
+import UpdatePage from 'pages/update/UpdatePage';
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/find-shelter" element={<MapPage />} />
+            <Route path="/pet-update/:id" element={<UpdatePage />} />
           </Routes>
         </BrowserRouter>
       </RecoilRoot>
