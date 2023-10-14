@@ -14,7 +14,11 @@ import SignupPage from 'pages/signUp/SignupPage';
 import UrgentListPage from 'pages/profileList/urgentList/UrgentListPage';
 import UpdatePage from 'pages/update/UpdatePage';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: { refetchOnWindowFocus: false, refetchOnMount: false },
+  },
+});
 
 function App() {
   return (
