@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import registerState from 'recoil/registerState';
 import PatchStatusSelectGroup from './PatchStatusSelectGroup';
+import UpdateRegisterForm from './UpdateRegisterForm';
 
 const UpdatePage = () => {
   const params = useParams();
@@ -50,7 +51,10 @@ const UpdatePage = () => {
   }, [updateState]);
 
   return !isLoading ? (
-    <PatchStatusSelectGroup petStatus={updateState.petPolygonProfileDto} />
+    <div>
+      <UpdateRegisterForm petInfo={updateState} />
+      <PatchStatusSelectGroup petStatus={updateState.petPolygonProfileDto} />
+    </div>
   ) : (
     <div>Loading...</div>
   );
