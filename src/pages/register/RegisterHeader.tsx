@@ -30,10 +30,8 @@ const RegisterHeader = () => {
   };
 
   // 등록하기 관련
-  console.log(getCookie('loginToken'));
   const postPet = async (formData: FormData) => {
     const loginToken = getCookie('loginToken');
-    console.log(`Bearer ${loginToken}`);
     const res = await fetch(`${process.env.REACT_APP_URI}/pet`, {
       method: 'POST',
       body: formData,
