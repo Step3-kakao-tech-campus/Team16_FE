@@ -43,6 +43,7 @@ const RegisterHeader = () => {
   };
   const { data, mutate, isError, isLoading, isSuccess } = useMutation(postPet);
   const handleRegisterButtonClick = async () => {
+    console.log(registerPetData);
     if (!selectedImageFile || !selectedVideoFile || !registerPetData.isComplete)
       return;
     const formData = new FormData();

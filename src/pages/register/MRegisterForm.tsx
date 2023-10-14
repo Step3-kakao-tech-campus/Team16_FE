@@ -59,9 +59,11 @@ const MRegisterForm = () => {
     const tempPetInfo = { ...petInfo, [fieldName]: newValue };
     const allFieldsFilled = Object.values(tempPetInfo).every((value, index) => {
       // isComplete는 petInfo의 모든 필드가 채워져 있을 때 true
-      if (index === Object.values(petInfo).length - 1) {
+      if (
+        Object.keys(tempPetInfo)[index] === 'isComplete' ||
+        Object.keys(tempPetInfo)[index] === 'protectionExpirationDate'
+      )
         return true;
-      }
       return !!value;
     });
     if (allFieldsFilled) {
