@@ -43,21 +43,16 @@ const RegisterHeader = () => {
   };
   const { data, mutate, isError, isLoading, isSuccess } = useMutation(postPet);
   const handleRegisterButtonClick = async () => {
+    console.log(registerPetData);
     if (!selectedImageFile || !selectedVideoFile || !registerPetData.isComplete)
       return;
     const formData = new FormData();
     formData.append('profileVideo', selectedVideoFile);
     formData.append('profileImage', selectedImageFile);
     const { isComplete, ...restRegisterPetData } = registerPetData;
-    const registerPetDataWithPetPolygonProfileDto = {
-      ...restRegisterPetData,
-      petPolygonProfileDto: {
-        ...restRegisterPetData.petPolygonProfileDto,
-      },
-    };
     formData.append(
       'petInfo',
-      new Blob([JSON.stringify(registerPetDataWithPetPolygonProfileDto)], {
+      new Blob([JSON.stringify(restRegisterPetData)], {
         type: 'application/json',
       }),
     );

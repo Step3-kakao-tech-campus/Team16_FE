@@ -1,7 +1,7 @@
 import StatusScore from 'pages/register/StatusScore';
-import React, { useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
-import registerState from 'recoil/registerState';
+import React, { useState } from 'react';
+import { SetterOrUpdater } from 'recoil';
+import { RegisterType } from 'recoil/registerState';
 
 interface PetStatusType {
   intelligence: number;
@@ -13,12 +13,13 @@ interface PetStatusType {
 
 interface PetStatusProps {
   petStatus: PetStatusType;
+  setUpdateState: SetterOrUpdater<RegisterType>;
 }
 
-const PatchStatusSelectGroup = ({ petStatus }: PetStatusProps) => {
-  const [profileStatus, setProfileStatus] = useRecoilState(registerState);
-  const { petPolygonProfileDto } = profileStatus;
-
+const PatchStatusSelectGroup = ({
+  petStatus,
+  setUpdateState,
+}: PetStatusProps) => {
   const { intelligence, affinity, athletic, adaptability, activeness } =
     petStatus;
 
@@ -32,9 +33,9 @@ const PatchStatusSelectGroup = ({ petStatus }: PetStatusProps) => {
     switch (status) {
       case 'intelligence':
         setIntelligenceOption(option);
-        setProfileStatus((prev) => ({
+        setUpdateState((prev) => ({
           ...prev,
-          polygonProfile: {
+          petPolygonProfileDto: {
             ...prev.petPolygonProfileDto,
             intelligence: option,
           },
@@ -42,9 +43,9 @@ const PatchStatusSelectGroup = ({ petStatus }: PetStatusProps) => {
         break;
       case 'affinity':
         setAffinityOption(option);
-        setProfileStatus((prev) => ({
+        setUpdateState((prev) => ({
           ...prev,
-          polygonProfile: {
+          petPolygonProfileDto: {
             ...prev.petPolygonProfileDto,
             affinity: option,
           },
@@ -52,9 +53,9 @@ const PatchStatusSelectGroup = ({ petStatus }: PetStatusProps) => {
         break;
       case 'athletic':
         setAthleticOption(option);
-        setProfileStatus((prev) => ({
+        setUpdateState((prev) => ({
           ...prev,
-          polygonProfile: {
+          petPolygonProfileDto: {
             ...prev.petPolygonProfileDto,
             athletic: option,
           },
@@ -62,9 +63,9 @@ const PatchStatusSelectGroup = ({ petStatus }: PetStatusProps) => {
         break;
       case 'adaptability':
         setAdaptabilityOption(option);
-        setProfileStatus((prev) => ({
+        setUpdateState((prev) => ({
           ...prev,
-          polygonProfile: {
+          petPolygonProfileDto: {
             ...prev.petPolygonProfileDto,
             adaptability: option,
           },
@@ -72,9 +73,9 @@ const PatchStatusSelectGroup = ({ petStatus }: PetStatusProps) => {
         break;
       case 'activeness':
         setActivenessOption(option);
-        setProfileStatus((prev) => ({
+        setUpdateState((prev) => ({
           ...prev,
-          polygonProfile: {
+          petPolygonProfileDto: {
             ...prev.petPolygonProfileDto,
             activeness: option,
           },
@@ -85,39 +86,40 @@ const PatchStatusSelectGroup = ({ petStatus }: PetStatusProps) => {
     }
   };
 
-  useEffect(() => {
-    console.log('propsData: ', petStatus);
-  }, []);
+  // 데이터 확인용
+  // useEffect(() => {
+  //   console.log(petStatus);
+  // }, [petStatus]);
 
   return (
     <div>
       <StatusScore
         status={'intelligence'}
-        score={petPolygonProfileDto.intelligence}
+        score={intelligence}
         selectedOption={intelligenceOption}
         handleChange={handleOptionChange}
       />
       <StatusScore
         status={'affinity'}
-        score={petPolygonProfileDto.affinity}
+        score={affinity}
         selectedOption={affinityOption}
         handleChange={handleOptionChange}
       />
       <StatusScore
         status={'athletic'}
-        score={petPolygonProfileDto.athletic}
+        score={athletic}
         selectedOption={athleticOption}
         handleChange={handleOptionChange}
       />
       <StatusScore
         status={'adaptability'}
-        score={petPolygonProfileDto.adaptability}
+        score={adaptability}
         selectedOption={adaptabilityOption}
         handleChange={handleOptionChange}
       />
       <StatusScore
         status={'activeness'}
-        score={petPolygonProfileDto.activeness}
+        score={activeness}
         selectedOption={activenessOption}
         handleChange={handleOptionChange}
       />

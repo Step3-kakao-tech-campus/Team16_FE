@@ -3,7 +3,7 @@ interface RadioProps {
   label: string;
   value: string;
   selected?: boolean;
-  onChange: (e: any) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onClick: (e: React.MouseEvent<HTMLInputElement>) => void;
 }
 

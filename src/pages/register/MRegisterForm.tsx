@@ -4,7 +4,6 @@ import VMRegisterForm from './VMRegisterForm';
 
 const MRegisterForm = () => {
   const [petInfo, setPetInfo] = useRecoilState(registerState);
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -57,21 +56,45 @@ const MRegisterForm = () => {
     // useState의 set함수로 petInfo를 업데이트해도, handleChange가 실행될 때의 petInfo는 업데이트 전의 petInfo를 가리킵니다.
     // 따라서 tempPetInfo를 만들어서 최신의 petInfo를 사용하도록 했습니다.
     const tempPetInfo = { ...petInfo, [fieldName]: newValue };
-    const allFieldsFilled = Object.values(tempPetInfo).every((value, index) => {
-      // isComplete는 petInfo의 모든 필드가 채워져 있을 때 true
-      if (index === Object.values(petInfo).length - 1) {
-        return true;
-      }
-      return !!value;
+    const list = [
+      tempPetInfo.age,
+      tempPetInfo.name,
+      tempPetInfo.adoptionStatus,
+      tempPetInfo.type,
+      tempPetInfo.weight,
+      tempPetInfo.description,
+      tempPetInfo.sex,
+      tempPetInfo.size,
+      tempPetInfo.vaccinationStatus,
+      tempPetInfo.neutralizationStatus,
+    ];
+    console.log(list);
+    const lili = list.filter((item) => {
+      return item !== '';
     });
-    if (allFieldsFilled) {
+    if (lili.length === 10) {
       setPetInfo((prev) => ({ ...prev, isComplete: true }));
-    }
+    } else setPetInfo((prev) => ({ ...prev, isComplete: false }));
   };
+
+  // 안쓰는 이유 값이 없어서 안만들어지고 업데이트가 잘안됨.
+  //   const allFieldsFilled = Object.values(tempPetInfo).every((value, index) => {
+  //     console.log(value);
+  //     // isComplete는 petInfo의 모든 필드가 채워져 있을 때 true
+  //     if (index === Object.values(tempPetInfo).length - 2) {
+  //       console.log(index, Object.values(tempPetInfo).length - 2);
+  //       return true;
+  //     }
+  //     console.log(index);
+  //     return !!value;
+  //   });
+  //   if (allFieldsFilled) {
+  //     setPetInfo((prev) => ({ ...prev, isComplete: true }));
+  //   }
+  // };
 
   const MRegisterProps = {
     handleChange,
-    handleSubmit,
   };
 
   return <VMRegisterForm {...MRegisterProps} />;
