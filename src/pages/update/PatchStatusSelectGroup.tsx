@@ -1,7 +1,7 @@
 import StatusScore from 'pages/register/StatusScore';
-import React, { useEffect, useState } from 'react';
-import { SetterOrUpdater, useSetRecoilState } from 'recoil';
-import registerState, { RegisterType } from 'recoil/registerState';
+import React, { useState } from 'react';
+import { SetterOrUpdater } from 'recoil';
+import { RegisterType } from 'recoil/registerState';
 
 interface PetStatusType {
   intelligence: number;
@@ -86,9 +86,10 @@ const PatchStatusSelectGroup = ({
     }
   };
 
-  useEffect(() => {
-    console.log(petStatus);
-  }, [petStatus]);
+  // 데이터 확인용
+  // useEffect(() => {
+  //   console.log(petStatus);
+  // }, [petStatus]);
 
   return (
     <div>
