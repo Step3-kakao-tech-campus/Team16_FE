@@ -19,9 +19,9 @@ const StatusSelectGroup = () => {
         setIntelligenceOption(option);
         setProfileStatus((prev) => ({
           ...prev,
-          polygonProfile: {
+          petPolygonProfileDto: {
             ...prev.petPolygonProfileDto,
-            intelligence: Number(option),
+            intelligence: option,
           },
         }));
         break;
@@ -29,9 +29,9 @@ const StatusSelectGroup = () => {
         setAffinityOption(option);
         setProfileStatus((prev) => ({
           ...prev,
-          polygonProfile: {
+          petPolygonProfileDto: {
             ...prev.petPolygonProfileDto,
-            affinity: Number(option),
+            affinity: option,
           },
         }));
         break;
@@ -39,9 +39,9 @@ const StatusSelectGroup = () => {
         setAthleticOption(option);
         setProfileStatus((prev) => ({
           ...prev,
-          polygonProfile: {
+          petPolygonProfileDto: {
             ...prev.petPolygonProfileDto,
-            athletic: Number(option),
+            athletic: option,
           },
         }));
         break;
@@ -49,9 +49,9 @@ const StatusSelectGroup = () => {
         setAdaptabilityOption(option);
         setProfileStatus((prev) => ({
           ...prev,
-          polygonProfile: {
+          petPolygonProfileDto: {
             ...prev.petPolygonProfileDto,
-            adaptability: Number(option),
+            adaptability: option,
           },
         }));
         break;
@@ -59,9 +59,9 @@ const StatusSelectGroup = () => {
         setActivenessOption(option);
         setProfileStatus((prev) => ({
           ...prev,
-          polygonProfile: {
+          petPolygonProfileDto: {
             ...prev.petPolygonProfileDto,
-            activeness: Number(option),
+            activeness: option,
           },
         }));
         break;
