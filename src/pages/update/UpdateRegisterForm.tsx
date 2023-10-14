@@ -1,7 +1,7 @@
-import VMRegisterForm from 'pages/register/VMRegisterForm';
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import registerState, { RegisterType } from 'recoil/registerState';
+import VMRegisterForm from './VUpdateRegisterForm';
 
 interface PetProps {
   petInfo: RegisterType;
@@ -34,12 +34,14 @@ const UpdateRegisterForm = ({ petInfo }: PetProps) => {
       return !!value;
     });
     if (allFieldsFilled) {
+      console.log('검사', petInfo);
       setPetInfo((prev) => ({ ...prev, isComplete: true }));
-    }
+    } else setPetInfo((prev) => ({ ...prev, isComplete: false }));
   };
 
   const MRegisterProps = {
     handleChange,
+    petInfo,
   };
 
   return <VMRegisterForm {...MRegisterProps} />;

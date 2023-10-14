@@ -5,6 +5,8 @@ import { useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import registerState from 'recoil/registerState';
 import DayModalInput from 'pages/register/DayModalInput';
+import RegisterHeader from 'pages/register/RegisterHeader';
+import GNB from 'layouts/GNB';
 import PatchStatusSelectGroup from './PatchStatusSelectGroup';
 import UpdateRegisterForm from './UpdateRegisterForm';
 
@@ -52,6 +54,8 @@ const UpdatePage = () => {
 
   return !isLoading ? (
     <div>
+      <GNB />
+      <UpdateRegisterForm petInfo={updateState} />
       <DayModalInput />
       <PatchStatusSelectGroup
         petStatus={updateState.petPolygonProfileDto}
