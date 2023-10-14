@@ -5,6 +5,7 @@ import SelectBox from 'commons/SelectBox';
 type RegisterProps = {
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
+
 const VMRegisterForm = ({ handleChange }: RegisterProps) => {
   return (
     <div className="sm:mx-auto flex flex-col items-center gap-8 mt-10">
