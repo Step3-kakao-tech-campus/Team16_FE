@@ -12,7 +12,7 @@ const VDayModalInput = ({ open, handleClick }: DayModalProps) => {
   const { protectionExpirationDate } = protectionDate;
 
   return (
-    <div className="flex justify-center items-center gap-2">
+    <div className="flex justify-center items-center gap-2 relative">
       <label htmlFor="day-modal" className="text-sm font-semibold">
         안락사 일자
       </label>
@@ -23,10 +23,11 @@ const VDayModalInput = ({ open, handleClick }: DayModalProps) => {
         type="text"
         placeholder="날짜를 선택해주세요."
         onClick={handleClick}
-        defaultValue={protectionExpirationDate}
-        autoComplete="date"
+        value={protectionExpirationDate}
+        autoComplete="off"
+        readOnly
       />
-      <dialog open={open} className="">
+      <dialog open={open} className="absolute top-10 mt-2">
         <Calendar handleClick={handleClick} />
       </dialog>
     </div>

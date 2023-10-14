@@ -35,7 +35,7 @@ const VSignupInputForm = ({
           type="text"
           placeholder="이메일을 입력해주세요."
           onChange={handleChange}
-          autocomplete="email"
+          autocomplete="off"
         />
         <button
           type="button" // type을 버튼으로 지정해주면 handleSubmit이 작동하지 않음 -> onClick만 동작
@@ -57,7 +57,7 @@ const VSignupInputForm = ({
         type="password"
         placeholder="비밀번호를 입력해주세요."
         onChange={handleChange}
-        autocomplete="new-password"
+        autocomplete="off"
       />
       <InputGroup
         id="password-confirm"
@@ -65,7 +65,7 @@ const VSignupInputForm = ({
         type="password"
         placeholder="비밀번호를 한번 더 입력해주세요."
         onChange={handleChange}
-        autocomplete="new-password"
+        autocomplete="off"
       />
       {!passwordConfirm && (
         <div className="text-red-500">비밀번호가 일치하지 않습니다.</div>
@@ -76,7 +76,7 @@ const VSignupInputForm = ({
         type="text"
         placeholder="보호소 이름을 입력해주세요."
         onChange={handleChange}
-        autocomplete="organization"
+        autocomplete="off"
       />
       <InputGroup
         id="shelter-contact"
@@ -84,7 +84,7 @@ const VSignupInputForm = ({
         type="text"
         placeholder="보호소에 연락 가능한 연락처를 입력해주세요."
         onChange={handleChange}
-        autocomplete="tel-national"
+        autocomplete="off"
       />
       <AddressInputGroup />
       <button className="bg-brand-color text-white w-full rounded-md p-2">

@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import registerState from 'recoil/registerState';
+import DayModalInput from 'pages/register/DayModalInput';
 import PatchStatusSelectGroup from './PatchStatusSelectGroup';
 import UpdateRegisterForm from './UpdateRegisterForm';
 
@@ -42,18 +43,20 @@ const UpdatePage = () => {
     },
   });
 
+  // 데이터 들어오는 것 확인 용도
   useEffect(() => {
     if (!isLoading && data) {
-      // 데이터 들어오는 것 확인 용도
-      console.log('data: ', data);
       console.log('status: ', updateState);
     }
   }, [updateState]);
 
   return !isLoading ? (
     <div>
-      <UpdateRegisterForm petInfo={updateState} />
-      <PatchStatusSelectGroup petStatus={updateState.petPolygonProfileDto} />
+      <DayModalInput />
+      <PatchStatusSelectGroup
+        petStatus={updateState.petPolygonProfileDto}
+        setUpdateState={setUpdateState}
+      />
     </div>
   ) : (
     <div>Loading...</div>
