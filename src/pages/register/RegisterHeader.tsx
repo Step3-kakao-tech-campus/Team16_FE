@@ -30,36 +30,29 @@ const RegisterHeader = () => {
   };
 
   // 등록하기 관련
-  console.log(getCookie('loginToken'));
   const postPet = async (formData: FormData) => {
     const loginToken = getCookie('loginToken');
-    console.log(`Bearer ${loginToken}`);
     const res = await fetch(`${process.env.REACT_APP_URI}/pet`, {
       method: 'POST',
       body: formData,
       headers: {
-        Authorization: `Bearer ${getCookie('loginToken')}`,
+        Authorization: `Bearer ${loginToken}`,
       },
     });
     return res.json();
   };
   const { data, mutate, isError, isLoading, isSuccess } = useMutation(postPet);
   const handleRegisterButtonClick = async () => {
+    console.log(registerPetData);
     if (!selectedImageFile || !selectedVideoFile || !registerPetData.isComplete)
       return;
     const formData = new FormData();
     formData.append('profileVideo', selectedVideoFile);
     formData.append('profileImage', selectedImageFile);
     const { isComplete, ...restRegisterPetData } = registerPetData;
-    const registerPetDataWithPetPolygonProfileDto = {
-      ...restRegisterPetData,
-      petPolygonProfileDto: {
-        ...restRegisterPetData.petPolygonProfileDto,
-      },
-    };
     formData.append(
       'petInfo',
-      new Blob([JSON.stringify(registerPetDataWithPetPolygonProfileDto)], {
+      new Blob([JSON.stringify(restRegisterPetData)], {
         type: 'application/json',
       }),
     );
