@@ -13,6 +13,7 @@ const RadioGroup = () => {
 
   const handleSexChange = (value: string) => {
     setRegisterData((prev) => ({ ...prev, sex: value }));
+    console.log(registerData);
   };
   const handleAdoptionStatusChange = (value: string) => {
     setRegisterData((prev) => ({ ...prev, adoptionStatus: value }));
