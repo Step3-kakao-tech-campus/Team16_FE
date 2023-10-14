@@ -6,6 +6,7 @@ import { useRecoilState } from 'recoil';
 import registerState from 'recoil/registerState';
 import DayModalInput from 'pages/register/DayModalInput';
 import PatchStatusSelectGroup from './PatchStatusSelectGroup';
+import UpdateRegisterForm from './UpdateRegisterForm';
 
 const UpdatePage = () => {
   const params = useParams();

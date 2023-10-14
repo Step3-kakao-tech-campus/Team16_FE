@@ -4,7 +4,6 @@ import VMRegisterForm from './VMRegisterForm';
 
 const MRegisterForm = () => {
   const [petInfo, setPetInfo] = useRecoilState(registerState);
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -75,24 +74,24 @@ const MRegisterForm = () => {
     });
     if (lili.length === 10) {
       setPetInfo((prev) => ({ ...prev, isComplete: true }));
-    }
-
-    // 안쓰는 이유 값이 없어서 안만들어지고 업데이트가 잘안됨.
-    //   const allFieldsFilled = Object.values(tempPetInfo).every((value, index) => {
-    //     console.log(value);
-    //     // isComplete는 petInfo의 모든 필드가 채워져 있을 때 true
-    //     if (index === Object.values(tempPetInfo).length - 2) {
-    //       console.log(index, Object.values(tempPetInfo).length - 2);
-    //       return true;
-    //     }
-    //     console.log(index);
-    //     return !!value;
-    //   });
-    //   if (allFieldsFilled) {
-    //     setPetInfo((prev) => ({ ...prev, isComplete: true }));
-    //   }
-    // };
+    } else setPetInfo((prev) => ({ ...prev, isComplete: false }));
   };
+
+  // 안쓰는 이유 값이 없어서 안만들어지고 업데이트가 잘안됨.
+  //   const allFieldsFilled = Object.values(tempPetInfo).every((value, index) => {
+  //     console.log(value);
+  //     // isComplete는 petInfo의 모든 필드가 채워져 있을 때 true
+  //     if (index === Object.values(tempPetInfo).length - 2) {
+  //       console.log(index, Object.values(tempPetInfo).length - 2);
+  //       return true;
+  //     }
+  //     console.log(index);
+  //     return !!value;
+  //   });
+  //   if (allFieldsFilled) {
+  //     setPetInfo((prev) => ({ ...prev, isComplete: true }));
+  //   }
+  // };
 
   const MRegisterProps = {
     handleChange,
