@@ -67,7 +67,7 @@ const LoginInputForm = () => {
     const target = event.target as HTMLInputElement;
     if (target.id === 'id') {
       setUserInfo((prev) => ({ ...prev, email: target.value }));
-      emailValidate(userInfo.email);
+      emailValidate(target.value);
       setIsEmailEmpty(true);
     } else if (target.id === 'password') {
       setUserInfo((prev) => ({ ...prev, password: target.value }));
