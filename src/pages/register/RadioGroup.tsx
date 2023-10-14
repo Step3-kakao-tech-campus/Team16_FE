@@ -8,7 +8,7 @@ const RadioGroup = () => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const target = event.target as HTMLInputElement;
-    const fieldName = target.id;
+    const fieldName = target.name;
     const newValue = target.value;
     setPetInfo((prev) => ({ ...prev, [fieldName]: newValue }));
 
@@ -27,7 +27,6 @@ const RadioGroup = () => {
       tempPetInfo.vaccinationStatus,
       tempPetInfo.neutralizationStatus,
     ];
-    console.log('리스트', list);
     const lili = list.filter((item) => {
       return item !== '';
     });
