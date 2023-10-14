@@ -1,4 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
+import { getCookie } from 'commons/cookie/cookie';
 import ModalPortal from 'commons/modals/ModalPortal';
 import RegisterModal, {
   RegisterModalProps,
@@ -8,7 +9,6 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import registerState from 'recoil/registerState';
 import ImageVideoInput from './ImageVideoInput';
-import { getCookie } from '../../commons/cookie/cookie';
 
 const RegisterHeader = () => {
   const [selectedImageFile, setSelectedImageFile] = useState(null);
@@ -36,7 +36,7 @@ const RegisterHeader = () => {
       method: 'POST',
       body: formData,
       headers: {
-        Authorization: `Bearer ${loginToken}`,
+        Authorization: `Bearer ${getCookie('loginToken')}`,
       },
     });
     return res.json();
@@ -52,7 +52,7 @@ const RegisterHeader = () => {
     const registerPetDataWithPetPolygonProfileDto = {
       ...restRegisterPetData,
       petPolygonProfileDto: {
-        ...restRegisterPetData.polygonProfile,
+        ...restRegisterPetData.petPolygonProfileDto,
       },
     };
     formData.append(

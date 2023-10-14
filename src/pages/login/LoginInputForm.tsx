@@ -58,7 +58,6 @@ const LoginInputForm = () => {
       })
       .then((data) => {
         if (data.success) {
-          // const token = getCookie('loginToken');
           navigate('/');
         }
       });

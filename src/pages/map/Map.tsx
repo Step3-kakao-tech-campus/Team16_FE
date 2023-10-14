@@ -103,6 +103,7 @@ const Map: React.FC = () => {
       if (!currentPosition.lat || !currentPosition.lon) {
         return;
       }
+      console.log(currentPosition.lat, currentPosition.lon);
       window.kakao.maps.load(() => {
         const mapContainer = document.getElementById('map');
         const mapOption = {
