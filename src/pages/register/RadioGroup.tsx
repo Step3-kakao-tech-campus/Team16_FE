@@ -13,6 +13,7 @@ const RadioGroup = () => {
 
   const handleSexChange = (value: string) => {
     setRegisterData((prev) => ({ ...prev, sex: value }));
+    console.log(registerData);
   };
   const handleAdoptionStatusChange = (value: string) => {
     setRegisterData((prev) => ({ ...prev, adoptionStatus: value }));
@@ -60,7 +61,7 @@ const RadioGroup = () => {
         <h2 className="font-semibold text-sm my-3 whitespace-nowrap">
           입양 상태
         </h2>
-        <div className="grid grid-cols-2  gap-5 text-sm whitespace-nowrap">
+        <div className="grid grid-cols-2 w-full  gap-10 text-sm whitespace-nowrap">
           <DetailRadio
             label="입양"
             name="adoptionStatus"
@@ -95,7 +96,7 @@ const RadioGroup = () => {
         <h2 className="font-semibold text-sm my-3 whitespace-nowrap">
           중성화 상태
         </h2>
-        <div className="grid grid-cols-3 gap-8 text-sm whitespace-nowrap">
+        <div className="grid grid-cols-3 w-full gap-16 text-sm whitespace-nowrap">
           <DetailRadio
             label="했어요"
             name="neutralizationStatus"
