@@ -44,13 +44,15 @@ const UpdatePage = () => {
   useEffect(() => {
     if (!isLoading && data) {
       // 데이터 들어오는 것 확인 용도
-      console.log('data: ', data);
       console.log('status: ', updateState);
     }
   }, [updateState]);
 
   return !isLoading ? (
-    <PatchStatusSelectGroup petStatus={updateState.petPolygonProfileDto} />
+    <PatchStatusSelectGroup
+      petStatus={updateState.petPolygonProfileDto}
+      setUpdateState={setUpdateState}
+    />
   ) : (
     <div>Loading...</div>
   );
