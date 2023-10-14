@@ -255,16 +255,16 @@ const Calendar = ({ handleClick }: CalendarProps) => {
       </div>
 
       <table className="flex flex-col gap-2 font-medium">
-        <thead className="grid grid-cols-7 grid-rows-1 text-center">
+        <thead className="grid grid-cols-7 grid-rows-1">
           {dayOfWeek.map((row: string, index: number) => (
-            <tr key={index} className="weeks">
+            <tr key={index} className="weeks mx-auto">
               <td>{row}</td>
             </tr>
           ))}
         </thead>
         <tbody className="h-full grid gap-2">
           {calendarRows.map((row: JSX.Element[], index: number) => (
-            <tr key={index} className="text-center grid grid-cols-7 gap-2">
+            <tr key={index} className="text-center grid grid-cols-7">
               {row}
             </tr>
           ))}
