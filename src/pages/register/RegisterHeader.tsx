@@ -36,7 +36,7 @@ const RegisterHeader = () => {
       method: 'POST',
       body: formData,
       headers: {
-        Authorization: `Bearer ${getCookie('loginToken')}`,
+        Authorization: `Bearer ${loginToken}`,
       },
     });
     return res.json();
@@ -49,15 +49,9 @@ const RegisterHeader = () => {
     formData.append('profileVideo', selectedVideoFile);
     formData.append('profileImage', selectedImageFile);
     const { isComplete, ...restRegisterPetData } = registerPetData;
-    const registerPetDataWithPetPolygonProfileDto = {
-      ...restRegisterPetData,
-      petPolygonProfileDto: {
-        ...restRegisterPetData.petPolygonProfileDto,
-      },
-    };
     formData.append(
       'petInfo',
-      new Blob([JSON.stringify(registerPetDataWithPetPolygonProfileDto)], {
+      new Blob([JSON.stringify(restRegisterPetData)], {
         type: 'application/json',
       }),
     );
