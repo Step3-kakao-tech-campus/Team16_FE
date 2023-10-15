@@ -44,11 +44,10 @@ const UpdateHeader = () => {
   const { data, mutate, isError, isLoading, isSuccess } = useMutation(postPet);
   const handleRegisterButtonClick = async () => {
     console.log(registerPetData);
-    if (!selectedImageFile || !selectedVideoFile || !registerPetData.isComplete)
-      return;
+    if (!registerPetData.isComplete) return;
     const formData = new FormData();
-    formData.append('profileVideo', selectedVideoFile);
-    formData.append('profileImage', selectedImageFile);
+    if (selectedVideoFile) formData.append('profileVideo', selectedVideoFile);
+    if (selectedImageFile) formData.append('profileImage', selectedImageFile);
     const { isComplete, ...restRegisterPetData } = registerPetData;
     formData.append(
       'petInfo',
@@ -98,12 +97,12 @@ const UpdateHeader = () => {
     <>
       <div className="flex flex-col items-center gap-8">
         <div className="flex justify-between items-center w-5/6">
-          <h1 className="text-center text-xl">등록하기</h1>
+          <h1 className="text-center text-xl">수정하기</h1>
           <button
             onClick={() => setIsModalOpen(true)}
             className="bg-brand-color rounded-md font-bold text-white w-20 py-2"
           >
-            등록완료
+            수정완료
           </button>
         </div>
         <ImageVideoInput
