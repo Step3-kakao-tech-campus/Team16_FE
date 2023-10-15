@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { getCookie } from 'commons/cookie/cookie';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import registerState from 'recoil/registerState';
@@ -14,6 +14,10 @@ const UpdateTemplate = () => {
   const petId = params.id;
   const cookie = getCookie('loginToken');
   const [updateState, setUpdateState] = useRecoilState(registerState);
+  const [error, setError] = useState({
+    isError: false,
+    errorMessage: '',
+  });
 
   // petInfo return
   const getPetInfo = async () => {
@@ -31,12 +35,15 @@ const UpdateTemplate = () => {
         return response.json();
       })
       .then((apiData) => {
+        if (apiData.success === false) {
+          throw new Error(apiData.message);
+        }
         return { ...apiData.response };
       });
     return res;
   };
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ['pet-update'],
     queryFn: () => getPetInfo(),
     onSuccess: (fetchedData) => {
@@ -52,6 +59,10 @@ const UpdateTemplate = () => {
       console.log('status: ', updateState);
     }
   }, [updateState]);
+
+  if (isError) {
+    return <div className="bg-slate-500 h-screen">{error.errorMessage}</div>;
+  }
 
   return (
     <>
