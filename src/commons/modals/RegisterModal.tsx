@@ -36,7 +36,7 @@ const RegisterModal = ({
             </button>
           </div>
           <span className="text-2xl text-brand-color">등록에 실패했습니다</span>
-          <div className="text-red-600">{data.error.message}</div>
+          <div className="text-red-600">{data?.error?.message}</div>
           <div className="flex w-2/3 justify-between mt-8">
             <button
               className="text-brand-color rounded-md font-bold border border-brand-color w-16 py-2"
