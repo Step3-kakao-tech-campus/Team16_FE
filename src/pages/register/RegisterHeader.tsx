@@ -93,6 +93,7 @@ const RegisterHeader = () => {
     isSuccess,
     isError,
     data,
+    modalString: '등록',
   };
   return (
     <>

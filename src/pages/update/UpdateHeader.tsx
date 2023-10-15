@@ -92,6 +92,7 @@ const UpdateHeader = () => {
     isSuccess,
     isError,
     data,
+    modalString: '수정',
   };
   return (
     <>
