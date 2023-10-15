@@ -40,7 +40,8 @@ const UpdateTemplate = () => {
     queryKey: ['pet-update'],
     queryFn: () => getPetInfo(),
     onSuccess: (fetchedData) => {
-      setUpdateState({ ...fetchedData });
+      const { profileImageUrl, profileShortFormUrl, ...rest } = fetchedData;
+      setUpdateState({ ...rest, isComplete: true });
     },
   });
 
