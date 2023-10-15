@@ -43,6 +43,7 @@ const UpdateTemplate = () => {
       const { profileImageUrl, profileShortFormUrl, ...rest } = fetchedData;
       setUpdateState({ ...rest, isComplete: true });
     },
+    suspense: true,
   });
 
   // 데이터 들어오는 것 확인 용도
@@ -51,8 +52,6 @@ const UpdateTemplate = () => {
       console.log('status: ', updateState);
     }
   }, [updateState]);
-
-  if (isLoading) return <div>로딩중...</div>;
 
   return (
     <>
