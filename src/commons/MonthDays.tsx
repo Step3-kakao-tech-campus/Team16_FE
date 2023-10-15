@@ -33,12 +33,16 @@ export const CurrentMonthDays = ({
       <button
         className="w-full h-full"
         onClick={() => {
-          const date = `${day.getFullYear()}-${
-            day.getMonth() + 1
-          }-${day.getDate()}`;
+          const dateFormat = `${day.getFullYear()}-${String(
+            day.getMonth() + 1 < 9
+              ? `0${day.getMonth() + 1}`
+              : day.getMonth() + 1,
+          )}-${String(
+            day.getDate() + 1 < 9 ? `0${day.getDate() + 1}` : day.getDate() + 1,
+          )}`;
           setProtectionDate((prev) => ({
             ...prev,
-            protectionExpirationDate: date,
+            protectionExpirationDate: dateFormat,
           }));
           handleClick();
         }}

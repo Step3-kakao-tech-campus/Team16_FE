@@ -54,7 +54,7 @@ const VDetailPetData = ({
   return (
     <div className="flex min-w-[375px] items-center flex-col justify-center md:flex-row">
       <img
-        className="relative w-96 cursor-pointer lg:mr-20"
+        className="relative w-96 cursor-pointer lg:mr-20 lg:ml-20 lg:w-1/2"
         src={detailPetInfoProps.profileImageUrl}
         alt="z"
         onClick={handleModalImageClick}
@@ -68,7 +68,7 @@ const VDetailPetData = ({
           />
         )}
       </ModalPortal>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col w-5/6 items-center">
         <DetailPetInfo {...detailPetInfoProps} />
         <RadarChart {...radarChartProps} />
       </div>

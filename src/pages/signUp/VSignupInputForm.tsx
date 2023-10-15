@@ -2,19 +2,27 @@ import AddressInputGroup from 'pages/signUp/AddressInputGroup';
 import InputGroup from 'commons/InputGroup';
 import React from 'react';
 
-interface Props {
+interface VSignupInputProps {
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   duplicateCheck: () => void;
-  confirm: boolean;
+  isValid: boolean;
+  checked: boolean;
+  passwordConfirm: boolean;
+  emailValidText: string;
+  emailInValidText: string;
 }
 
 const VSignupInputForm = ({
   handleChange,
   handleSubmit,
   duplicateCheck,
-  confirm,
-}: Props) => {
+  isValid,
+  checked,
+  passwordConfirm,
+  emailValidText,
+  emailInValidText,
+}: VSignupInputProps) => {
   return (
     <form
       className="flex flex-col gap-4 w-full max-w-[400px]"
@@ -27,7 +35,7 @@ const VSignupInputForm = ({
           type="text"
           placeholder="이메일을 입력해주세요."
           onChange={handleChange}
-          autocomplete="email"
+          autocomplete="off"
         />
         <button
           type="button" // type을 버튼으로 지정해주면 handleSubmit이 작동하지 않음 -> onClick만 동작
@@ -37,13 +45,19 @@ const VSignupInputForm = ({
           중복 확인
         </button>
       </div>
+      {checked && isValid && (
+        <div className="text-green-500">{emailValidText}</div>
+      )}
+      {!checked && !isValid && (
+        <div className="text-red-500">{emailInValidText}</div>
+      )}
       <InputGroup
         id="password"
         name="비밀번호"
         type="password"
         placeholder="비밀번호를 입력해주세요."
         onChange={handleChange}
-        autocomplete="new-password"
+        autocomplete="off"
       />
       <InputGroup
         id="password-confirm"
@@ -51,9 +65,9 @@ const VSignupInputForm = ({
         type="password"
         placeholder="비밀번호를 한번 더 입력해주세요."
         onChange={handleChange}
-        autocomplete="new-password"
+        autocomplete="off"
       />
-      {confirm && (
+      {!passwordConfirm && (
         <div className="text-red-500">비밀번호가 일치하지 않습니다.</div>
       )}
       <InputGroup
@@ -62,7 +76,7 @@ const VSignupInputForm = ({
         type="text"
         placeholder="보호소 이름을 입력해주세요."
         onChange={handleChange}
-        autocomplete="organization"
+        autocomplete="off"
       />
       <InputGroup
         id="shelter-contact"
@@ -70,7 +84,7 @@ const VSignupInputForm = ({
         type="text"
         placeholder="보호소에 연락 가능한 연락처를 입력해주세요."
         onChange={handleChange}
-        autocomplete="tel-national"
+        autocomplete="off"
       />
       <AddressInputGroup />
       <button className="bg-brand-color text-white w-full rounded-md p-2">

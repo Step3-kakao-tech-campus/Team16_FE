@@ -5,19 +5,19 @@ import RegisterModal, {
   RegisterModalProps,
 } from 'commons/modals/RegisterModal';
 import { useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import registerState from 'recoil/registerState';
-import ImageVideoInput from './ImageVideoInput';
+import ImageVideoInput from '../register/ImageVideoInput';
 
-const RegisterHeader = () => {
+const UpdateHeader = () => {
   const [selectedImageFile, setSelectedImageFile] = useState(null);
   const [selectedVideoFile, setSelectedVideoFile] = useState(null);
   const registerPetData = useRecoilValue(registerState);
   const imageRef = useRef<HTMLInputElement>(null);
   const videoRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
-
+  const params = useParams().id;
   // 모달 관련
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleModalCloseClick = () => {
@@ -30,10 +30,10 @@ const RegisterHeader = () => {
   };
 
   // 등록하기 관련
-  const postPet = async (formData: FormData) => {
+  const patchPet = async (formData: FormData) => {
     const loginToken = getCookie('loginToken');
-    const res = await fetch(`${process.env.REACT_APP_URI}/pet`, {
-      method: 'POST',
+    const res = await fetch(`${process.env.REACT_APP_URI}/pet/${params}`, {
+      method: 'PATCH',
       body: formData,
       headers: {
         Authorization: `Bearer ${loginToken}`,
@@ -41,14 +41,12 @@ const RegisterHeader = () => {
     });
     return res.json();
   };
-  const { data, mutate, isError, isLoading, isSuccess } = useMutation(postPet);
+  const { data, mutate, isError, isLoading, isSuccess } = useMutation(patchPet);
   const handleRegisterButtonClick = async () => {
-    console.log(registerPetData);
-    if (!selectedImageFile || !selectedVideoFile || !registerPetData.isComplete)
-      return;
+    if (!registerPetData.isComplete) return;
     const formData = new FormData();
-    formData.append('profileVideo', selectedVideoFile);
-    formData.append('profileImage', selectedImageFile);
+    if (selectedVideoFile) formData.append('profileVideo', selectedVideoFile);
+    if (selectedImageFile) formData.append('profileImage', selectedImageFile);
     const { isComplete, ...restRegisterPetData } = registerPetData;
     formData.append(
       'petInfo',
@@ -93,18 +91,18 @@ const RegisterHeader = () => {
     isSuccess,
     isError,
     data,
-    modalString: '등록',
+    modalString: '수정',
   };
   return (
     <>
       <div className="flex flex-col items-center gap-8">
         <div className="flex justify-between items-center w-5/6">
-          <h1 className="text-center text-xl">등록하기</h1>
+          <h1 className="text-center text-xl">수정하기</h1>
           <button
             onClick={() => setIsModalOpen(true)}
             className="bg-brand-color rounded-md font-bold text-white w-20 py-2"
           >
-            등록완료
+            수정완료
           </button>
         </div>
         <ImageVideoInput
@@ -125,4 +123,4 @@ const RegisterHeader = () => {
   );
 };
 
-export default RegisterHeader;
+export default UpdateHeader;

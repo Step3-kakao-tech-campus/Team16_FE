@@ -8,6 +8,7 @@
 - [💻 프로젝트 소개](#-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%86%8C%EA%B0%9C)
 - [📚 기술 스택](#-%EA%B8%B0%EC%88%A0-%EC%8A%A4%ED%83%9D)
 - [🗃️ 디자인 패턴 & 디렉토리 구조 소개](#%EF%B8%8F-%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4--%EB%94%94%EB%A0%89%ED%86%A0%EB%A6%AC-%EA%B5%AC%EC%A1%B0-%EC%86%8C%EA%B0%9C)
+- [⌨️ 네이밍 컨벤션](#%EF%B8%8F-네이밍-컨벤션)
 - [📑 페이지별 기능 소개](#-%ED%8E%98%EC%9D%B4%EC%A7%80%EB%B3%84-%EA%B8%B0%EB%8A%A5-%EC%86%8C%EA%B0%9C)
 - [📝 요구사항 명세서](https://github.com/Step3-kakao-tech-campus/Team16_BE/wiki/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD-%EB%AA%85%EC%84%B8)
 - [📒 카카오 테크 캠퍼스 3단계 진행 커리큘럼 안내 사항](#-%EC%B9%B4%EC%B9%B4%EC%98%A4-%ED%85%8C%ED%81%AC-%EC%BA%A0%ED%8D%BC%EC%8A%A4-3%EB%8B%A8%EA%B3%84-%EC%A7%84%ED%96%89-%EB%B3%B4%EB%93%9C)
@@ -43,15 +44,27 @@
 </br>
 
 ### 🗃️ 디자인 패턴 & 디렉토리 구조 소개
-디자인 패턴 설명
+### ▶️ 디자인 패턴 설명 [변경 전]
 - `VAC Pattern`과 `Atomic Design Pattern`을 병합하여 사용하고 있습니다. 
-    - VAC 패턴을 사용하여 UI를 담당하는 부분과 비즈니스 로직을 담당하는 부분을 분리하여 사용하고 있습니다. 
-    - 컴포넌트 및 페이지는 Atomin 디자인 패턴을 사용하여 컴포넌트의 재사용성을 염두에 두고 관리하고 있습니다. 
+   - VAC 패턴을 사용하여 UI를 담당하는 부분과 비즈니스 로직을 담당하는 부분을 분리하여 사용하고 있습니다. 
+   - 컴포넌트 및 페이지는 Atomin 디자인 패턴을 사용하여 컴포넌트의 재사용성을 염두에 두고 관리하고 있습니다. 
+
+</br>
+
+### ▶️ 디자인 패턴 설명 [변경 후]
+- 기존 방식의 문제점
+   1. `Component의 Level`을 정하는 기준이 모호하다는 문제점이 있었습니다. 
+   2. 재사용할 수 있는 컴포넌트가 한정적이어서 모든 컴포넌트를 나누는 것에 어려움이 있었습니다. 
+- 변경된 방식
+  1. `VAC Pattern`을 유지하여 로직과 UI를 분리하고, 페이지 단위로 컴포넌트를 관리하는 방식으로 변경하였습니다.
+  2. `commons` 폴더를 만들어서 재사용할 수 있는 컴포넌트를 따로 분리했습니다. 
+
 </br>
 
 디렉토리 구조   
 - 아래의 구조는 디자인 패턴을 고려하여 작성한 가이드라인입니다.
-- 폴더명은 바뀌지 않지만, 내부 파일의 이름은 변경될 수 있습니다. 
+- `Atomic Design Pattern`의 문제로 인해 변경 사항이 반영된 구조입니다. 
+- 폴더명은 바뀌지 않지만, 내부 파일의 이름은 변경될 수 있습니다.
 
 ```
 ├── /public
@@ -64,32 +77,30 @@
 │   │   │   ├── logo1
 │   └── └── └── logo2
 ├── /src
-│   ├── /apis
-│   ├── /components
-│   │   ├── /atoms
-│   │   ├── /molecules
-│   │   ├── /organisms
-│   │   ├── /templates
-│   │   │   ├── SomeTemplate.tsx
-│   │   └── └── VSomeTemplate.tsx
-│   ├── /pages
-│   │   ├── HomePage.tsx
-│   │   └── DetailedPetPage.tsx
-│   ├── /layouts
-│   └── └── GNB.tsx
-│   ├── /recoil
-│   │   ├── PetShelterState.tsx
-│   └── └── PetInfoState.tsx
 │   ├── /commons
-│   │   ├── someFunction.ts
-│   └── └── regex.ts
+│   ├── /pages
+│   │   ├── home
+│   │   │   └── Home.tsx
+│   │   ├── login
+│   │   │   ├── VLoginPage.tsx
+│   │   │   └── LoginPage.tsx
+│   │   ├── map
+│   │   │   ├── Map.tsx
+│   ├── └── └── MapPage.tsx
+│   ├── /layouts
+│   │   ├── VGNB.tsx
+│   │   └── GNB.tsx
+│   ├── /recoil
+│   │   ├── registerState.tsx
+│   └── └── regionState.tsx
 │   ├── /hooks
 │   └── └── useFetch.ts
 │   ├── App.css
 │   ├── App.tsx
 │   ├── App.test.tsx
 │   ├── index.css
-└── └── index.tsx
+├── └── index.tsx
+├── .env
 ├── .eslintrc
 ├── .gitignore
 ├── .prettierrc
@@ -102,13 +113,36 @@
 
 </br>
 
+### ⌨️ 네이밍 컨벤션
+- 모든 이름은 기능을 유추할 수 있도록 의미를 내포하고 있도록 작성함을 원칙으로 한다.
+  #### 1. 파일
+  - 컴포넌트 파일 : `PascalCase` 적용
+  - 컴포넌트 이외의 파일 : `camelCase` 적용
+  - 테스트 파일 : `App.test.tx`와 같이 `.test`를 명시
+  #### 2. 폴더
+  - 모든 폴더를 `camelCase`로 적용
+  #### 3. 변수명
+  - 일반적인 변수 : `camelCase`로 영어 대소문자를 사용
+  - 상수 : 대문자로만 작성하고, 여러 단어의 구분은 _(underscore) 사용
+  #### 4. 이벤트 핸들러
+  - handle + EventName으로 사용
+  #### 5. 함수
+  - 함수의 기능을 기준으로 작명
+  - `camelCase` 적용
+  #### 6. Type, Interface
+  - `PascalCase` 적용
+  #### 7. Route(경로)
+  - `kebab-case` 적용
+
+</br>
+
 ### 📑 페이지별 기능 소개
 - 기획 단계에서 `Figma`을 통해 UI에 대한 와이어프레임을 제작하였습니다.
 - 아래 이미지는 페이지별 UI 설계 이미지와 사용되는 컴포넌트 및 기능에 대한 설명입니다. 
 - 자세한 사항은 [TEAM-16-Wireframe](https://www.figma.com/file/A0w3m1DU5JJm2zzvo9lnGE/16%EC%A1%B0-%EC%83%88%EA%B8%B0%ED%9A%8D?type=design&node-id=684%3A1302&mode=design&t=OXljL8TPJH6AsihE-1)을 통해 확인하실 수 있습니다. 
 </br>
 
-1. 메인 페이지
+### 1. 메인 페이지
 
    <img width="450" alt="main-page" src="https://github.com/Step3-kakao-tech-campus/Team16_FE/assets/81916309/9836ad76-7103-4db2-8de2-108243a3e1cb">
 
@@ -118,7 +152,7 @@
 
 </br>
 
-2. 상세 정보 페이지
+### 2. 상세 정보 페이지
 
    <img width="450" alt="image" src="https://github.com/Step3-kakao-tech-campus/Team16_FE/assets/81916309/73fa44a9-4096-4fbe-bd1a-96656973ccfe">
 
@@ -128,7 +162,7 @@
 
 </br>
 
-3. 근처 동물 보호소 찾기 페이지
+### 3. 근처 동물 보호소 찾기 페이지
 
    <img width="450" alt="image" src="https://github.com/Step3-kakao-tech-campus/Team16_FE/assets/81916309/46567a69-aebf-4bbd-b288-86d1e8b7bab2">
 
@@ -138,7 +172,7 @@
 
 </br>
 
-4. 보호소 프로필 페이지
+### 4. 보호소 프로필 페이지
 
    <img width="450" alt="image" src="https://github.com/Step3-kakao-tech-campus/Team16_FE/assets/81916309/d8fd3872-74e1-4baf-ada8-e61db9877be3">
 
@@ -147,7 +181,7 @@
 
 </br>
 
-5. 프로필 리스트 페이지
+### 5. 프로필 리스트 페이지
 
    <img width="450" alt="image" src="https://github.com/Step3-kakao-tech-campus/Team16_FE/assets/81916309/cdea2d38-69fc-45ae-865a-c6e830480357">
    <img width="450" alt="image" src="https://github.com/Step3-kakao-tech-campus/Team16_FE/assets/81916309/9a897d39-8edd-450d-8b63-e99c72354b3d">
@@ -159,7 +193,7 @@
 
 </br>
 
-6. 등록하기 페이지
+### 6. 등록하기 페이지
 
    <img width="300" alt="image" src="https://github.com/Step3-kakao-tech-campus/Team16_FE/assets/81916309/80a87ef3-2990-44f8-a9f4-740ecd5e0906">
    <img width="350" alt="image" src="https://github.com/Step3-kakao-tech-campus/Team16_FE/assets/81916309/a10b6302-8976-485a-9b62-1c131ec88156">
@@ -170,7 +204,7 @@
 
 </br>
 
-7. 수정하기 페이지
+### 7. 수정하기 페이지
 
    <img width="450" alt="image" src="https://github.com/Step3-kakao-tech-campus/Team16_FE/assets/81916309/6f2fe250-121c-47ad-8710-f9a48d876026">
 
@@ -179,7 +213,7 @@
 
 </br>
 
-8. 로그인 페이지
+### 8. 로그인 페이지
 
    <img width="450" alt="image" src="https://github.com/Step3-kakao-tech-campus/Team16_FE/assets/81916309/a23d7cdc-6e14-44db-9148-a26547dbd58e">
 
@@ -191,7 +225,7 @@
   
 </br>
 
-9. 회원가입 페이지
+### 9. 회원가입 페이지
 
    <img width="350" alt="image" src="https://github.com/Step3-kakao-tech-campus/Team16_FE/assets/81916309/b15f4b83-0cd3-4e74-a2dc-c81ed578bfe1">
 
@@ -202,9 +236,9 @@
 
 </br>
 
-10. GNB(Global Navigation Bar)
+### 10. GNB(Global Navigation Bar)
 
-    <img width="450" alt="image" src="https://github.com/Step3-kakao-tech-campus/Team16_FE/assets/81916309/abbc8077-66a0-487b-a2fb-49cc375c0628">
+  <img width="450" alt="image" src="https://github.com/Step3-kakao-tech-campus/Team16_FE/assets/81916309/abbc8077-66a0-487b-a2fb-49cc375c0628">
 
 - 카테고리, 프로필 목록, 주변 보호소 찾기, 등록하기, 로그인, 회원가입 페이지입니다.
 - 각 기능에 대한 버튼을 누르게 되면, 해당 역할을 하는 페이지로 이동하게 됩니다. 
@@ -212,10 +246,10 @@
 
 </br>
 
-11. 카테고리 Modal
+### 11. 카테고리 Modal
 
-    <img width="436" alt="image" src="https://github.com/Step3-kakao-tech-campus/Team16_FE/assets/81916309/d8121898-cc0e-4b87-bc34-05771e77e4f4">
-    <img width="395" alt="image" src="https://github.com/Step3-kakao-tech-campus/Team16_FE/assets/81916309/698a6822-c5f4-4dc7-8179-b14d1a0109bc">
+  <img width="436" alt="image" src="https://github.com/Step3-kakao-tech-campus/Team16_FE/assets/81916309/d8121898-cc0e-4b87-bc34-05771e77e4f4">
+  <img width="395" alt="image" src="https://github.com/Step3-kakao-tech-campus/Team16_FE/assets/81916309/698a6822-c5f4-4dc7-8179-b14d1a0109bc">
 
 - GNB에 있는 카테고리 탭을 누르게 되면, 지역과 동물 카테고리를 지정할 수 있는 모달창이 나오게 됩니다.
 - 선택된 카테고리에 따라 홈 화면에서 보여지는 동물 숏폼 리스트가 변경됩니다. 

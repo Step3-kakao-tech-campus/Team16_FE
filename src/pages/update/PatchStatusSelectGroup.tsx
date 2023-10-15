@@ -1,23 +1,39 @@
+import StatusScore from 'pages/register/StatusScore';
 import React, { useState } from 'react';
-import { useRecoilState } from 'recoil';
-import registerState from 'recoil/registerState';
-import StatusScore from './StatusScore';
+import { SetterOrUpdater } from 'recoil';
+import { RegisterType } from 'recoil/registerState';
 
-const StatusSelectGroup = () => {
-  const [profileStatus, setProfileStatus] = useRecoilState(registerState);
-  const { petPolygonProfileDto } = profileStatus;
+interface PetStatusType {
+  intelligence: number;
+  affinity: number;
+  athletic: number;
+  adaptability: number;
+  activeness: number;
+}
 
-  const [intelligenceOption, setIntelligenceOption] = useState(3);
-  const [affinityOption, setAffinityOption] = useState(3);
-  const [athleticOption, setAthleticOption] = useState(3);
-  const [adaptabilityOption, setAdaptabilityOption] = useState(3);
-  const [activenessOption, setActivenessOption] = useState(3);
+interface PetStatusProps {
+  petStatus: PetStatusType;
+  setUpdateState: SetterOrUpdater<RegisterType>;
+}
+
+const PatchStatusSelectGroup = ({
+  petStatus,
+  setUpdateState,
+}: PetStatusProps) => {
+  const { intelligence, affinity, athletic, adaptability, activeness } =
+    petStatus;
+
+  const [intelligenceOption, setIntelligenceOption] = useState(intelligence);
+  const [affinityOption, setAffinityOption] = useState(affinity);
+  const [athleticOption, setAthleticOption] = useState(athletic);
+  const [adaptabilityOption, setAdaptabilityOption] = useState(adaptability);
+  const [activenessOption, setActivenessOption] = useState(activeness);
 
   const handleOptionChange = (status: string, option: number) => {
     switch (status) {
       case 'intelligence':
         setIntelligenceOption(option);
-        setProfileStatus((prev) => ({
+        setUpdateState((prev) => ({
           ...prev,
           petPolygonProfileDto: {
             ...prev.petPolygonProfileDto,
@@ -27,7 +43,7 @@ const StatusSelectGroup = () => {
         break;
       case 'affinity':
         setAffinityOption(option);
-        setProfileStatus((prev) => ({
+        setUpdateState((prev) => ({
           ...prev,
           petPolygonProfileDto: {
             ...prev.petPolygonProfileDto,
@@ -37,7 +53,7 @@ const StatusSelectGroup = () => {
         break;
       case 'athletic':
         setAthleticOption(option);
-        setProfileStatus((prev) => ({
+        setUpdateState((prev) => ({
           ...prev,
           petPolygonProfileDto: {
             ...prev.petPolygonProfileDto,
@@ -47,7 +63,7 @@ const StatusSelectGroup = () => {
         break;
       case 'adaptability':
         setAdaptabilityOption(option);
-        setProfileStatus((prev) => ({
+        setUpdateState((prev) => ({
           ...prev,
           petPolygonProfileDto: {
             ...prev.petPolygonProfileDto,
@@ -57,7 +73,7 @@ const StatusSelectGroup = () => {
         break;
       case 'activeness':
         setActivenessOption(option);
-        setProfileStatus((prev) => ({
+        setUpdateState((prev) => ({
           ...prev,
           petPolygonProfileDto: {
             ...prev.petPolygonProfileDto,
@@ -70,35 +86,40 @@ const StatusSelectGroup = () => {
     }
   };
 
+  // 데이터 확인용
+  // useEffect(() => {
+  //   console.log(petStatus);
+  // }, [petStatus]);
+
   return (
     <div>
       <StatusScore
         status={'intelligence'}
-        score={petPolygonProfileDto.intelligence}
+        score={intelligence}
         selectedOption={intelligenceOption}
         handleChange={handleOptionChange}
       />
       <StatusScore
         status={'affinity'}
-        score={petPolygonProfileDto.affinity}
+        score={affinity}
         selectedOption={affinityOption}
         handleChange={handleOptionChange}
       />
       <StatusScore
         status={'athletic'}
-        score={petPolygonProfileDto.athletic}
+        score={athletic}
         selectedOption={athleticOption}
         handleChange={handleOptionChange}
       />
       <StatusScore
         status={'adaptability'}
-        score={petPolygonProfileDto.adaptability}
+        score={adaptability}
         selectedOption={adaptabilityOption}
         handleChange={handleOptionChange}
       />
       <StatusScore
         status={'activeness'}
-        score={petPolygonProfileDto.activeness}
+        score={activeness}
         selectedOption={activenessOption}
         handleChange={handleOptionChange}
       />
@@ -106,4 +127,4 @@ const StatusSelectGroup = () => {
   );
 };
 
-export default StatusSelectGroup;
+export default PatchStatusSelectGroup;

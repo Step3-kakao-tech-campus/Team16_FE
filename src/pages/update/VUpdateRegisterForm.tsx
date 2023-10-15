@@ -1,12 +1,16 @@
-import InputGroup from 'commons/InputGroup';
 import RadioGroup from 'pages/register/RadioGroup';
 import SelectBox from 'commons/SelectBox';
+import { RegisterType } from 'recoil/registerState';
+import InputGroup from './UpdateInputGroup';
 
 type RegisterProps = {
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  petInfo: RegisterType;
 };
 
-const VMRegisterForm = ({ handleChange }: RegisterProps) => {
+const VMRegisterForm = ({ handleChange, petInfo }: RegisterProps) => {
+  console.log('dk', petInfo);
+  console.log(petInfo.name);
   return (
     <div className="sm:mx-auto flex flex-col items-center gap-8 mt-10">
       <div className="flex justify-center items-center w-3/4 text-sm  mb-5 sm:gap-20 sm:w-1/2  ">
@@ -16,11 +20,11 @@ const VMRegisterForm = ({ handleChange }: RegisterProps) => {
               id="name"
               name="이름"
               type="text"
-              placeholder="이름을 입력해주세요"
+              placeholder={petInfo.name}
               onChange={(e) => {
                 handleChange(e);
               }}
-              autocomplete="on"
+              value={petInfo.name}
             />
           </div>
           <div className="flex w-3/4 gap-5 whitespace-nowrap items-center ml-10 justify-center">
@@ -28,11 +32,11 @@ const VMRegisterForm = ({ handleChange }: RegisterProps) => {
               id="age"
               name="나이"
               type="text"
-              placeholder="'00년 00개월'과 같이 작성해주세요."
+              placeholder={petInfo.age}
               onChange={(e) => {
                 handleChange(e);
               }}
-              autocomplete="on"
+              value={petInfo.age}
             />
             <SelectBox />
           </div>
@@ -49,11 +53,11 @@ const VMRegisterForm = ({ handleChange }: RegisterProps) => {
             id="size"
             name="크기"
             type="text"
-            placeholder="주변 사물과 비교해서 작성해주셔도 좋아요!"
+            placeholder={petInfo.size}
             onChange={(e) => {
               handleChange(e);
             }}
-            autocomplete="on"
+            value={petInfo.size}
           />
         </div>
       </div>
@@ -63,11 +67,11 @@ const VMRegisterForm = ({ handleChange }: RegisterProps) => {
             id="weight"
             name="몸무게"
             type="number"
-            placeholder="kg 단위로 입력해주세요"
+            placeholder={`${petInfo.weight}`}
             onChange={(e) => {
               handleChange(e);
             }}
-            autocomplete="off"
+            value={petInfo.weight}
           />
         </div>
         <div className=" w-full">
@@ -75,11 +79,11 @@ const VMRegisterForm = ({ handleChange }: RegisterProps) => {
             id="vaccinationStatus"
             name="접종여부"
             type="text"
-            placeholder="접종차수를 입력해주세요"
+            placeholder={petInfo.vaccinationStatus}
             onChange={(e) => {
               handleChange(e);
             }}
-            autocomplete="off"
+            value={petInfo.vaccinationStatus}
           />
         </div>
       </div>
@@ -89,11 +93,11 @@ const VMRegisterForm = ({ handleChange }: RegisterProps) => {
             id="description"
             name="상세설명"
             type="text"
-            placeholder="상세 설명을 입력해주세요"
+            placeholder={petInfo.description}
             onChange={(e) => {
               handleChange(e);
             }}
-            autocomplete="off"
+            value={petInfo.description}
           />
         </div>
       </div>
