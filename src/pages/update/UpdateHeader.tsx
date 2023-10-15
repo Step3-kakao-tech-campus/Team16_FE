@@ -30,7 +30,7 @@ const UpdateHeader = () => {
   };
 
   // 등록하기 관련
-  const postPet = async (formData: FormData) => {
+  const patchPet = async (formData: FormData) => {
     const loginToken = getCookie('loginToken');
     const res = await fetch(`${process.env.REACT_APP_URI}/pet/${params}`, {
       method: 'PATCH',
@@ -41,9 +41,8 @@ const UpdateHeader = () => {
     });
     return res.json();
   };
-  const { data, mutate, isError, isLoading, isSuccess } = useMutation(postPet);
+  const { data, mutate, isError, isLoading, isSuccess } = useMutation(patchPet);
   const handleRegisterButtonClick = async () => {
-    console.log(registerPetData);
     if (!registerPetData.isComplete) return;
     const formData = new FormData();
     if (selectedVideoFile) formData.append('profileVideo', selectedVideoFile);
