@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import registerState from 'recoil/registerState';
 import DayModalInput from 'pages/register/DayModalInput';
-import RegisterHeader from 'pages/register/RegisterHeader';
+import UpdateHeader from './UpdateHeader';
 import PatchStatusSelectGroup from './PatchStatusSelectGroup';
 import UpdateRegisterForm from './UpdateRegisterForm';
 
@@ -53,7 +53,7 @@ const UpdateTemplate = () => {
 
   return (
     <>
-      <RegisterHeader />
+      <UpdateHeader />
       <UpdateRegisterForm petInfo={updateState} />
       <DayModalInput />
       <PatchStatusSelectGroup
