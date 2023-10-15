@@ -5,7 +5,7 @@ import RegisterModal, {
   RegisterModalProps,
 } from 'commons/modals/RegisterModal';
 import { useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import registerState from 'recoil/registerState';
 import ImageVideoInput from '../register/ImageVideoInput';
@@ -17,7 +17,7 @@ const UpdateHeader = () => {
   const imageRef = useRef<HTMLInputElement>(null);
   const videoRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
-
+  const params = useParams().id;
   // 모달 관련
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleModalCloseClick = () => {
@@ -32,8 +32,8 @@ const UpdateHeader = () => {
   // 등록하기 관련
   const postPet = async (formData: FormData) => {
     const loginToken = getCookie('loginToken');
-    const res = await fetch(`${process.env.REACT_APP_URI}/pet`, {
-      method: 'POST',
+    const res = await fetch(`${process.env.REACT_APP_URI}/pet/${params}`, {
+      method: 'PATCH',
       body: formData,
       headers: {
         Authorization: `Bearer ${loginToken}`,
