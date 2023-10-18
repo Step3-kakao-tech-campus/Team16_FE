@@ -13,7 +13,7 @@ interface SelectProps {
 }
 
 const yearOptions: SelectProps[] = [];
-for (let idx = 0; idx < 33; idx += 1) {
+for (let idx = 0; idx < 32; idx += 1) {
   yearOptions.push({ label: `${idx}`, value: `${idx}` });
 }
 
@@ -31,6 +31,7 @@ const SelectBox = ({ id, label }: IdProps) => {
   const [selectedType, setSelectedType] = useRecoilState(registerState);
 
   const year = selectedType.age.substring(0, selectedType.age.indexOf('년'));
+  console.log('년', year);
   const month = selectedType.age.substring(
     selectedType.age.indexOf('년') + 1,
     selectedType.age.indexOf('개'),
@@ -40,21 +41,21 @@ const SelectBox = ({ id, label }: IdProps) => {
     console.log(value);
 
     console.log('달', month);
-    if (label === '종') {
+    if (label === '종🔸') {
       setSelectedType((prevType) => ({
         ...prevType,
         type: value,
       }));
-    } else if (label === '나이') {
+    } else if (label === 'ㅤ') {
       setSelectedType((prevType) => ({
         ...prevType,
-        age: `${value}년${month}개월`,
+        age: `${year}년${value}개월`,
       }));
       console.log(value);
     } else {
       setSelectedType((prevType) => ({
         ...prevType,
-        age: `${year}년${value}개월`,
+        age: `${value}년${month}개월`,
       }));
       console.log(value);
     }
@@ -79,7 +80,7 @@ const SelectBox = ({ id, label }: IdProps) => {
     <div className="justify-end">
       <h2 className="font-semibold mb-1">{label}</h2>
       <select
-        className="border-2 rounded-md border-gray-300 h-10"
+        className="border-2 rounded-md w-auto border-gray-300 h-10 mx-auto"
         name="type"
         value={key}
         onChange={(e) => handleChange(e.target.value)}
