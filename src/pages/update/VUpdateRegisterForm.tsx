@@ -1,5 +1,5 @@
 import RadioGroup from 'pages/register/RadioGroup';
-import SelectBox from 'commons/SelectBox';
+import SelectBox, { IdProps } from 'commons/SelectBox';
 import { RegisterType } from 'recoil/registerState';
 import InputGroup from './UpdateInputGroup';
 
@@ -8,7 +8,10 @@ type RegisterProps = {
   petInfo: RegisterType;
 };
 
-const VMRegisterForm = ({ handleChange, petInfo }: RegisterProps) => {
+const VMRegisterForm = (
+  { handleChange, petInfo }: RegisterProps,
+  { id }: IdProps,
+) => {
   console.log('dk', petInfo);
   console.log(petInfo.name);
   return (
@@ -20,25 +23,19 @@ const VMRegisterForm = ({ handleChange, petInfo }: RegisterProps) => {
               id="name"
               name="이름"
               type="text"
-              placeholder={petInfo.name}
+              placeholder="이름을 입력해주세요"
               onChange={(e) => {
                 handleChange(e);
               }}
-              value={petInfo.name}
+              defaultValue={petInfo.name}
             />
           </div>
-          <div className="flex w-3/4 gap-5 whitespace-nowrap items-center ml-10 justify-center">
-            <InputGroup
-              id="age"
-              name="나이"
-              type="text"
-              placeholder={petInfo.age}
-              onChange={(e) => {
-                handleChange(e);
-              }}
-              value={petInfo.age}
-            />
-            <SelectBox />
+          <div className="flex w-3/4 gap-2 whitespace-nowrap items-center ml-10 justify-center">
+            <SelectBox id={1} label={'나이🔸'} />
+            <div className="flex h-full items-end">년</div>
+            <SelectBox id={2} label={'ㅤ'} />
+            <div className="flex w-12 h-full items-end">개월</div>
+            <SelectBox id={3} label={'종🔸'} />
           </div>
         </div>
       </div>
@@ -53,25 +50,31 @@ const VMRegisterForm = ({ handleChange, petInfo }: RegisterProps) => {
             id="size"
             name="크기"
             type="text"
-            placeholder={petInfo.size}
+            placeholder="주변 사물과 비교해서 작성해주셔도 좋아요!"
             onChange={(e) => {
               handleChange(e);
             }}
-            value={petInfo.size}
+            defaultValue={petInfo.size}
           />
         </div>
       </div>
       <div className="flex flex-col sm:flex-row justify-center gap-5 sm:gap-10 w-3/4 sm:w-1/2 text-sm  mb-5">
-        <div className=" w-full">
-          <InputGroup
+        <div className="flex flex-col gap-1 w-full">
+          <label htmlFor={'weight'} className="text-sm font-semibold">
+            몸무게
+          </label>
+          <input
+            className="border-2 rounded-md border-gray-300 p-2"
             id="weight"
             name="몸무게"
             type="number"
-            placeholder={`${petInfo.weight}`}
+            placeholder="kg 단위로 입력해주세요"
             onChange={(e) => {
               handleChange(e);
             }}
-            value={petInfo.weight}
+            autoComplete="off"
+            min={1}
+            defaultValue={petInfo.weight}
           />
         </div>
         <div className=" w-full">
@@ -79,11 +82,11 @@ const VMRegisterForm = ({ handleChange, petInfo }: RegisterProps) => {
             id="vaccinationStatus"
             name="접종여부"
             type="text"
-            placeholder={petInfo.vaccinationStatus}
+            placeholder="접종명과 차수를 입력해주세요"
             onChange={(e) => {
               handleChange(e);
             }}
-            value={petInfo.vaccinationStatus}
+            defaultValue={petInfo.vaccinationStatus}
           />
         </div>
       </div>
@@ -93,11 +96,11 @@ const VMRegisterForm = ({ handleChange, petInfo }: RegisterProps) => {
             id="description"
             name="상세설명"
             type="text"
-            placeholder={petInfo.description}
+            placeholder="상세 설명을 입력해주세요"
             onChange={(e) => {
               handleChange(e);
             }}
-            value={petInfo.description}
+            defaultValue={petInfo.description}
           />
         </div>
       </div>

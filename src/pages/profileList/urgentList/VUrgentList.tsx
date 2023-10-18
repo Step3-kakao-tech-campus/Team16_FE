@@ -23,11 +23,11 @@ export interface Props {
 
 const VUrgentList = (props: Props) => {
   return (
-    <div className="mx-16 sm:mx-72 sm:my-20">
-      <h2 className="flex w-full font-bold text-xl sm:text-2xl whitespace-nowrap">
+    <div className="mx-16 sm:mx-40 lg:mx-64 my-14">
+      <h2 className="flex w-full font-bold text-xl sm:text-2xl items-center whitespace-nowrap">
         긴급 도움이 필요해요!
       </h2>
-      <div className="grid grid-cols-1 gap-1 sm:grid-cols-2 my-10 w-full">
+      <div className="grid grid-cols-1 gap-1 md:grid-cols-2 my-10 w-full whitespace-nowrap">
         <ProfileCard {...props.profileListProps} />
         <ProfileCard {...props.profileListProps} />
         <ProfileCard {...props.profileListProps} />
