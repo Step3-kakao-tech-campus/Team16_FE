@@ -1,8 +1,8 @@
 interface StatusProps {
   status: string;
   score: number;
-  selectedOption: string;
-  handleChange: (status: string, option: string) => void;
+  selectedOption: number;
+  handleChange: (status: string, option: number) => void;
 }
 
 const Dash = () => {
@@ -21,7 +21,7 @@ const Dash = () => {
 const StatusScore = ({ status, selectedOption, handleChange }: StatusProps) => {
   const getButtonColor = (option: string) => {
     return `appearance-none ${
-      selectedOption !== option
+      String(selectedOption) !== option
         ? 'border-[#C4C4C4] bg-[#C4C4C4]'
         : 'border-brand-color bg-brand-color'
     } border-8 rounded-full w-[50px] h-[50px] cursor-pointer`;
@@ -36,35 +36,35 @@ const StatusScore = ({ status, selectedOption, handleChange }: StatusProps) => {
           type="radio"
           value="1"
           className={getButtonColor('1')}
-          onChange={() => handleChange(status, '1')}
+          onClick={() => handleChange(status, 1)}
         />
         <Dash />
         <input
           type="radio"
           value="2"
           className={getButtonColor('2')}
-          onChange={() => handleChange(status, '2')}
+          onClick={() => handleChange(status, 2)}
         />
         <Dash />
         <input
           type="radio"
           value="3"
           className={getButtonColor('3')}
-          onChange={() => handleChange(status, '3')}
+          onClick={() => handleChange(status, 3)}
         />
         <Dash />
         <input
           type="radio"
           value="4"
           className={getButtonColor('4')}
-          onChange={() => handleChange(status, '4')}
+          onClick={() => handleChange(status, 4)}
         />
         <Dash />
         <input
           type="radio"
           value="5"
           className={getButtonColor('5')}
-          onChange={() => handleChange(status, '5')}
+          onClick={() => handleChange(status, 5)}
         />
         <span className="text-sm font-semibold mx-1">High</span>
       </div>

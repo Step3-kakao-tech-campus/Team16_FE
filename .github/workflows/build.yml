@@ -1,0 +1,46 @@
+name: npm-build-and-deploy
+
+on:
+  pull_request:
+    branches: [ develop ]
+
+jobs:
+  npm-build:
+    runs-on: ubuntu-22.04 
+
+    # build 중 warning 무시
+    env:
+      CI: false
+
+    steps:
+      - uses: actions/checkout@v3.6.0
+
+      - name: Set up Node 20 
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Inject .env file from GitHub Secrets
+        env:
+          ENV_FILE: ${{ secrets.ENV_FILE }}
+          TARGET_DIR: ./
+        run: echo $ENV_FILE | base64 -d > $TARGET_DIR/.env
+
+      - name: Try build
+        run: npm run build
+
+  deploy:
+    needs: npm-build
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Deploy Trigger
+        run: |
+          curl -X POST http://ec2-3-37-14-140.ap-northeast-2.compute.amazonaws.com:20001/job/animory-fe-deploy/build \
+          --user admin:${{ secrets.JENKINS_DEPLOY_KEY }}
+
+

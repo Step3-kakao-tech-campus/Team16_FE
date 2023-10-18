@@ -3,7 +3,8 @@ interface RadioProps {
   label: string;
   value: string;
   selected?: boolean;
-  onChange: (e: any) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onClick: (e: React.MouseEvent<HTMLInputElement>) => void;
 }
 
 const DetailRadio = ({
@@ -12,6 +13,7 @@ const DetailRadio = ({
   value,
   selected,
   onChange,
+  onClick,
 }: RadioProps) => {
   return (
     <div>
@@ -23,6 +25,7 @@ const DetailRadio = ({
           value={value}
           defaultChecked={selected}
           onChange={onChange}
+          onClick={onClick}
         />
         {label}
       </label>
