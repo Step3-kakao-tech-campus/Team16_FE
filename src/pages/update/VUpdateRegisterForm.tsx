@@ -1,5 +1,5 @@
 import RadioGroup from 'pages/register/RadioGroup';
-import SelectBox from 'commons/SelectBox';
+import SelectBox, { IdProps } from 'commons/SelectBox';
 import { RegisterType } from 'recoil/registerState';
 import InputGroup from './UpdateInputGroup';
 
@@ -8,7 +8,10 @@ type RegisterProps = {
   petInfo: RegisterType;
 };
 
-const VMRegisterForm = ({ handleChange, petInfo }: RegisterProps) => {
+const VMRegisterForm = (
+  { handleChange, petInfo }: RegisterProps,
+  { id }: IdProps,
+) => {
   console.log('dk', petInfo);
   console.log(petInfo.name);
   return (
@@ -24,7 +27,7 @@ const VMRegisterForm = ({ handleChange, petInfo }: RegisterProps) => {
               onChange={(e) => {
                 handleChange(e);
               }}
-              value={petInfo.name}
+              defaultValue={petInfo.name}
             />
           </div>
           <div className="flex w-3/4 gap-5 whitespace-nowrap items-center ml-10 justify-center">
@@ -36,9 +39,9 @@ const VMRegisterForm = ({ handleChange, petInfo }: RegisterProps) => {
               onChange={(e) => {
                 handleChange(e);
               }}
-              value={petInfo.age}
+              defaultValue={petInfo.age}
             />
-            <SelectBox />
+            <SelectBox id={1} label={'나이'} />
           </div>
         </div>
       </div>
@@ -57,7 +60,7 @@ const VMRegisterForm = ({ handleChange, petInfo }: RegisterProps) => {
             onChange={(e) => {
               handleChange(e);
             }}
-            value={petInfo.size}
+            defaultValue={petInfo.size}
           />
         </div>
       </div>
@@ -71,7 +74,7 @@ const VMRegisterForm = ({ handleChange, petInfo }: RegisterProps) => {
             onChange={(e) => {
               handleChange(e);
             }}
-            value={petInfo.weight}
+            defaultValue={petInfo.weight}
           />
         </div>
         <div className=" w-full">
@@ -83,7 +86,7 @@ const VMRegisterForm = ({ handleChange, petInfo }: RegisterProps) => {
             onChange={(e) => {
               handleChange(e);
             }}
-            value={petInfo.vaccinationStatus}
+            defaultValue={petInfo.vaccinationStatus}
           />
         </div>
       </div>
@@ -97,7 +100,7 @@ const VMRegisterForm = ({ handleChange, petInfo }: RegisterProps) => {
             onChange={(e) => {
               handleChange(e);
             }}
-            value={petInfo.description}
+            defaultValue={petInfo.description}
           />
         </div>
       </div>
