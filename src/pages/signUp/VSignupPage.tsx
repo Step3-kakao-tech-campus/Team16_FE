@@ -1,4 +1,5 @@
 import Banner from 'commons/Banner';
+import LogoButton from 'commons/LogoButton';
 import SignupInputForm from 'pages/signUp/SignupInputForm';
 
 type Props = {
@@ -15,7 +16,14 @@ const VSignupPage = ({ redirectLoginPage }: Props) => {
         backgroundPosition: 'center',
       }}
     >
-      <Banner className="font-bold text-2xl">회원가입</Banner>
+      <div className="flex flex-row justify-between items-center gap-4 max-w-[400px] w-[100%]">
+        <LogoButton
+          imageClassName="sm:w-8 md:w-8 lg:w-12"
+          logoClassName="sm:text-2xl md:text-2xl lg:text-3xl"
+        />
+        <Banner className="font-bold text-lg lg:text-2xl">회원가입</Banner>
+      </div>
+
       <div className="flex flex-col gap-2">
         <Banner className="font-semibold text-lg">
           애니모리에 오신 것을 환영합니다!
@@ -25,16 +33,15 @@ const VSignupPage = ({ redirectLoginPage }: Props) => {
         </Banner>
       </div>
       <SignupInputForm />
-      <div className="signUp-button signUp-button flex justify-between min-w-[15rem]">
+      <div className="signUp-button lg:flex-row lg:justify-between gap-2 min-w-[15rem] flex flex-col text-center">
         <span className="text-gray-400">계정이 이미 있다면? </span>
         <span className="font-medium text-brand-color">
           <button
             className="font-medium text-brand-color"
             onClick={redirectLoginPage}
           >
-            로그인{' '}
-          </button>{' '}
-          <span>하러가기</span>
+            로그인 하러가기
+          </button>
         </span>
       </div>
     </div>

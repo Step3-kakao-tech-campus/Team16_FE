@@ -25,7 +25,7 @@ const VSignupInputForm = ({
 }: VSignupInputProps) => {
   return (
     <form
-      className="flex flex-col gap-4 w-full max-w-[400px]"
+      className="flex flex-col gap-4 w-full max-w-[400px] px-2"
       onSubmit={handleSubmit}
     >
       <div className="email-confirm flex place-items-end justify-center">
