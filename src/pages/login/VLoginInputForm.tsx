@@ -1,11 +1,20 @@
 import InputGroup from 'commons/InputGroup';
 
-type Props = {
+interface LoginInputFormProps {
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   isEmailEmpty: boolean;
   isPasswordEmpty: boolean;
   errorText: string;
+}
+
+interface ErrorTextProps {
+  isEmpty: boolean;
+  text: string;
+}
+
+const ErrorText = ({ isEmpty, text }: ErrorTextProps) => {
+  return <div>{isEmpty && <span className="text-red-500">{text}</span>}</div>;
 };
 
 const VLoginInputForm = ({
@@ -14,7 +23,7 @@ const VLoginInputForm = ({
   isEmailEmpty,
   isPasswordEmpty,
   errorText,
-}: Props) => {
+}: LoginInputFormProps) => {
   return (
     <form
       className="flex flex-col gap-4 w-full max-w-[400px]"
@@ -30,7 +39,8 @@ const VLoginInputForm = ({
         }}
         autocomplete="off"
       />
-      {isEmailEmpty && <div className="text-red-500">{errorText}</div>}
+      <ErrorText isEmpty={isEmailEmpty} text={errorText} />
+
       <InputGroup
         id="password"
         name="비밀번호"
@@ -41,9 +51,7 @@ const VLoginInputForm = ({
         }}
         autocomplete="off"
       />
-      {isPasswordEmpty && (
-        <div className="text-red-500">비밀번호를 입력해주세요.</div>
-      )}
+      <ErrorText isEmpty={isPasswordEmpty} text="비밀번호를 입력해주세요." />
       <button className="bg-brand-color text-white w-full rounded-md p-2">
         로그인
       </button>
