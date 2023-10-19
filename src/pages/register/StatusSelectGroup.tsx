@@ -73,31 +73,31 @@ const StatusSelectGroup = () => {
   return (
     <div>
       <StatusScore
-        status={'intelligence'}
+        status={'영리함'}
         score={petPolygonProfileDto.intelligence}
         selectedOption={intelligenceOption}
         handleChange={handleOptionChange}
       />
       <StatusScore
-        status={'affinity'}
+        status={'친화력'}
         score={petPolygonProfileDto.affinity}
         selectedOption={affinityOption}
         handleChange={handleOptionChange}
       />
       <StatusScore
-        status={'athletic'}
+        status={'운동신경'}
         score={petPolygonProfileDto.athletic}
         selectedOption={athleticOption}
         handleChange={handleOptionChange}
       />
       <StatusScore
-        status={'adaptability'}
+        status={'적응력'}
         score={petPolygonProfileDto.adaptability}
         selectedOption={adaptabilityOption}
         handleChange={handleOptionChange}
       />
       <StatusScore
-        status={'activeness'}
+        status={'활발함'}
         score={petPolygonProfileDto.activeness}
         selectedOption={activenessOption}
         handleChange={handleOptionChange}
