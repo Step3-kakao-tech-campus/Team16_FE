@@ -24,8 +24,7 @@ const LoginInputForm = () => {
     setIsEmailEmpty(false);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const checkEmpty = () => {
     if (!userInfo.email) {
       setErrorText('이메일을 입력해주세요');
       setIsEmailEmpty(true);
@@ -33,7 +32,9 @@ const LoginInputForm = () => {
     if (!userInfo.password) {
       setIsPasswordEmpty(true);
     }
-    // email, password 보내기
+  };
+
+  const userfetch = () => {
     fetch(`${process.env.REACT_APP_URI}/account/login`, {
       method: 'POST',
       headers: {
@@ -61,6 +62,14 @@ const LoginInputForm = () => {
           navigate('/');
         }
       });
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // email, password 비었는지 확인
+    checkEmpty();
+    // email, password 보내기
+    userfetch();
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
