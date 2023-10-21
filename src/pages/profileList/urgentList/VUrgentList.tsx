@@ -1,14 +1,7 @@
 import ProfileCard from 'pages/profileList/ProfileCard';
 import Pagination from '../../../commons/Pagenation';
+import { SosListProps } from '../VProfileListHome';
 
-export interface ProfileListProps {
-  image: string;
-  id: number;
-  name: string;
-  age: number;
-  shelter: string;
-  state: string;
-}
 export interface PageNationProps {
   setCurrentPage: (page: number) => void;
   currentPage: number;
@@ -17,7 +10,7 @@ export interface PageNationProps {
 }
 
 export interface Props {
-  profileListProps: ProfileListProps;
+  profileListProps: SosListProps;
   pageNationProps: PageNationProps;
 }
 
@@ -28,14 +21,13 @@ const VUrgentList = (props: Props) => {
         긴급 도움이 필요해요!
       </h2>
       <div className="grid grid-cols-1 gap-1 md:grid-cols-2 my-10 w-full whitespace-nowrap">
-        <ProfileCard {...props.profileListProps} />
-        <ProfileCard {...props.profileListProps} />
-        <ProfileCard {...props.profileListProps} />
-        <ProfileCard {...props.profileListProps} />
-        <ProfileCard {...props.profileListProps} />
-        <ProfileCard {...props.profileListProps} />
-        <ProfileCard {...props.profileListProps} />
-        <ProfileCard {...props.profileListProps} />
+        {props.profileListProps.map((sosItem, index) => (
+          <ProfileCard
+            key={index}
+            adoptionStatus={sosItem.protectionExpirationDate}
+            {...sosItem}
+          />
+        ))}
       </div>
       <div className="flex justify-center mb-11 sm:mb-28">
         <Pagination

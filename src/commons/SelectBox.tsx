@@ -18,7 +18,7 @@ for (let idx = 0; idx < 32; idx += 1) {
 }
 
 const monthOptions: SelectProps[] = [];
-for (let idx = 0; idx < 13; idx += 1) {
+for (let idx = 0; idx < 12; idx += 1) {
   monthOptions.push({ label: `${idx}`, value: `${idx}` });
 }
 

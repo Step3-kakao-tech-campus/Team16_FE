@@ -1,56 +1,89 @@
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import VShelterInfo, {
-  PageNationProps,
-  ProfileListProps,
-  Props,
-  ShelterInfoProps,
-} from './VShelterInfo';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import VShelterInfo, { Props } from './VShelterInfo';
+import ShelterInfoSkeleton from './ShelterInfoSkeleton';
 
 const ShelterInfo = () => {
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태
   const navigate = useNavigate();
-  // 페이지 변경 함수
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-    navigate(`/profile/urgent/${page}`);
-  };
-  //   const [sosList, setSosList] = useState([]);
+  const params = useParams();
+  const shelterId = params.id;
 
-  //   useEffect(() => {
-  //     fetch('public/data/profileHomeMock.json')
-  //       .then((res) => res.json()) // javascript객체로 변환
-  //       .then(setSosList); // list에 저장
-  //   }, []);
-  const shelterInfoProps: ShelterInfoProps = {
-    name: '광주광역시보호소',
-    id: 1,
-    adress: '광주광역시 어디구 어디로',
-    call: '010-3916-5330',
-  };
-  const profileListProps: ProfileListProps = {
-    image: '/assets/pet.png',
-    id: 1,
-    name: '보리',
-    age: 1,
-    shelter: '광주보호소',
-    state: '입양완료',
+  const [profiles, setProfiles] = useState<Props | null>(null);
+
+  const getShelter = async () => {
+    const response = await fetch(
+      `${process.env.REACT_APP_URI}/shelter/${shelterId}?page=${currentPage}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const json = await response.json();
+    return json.response;
   };
 
-  const pageNationProps: PageNationProps = {
-    currentPage, // 현재 페이지 상태를 전달
-    lastPage: 10,
-    maxLength: 7,
-    setCurrentPage: handlePageChange, // 페이지 변경 함수를 전달
-  };
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['page', currentPage],
+    queryFn: getShelter,
+  });
+  console.log(data);
 
-  const props: Props = {
-    shelterInfoProps,
-    profileListProps,
-    pageNationProps,
-  };
+  useEffect(() => {
+    if (!isLoading && !isError && data) {
+      const shelterInfoData = {
+        name: data.shelter.name,
+        id: data.shelter.id,
+        adress: data.shelter.adress,
+        call: data.shelter.contact,
+      };
+      const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+        navigate(`/shelter/${shelterInfoData.id}/${page}`);
+      };
+      const pageData = {
+        currentPage, // 현재 페이지 상태를 전달
+        lastPage: data.totalPages,
+        maxLength: 7,
+        setCurrentPage: handlePageChange,
+      };
+      const profileListData = {
+        id: data.petList.pets.id,
+        name: data.petList.pets.name,
+        adoptionStatus: data.petList.pets.adoptionStatus,
+      };
 
-  // JSX를 VAC로 교체
-  return <VShelterInfo {...props} />;
+      const props: Props = {
+        shelterInfoProps: shelterInfoData,
+        pageNationProps: pageData,
+        profileProps: profileListData,
+      };
+
+      setProfiles(props);
+    }
+  }, [data, isLoading, isError]);
+
+  if (isLoading) {
+    return <ShelterInfoSkeleton />;
+  }
+
+  if (isError) {
+    return <div>Error: {isError}</div>;
+  }
+
+  if (profiles) {
+    return <VShelterInfo {...profiles} />;
+  }
+
+  return null;
 };
+
 export default ShelterInfo;

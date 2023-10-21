@@ -1,14 +1,7 @@
-import { ProfileListProps } from 'pages/profileList/VProfileListHome';
-import { useNavigate } from 'react-router-dom';
-import VProfileCard from './VProfileCard';
+import VProfileCard, { VProfileInfoProps } from './VProfileCard';
 
-const ProfileCard = (data: ProfileListProps) => {
-  return <VProfileCard {...data} />;
+const ProfileCard = (vProfileListProps: VProfileInfoProps) => {
+  return <VProfileCard {...vProfileListProps} />;
 };
-// const navigate = useNavigate();
-
-// export function navigatePet(id: number) {
-//   return navigate('pet/$id');
-// }
 
 export default ProfileCard;
