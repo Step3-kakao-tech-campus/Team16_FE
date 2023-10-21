@@ -1,7 +1,6 @@
 import './App.css';
 import { RecoilRoot } from 'recoil';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import Home from 'pages/home/Home';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import DetailPetPage from 'pages/detailPet/DetailPetPage';
 import ProfileListPage from 'pages/profileList/ProfileListPage';
@@ -13,6 +12,7 @@ import ShelterInfoPage from 'pages/shelterInfo/ShelterInfoPage';
 import SignupPage from 'pages/signUp/SignupPage';
 import UrgentListPage from 'pages/profileList/urgentList/UrgentListPage';
 import UpdatePage from 'pages/update/UpdatePage';
+import HomePage from 'pages/home/HomePage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,10 +26,10 @@ function App() {
       <RecoilRoot>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<HomePage />} />
             <Route path="/pet/:id" element={<DetailPetPage />} />
             <Route path="/profile" element={<ProfileListPage />} />
-            <Route path="/shelter/:id" element={<ShelterInfoPage />} />
+            <Route path="/shelter/:id/:page" element={<ShelterInfoPage />} />
             <Route path="/profile/urgent/:page" element={<UrgentListPage />} />
             <Route path="/profile/new/:page" element={<NewListPage />} />
             <Route path="/register" element={<RegisterPage />} />
