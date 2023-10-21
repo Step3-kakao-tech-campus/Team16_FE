@@ -1,12 +1,31 @@
 import ProfileCard from 'pages/profileList/ProfileCard';
 
+export interface SosListProps {
+  map(
+    arg0: (sosItem: any, index: any) => import('react/jsx-runtime').JSX.Element,
+  ): import('react').ReactNode;
+  profileImageUrl: string;
+  petId: number;
+  petName: string;
+  petAge: number;
+  shelterName: string;
+  protectionExpirationDate: string;
+}
+
+export interface NewListProps {
+  map(
+    arg0: (newItem: any, index: any) => import('react/jsx-runtime').JSX.Element,
+  ): import('react').ReactNode;
+  profileImageUrl: string;
+  petId: number;
+  petName: string;
+  petAge: number;
+  shelterName: string;
+  adoptionStatus: string;
+}
 export interface ProfileListProps {
-  image: string;
-  id: number;
-  name: string;
-  age: number;
-  shelter: string;
-  state: string;
+  sosListProps: SosListProps;
+  newListProps: NewListProps;
 }
 
 const VProfileListHome = (profileListProps: ProfileListProps) => {
@@ -22,10 +41,13 @@ const VProfileListHome = (profileListProps: ProfileListProps) => {
         </a>
       </h2>
       <div className="grid grid-cols-1 gap-1 md:grid-cols-2 my-10 w-full whitespace-nowrap">
-        <ProfileCard {...profileListProps} />
-        <ProfileCard {...profileListProps} />
-        <ProfileCard {...profileListProps} />
-        <ProfileCard {...profileListProps} />
+        {profileListProps.sosListProps.map((sosItem, index) => (
+          <ProfileCard
+            key={index}
+            adoptionStatus={sosItem.protectionExpirationDate}
+            {...sosItem}
+          />
+        ))}
       </div>
       <h2 className="flex w-full font-bold text-xl sm:text-2xl justify-center items-center whitespace-nowrap">
         신규 애니모리 친구들
@@ -37,10 +59,9 @@ const VProfileListHome = (profileListProps: ProfileListProps) => {
         </a>
       </h2>
       <div className="grid grid-cols-1 gap-1 md:grid-cols-2 my-10 w-full whitespace-nowrap">
-        <ProfileCard {...profileListProps} />
-        <ProfileCard {...profileListProps} />
-        <ProfileCard {...profileListProps} />
-        <ProfileCard {...profileListProps} />
+        {profileListProps.newListProps.map((newItem, index) => (
+          <ProfileCard key={index} {...newItem} />
+        ))}
       </div>
     </div>
   );

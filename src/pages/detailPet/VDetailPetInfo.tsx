@@ -31,7 +31,7 @@ const VDetailPetInfo = (data: DetailPetInfoProps) => {
               {'애니모리에 등록된 보호소입니다. '}
             </span>
             <Link
-              to={`/shelter/${data.shelterInfo.id}`}
+              to={`/shelter/${data.shelterInfo.id}/1`}
               className="text-xs font-bold text-blue-700"
             >
               정보 보기

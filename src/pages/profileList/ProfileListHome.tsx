@@ -1,24 +1,61 @@
+import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import VProfileListHome, { ProfileListProps } from './VProfileListHome';
+import ProfileListHomeSkeleton from './ProfileListHomeSkeleton';
 
 const ProfileListHome = () => {
-  // const [list, setlist] = useState([]);
+  const [profileListProps, setProfileListProps] =
+    useState<ProfileListProps | null>(null);
 
-  // useEffect(() => {
-  //   fetch('public/data/profileHomeMock.json')
-  //     .then((res) => res.json()) // javascript객체로 변환
-  //     .then(setlist); // list에 저장
-  // }, []);
-  const profileListProps: ProfileListProps = {
-    image: '/assets/pet.png',
-    id: 1,
-    name: '보리',
-    age: 1,
-    shelter: '광주보호소',
-    state: '입양완료',
+  const getProfiles = async () => {
+    const response = await fetch(`${process.env.REACT_APP_URI}/pet/profiles`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const json = await response.json();
+    return json.response;
   };
 
-  // JSX를 VAC로 교체
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['pet-list'],
+    queryFn: getProfiles,
+  });
 
-  return <VProfileListHome {...profileListProps} />;
+  useEffect(() => {
+    if (!isLoading && !isError && data) {
+      const sosListData = data.sosList;
+
+      const newListData = data.newList;
+
+      const updatedProfileListProps: ProfileListProps = {
+        sosListProps: sosListData,
+        newListProps: newListData,
+      };
+
+      setProfileListProps(updatedProfileListProps);
+    }
+  }, [data, isLoading, isError]);
+
+  if (isLoading) {
+    return <ProfileListHomeSkeleton />;
+  }
+
+  if (isError) {
+    return <div>Error: {isError}</div>;
+  }
+
+  if (profileListProps) {
+    return <VProfileListHome {...profileListProps} />;
+  }
+
+  return null;
 };
+
 export default ProfileListHome;
