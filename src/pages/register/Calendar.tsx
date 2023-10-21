@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import registerState from 'recoil/registerState';
 import {
@@ -103,31 +103,29 @@ const Calendar = ({ handleClick }: CalendarProps) => {
   };
 
   // 이전 달로 이동
-  const prevMonth = (month: number) => {
+  const prevMonth = (year: number, month: number) => {
     const prevIndex = month - 1;
-    if (prevIndex < 0) {
-      // 1월 이전은 12월로 넘어가야 됨
-      // 날짜도 변경해야 됨
+    const prevYear = currentDate.getFullYear() - 1;
+    if (prevIndex > 11 && prevYear !== year) {
       setCurrentYear((prev) => prev - 1);
-      setCurrentMonth(prevIndex + 12);
-      setCurrentDate(new Date(currentYear, prevIndex + 12));
+      setCurrentMonth((prev) => prev + 11);
+      setCurrentDate(new Date(prevYear, prevIndex + 12));
     } else {
-      setCurrentMonth(prevIndex);
-      setCurrentDate(new Date(currentYear, prevIndex)); // 시작, 끝나는 요일 정하기
+      setCurrentMonth((prev) => prev - 1);
+      setCurrentDate(new Date(currentYear, prevIndex));
     }
   };
 
   // 다음 달로 이동
-  const nextMonth = (month: number) => {
+  const nextMonth = (year: number, month: number) => {
     const nextIndex = month + 1;
-    if (nextIndex > 11) {
-      // 12월 다음은 다음 연도 1월로 넘어가야 됨
-      // 날짜도 변경해야 됨
+    const nextYear = currentDate.getFullYear() + 1;
+    if (nextIndex > 11 && nextYear !== year) {
       setCurrentYear((prev) => prev + 1);
-      setCurrentMonth(nextIndex - 12);
-      setCurrentDate(new Date(currentYear, nextIndex - 12));
+      setCurrentMonth((prev) => prev - 11);
+      setCurrentDate(new Date(nextYear, nextIndex - 12));
     } else {
-      setCurrentMonth(nextIndex);
+      setCurrentMonth((prev) => prev + 1);
       setCurrentDate(new Date(currentYear, nextIndex));
     }
   };
@@ -137,31 +135,71 @@ const Calendar = ({ handleClick }: CalendarProps) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
+    // 리팩토링 필요
     return days.map((day: Date, index: number) => {
       // 지난 달에서 가져온 날짜
-      if (day.getMonth() < currentDate.getMonth()) {
-        return (
-          <PrevMonthDays
-            key={index}
-            day={day}
-            index={index}
-            className={'prevMonthDay text-gray-400 py-2'}
-            prevMonth={() => prevMonth(currentDate.getMonth())}
-          />
-        );
+      // 연도가 같을 때
+      if (day.getFullYear() === currentDate.getFullYear()) {
+        if (day.getMonth() < currentDate.getMonth()) {
+          return (
+            <PrevMonthDays
+              key={index}
+              day={day}
+              index={index}
+              className={'prevMonthDay text-gray-400 py-2'}
+              prevMonth={() =>
+                prevMonth(currentDate.getFullYear(), currentDate.getMonth())
+              }
+            />
+          );
+        }
+
+        // 다음 달에서 가져온 날짜
+        if (day.getMonth() > currentDate.getMonth()) {
+          return (
+            <NextMonthDays
+              key={index}
+              day={day}
+              index={index}
+              className={'nextMonthDay text-gray-400 py-2'}
+              nextMonth={() =>
+                nextMonth(currentDate.getFullYear(), currentDate.getMonth())
+              }
+            />
+          );
+        }
       }
 
-      // 다음 달에서 가져온 날짜
-      if (day.getMonth() > currentDate.getMonth()) {
-        return (
-          <NextMonthDays
-            key={index}
-            day={day}
-            index={index}
-            className={'nextMonthDay text-gray-400 py-2'}
-            nextMonth={() => nextMonth(currentDate.getMonth())}
-          />
-        );
+      // 연도가 다를 때
+      if (day.getFullYear() !== currentDate.getFullYear()) {
+        if (day.getMonth() < currentDate.getMonth()) {
+          return (
+            <NextMonthDays
+              key={index}
+              day={day}
+              index={index}
+              className={'nextMonthDay2 text-gray-400 py-2'}
+              nextMonth={() =>
+                nextMonth(currentDate.getFullYear(), currentDate.getMonth())
+              }
+            />
+          );
+        }
+
+        // 다음 달에서 가져온 날짜
+        if (day.getMonth() > currentDate.getMonth()) {
+          return (
+            <PrevMonthDays
+              key={index}
+              day={day}
+              index={index}
+              className={'prevMonthDay2 text-gray-400 py-2'}
+              prevMonth={() =>
+                prevMonth(currentDate.getFullYear(), currentDate.getMonth())
+              }
+            />
+          );
+        }
       }
 
       // 이번달 중 날짜가 지난 날
@@ -193,7 +231,7 @@ const Calendar = ({ handleClick }: CalendarProps) => {
             key={index}
             day={day}
             index={index}
-            className={'today bg-brand-color rounded-full text-white py-2'}
+            className={'today bg-brand-color rounded-full text-white w-8 h-8'}
             setProtectionDate={setProtectionDate}
             handleClick={handleClick}
           />
@@ -238,16 +276,16 @@ const Calendar = ({ handleClick }: CalendarProps) => {
         <div className="calendarNav-title flex flex-row justify-around p-4">
           <button
             className="calendarNav-arrow px-6"
-            onClick={() => prevMonth(currentMonth)}
+            onClick={() => prevMonth(currentDate.getFullYear(), currentMonth)}
           >
             {'<'}
           </button>
           <div className="current-month-year text-2xl font-bold">
-            {months[currentMonth]} {currentYear}
+            {months[currentDate.getMonth()]} {currentDate.getFullYear()}
           </div>
           <button
             className="calendarNav-arrow px-6"
-            onClick={() => nextMonth(currentMonth)}
+            onClick={() => nextMonth(currentDate.getFullYear(), currentMonth)}
           >
             {'>'}
           </button>

@@ -29,16 +29,16 @@ export const CurrentMonthDays = ({
   handleClick,
 }: CurrentDaysProps) => {
   return (
-    <td key={index} className={className}>
+    <td key={index} className="flex justify-center items-center">
       <button
-        className="w-full h-full"
+        className={className}
         onClick={() => {
           const dateFormat = `${day.getFullYear()}-${String(
             day.getMonth() + 1 < 9
               ? `0${day.getMonth() + 1}`
               : day.getMonth() + 1,
           )}-${String(
-            day.getDate() + 1 < 9 ? `0${day.getDate() + 1}` : day.getDate() + 1,
+            day.getDate() < 9 ? `0${day.getDate()}` : day.getDate(),
           )}`;
           setProtectionDate((prev) => ({
             ...prev,
