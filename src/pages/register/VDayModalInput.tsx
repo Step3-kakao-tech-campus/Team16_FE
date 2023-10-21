@@ -27,7 +27,10 @@ const VDayModalInput = ({ open, handleClick }: DayModalProps) => {
         autoComplete="off"
         readOnly
       />
-      <dialog open={open} className="absolute top-10 mt-2">
+      <dialog
+        open={open}
+        className="absolute top-10 mt-2 border-2 border-gray-300 rounded-md"
+      >
         <Calendar handleClick={handleClick} />
       </dialog>
     </div>
