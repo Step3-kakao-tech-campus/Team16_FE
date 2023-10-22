@@ -17,7 +17,7 @@ const VLoginPage = ({ redirectSignupPage }: Props) => {
           backgroundPosition: 'center',
         }}
       >
-        <div className="absolute sm:top-[150px] md:top-[120px] lg:top-[100px]">
+        <div className="absolute top-[100px] lg:top-[90px]">
           <LogoButton
             imageClassName="sm:w-6 md:w-8 lg:w-12"
             logoClassName="sm:text-2xl md:text-3xl lg:text-4xl"
