@@ -25,7 +25,7 @@ const VRadioGroup = ({
   return (
     <div className="flex flex-col sm:flex-row sm:gap-20 justify-center">
       <div>
-        <h2 className="font-semibold my-3  whitespace-nowrap">성별</h2>
+        <h2 className="font-semibold my-3  whitespace-nowrap">성별🔸</h2>
         <div className="grid grid-cols-2 gap-8 text-sm  whitespace-nowrap">
           <DetailRadio
             label="남"
@@ -62,7 +62,7 @@ const VRadioGroup = ({
 
       <div>
         <h2 className="font-semibold text-sm my-3 whitespace-nowrap">
-          입양 상태
+          입양 상태🔸
         </h2>
         <div className="grid grid-cols-2 w-full  gap-10 text-sm whitespace-nowrap">
           <DetailRadio
@@ -97,7 +97,7 @@ const VRadioGroup = ({
       </div>
       <div>
         <h2 className="font-semibold text-sm my-3 whitespace-nowrap">
-          중성화 상태
+          중성화 상태🔸
         </h2>
         <div className="grid grid-cols-3 w-full gap-16 text-sm whitespace-nowrap">
           <DetailRadio

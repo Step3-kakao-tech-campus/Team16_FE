@@ -9,7 +9,7 @@ export interface InputGroupProps {
   type: string;
   placeholder: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  value: any;
+  defaultValue: any;
 }
 
 const InputGroup = ({
@@ -18,7 +18,7 @@ const InputGroup = ({
   type,
   placeholder,
   onChange,
-  value,
+  defaultValue,
 }: InputGroupProps) => {
   return (
     <Container className={'flex flex-col gap-1'}>
@@ -31,7 +31,7 @@ const InputGroup = ({
         type={type}
         placeholder={placeholder}
         onChange={onChange}
-        value={value}
+        defaultValue={defaultValue}
       />
     </Container>
   );

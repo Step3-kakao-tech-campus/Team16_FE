@@ -8,6 +8,6 @@ export const getLoginState = () => {
   return '로그인';
 };
 
-export const removeUser = () => {
+export const removeToken = () => {
   removeCookie('loginToken');
 };
