@@ -1,20 +1,28 @@
 import InputGroup from 'commons/InputGroup';
+import { ShelterLoginType } from 'recoil/shelterState';
+import { ClipLoader } from 'react-spinners';
 
-type Props = {
+interface LoginInputFormProps {
+  errors: Partial<ShelterLoginType>;
+  isLoading: boolean;
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  isEmailEmpty: boolean;
-  isPasswordEmpty: boolean;
-  errorText: string;
+}
+
+interface ValidationProps {
+  text?: string;
+}
+
+const ValidateText = ({ text }: ValidationProps) => {
+  return <div className="text-red-500">{text}</div>;
 };
 
 const VLoginInputForm = ({
+  errors,
+  isLoading,
   handleChange,
   handleSubmit,
-  isEmailEmpty,
-  isPasswordEmpty,
-  errorText,
-}: Props) => {
+}: LoginInputFormProps) => {
   return (
     <form
       className="flex flex-col gap-4 w-full max-w-[400px]"
@@ -30,7 +38,8 @@ const VLoginInputForm = ({
         }}
         autocomplete="off"
       />
-      {isEmailEmpty && <div className="text-red-500">{errorText}</div>}
+      <ValidateText text={errors.email} />
+
       <InputGroup
         id="password"
         name="비밀번호"
@@ -41,11 +50,13 @@ const VLoginInputForm = ({
         }}
         autocomplete="off"
       />
-      {isPasswordEmpty && (
-        <div className="text-red-500">비밀번호를 입력해주세요.</div>
-      )}
-      <button className="bg-brand-color text-white w-full rounded-md p-2">
-        로그인
+      <ValidateText text={errors.password} />
+      <button className="flex justify-center items-center bg-brand-color text-white w-full rounded-md p-2">
+        {isLoading ? (
+          <ClipLoader size={20} color="#fff" loading={isLoading} />
+        ) : (
+          '로그인'
+        )}
       </button>
     </form>
   );

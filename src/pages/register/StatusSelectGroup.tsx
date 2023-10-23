@@ -15,7 +15,7 @@ const StatusSelectGroup = () => {
 
   const handleOptionChange = (status: string, option: number) => {
     switch (status) {
-      case 'intelligence':
+      case '영리함':
         setIntelligenceOption(option);
         setProfileStatus((prev) => ({
           ...prev,
@@ -25,7 +25,7 @@ const StatusSelectGroup = () => {
           },
         }));
         break;
-      case 'affinity':
+      case '친화력':
         setAffinityOption(option);
         setProfileStatus((prev) => ({
           ...prev,
@@ -35,7 +35,7 @@ const StatusSelectGroup = () => {
           },
         }));
         break;
-      case 'athletic':
+      case '운동신경':
         setAthleticOption(option);
         setProfileStatus((prev) => ({
           ...prev,
@@ -45,7 +45,7 @@ const StatusSelectGroup = () => {
           },
         }));
         break;
-      case 'adaptability':
+      case '적응력':
         setAdaptabilityOption(option);
         setProfileStatus((prev) => ({
           ...prev,
@@ -55,7 +55,7 @@ const StatusSelectGroup = () => {
           },
         }));
         break;
-      case 'activeness':
+      case '활발함':
         setActivenessOption(option);
         setProfileStatus((prev) => ({
           ...prev,
@@ -73,31 +73,31 @@ const StatusSelectGroup = () => {
   return (
     <div>
       <StatusScore
-        status={'intelligence'}
+        status={'영리함'}
         score={petPolygonProfileDto.intelligence}
         selectedOption={intelligenceOption}
         handleChange={handleOptionChange}
       />
       <StatusScore
-        status={'affinity'}
+        status={'친화력'}
         score={petPolygonProfileDto.affinity}
         selectedOption={affinityOption}
         handleChange={handleOptionChange}
       />
       <StatusScore
-        status={'athletic'}
+        status={'운동신경'}
         score={petPolygonProfileDto.athletic}
         selectedOption={athleticOption}
         handleChange={handleOptionChange}
       />
       <StatusScore
-        status={'adaptability'}
+        status={'적응력'}
         score={petPolygonProfileDto.adaptability}
         selectedOption={adaptabilityOption}
         handleChange={handleOptionChange}
       />
       <StatusScore
-        status={'activeness'}
+        status={'활발함'}
         score={petPolygonProfileDto.activeness}
         selectedOption={activenessOption}
         handleChange={handleOptionChange}

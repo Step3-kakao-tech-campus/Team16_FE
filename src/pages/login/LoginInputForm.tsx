@@ -1,39 +1,25 @@
 import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { useNavigate } from 'react-router-dom';
-import { shelterLoginState } from 'recoil/shelterState';
+import { ShelterLoginType, shelterLoginState } from 'recoil/shelterState';
+import * as Yup from 'yup';
 import VLoginInputForm from './VLoginInputForm';
 import { setCookie } from '../../commons/cookie/cookie';
 
 const LoginInputForm = () => {
   const [userInfo, setUserInfo] = useRecoilState(shelterLoginState);
-  const [isEmailEmpty, setIsEmailEmpty] = useState(false);
-  const [isPasswordEmpty, setIsPasswordEmpty] = useState(false);
-  const [errorText, setErrorText] = useState('이메일을 입력해주세요');
-
+  const [errors, setErrors] = useState<Partial<ShelterLoginType>>({});
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  const emailValidate = (text: string) => {
-    const emailReg = /^[\w.-]+@[\w.-]+\.\w+$/g; // email형식
-    if (!emailReg.test(text)) {
-      setErrorText('이메일 형식에 맞게 입력해주세요');
-      setIsEmailEmpty(true);
-      return;
-    }
-    setErrorText('');
-    setIsEmailEmpty(false);
-  };
+  const validationSchema = Yup.object().shape({
+    email: Yup.string()
+      .email('이메일 형식에 맞게 입력해주세요.')
+      .required('이메일을 입력해주세요.'),
+    password: Yup.string().required('비밀번호를 입력해주세요.'),
+  });
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!userInfo.email) {
-      setErrorText('이메일을 입력해주세요');
-      setIsEmailEmpty(true);
-    }
-    if (!userInfo.password) {
-      setIsPasswordEmpty(true);
-    }
-    // email, password 보내기
+  const userfetch = () => {
     fetch(`${process.env.REACT_APP_URI}/account/login`, {
       method: 'POST',
       headers: {
@@ -51,15 +37,41 @@ const LoginInputForm = () => {
           const slicedToken = jwtToken.split(' ')[1];
           setCookie('loginToken', slicedToken);
         } else {
-          console.log('Token이 Null');
+          console.log('로그인 실패로 token이 Null');
         }
-
         return res.json();
       })
+
       .then((data) => {
         if (data.success) {
           navigate('/');
+        } else {
+          // 형식은 맞지만 입력된 값이 가입되지 않은 계정일 때
+          alert(data.error.message);
         }
+        setIsLoading(false);
+      });
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // email, password 비었는지 확인
+    validationSchema
+      .validate(userInfo, { abortEarly: false })
+      .then(() => {
+        // email, password 보내기
+        setIsLoading(true);
+        userfetch();
+        setErrors({});
+      })
+      .catch((err) => {
+        const newErrors: Partial<ShelterLoginType> = {};
+        err.inner.forEach(
+          (er: { path: string; message: string | undefined }) => {
+            newErrors[er.path as keyof ShelterLoginType] = er.message;
+          },
+        );
+        setErrors(newErrors);
       });
   };
 
@@ -67,8 +79,6 @@ const LoginInputForm = () => {
     const target = event.target as HTMLInputElement;
     if (target.id === 'id') {
       setUserInfo((prev) => ({ ...prev, email: target.value }));
-      emailValidate(target.value);
-      setIsEmailEmpty(true);
     } else if (target.id === 'password') {
       setUserInfo((prev) => ({ ...prev, password: target.value }));
     }
@@ -77,12 +87,10 @@ const LoginInputForm = () => {
   const LoginInputFormProps = {
     handleChange,
     handleSubmit,
-    isEmailEmpty,
-    isPasswordEmpty,
-    errorText,
+    errors,
+    isLoading,
   };
 
-  // submit에 userInfo를 넣어주거나 button에서 보내도록 하는 것 필요!!!!
   return <VLoginInputForm {...LoginInputFormProps} />;
 };
 

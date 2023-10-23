@@ -1,5 +1,6 @@
 import Pagination from 'commons/VPagenation';
 import ProfileCard from 'pages/profileList/ProfileCard';
+import { ProfileListProps } from 'pages/profileList/VProfileListHome';
 import VShelterCard from './VShelterCard';
 
 export interface ShelterInfoProps {
@@ -9,14 +10,6 @@ export interface ShelterInfoProps {
   call: string;
 }
 
-export interface ProfileListProps {
-  image: string;
-  id: number;
-  name: string;
-  age: number;
-  shelter: string;
-  state: string;
-}
 export interface PageNationProps {
   setCurrentPage: (page: number) => void;
   currentPage: number;
@@ -24,8 +17,14 @@ export interface PageNationProps {
   maxLength: number;
 }
 
+export interface ProfileProps {
+  id: number;
+  name: string;
+  adoptionStatus: string;
+}
+
 export interface Props {
-  profileListProps: ProfileListProps;
+  profileProps: ProfileProps;
   shelterInfoProps: ShelterInfoProps;
   pageNationProps: PageNationProps;
 }
@@ -33,21 +32,25 @@ export interface Props {
 const VShelterInfo = (props: Props) => {
   return (
     <div>
-      <div>
+      <div className="mt-8 sm:mt-20">
         <VShelterCard {...props.shelterInfoProps} />
       </div>
-      <div className=" m-20 -mt-10">
-        <h2 className="font-bold text-xl sm:text-2xl ml-20">관리중인 동물</h2>
-        <div className="grid grid-cols-1 gap-1 sm:grid-cols-2 ml-20">
-          <ProfileCard {...props.profileListProps} />
-          <ProfileCard {...props.profileListProps} />
-          <ProfileCard {...props.profileListProps} />
-          <ProfileCard {...props.profileListProps} />
-          <ProfileCard {...props.profileListProps} />
-          <ProfileCard {...props.profileListProps} />
+      <div className="mx-16 sm:mx-40 lg:mx-64 my-14">
+        <h2 className="flex w-full font-bold text-xl sm:text-2xl items-center whitespace-nowrap">
+          관리중인 동물
+        </h2>
+        <div className="grid grid-cols-1 gap-1 md:grid-cols-2 my-10 w-full whitespace-nowrap">
+          <ProfileCard
+            profileImageUrl={''}
+            petId={props.profileProps.id}
+            petName={props.profileProps.name}
+            petAge={0}
+            shelterName={''}
+            {...props.profileProps}
+          />
         </div>
       </div>
-      <div className="flex justify-center">
+      <div className="flex justify-center mb-11 sm:mb-28">
         <Pagination
           currentPage={props.pageNationProps.currentPage}
           lastPage={props.pageNationProps.lastPage}
