@@ -42,7 +42,7 @@ const ShelterInfo = () => {
       const shelterInfoData = {
         name: data.shelter.name,
         id: data.shelter.id,
-        adress: data.shelter.adress,
+        adress: `${data.shelter.address.province} ${data.shelter.address.city} ${data.shelter.address.roadName} ${data.shelter.address.detail} `,
         call: data.shelter.contact,
       };
       const handlePageChange = (page: number) => {
@@ -51,15 +51,11 @@ const ShelterInfo = () => {
       };
       const pageData = {
         currentPage, // 현재 페이지 상태를 전달
-        lastPage: data.totalPages,
+        lastPage: data.petList.totalPages,
         maxLength: 7,
         setCurrentPage: handlePageChange,
       };
-      const profileListData = {
-        id: data.petList.pets.id,
-        name: data.petList.pets.name,
-        adoptionStatus: data.petList.pets.adoptionStatus,
-      };
+      const profileListData = data.petList.pets;
 
       const props: Props = {
         shelterInfoProps: shelterInfoData,

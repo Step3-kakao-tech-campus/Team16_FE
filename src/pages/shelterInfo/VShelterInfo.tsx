@@ -18,9 +18,14 @@ export interface PageNationProps {
 }
 
 export interface ProfileProps {
+  map(
+    arg0: (item: any, index: any) => import('react/jsx-runtime').JSX.Element,
+  ): import('react').ReactNode;
+  profileImageUrl: string;
   id: number;
   name: string;
   adoptionStatus: string;
+  age: number;
 }
 
 export interface Props {
@@ -40,14 +45,16 @@ const VShelterInfo = (props: Props) => {
           관리중인 동물
         </h2>
         <div className="grid grid-cols-1 gap-1 md:grid-cols-2 my-10 w-full whitespace-nowrap">
-          <ProfileCard
-            profileImageUrl={''}
-            petId={props.profileProps.id}
-            petName={props.profileProps.name}
-            petAge={0}
-            shelterName={''}
-            {...props.profileProps}
-          />
+          {props.profileProps.map((item, index) => (
+            <ProfileCard
+              key={index}
+              petId={item.id}
+              petName={item.name}
+              petAge={item.age}
+              shelterName={''}
+              {...item}
+            />
+          ))}
         </div>
       </div>
       <div className="flex justify-center mb-11 sm:mb-28">
