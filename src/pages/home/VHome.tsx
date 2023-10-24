@@ -27,10 +27,10 @@ export interface HomeProps {
 
 const VHome = (homeProps: HomeProps) => (
   <div className="flex flex-col mx-16 sm:mx-40 lg:mx-64 my-14">
-    <h2 className="flex w-full font-bold text-xl sm:text-2xl items-center whitespace-nowrap"></h2>
-    <div className="flex flex-col">
+    <h2 className="flex w-full font-bold text-xl sm:text-2xl whitespace-nowrap"></h2>
+    <div className="flex flex-col items-center max-w-[500px] max-h-[500px] gap-2">
       {homeProps.shortFormProps.map((shortForm, index) => (
-        <div key={index} className="flex">
+        <div key={index} className="flex flex-col">
           <a
             href={`/pet/${shortForm.petId}`}
             className="flex flex-col items-center justify-center gap-6"
