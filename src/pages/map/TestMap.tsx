@@ -1,42 +1,61 @@
-import React, { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import useKakaoLoader from './useKakaoLoader';
 
-const { kakao } = window;
+type Coordinate = {
+  lat: number;
+  lng: number;
+};
 
-// 지도 띄우기
-const LoadMap = () => {
-  const [map, setMap] = useState(null);
+interface SearchedPlaceType {
+  position: { lat: number; lng: number };
+  content: string;
+}
 
-  // useEffect []로 script 태그 내용 넣어주는게 가장 간단한 방식 + API 문서대로 하기 쉬울듯
-  useEffect(() => {
-    const container = document.getElementById('map');
-    const options = {
-      // 중간 위치 -> 나중에 사용자 위치로 바꿔야 됨
-      center: new kakao.maps.LatLng(35.175483, 126.906988),
-      // 확대 수준
-      level: 4,
-    };
-    const kakaoMap = new kakao.maps.Map(container, options);
-    setMap(kakaoMap);
-  }, []);
-
-  return <div id="map" className="w-[500px] h-[400px] mx-2"></div>;
+type PlaceType = {
+  address_name: string;
+  distance: number;
+  id: string;
+  place_name: string;
+  place_url: string;
+  road_address_name: string;
+  x: number;
+  y: number;
 };
 
 const TestMap = () => {
-  // const [data, isLoading, isSuccess] = useQuery(['shelter'], () => {
-  //   fetch(`${process.env.REACT_APP_URI}/shelter/filter`, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(),
-  //   }).then((res) => {
-  //     return res.json();
-  //   });
-  // });
-  const currentPosition = { lat: 35.1759293, lon: 126.9149701 };
+  useKakaoLoader();
+  const [currentPosition, setCurrentPosition] = useState<Coordinate>({
+    lat: 35.1759293,
+    lng: 126.9149701,
+  });
+  const [markers, setMarkers] = useState<Array<SearchedPlaceType>>([]);
+  const [searchedPlaces, setSearchedPlaces] = useState<Array<object>>([]);
 
-  return <LoadMap />;
+  // 키워드 검색
+  useEffect(() => {
+    const ps = new kakao.maps.services.Places();
+    const places: any = [];
+    ps.keywordSearch('보호소', (data, status) => {
+      if (status === kakao.maps.services.Status.OK && data) {
+        places.push(data);
+      }
+      setSearchedPlaces(places);
+    });
+    console.log(searchedPlaces);
+  }, []);
+
+  return (
+    <Map
+      id="map"
+      center={currentPosition}
+      className="w-[500px] h-[500px]"
+      level={3}
+      onCreate={() => {}}
+    >
+      <MapMarker position={currentPosition}>현재 위치</MapMarker>
+    </Map>
+  );
 };
 
 export default TestMap;
