@@ -45,7 +45,7 @@ export interface HomeProps {
 
 const VHome = (homeProps: HomeProps) => {
   return (
-    <div className="flex flex-col mx-16 sm:mx-40 lg:mx-64 my-14">
+    <div className="flex flex-col sm:mx-40 lg:mx-64 my-14">
       <h2 className="flex w-60 font-bold text-xl sm:text-2xl items-center whitespace-nowrap"></h2>
       <div className="flex flex-col h-screen w-auto items-center">
         <Swiper
@@ -70,7 +70,6 @@ const VHome = (homeProps: HomeProps) => {
             sensitivity: 100,
           }}
           longSwipes={false}
-          navigation
           pagination={{ clickable: true }}
           scrollbar={{ draggable: true }}
           onSlideChange={() => console.log('스와이프')}
