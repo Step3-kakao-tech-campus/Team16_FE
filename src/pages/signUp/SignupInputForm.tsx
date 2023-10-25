@@ -26,7 +26,6 @@ const SignupInputForm = () => {
     checked: false,
   });
   const [passwordConfirm, setPasswordConfirm] = useState(true);
-  const { isValid, checked } = emailConfirm;
   const [emailValidText, setEmailValidText] = useState('');
   const [emailInValidText, setEmailInValidText] = useState('');
 
@@ -159,8 +158,7 @@ const SignupInputForm = () => {
     }
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const target = event.target as HTMLInputElement;
+  const getInputValue = (target: HTMLInputElement) => {
     switch (target.id) {
       case 'email':
         setShelterInfo((prev) => ({ ...prev, email: target.value }));
@@ -187,8 +185,7 @@ const SignupInputForm = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const validationCheck = () => {
     validationSchema
       .validate(shelterInfo, { abortEarly: false })
       .then(() => {
@@ -217,16 +214,23 @@ const SignupInputForm = () => {
       });
   };
 
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const target = event.target as HTMLInputElement;
+    getInputValue(target);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    validationCheck();
+  };
+
   const SignupInputFormProps = {
-    shelterInfo,
     handleChange,
     handleSubmit,
     duplicateCheck,
-    passwordConfirm,
-    isValid,
-    checked,
     emailValidText,
     emailInValidText,
+    passwordConfirm,
     errors,
     isLoading,
   };

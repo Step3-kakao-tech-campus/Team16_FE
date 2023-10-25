@@ -8,32 +8,29 @@ interface VSignupInputProps {
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   duplicateCheck: () => void;
-  isValid: boolean;
-  checked: boolean;
-  passwordConfirm: boolean;
   emailValidText: string;
   emailInValidText: string;
+  passwordConfirm: boolean;
   errors: Partial<ShelterSignupType>;
   isLoading: boolean;
 }
 
 interface ValidationProps {
   text?: string;
+  textColor?: string;
 }
 
-const ValidateText = ({ text }: ValidationProps) => {
-  return <div className="text-red-500">{text}</div>;
+const ValidateText = ({ text, textColor }: ValidationProps) => {
+  return text ? <div className={`text-${textColor}-500`}>{text}</div> : null;
 };
 
 const VSignupInputForm = ({
   handleChange,
   handleSubmit,
   duplicateCheck,
-  isValid,
-  checked,
-  passwordConfirm,
   emailValidText,
   emailInValidText,
+  passwordConfirm,
   errors,
   isLoading,
 }: VSignupInputProps) => {
@@ -59,6 +56,8 @@ const VSignupInputForm = ({
           중복 확인
         </button>
       </div>
+      <ValidateText text={emailValidText} textColor={'green'} />
+      <ValidateText text={emailInValidText} textColor={'red'} />
       <ValidateText text={errors.email} />
       <InputGroup
         id="password"
@@ -77,7 +76,6 @@ const VSignupInputForm = ({
         onChange={handleChange}
         autocomplete="off"
       />
-      {/* 수정필요 */}
       {!passwordConfirm && (
         <div className="text-red-500">비밀번호가 일치하지 않습니다.</div>
       )}
