@@ -52,25 +52,25 @@ const HomeIO = () => {
     if (currentVideo < videoArrayLength - 1) {
       setCurrentVideo((prev) => {
         console.log('화살표 아래 키가 눌렸습니다.');
-        console.log('이전 값:', prev);
         return prev + 1;
       });
     }
   };
 
   const loadPrevVideo = () => {
-    setCurrentVideo((prev) => prev - 1);
-    console.log('화살표 윗 키가 눌렸습니다.');
-    const temp = currentVideo;
-    console.log('t', temp);
+    if (currentVideo > 0) {
+      setCurrentVideo((prev) => {
+        console.log('화살표 윗키가 눌렸습니다.');
+        return prev - 1;
+      });
+    }
   };
 
   const handleMouseWheel = (e: WheelEvent) => {
     if (e.deltaY > 0) {
       loadNextVideo();
-    } else if (e.deltaY < 0) {
-      loadPrevVideo();
-    }
+    } else loadPrevVideo();
+    console.log('wheel delta: ', e.deltaY);
   };
   const handleKeyDown = (e: { key: string }) => {
     if (e.key === 'ArrowDown') {
@@ -78,34 +78,35 @@ const HomeIO = () => {
     } else if (e.key === 'ArrowUp') {
       loadPrevVideo();
     }
+    console.log('press: ', e.key);
   };
 
   // io - 미완
-  useEffect(() => {
-    const io = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            if (entry.boundingClientRect.top < 0) {
-              // setLoadNextVideo(true);
-            }
-          }
-        });
-      },
-      { threshold: 0.3 }, // 30%로 적용
-    );
+  // useEffect(() => {
+  //   const io = new IntersectionObserver(
+  //     (entries, observer) => {
+  //       entries.forEach((entry) => {
+  //         if (entry.isIntersecting) {
+  //           if (entry.boundingClientRect.top < 0) {
+  //             // setLoadNextVideo(true);
+  //           }
+  //         }
+  //       });
+  //     },
+  //     { threshold: 0.3 }, // 30%로 적용
+  //   );
 
-    if (videoRef.current) {
-      io.observe(videoRef.current);
-      console.log(io);
-    }
+  //   if (videoRef.current) {
+  //     io.observe(videoRef.current);
+  //     console.log(io);
+  //   }
 
-    return () => {
-      if (videoRef.current) {
-        io.unobserve(videoRef.current);
-      }
-    };
-  }, [videoRef]);
+  //   return () => {
+  //     if (videoRef.current) {
+  //       io.unobserve(videoRef.current);
+  //     }
+  //   };
+  // }, [videoRef]);
   // load 처리 관련 - 미완
   // useEffect(() => {
   //   if (loadNextVideo) {
@@ -125,11 +126,17 @@ const HomeIO = () => {
       const videoElement = videoRef.current as HTMLVideoElement;
       if (videoElement) {
         videoElement.focus(); // 바로 포커스 되어서 키 다운이 먹도록
-        videoElement.addEventListener('wheel', handleMouseWheel);
-        document.addEventListener('keydown', handleKeyDown);
+        document.addEventListener('wheel', handleMouseWheel);
       }
+      document.addEventListener('keydown', handleKeyDown);
     }
-  }, [isLoading, shortForm]);
+    return () => {
+      if (videoRef.current) {
+        document.removeEventListener('wheel', handleMouseWheel);
+      }
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isLoading, shortForm, currentVideo]);
 
   // useEffect(() => {}, []);
 
