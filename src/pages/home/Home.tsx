@@ -38,10 +38,17 @@ const Home = () => {
       };
 
       const shortFormData = data.shortForms;
+      const handleReachEnd = () => {
+        if (pageData.hasNext) {
+          setCurrentPage(currentPage + 1);
+          console.log('마지막');
+        }
+      };
 
       const homeProps: HomeProps = {
         pageProps: pageData,
         shortFormProps: shortFormData,
+        handleReachEnd,
       };
 
       setShortForm(homeProps);
