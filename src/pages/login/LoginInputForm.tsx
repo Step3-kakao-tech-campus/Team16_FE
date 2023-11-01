@@ -20,6 +20,7 @@ const LoginInputForm = () => {
   });
 
   const userfetch = () => {
+    let token: string;
     fetch(`${process.env.REACT_APP_URI}/account/login`, {
       method: 'POST',
       headers: {
@@ -30,27 +31,32 @@ const LoginInputForm = () => {
         email: userInfo.email,
         password: userInfo.password,
       }),
-    })
-      .then((res) => {
-        const jwtToken = res.headers.get('Authorization');
-        if (jwtToken) {
-          const slicedToken = jwtToken.split(' ')[1];
-          setCookie('loginToken', slicedToken);
-        } else {
-          console.log('로그인 실패로 token이 Null');
-        }
-        return res.json();
-      })
-
-      .then((data) => {
-        console.log('data: ', data);
-        if (data.success) {
+    }).then((res) => {
+      const jwtToken = res.headers.get('Authorization');
+      if (jwtToken) {
+        // eslint-disable-next-line prefer-destructuring
+        token = jwtToken.split(' ')[1];
+      } else {
+        console.log('로그인 실패로 token이 Null');
+      }
+      return res.json().then((data) => {
+        if (data.success && token) {
           const { accountInfo, tokenExpirationDateTime } = data.response;
           const { id, role } = accountInfo;
-          const expiredDate = new Date(tokenExpirationDateTime);
+          const currentDate = new Date();
+          const tokenExpirationDate = new Date(tokenExpirationDateTime);
+          const timeDifferenceInMilliseconds =
+            Number(tokenExpirationDate) - Number(currentDate);
 
-          setCookie('userAccountInfo', `${role} ${id}`);
-          setCookie('expiredDate', String(expiredDate));
+          setCookie('userAccountInfo', `${role} ${id}`, {
+            expires: tokenExpirationDate,
+            maxAge: timeDifferenceInMilliseconds,
+          });
+          setCookie('loginToken', token, {
+            expires: tokenExpirationDate,
+            maxAge: timeDifferenceInMilliseconds,
+          });
+
           navigate('/');
         } else {
           // 형식은 맞지만 입력된 값이 가입되지 않은 계정일 때
@@ -58,6 +64,7 @@ const LoginInputForm = () => {
         }
         setIsLoading(false);
       });
+    });
   };
 
   const validateCheck = () => {
