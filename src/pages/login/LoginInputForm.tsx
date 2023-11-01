@@ -11,6 +11,7 @@ const LoginInputForm = () => {
   const [errors, setErrors] = useState<Partial<ShelterLoginType>>({});
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
+  const currentDate = new Date();
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -31,7 +32,7 @@ const LoginInputForm = () => {
         email: userInfo.email,
         password: userInfo.password,
       }),
-    }).then((res) => {
+    }).then(async (res) => {
       const jwtToken = res.headers.get('Authorization');
       if (jwtToken) {
         // eslint-disable-next-line prefer-destructuring
@@ -39,31 +40,29 @@ const LoginInputForm = () => {
       } else {
         console.log('로그인 실패로 token이 Null');
       }
-      return res.json().then((data) => {
-        if (data.success && token) {
-          const { accountInfo, tokenExpirationDateTime } = data.response;
-          const { id, role } = accountInfo;
-          const currentDate = new Date();
-          const tokenExpirationDate = new Date(tokenExpirationDateTime);
-          const timeDifferenceInMilliseconds =
-            Number(tokenExpirationDate) - Number(currentDate);
+      const data = await res.json();
+      if (data.success && token) {
+        const { accountInfo, tokenExpirationDateTime } = data.response;
+        const { id, role } = accountInfo;
+        const tokenExpirationDate = new Date(tokenExpirationDateTime);
+        const timeDifferenceseconds = Math.floor(
+          (Number(tokenExpirationDate) - Number(currentDate)) / 1000,
+        );
 
-          setCookie('userAccountInfo', `${role} ${id}`, {
-            expires: tokenExpirationDate,
-            maxAge: timeDifferenceInMilliseconds,
-          });
-          setCookie('loginToken', token, {
-            expires: tokenExpirationDate,
-            maxAge: timeDifferenceInMilliseconds,
-          });
-
-          navigate('/');
-        } else {
-          // 형식은 맞지만 입력된 값이 가입되지 않은 계정일 때
-          alert(data.error.message);
-        }
-        setIsLoading(false);
-      });
+        setCookie('userAccountInfo', `${role} ${id}`, {
+          expires: tokenExpirationDate,
+          maxAge: timeDifferenceseconds,
+        });
+        setCookie('loginToken', token, {
+          expires: tokenExpirationDate,
+          maxAge: timeDifferenceseconds,
+        });
+        navigate('/');
+      } else {
+        // 형식은 맞지만 입력된 값이 가입되지 않은 계정일 때
+        alert(data.error.message);
+      }
+      setIsLoading(false);
     });
   };
 
