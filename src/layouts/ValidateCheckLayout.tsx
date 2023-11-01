@@ -18,7 +18,6 @@ const ValidateCheckLayout: React.FC<LayoutProps> = ({ children }) => {
       if (!loginToken && !userAccount) {
         // loginToken이 없으면 모달 열기
         setIsModalOpen(true);
-        setCookie('userAccountInfo', 'Not Login');
       }
     }, 60000);
 
