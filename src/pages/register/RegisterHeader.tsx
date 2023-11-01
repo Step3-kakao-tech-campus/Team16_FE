@@ -98,8 +98,7 @@ const RegisterHeader = () => {
   return (
     <>
       <div className="flex flex-col items-center gap-8">
-        <div className="flex justify-between items-center w-5/6">
-          <h1 className="text-center text-xl">등록하기</h1>
+        <div className="flex justify-end items-center w-5/6">
           <button
             onClick={() => setIsModalOpen(true)}
             className="bg-brand-color rounded-md font-bold text-white w-20 py-2"
