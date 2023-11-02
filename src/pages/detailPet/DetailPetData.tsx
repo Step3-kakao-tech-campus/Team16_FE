@@ -19,7 +19,7 @@ const DetailPetData = () => {
     },
   });
   if (isLoading) return <div>로딩중</div>;
-  const labels = ['귀여움', '침착함', '유머감각', '외모', '의젓함'];
+  const labels = ['영리함', '친화력', '운동신경', '적응력', '활발함'];
 
   const radarChartProps: RadarChartProps = {
     setCanvas,
