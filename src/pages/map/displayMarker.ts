@@ -22,6 +22,18 @@ const displayMarker = async (map: any, addressInfo: any) => {
     zIndex: 1,
   });
 
+  const infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
+  kakao.maps.event.addListener(marker, 'click', () => {
+    infowindow.setContent(
+      `<div style="padding:5px;font-size:12px;">${addressInfo.place_name}</div>`,
+    );
+    infowindow.open(map, marker);
+    setTimeout(() => {
+      infowindow.close();
+    }, 1500);
+    map.setCenter(marker.getPosition());
+  });
+
   marker.setMap(map);
 };
 

@@ -37,7 +37,12 @@ const Map: React.FC = () => {
     searchedPlace.forEach((place: any) => {
       const lat = parseFloat(place.y);
       const lng = parseFloat(place.x);
-      displayMarkerByInfo({ isRegistered: place.isRegistered, lat, lng });
+      displayMarkerByInfo({
+        isRegistered: place.isRegistered,
+        lat,
+        lng,
+        place_name: place.place_name,
+      });
     });
   });
 
