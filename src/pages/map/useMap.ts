@@ -25,3 +25,5 @@ function useMap<T>(
 
   return { map, displayMarkerByInfo };
 }
+
+export default useMap;
