@@ -1,9 +1,15 @@
 import { useEffect, useState, RefObject } from 'react';
+import displayMarker from './displayMarker';
 
 function useMap<T>(
   containerRef: RefObject<T extends HTMLElement ? T : HTMLElement>,
 ) {
   const [map, setMap] = useState();
+
+  const displayMarkerByInfo = async (addressInfo: any) => {
+    if (!map) return;
+    await displayMarker(map, addressInfo);
+  };
 
   useEffect(() => {
     (() => {
@@ -17,5 +23,5 @@ function useMap<T>(
     })();
   }, [containerRef]);
 
-  return { map };
+  return { map, displayMarkerByInfo };
 }
