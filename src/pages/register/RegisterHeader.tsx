@@ -30,20 +30,26 @@ const RegisterHeader = () => {
   };
 
   // 등록하기 관련
+  // eslint-disable-next-line consistent-return
   const postPet = async (formData: FormData) => {
     const loginToken = getCookie('loginToken');
-    const res = await fetch(`${process.env.REACT_APP_URI}/pet`, {
+    console.log('token', loginToken);
+
+    const response = await fetch(`${process.env.REACT_APP_URI}/pet`, {
       method: 'POST',
       body: formData,
       headers: {
         Authorization: `Bearer ${loginToken}`,
       },
     });
-    return res.json();
+
+    console.log('이거 작동함?');
+    return response.json();
+
+    // 다른 상태 코드에 따른 처리를 추가
   };
   const { data, mutate, isError, isLoading, isSuccess } = useMutation(postPet);
   const handleRegisterButtonClick = async () => {
-    console.log(registerPetData);
     if (!selectedImageFile || !selectedVideoFile || !registerPetData.isComplete)
       return;
     const formData = new FormData();
@@ -57,10 +63,14 @@ const RegisterHeader = () => {
       }),
     );
     try {
-      const res = mutate(formData);
-      console.log(res);
-    } catch (err: unknown) {
-      console.log(err);
+      const res = mutate(formData, {
+        onSettled: (dat, err: any) => {
+          console.log('dat: ', dat);
+          console.log('err: ', err.status);
+        },
+      });
+    } catch (err) {
+      console.log('err: ', err);
     }
   };
   const handleCustomButtonClick = (

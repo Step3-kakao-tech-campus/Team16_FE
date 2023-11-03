@@ -54,7 +54,7 @@ const TestMap = () => {
 
     ps.keywordSearch(
       '동물 보호소',
-      (data: any, status: kakao.maps.services.Status) => {
+      (data: any, status: kakao.maps.services.Status, pagination) => {
         if (status === kakao.maps.services.Status.OK && data) {
           setState(data);
           setIsExecuted(true);
@@ -63,6 +63,7 @@ const TestMap = () => {
           alert('검색 결과가 없습니다.');
           setIsExecuted(false);
         }
+        // pagination.gotoFirst();
       },
     );
   };
@@ -72,18 +73,20 @@ const TestMap = () => {
     if (!isExecuted) searchKeywordPlace(searchedPlaces, setSearchedPlaces);
     console.log('filteredPlaces: ', searchedPlaces);
     console.log('MapRef: ', mapRef.current);
+    console.log('MarkerRef: ', markerRef.current);
   }, [searchedPlaces]);
 
   return (
-    <div className="flex">
-      <Map
-        id="map"
-        center={currentPosition}
-        className="w-[500px] h-[500px]"
-        level={3}
-        ref={mapRef}
-      >
-        {/* <MapMarker
+    <div className="flex sm:flex-col lg:flex-row justify-evenly items-center h-[80vh]">
+      <div className=" border-2 rounded-sm shadow-sm shadow-gray-400 border-gray-300">
+        <Map
+          id="map"
+          center={currentPosition}
+          className="w-[500px] h-[500px]"
+          level={3}
+          ref={mapRef}
+        >
+          {/* <MapMarker
           position={currentPosition}
           image={{
             src: 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png', // 마커이미지의 주소입니다
@@ -93,34 +96,40 @@ const TestMap = () => {
             }, // 마커이미지의 크기입니다
           }}
           title="현재 위치"
-          ref={markerRef}
         /> */}
-        {/* Marker 표시 */}
-        {searchedPlaces.map((searchedPlace) => {
-          console.log('마커 작동여부 확인');
-          return (
-            <MapMarker
-              key={`${searchedPlace.id}-${searchedPlace.place_name}`}
-              position={{
-                x: Number(searchedPlace.x),
-                y: Number(searchedPlace.y),
-              }} // 마커를 표시할 위치
-              image={{
-                src: 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png', // 마커이미지의 주소입니다
-                size: {
-                  width: 24,
-                  height: 35,
-                }, // 마커이미지의 크기입니다
-              }}
-              title={searchedPlace.place_name} // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-            ></MapMarker>
-          );
-        })}
-      </Map>
-      <div className="list flex flex-col justify-center">
+          {/* Marker 표시 */}
+          {searchedPlaces.map((searchedPlace, index) => {
+            console.log('마커 작동여부 확인');
+            console.log('현재 마커 장소: ', searchedPlace);
+            return (
+              <MapMarker
+                ref={markerRef}
+                key={`${searchedPlace.id}-${searchedPlace.place_name}`}
+                position={{
+                  x: Number(searchedPlace.x),
+                  y: Number(searchedPlace.y),
+                }} // 마커를 표시할 위치
+                image={{
+                  src: 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png', // 마커이미지의 주소입니다
+                  size: {
+                    width: 24,
+                    height: 35,
+                  }, // 마커이미지의 크기입니다
+                }}
+                title={searchedPlace.place_name} // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                onClick={(e) => {
+                  console.log(e);
+                  console.log(e.getPosition()); // La(124...)랑 Ma(33...)
+                }}
+              ></MapMarker>
+            );
+          })}
+        </Map>
+      </div>
+      <div className="list flex flex-col border-2">
         {isExecuted && searchedPlaces.length > 0 ? (
           searchedPlaces.map((searchedPlace, index) => (
-            <span key={index} className=" border-gray-200 ">
+            <span key={index} className="mb-2 border-gray-200 flex flex-col">
               <span className="">{searchedPlace.place_name}</span>
               <span className="">{searchedPlace.address_name}</span>
             </span>
