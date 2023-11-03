@@ -1,4 +1,5 @@
 import { useEffect, useState, RefObject, useRef } from 'react';
+import { useMutation } from '@tanstack/react-query';
 import displayMarker from './displayMarker';
 import searchPlace, { SearchedPlaceType } from './searchPlace';
 
@@ -6,7 +7,7 @@ function useMap<T>(
   containerRef: RefObject<T extends HTMLElement ? T : HTMLElement>,
 ) {
   const [map, setMap] = useState<any>();
-  const [searchedPlace, setSearchedPlace] = useState<any[]>([]);
+  const [searchedPlace, setSearchedPlace] = useState<any>([]);
   const boundRef = useRef<any>();
   console.log(searchedPlace);
 
@@ -15,8 +16,22 @@ function useMap<T>(
     map.setBounds(boundRef.current);
     await displayMarker(map, addressInfo);
   };
-
-  console.log(searchedPlace);
+  const { data: mutateData, mutate } = useMutation(
+    ['shelterFilter'],
+    (searchedPlaces: any) =>
+      fetch(`${process.env.REACT_APP_URI}/shelter/filter`, {
+        method: 'POST',
+        body: JSON.stringify(searchedPlaces.map((place: any) => place.id)),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then((res) => res.json()),
+    {
+      onSuccess: (res) => {
+        console.log(res);
+      },
+    },
+  );
 
   useEffect(() => {
     (() => {
@@ -47,7 +62,7 @@ function useMap<T>(
     })();
   }, [containerRef]);
 
-  return { map, displayMarkerByInfo, searchedPlace };
+  return { map, displayMarkerByInfo, searchedPlace, mutate, mutateData };
 }
 
 export default useMap;

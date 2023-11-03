@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -17,18 +18,28 @@ declare global {
   }
 }
 const Map: React.FC = () => {
-  const [notMutated, setNotMutated] = useState(false);
-
   const mapRef = useRef<HTMLDivElement>(null);
-  const { map, displayMarkerByInfo, searchedPlace } = useMap(mapRef);
-  console.log(searchedPlace);
-  searchedPlace.forEach((place) => {
-    const lat = parseFloat(place.x);
-    const lng = parseFloat(place.y);
-    console.log(lat, lng);
-    displayMarkerByInfo({ lat, lng });
+  const { map, displayMarkerByInfo, searchedPlace, mutate, mutateData } =
+    useMap(mapRef);
+  useEffect(() => {
+    mutate(searchedPlace);
+  }, [searchedPlace]);
+
+  mutateData?.response?.forEach((ff: any) => {
+    console.log(ff);
+    searchedPlace.forEach((place: any) => {
+      if (place.id === ff.kakaoLocationId.toString()) {
+        place.isRegistered = true;
+      } else {
+        place.isRegistered = false;
+      }
+    });
+    searchedPlace.forEach((place: any) => {
+      const lat = parseFloat(place.y);
+      const lng = parseFloat(place.x);
+      displayMarkerByInfo({ isRegistered: place.isRegistered, lat, lng });
+    });
   });
-  displayMarkerByInfo({ lat: 35.1759293, lng: 126.9149701 });
 
   return (
     <div className="Map">
