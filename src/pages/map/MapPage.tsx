@@ -6,7 +6,7 @@ const MapPage = () => {
   return (
     <div>
       <GNB />
-      {/* <Map /> */}
+      <Map />
       <TestMap />
     </div>
   );
