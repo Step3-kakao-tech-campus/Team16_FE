@@ -8,6 +8,7 @@
 /* eslint-disable no-new */
 import React, { useEffect, useRef, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
+import { SearchedPlaceType } from './searchPlace';
 import useMap from './useMap';
 
 declare global {
@@ -15,24 +16,19 @@ declare global {
     kakao: any;
   }
 }
-interface SearchedPlaceType {
-  address_name: string;
-  distance: string;
-  id: string;
-  place_name: string;
-  place_url: string;
-  road_address_name: string;
-  x: string;
-  y: string;
-  isRegistered?: boolean;
-}
-
 const Map: React.FC = () => {
-  const [searchedPlace, setSearchedPlace] = useState<SearchedPlaceType[]>([]);
-  const [notMutated, setNotMutated] = React.useState(false);
+  const [notMutated, setNotMutated] = useState(false);
 
   const mapRef = useRef<HTMLDivElement>(null);
-  const { map, displayMarkerByInfo } = useMap(mapRef);
+  const { map, displayMarkerByInfo, searchedPlace } = useMap(mapRef);
+  console.log(searchedPlace);
+  searchedPlace.forEach((place) => {
+    const lat = parseFloat(place.x);
+    const lng = parseFloat(place.y);
+    console.log(lat, lng);
+    displayMarkerByInfo({ lat, lng });
+  });
+  displayMarkerByInfo({ lat: 35.1759293, lng: 126.9149701 });
 
   return (
     <div className="Map">

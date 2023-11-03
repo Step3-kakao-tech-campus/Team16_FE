@@ -14,6 +14,10 @@ const displayMarker = async (map: any, addressInfo: any) => {
     ANYMORY_SHELTER_SRC,
     imageSize,
   );
+  console.log(
+    isRegistered ? markerImageAnymory : markerImageDefault,
+    addressInfo,
+  );
   const marker = new kakao.maps.Marker({
     position: new kakao.maps.LatLng(lat, lng),
     image: isRegistered ? markerImageAnymory : markerImageDefault,
