@@ -23,3 +23,5 @@ const displayMarker = async (map: any, addressInfo: any) => {
 
   marker.setMap(map);
 };
+
+export default displayMarker;
