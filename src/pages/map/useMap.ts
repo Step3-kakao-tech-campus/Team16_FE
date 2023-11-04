@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState, RefObject, useRef } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import displayMarker from './displayMarker';

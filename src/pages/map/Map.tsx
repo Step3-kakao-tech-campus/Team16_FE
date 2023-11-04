@@ -28,13 +28,12 @@ const Map: React.FC = () => {
     searchedPlace.forEach((place: any) => {
       if (place.id === data.kakaoLocationId.toString()) {
         place.isRegistered = true;
+        place.shelterId = data.id;
       } else {
         place.isRegistered = false;
       }
     });
     searchedPlace.forEach((place: any) => {
-      const lat = parseFloat(place.y);
-      const lng = parseFloat(place.x);
       displayMarkerByInfo(place);
     });
   });
