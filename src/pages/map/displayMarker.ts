@@ -1,7 +1,7 @@
 const displayMarker = async (map: any, addressInfo: any) => {
   const { kakao } = window;
-  const { isRegistered, lat, lng } = addressInfo;
-  console.log(isRegistered, lat, lng);
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  const { isRegistered, x: lng, y: lat, place_name } = addressInfo;
 
   const DEFAULT_SHELTER_SRC = '/assets/images/racoon.png';
   const ANYMORY_SHELTER_SRC = '/assets/images/dog.png';
@@ -16,7 +16,7 @@ const displayMarker = async (map: any, addressInfo: any) => {
     imageSize,
   );
   const marker = new kakao.maps.Marker({
-    position: new kakao.maps.LatLng(lat, lng),
+    position: new kakao.maps.LatLng(parseFloat(lat), parseFloat(lng)),
     image: isRegistered ? markerImageAnymory : markerImageDefault,
     clickable: true,
     zIndex: 1,
@@ -25,7 +25,7 @@ const displayMarker = async (map: any, addressInfo: any) => {
   const infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
   kakao.maps.event.addListener(marker, 'click', () => {
     infowindow.setContent(
-      `<div style="padding:5px;font-size:12px;">${addressInfo.place_name}</div>`,
+      `<div style="padding:5px;font-size:12px;">${place_name}</div>`,
     );
     infowindow.open(map, marker);
     setTimeout(() => {

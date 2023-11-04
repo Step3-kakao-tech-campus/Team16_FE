@@ -1,7 +1,6 @@
 import { useEffect, useState, RefObject, useRef } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import displayMarker from './displayMarker';
-import searchPlace, { SearchedPlaceType } from './searchPlace';
 
 function useMap<T>(
   containerRef: RefObject<T extends HTMLElement ? T : HTMLElement>,
@@ -9,7 +8,6 @@ function useMap<T>(
   const [map, setMap] = useState<any>();
   const [searchedPlace, setSearchedPlace] = useState<any>([]);
   const boundRef = useRef<any>();
-  console.log(searchedPlace);
 
   const displayMarkerByInfo = async (addressInfo: any) => {
     if (!map) return;
@@ -26,11 +24,6 @@ function useMap<T>(
           'Content-Type': 'application/json',
         },
       }).then((res) => res.json()),
-    {
-      onSuccess: (res) => {
-        console.log(res);
-      },
-    },
   );
 
   useEffect(() => {

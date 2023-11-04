@@ -9,7 +9,6 @@
 /* eslint-disable no-new */
 import React, { useEffect, useRef, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { SearchedPlaceType } from './searchPlace';
 import useMap from './useMap';
 
 declare global {
@@ -25,10 +24,9 @@ const Map: React.FC = () => {
     mutate(searchedPlace);
   }, [searchedPlace]);
 
-  mutateData?.response?.forEach((ff: any) => {
-    console.log(ff);
+  mutateData?.response?.forEach((data: any) => {
     searchedPlace.forEach((place: any) => {
-      if (place.id === ff.kakaoLocationId.toString()) {
+      if (place.id === data.kakaoLocationId.toString()) {
         place.isRegistered = true;
       } else {
         place.isRegistered = false;
@@ -37,12 +35,7 @@ const Map: React.FC = () => {
     searchedPlace.forEach((place: any) => {
       const lat = parseFloat(place.y);
       const lng = parseFloat(place.x);
-      displayMarkerByInfo({
-        isRegistered: place.isRegistered,
-        lat,
-        lng,
-        place_name: place.place_name,
-      });
+      displayMarkerByInfo(place);
     });
   });
 
