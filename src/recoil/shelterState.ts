@@ -43,3 +43,8 @@ export const shelterLoginState = atom<ShelterLoginType>({
     password: '',
   },
 });
+
+export const tokenCheckState = atom<boolean>({
+  key: 'tokenCheckState',
+  default: true,
+});

@@ -1,32 +1,32 @@
 import { setCookie } from 'commons/cookie/cookie';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { tokenCheckState } from 'recoil/shelterState';
 
-interface ModalProps {
-  isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const LoginGuideModal = ({ isOpen, setIsOpen }: ModalProps) => {
+const LoginGuideModal = () => {
   const navigate = useNavigate();
-  if (!isOpen) {
+  const [isLogined, setIsLogined] = useRecoilState(tokenCheckState); // default : true
+
+  if (isLogined) {
     return null;
   }
+
   return (
     <dialog
-      className="absolute z-50 flex justify-center h-[20vh] bottom-2 rounded-lg border-2 border-gray-300 text-black"
-      open={isOpen}
+      className="fixed z-50 flex justify-center w-full h-[20vh] opacity-80 hover:opacity-100 bottom-2 rounded-lg border-2 border-gray-300 text-black"
+      open={isLogined}
     >
       <div className="modal-content w-[600px] flex flex-col gap-4 justify-center">
         <div className="font-bold text-center text-lg">
-          <div>자동으로 로그아웃 되었습니다.</div>
-          <div>재로그인 하시겠습니까?</div>
+          <div>로그인이 만료되었습니다.</div>
+          <div>다시 로그인 하시겠습니까?</div>
         </div>
-        <div className="flex justify-evenly font-bold">
+        <div className="flex justify-evenly font-bold ">
           <button
-            className="border-brand-color text-brand-color border-2 rounded-md px-4 py-1 transition duration-300 hover:bg-brand-color hover:text-white"
+            className="border-brand-color text-brand-color border-2 rounded-md px-4 py-1 transition duration-300 hover:bg-brand-color hover:text-white "
             onClick={() => {
               navigate('/login');
-              setIsOpen(false);
+              setIsLogined(true);
             }}
           >
             로그인 하기
@@ -34,8 +34,8 @@ const LoginGuideModal = ({ isOpen, setIsOpen }: ModalProps) => {
           <button
             className="bg-brand-color text-white rounded-md px-4 py-1 transition duration-300 hover:bg-white hover:text-brand-color"
             onClick={() => {
-              setIsOpen(false);
               setCookie('userAccountInfo', 'Not Login');
+              setIsLogined(true);
             }}
           >
             로그아웃 유지하기
