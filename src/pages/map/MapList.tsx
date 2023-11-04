@@ -52,11 +52,12 @@ const MapList = ({
             );
             map.setCenter(moveLatLon);
           }}
+          className={`${
+            place.isRegistered ? 'bg-brand-color' : 'bg-white'
+          } cursor-pointer rounded-md p-2 mb-2 hover:bg-gray-100 transition duration-300 ease-in-out`}
         >
           <div>{place.place_name}</div>
-          <div>{place.road_address_name}</div>
-
-          <div>{place.isRegistered ? '등록됨' : '등록안됨'}</div>
+          <div className="text-sm">{place.road_address_name}</div>
         </div>
       ))}
     </div>
