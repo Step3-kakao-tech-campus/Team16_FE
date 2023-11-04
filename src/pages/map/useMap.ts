@@ -33,6 +33,7 @@ function useMap<T>(
       },
     },
   );
+  throw new Error();
 
   useEffect(() => {
     (() => {

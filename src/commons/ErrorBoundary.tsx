@@ -1,5 +1,6 @@
 /* eslint-disable class-methods-use-this */
 import React, { Component, ErrorInfo, ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 
 interface Props {
   children?: ReactNode;
@@ -32,10 +33,26 @@ class ErrorBoundary extends Component<Props, State> {
       if (this.props.fallback) {
         return this.props.fallback; // fallback이 있으면 fallback을 보여줌
       }
-      if (this.state.error) {
-        return <h1>{this.state.error.message}</h1>; // throw error에 들어간 메시지를 보여줌
+      if (this.state.error?.message) {
+        return (
+          <div className="flex flex-col mt-12 gap-12 items-center justify-center w-screen">
+            <h1 className="text-3xl font-bold text-brand-color">
+              뭔가 문제가 생겼어요..
+            </h1>
+            <h2 className="text-2xl font-bold">{this.state.error.message}</h2>
+          </div>
+        );
       }
-      return <h1>There was an error</h1>; // 에러 메시지도 없고 fallback도 없으면 그냥 에러 메시지 출력
+      return (
+        <div className="flex flex-col mt-12 gap-12 items-center justify-center w-screen">
+          <h1 className="text-3xl font-bold text-brand-color">
+            뭔가 문제가 생겼어요..
+          </h1>
+          <h2 className="text-2xl font-bold">
+            해결 중에 있습니다. 다시 한 번 시도해주세요!
+          </h2>
+        </div>
+      ); // 에러 메시지도 없고 fallback도 없으면 그냥 에러 메시지 출력
     }
 
     return this.props.children;
