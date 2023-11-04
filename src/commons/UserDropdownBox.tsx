@@ -30,8 +30,8 @@ const UserDropdownBox = () => {
         break;
       case '로그아웃':
         removeToken();
-        window.location.reload();
         setCookie('userAccountInfo', 'Not Login');
+        window.location.reload();
         break;
       default:
         break;
