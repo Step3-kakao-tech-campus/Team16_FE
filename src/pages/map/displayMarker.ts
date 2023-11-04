@@ -31,7 +31,6 @@ const displayMarker = async (map: any, addressInfo: any) => {
     setTimeout(() => {
       infowindow.close();
     }, 1500);
-    console.log(marker.getPosition());
     map.setCenter(marker.getPosition());
   });
 
