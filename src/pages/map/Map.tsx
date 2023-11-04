@@ -8,7 +8,7 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable no-new */
 import React, { useEffect, useRef } from 'react';
-import MapList from './MapList';
+import MapList, { SearchedPlace } from './MapList';
 import useMap from './useMap';
 
 declare global {
@@ -42,7 +42,7 @@ const Map: React.FC = () => {
   return (
     <div className="Map flex">
       <div ref={mapRef} className="w-96 h-96" />
-      <MapList />
+      <MapList searchedPlace={searchedPlace} map={map} />
     </div>
   );
 };
