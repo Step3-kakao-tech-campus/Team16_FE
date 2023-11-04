@@ -42,7 +42,6 @@ const Map: React.FC = () => {
   return (
     <div className="Map">
       <div ref={mapRef} className="w-96 h-96" />
-      <button>등록된 장소만 콘솔에 출력하기</button>
     </div>
   );
 };

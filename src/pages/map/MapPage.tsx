@@ -7,7 +7,7 @@ const MapPage = () => {
     <div>
       <GNB />
       <Map />
-      <TestMap />
+      {/* <TestMap /> */}
     </div>
   );
 };
