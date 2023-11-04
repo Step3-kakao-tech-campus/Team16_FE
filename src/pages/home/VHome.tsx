@@ -71,6 +71,7 @@ const VHome = (homeProps: HomeProps) => {
                 <a href={`/pet/${shortForm.petId}`}>
                   <div className="flex h-5/6 items-center justify-center justify-items-center">
                     <video
+                      muted
                       autoPlay
                       loop
                       src={shortForm.profileShortFormUrl}
