@@ -28,12 +28,11 @@ function useMap<T>(
     {
       onSuccess: (data) => {
         if (data.success === false) {
-          throw new Error('서버에 문제가 있습니다. 다시 시도해주세요.');
+          throw new Error(data.error.message);
         }
       },
     },
   );
-  throw new Error();
 
   useEffect(() => {
     (() => {
