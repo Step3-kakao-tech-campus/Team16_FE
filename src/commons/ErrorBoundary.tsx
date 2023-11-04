@@ -8,6 +8,7 @@ interface Props {
 
 interface State {
   hasError: boolean;
+  error?: Error;
 }
 
 class ErrorBoundary extends Component<Props, State> {
@@ -21,15 +22,20 @@ class ErrorBoundary extends Component<Props, State> {
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('Uncaught error:', error, errorInfo);
+    this.setState({
+      error,
+    });
   }
 
   public render() {
     if (this.state.hasError) {
       if (this.props.fallback) {
-        return this.props.fallback; // Use the provided fallback prop if an error occurs
+        return this.props.fallback; // fallback이 있으면 fallback을 보여줌
       }
-      return <h1>There was an error</h1>; // Default fallback if no prop is provided
+      if (this.state.error) {
+        return <h1>{this.state.error.message}</h1>; // throw error에 들어간 메시지를 보여줌
+      }
+      return <h1>There was an error</h1>; // 에러 메시지도 없고 fallback도 없으면 그냥 에러 메시지 출력
     }
 
     return this.props.children;

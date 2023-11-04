@@ -25,6 +25,13 @@ function useMap<T>(
           'Content-Type': 'application/json',
         },
       }).then((res) => res.json()),
+    {
+      onSuccess: (data) => {
+        if (data.success === false) {
+          throw new Error('서버에 문제가 있습니다. 다시 시도해주세요.');
+        }
+      },
+    },
   );
 
   useEffect(() => {
