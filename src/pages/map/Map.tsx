@@ -7,8 +7,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable no-new */
-import React, { useEffect, useRef, useState } from 'react';
-import { useMutation } from '@tanstack/react-query';
+import React, { useEffect, useRef } from 'react';
+import MapList from './MapList';
 import useMap from './useMap';
 
 declare global {
@@ -40,8 +40,9 @@ const Map: React.FC = () => {
   });
 
   return (
-    <div className="Map">
+    <div className="Map flex">
       <div ref={mapRef} className="w-96 h-96" />
+      <MapList />
     </div>
   );
 };
