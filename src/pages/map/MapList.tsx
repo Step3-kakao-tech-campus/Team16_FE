@@ -47,7 +47,7 @@ const MapList = ({
   const infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
 
   return (
-    <div>
+    <div className="w-96">
       {searchedPlace.map((place) => (
         <div
           key={place.id}
