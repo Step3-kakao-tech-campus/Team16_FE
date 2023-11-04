@@ -4,12 +4,12 @@ import ErrorBoundary from 'commons/ErrorBoundary';
 
 const MapPage = () => {
   return (
-    <ErrorBoundary>
-      <div>
-        <GNB />
+    <div>
+      <GNB />
+      <ErrorBoundary>
         <Map />
-      </div>
-    </ErrorBoundary>
+      </ErrorBoundary>
+    </div>
   );
 };
 
