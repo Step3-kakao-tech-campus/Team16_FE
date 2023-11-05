@@ -8,7 +8,7 @@ interface PetProps {
 }
 
 const UpdateRegisterForm = ({ petInfo }: PetProps) => {
-  const [petInfoState, setPetInfo] = useRecoilState(registerState);
+  const [petInfoState, setPetInfoState] = useRecoilState(registerState);
   const PET_INFO_REQUIRED_KEY: (keyof RegisterType)[] = [
     'age',
     'name',
@@ -25,7 +25,7 @@ const UpdateRegisterForm = ({ petInfo }: PetProps) => {
     const target = event.target as HTMLInputElement;
     const fieldName = target.id;
     const newValue = target.value;
-    setPetInfo((prev) => {
+    setPetInfoState((prev) => {
       const updatedPetInfo = {
         ...prev,
         [fieldName]: newValue,

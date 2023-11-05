@@ -7,6 +7,7 @@ const Input = ({
   placeholder,
   onChange,
   autocomplete,
+  defaultValue,
 }: InputGroupProps) => {
   return (
     <input
@@ -17,6 +18,7 @@ const Input = ({
       placeholder={placeholder}
       onChange={onChange}
       autoComplete={autocomplete}
+      defaultValue={defaultValue}
     />
   );
 };

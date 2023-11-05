@@ -1,7 +1,7 @@
 import RadioGroup from 'pages/register/RadioGroup';
 import SelectBox, { IdProps } from 'commons/SelectBox';
 import { RegisterType } from 'recoil/registerState';
-import InputGroup from './UpdateInputGroup';
+import InputGroup from 'commons/InputGroup';
 
 type RegisterProps = {
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
