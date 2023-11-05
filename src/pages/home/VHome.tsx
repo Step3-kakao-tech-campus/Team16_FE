@@ -11,6 +11,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { useState } from 'react';
 
 export interface PageProps {
   hasNext: boolean;
@@ -19,8 +20,8 @@ export interface PageProps {
 export interface ShortFormProps {
   map(
     arg0: (
-      shortForm: any,
-      index: any,
+      shortForm: ShortFormProps,
+      index: number,
     ) => import('react/jsx-runtime').JSX.Element,
   ): import('react').ReactNode;
   petId: number;
@@ -39,8 +40,13 @@ export interface HomeProps {
 }
 
 const VHome = (homeProps: HomeProps) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const isCurrentSlideMuted = (index: number) => {
+    return index !== currentIndex;
+  };
+
   return (
-    <div className="flex flex-col sm:mx-40 lg:mx-64 my-14">
+    <div className="flex flex-col sm:mx-40 lg:mx-64 my-5">
       <h2 className="flex w-60 font-bold text-xl sm:text-2xl items-center whitespace-nowrap"></h2>
       <div className="flex flex-col h-[75vh] w-fit items-center">
         <Swiper
@@ -50,13 +56,15 @@ const VHome = (homeProps: HomeProps) => {
           slidesPerView={1}
           grabCursor={true}
           loop={true}
+          pagination
           mousewheel={{
             thresholdTime: 1,
             sensitivity: 100,
           }}
-          longSwipes={false}
-          pagination={{ clickable: true }}
-          onSlideChange={() => console.log('스와이프')}
+          onSlideChange={(swiper: any) => {
+            setCurrentIndex(swiper.realIndex);
+            console.log(`현재 슬라이드: ${currentIndex}`);
+          }}
           autoHeight={true}
           direction={'vertical'}
           keyboard={{ enabled: true, pageUpDown: true, onlyInViewport: true }}
@@ -68,14 +76,23 @@ const VHome = (homeProps: HomeProps) => {
                 className="flex  slide-item items-center"
                 key={index}
               >
-                <a href={`/pet/${shortForm.petId}`}>
+                <a>
                   <div className="flex h-5/6 items-center justify-center justify-items-center">
                     <video
+                      muted={isCurrentSlideMuted(index)}
+                      id="short-form"
                       autoPlay
                       loop
-                      src={shortForm.profileShortFormUrl}
                       className=" w-full h-full"
-                    />
+                      // onClick={() => {
+                      //   setSound(false);
+                      // }}
+                    >
+                      <source
+                        src={shortForm.profileShortFormUrl}
+                        type="video/mp4"
+                      />
+                    </video>
                   </div>
                   <div className="flex flex-row h-20 px-6 pe-5 py-2 justify-between">
                     <div className="text-lg text-neutral-950">
@@ -95,30 +112,6 @@ const VHome = (homeProps: HomeProps) => {
             );
           })}
         </Swiper>
-        {/* {homeProps.shortFormProps.map((shortForm, index) => (
-        <div key={index} className="flex">
-          <a
-            href={`/pet/${shortForm.petId}`}
-            className="flex flex-col items-center justify-center gap-6"
-          >
-            <video muted autoPlay loop>
-              <source src={shortForm.profileShortFormUrl} type="video/mp4" />
-            </video>
-            <div className="flex flex-row w-full h-20 justify-between">
-              <div className="text-lg text-neutral-950">{shortForm.name}</div>
-              <div className="flex flex-col h-10 w-10 items-center">
-                <text className=" text-blue-700 font-semibold whitespace-nowrap">
-                  {shortForm.adoptionStatus}{' '}
-                </text>
-                <text className="text-gray-500 whitespace-nowrap">
-                  {' '}
-                  {shortForm.shelterName}{' '}
-                </text>
-              </div>
-            </div>
-          </a>
-        </div>
-      ))} */}
       </div>
     </div>
   );
