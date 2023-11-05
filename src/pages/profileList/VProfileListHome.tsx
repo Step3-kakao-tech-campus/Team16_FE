@@ -40,7 +40,7 @@ const VProfileListHome = (profileListProps: ProfileListProps) => {
           더보기
         </a>
       </h2>
-      <div className="grid grid-cols-1 gap-1 md:grid-cols-2 my-10 w-full whitespace-nowrap">
+      <div className="grid grid-cols-1 gap-1 md:grid-cols-2 my-5 w-full whitespace-nowrap">
         {profileListProps.sosListProps.map((sosItem, index) => (
           <ProfileCard
             key={index}
