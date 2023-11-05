@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import useFetch from 'commons/apis/useFetch';
 import VNewList, { Props } from './VNewList';
 import NewListSkeleton from './NewListSkeleton';
 
@@ -15,28 +16,9 @@ const NewList = () => {
 
   const [newList, setNewList] = useState<Props | null>(null);
 
-  const getProfiles = async () => {
-    const response = await fetch(
-      `${process.env.REACT_APP_URI}/pet/profiles/new?page=${currentPage}`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      },
-    );
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    const json = await response.json();
-    return json.response;
-  };
-
   const { data, isLoading, isError } = useQuery({
     queryKey: ['new-list', currentPage],
-    queryFn: getProfiles,
+    queryFn: () => useFetch(`/pet/profiles/new?page=${currentPage}`),
   });
 
   useEffect(() => {
