@@ -26,7 +26,6 @@ const SignupInputForm = () => {
     checked: false,
   });
   const [passwordConfirm, setPasswordConfirm] = useState(true);
-  const { isValid, checked } = emailConfirm;
   const [emailValidText, setEmailValidText] = useState('');
   const [emailInValidText, setEmailInValidText] = useState('');
 
@@ -128,9 +127,10 @@ const SignupInputForm = () => {
     // 중복 확인이 되지 않았을 때
     if (!emailConfirm.checked) {
       alert('이메일 중복을 확인해주세요');
+      setIsLoading(false);
     }
     // 제대로 확인되었을 때
-    if (emailConfirm.isValid && passwordConfirm) {
+    if (emailConfirm.isValid && emailConfirm.checked) {
       fetch(`${process.env.REACT_APP_URI}/account/shelter`, {
         method: 'POST',
         headers: {
@@ -152,15 +152,15 @@ const SignupInputForm = () => {
         .then((data) => {
           if (!data.success) {
             alert(data.error.message); // 이 부분은 주소 받는 거 때문에 그냥 텍스트만 넣기 애매함
-            return;
+          } else {
+            navigate('/login');
           }
-          navigate('/login');
         });
+      setIsLoading(false);
     }
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const target = event.target as HTMLInputElement;
+  const getInputValue = (target: HTMLInputElement) => {
     switch (target.id) {
       case 'email':
         setShelterInfo((prev) => ({ ...prev, email: target.value }));
@@ -187,13 +187,10 @@ const SignupInputForm = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const validationCheck = () => {
     validationSchema
       .validate(shelterInfo, { abortEarly: false })
       .then(() => {
-        setIsLoading(true);
-        userfetch();
         setErrors({});
       })
       .catch((err) => {
@@ -217,16 +214,25 @@ const SignupInputForm = () => {
       });
   };
 
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const target = event.target as HTMLInputElement;
+    getInputValue(target);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    validationCheck();
+    setIsLoading(true);
+    userfetch();
+  };
+
   const SignupInputFormProps = {
-    shelterInfo,
     handleChange,
     handleSubmit,
     duplicateCheck,
-    passwordConfirm,
-    isValid,
-    checked,
     emailValidText,
     emailInValidText,
+    passwordConfirm,
     errors,
     isLoading,
   };

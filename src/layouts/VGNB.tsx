@@ -1,5 +1,5 @@
 import LogoButton from 'commons/LogoButton';
-import { getLoginState, removeToken } from 'commons/cookie/getUser';
+import UserToggleBox from 'commons/UserToggleBox';
 import { Link } from 'react-router-dom';
 
 export interface VGNBProps {
@@ -34,21 +34,9 @@ const VGNB = (props: VGNBProps) => {
       </div>
       {isToggleOpen && (
         <div className="bg-white text-center z-10 flex w-content justify-center border-b">
-          <div className="lg:hidden w-full flex flex-col items-center text-xl gap-8">
+          <div className="lg:hidden w-full flex flex-col items-center text-xl gap-4">
             <div className="flex justify-center w-full gap-2">
-              <Link to="/login">
-                <button
-                  className="border border-2 box-border border-brand-color text-brand-color rounded-md w-28 py-1"
-                  onClick={removeToken}
-                >
-                  {getLoginState()}
-                </button>
-              </Link>
-              <Link to="/signup">
-                <button className="border box-border border-brand-color border-2 bg-brand-color text-white rounded-md w-28 py-1">
-                  회원가입
-                </button>
-              </Link>
+              <UserToggleBox />
             </div>
 
             <ol className="flex flex-col justify-center w-full gap-4">

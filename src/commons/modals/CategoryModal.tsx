@@ -5,6 +5,7 @@ import CategoryModalList, {
   CategoryModalType,
   VCategoryModalListProps,
 } from 'commons/modals/VCategoryModalList';
+import { redirect, useNavigate } from 'react-router-dom';
 
 export interface CategoryModalProps {
   handleModalCloseClick: () => void;
@@ -19,8 +20,9 @@ const CategoryModal = ({
   speciesOrRegion,
   setSpeciesOrRegion,
 }: CategoryModalProps) => {
-  const [, setSpecies] = useRecoilState(speciesState);
-  const [, setRegion] = useRecoilState(regionState);
+  const [species, setSpecies] = useRecoilState(speciesState);
+  const [region, setRegion] = useRecoilState(regionState);
+  const navigate = useNavigate();
 
   const speciesList: SpeciesType[] = ['강아지', '고양이', '기타', '전체'];
   const regionList: RegionType[] = [
@@ -28,7 +30,7 @@ const CategoryModal = ({
     '서울',
     '경기',
     '인천',
-    '강원',
+    '제주특별자치도',
     '충북',
     '충남',
     '대전',
@@ -40,17 +42,19 @@ const CategoryModal = ({
     '전북',
     '전남',
     '광주',
-    '제주',
-    '세종',
+    '강원특별자치도',
+    '세종특별자치시',
   ];
 
-  const handleSpeciesClick = (species: SpeciesType) => {
-    setSpecies(species);
+  const handleSpeciesClick = (speciess: SpeciesType) => {
+    setSpecies(speciess);
     setSpeciesOrRegion('region');
   };
-  const handleRegionClick = (region: RegionType) => {
-    setRegion(region);
+  const handleRegionClick = (regions: RegionType) => {
+    setRegion(regions);
     handleModalCloseClick();
+    navigate(`/`);
+    // ?type=${species}?area=${region}?page=${1}
   };
 
   const categoryModalListProps: VCategoryModalListProps = {
@@ -64,7 +68,7 @@ const CategoryModal = ({
   return (
     <div
       onClick={handleModalOutsideClick}
-      className="w-screen h-screen fixed top-0 left-0 flex justify-center items-center bg-black bg-opacity-50"
+      className="w-screen h-screen fixed top-0 left-0 flex justify-center items-center bg-black bg-opacity-50 z-10"
     >
       <div className="w-3/5 h-4/5 bg-white rounded-md overflow-auto">
         <div className="flex justify-between p-5">

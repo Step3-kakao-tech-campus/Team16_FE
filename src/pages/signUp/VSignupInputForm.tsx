@@ -8,38 +8,35 @@ interface VSignupInputProps {
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   duplicateCheck: () => void;
-  isValid: boolean;
-  checked: boolean;
-  passwordConfirm: boolean;
   emailValidText: string;
   emailInValidText: string;
+  passwordConfirm: boolean;
   errors: Partial<ShelterSignupType>;
   isLoading: boolean;
 }
 
 interface ValidationProps {
   text?: string;
+  className: string;
 }
 
-const ValidateText = ({ text }: ValidationProps) => {
-  return <div className="text-red-500">{text}</div>;
+const ValidateText = ({ text, className }: ValidationProps) => {
+  return text ? <div className={className}>{text}</div> : null;
 };
 
 const VSignupInputForm = ({
   handleChange,
   handleSubmit,
   duplicateCheck,
-  isValid,
-  checked,
-  passwordConfirm,
   emailValidText,
   emailInValidText,
+  passwordConfirm,
   errors,
   isLoading,
 }: VSignupInputProps) => {
   return (
     <form
-      className="flex flex-col gap-4 w-full max-w-[400px] px-2"
+      className="flex flex-col gap-3 w-full max-w-[400px] px-2"
       onSubmit={handleSubmit}
     >
       <div className="email-confirm flex place-items-end justify-center">
@@ -59,7 +56,9 @@ const VSignupInputForm = ({
           중복 확인
         </button>
       </div>
-      <ValidateText text={errors.email} />
+      <ValidateText text={emailValidText} className={'text-green-500'} />
+      <ValidateText text={emailInValidText} className={'text-red-500'} />
+      <ValidateText text={errors.email} className={'text-red-500'} />
       <InputGroup
         id="password"
         name="비밀번호"
@@ -68,7 +67,7 @@ const VSignupInputForm = ({
         onChange={handleChange}
         autocomplete="off"
       />
-      <ValidateText text={errors.password} />
+      <ValidateText text={errors.password} className={'text-red-500'} />
       <InputGroup
         id="password-confirm"
         name="비밀번호 확인"
@@ -77,7 +76,6 @@ const VSignupInputForm = ({
         onChange={handleChange}
         autocomplete="off"
       />
-      {/* 수정필요 */}
       {!passwordConfirm && (
         <div className="text-red-500">비밀번호가 일치하지 않습니다.</div>
       )}
@@ -89,7 +87,7 @@ const VSignupInputForm = ({
         onChange={handleChange}
         autocomplete="off"
       />
-      <ValidateText text={errors.name} />
+      <ValidateText text={errors.name} className={'text-red-500'} />
       <InputGroup
         id="shelter-contact"
         name="보호소 연락처"
@@ -98,7 +96,7 @@ const VSignupInputForm = ({
         onChange={handleChange}
         autocomplete="off"
       />
-      <ValidateText text={errors.contact} />
+      <ValidateText text={errors.contact} className={'text-red-500'} />
       <AddressInputGroup />
       <button className="bg-brand-color text-white w-full rounded-md p-2">
         {isLoading ? (

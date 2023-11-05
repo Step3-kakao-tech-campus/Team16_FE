@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import registerState from 'recoil/registerState';
 import DayModalInput from 'pages/register/DayModalInput';
+import useFetch from 'commons/apis/useFetch';
 import UpdateHeader from './UpdateHeader';
 import PatchStatusSelectGroup from './PatchStatusSelectGroup';
 import UpdateRegisterForm from './UpdateRegisterForm';
@@ -12,40 +13,15 @@ import UpdateRegisterForm from './UpdateRegisterForm';
 const UpdateTemplate = () => {
   const params = useParams();
   const petId = params.id;
-  const cookie = getCookie('loginToken');
   const [updateState, setUpdateState] = useRecoilState(registerState);
   const [error, setError] = useState({
     isError: false,
     errorMessage: '',
   });
 
-  // petInfo return
-  const getPetInfo = async () => {
-    const res = await fetch(
-      `${process.env.REACT_APP_URI}/pet/register-info/${petId}`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${cookie}`,
-        },
-      },
-    )
-      .then((response) => {
-        return response.json();
-      })
-      .then((apiData) => {
-        if (apiData.success === false) {
-          throw new Error(apiData.message);
-        }
-        return { ...apiData.response };
-      });
-    return res;
-  };
-
   const { data, isLoading, isError } = useQuery({
     queryKey: ['pet-update'],
-    queryFn: () => getPetInfo(),
+    queryFn: () => useFetch(`/pet/register-info/${petId}`),
     onSuccess: (fetchedData) => {
       const { profileImageUrl, profileShortFormUrl, ...rest } = fetchedData;
       setUpdateState({ ...rest, isComplete: true });

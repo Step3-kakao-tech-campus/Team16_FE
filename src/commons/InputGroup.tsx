@@ -1,13 +1,13 @@
+import React from 'react';
 import Container from 'commons/Container';
 import Input from 'commons/Input';
 
-export interface InputGroupProps {
-  id: string;
+export interface InputGroupProps
+  extends React.HTMLAttributes<HTMLInputElement> {
   name: string;
   type: string;
-  placeholder: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  autocomplete: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  autocomplete?: string;
 }
 
 const InputGroup = ({
@@ -17,6 +17,7 @@ const InputGroup = ({
   placeholder,
   onChange,
   autocomplete,
+  defaultValue,
 }: InputGroupProps) => {
   return (
     <Container className={'flex flex-col gap-1'}>
@@ -30,6 +31,7 @@ const InputGroup = ({
         placeholder={placeholder}
         onChange={onChange}
         autocomplete={autocomplete}
+        defaultValue={defaultValue}
       />
     </Container>
   );
