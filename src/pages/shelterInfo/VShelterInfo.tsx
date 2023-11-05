@@ -1,6 +1,9 @@
 import Pagination from 'commons/VPagenation';
 import ProfileCard from 'pages/profileList/ProfileCard';
 import { ProfileListProps } from 'pages/profileList/VProfileListHome';
+import { getCookie } from 'commons/cookie/cookie';
+import { link } from 'fs/promises';
+import { useHref } from 'react-router-dom';
 import VShelterCard from './VShelterCard';
 
 export interface ShelterInfoProps {
@@ -35,6 +38,9 @@ export interface Props {
 }
 
 const VShelterInfo = (props: Props) => {
+  const loginAccount = getCookie('accountInfo');
+  console.log(loginAccount);
+
   return (
     <div>
       <div className="mt-8 sm:mt-20">
@@ -46,14 +52,31 @@ const VShelterInfo = (props: Props) => {
         </h2>
         <div className="grid grid-cols-1 gap-1 md:grid-cols-2 my-10 w-full whitespace-nowrap">
           {props.profileProps.map((item, index) => (
-            <ProfileCard
-              key={index}
-              petId={item.id}
-              petName={item.name}
-              petAge={item.age}
-              shelterName={''}
-              {...item}
-            />
+            <div className="flex" key={index}>
+              <ProfileCard
+                key={index}
+                petId={item.id}
+                petName={item.name}
+                petAge={item.age}
+                shelterName={''}
+                {...item}
+              />
+              <button
+                className={`${
+                  loginAccount.role === 'SHELTER' &&
+                  loginAccount.id === props.shelterInfoProps.id
+                    ? ' bg-slate-200 text-sm h-fit w-fit p-1  rounded-xl '
+                    : ' text-transparent '
+                }`}
+                onClick={() => {
+                  console.log('안녕', item.id);
+                  // eslint-disable-next-line no-restricted-globals
+                  location.href = `/pet-update/${item.id}`;
+                }}
+              >
+                수정하기
+              </button>
+            </div>
           ))}
         </div>
       </div>

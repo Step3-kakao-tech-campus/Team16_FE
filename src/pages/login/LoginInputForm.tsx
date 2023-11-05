@@ -44,6 +44,7 @@ const LoginInputForm = () => {
 
       .then((data) => {
         if (data.success) {
+          setCookie('accountInfo', data.response.accountInfo);
           navigate('/');
         } else {
           // 형식은 맞지만 입력된 값이 가입되지 않은 계정일 때
