@@ -2,10 +2,10 @@ import Container from 'commons/Container';
 import Postcode from 'commons/PostCode';
 import { ShelterSignupType } from 'recoil/shelterState';
 
-type Props = {
+interface Props {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   shelterInfo: ShelterSignupType;
-};
+}
 
 const VAddressInputGroup = ({ handleChange, shelterInfo }: Props) => {
   return (
@@ -16,13 +16,13 @@ const VAddressInputGroup = ({ handleChange, shelterInfo }: Props) => {
         </label>
         <div className="zone-code-input flex justify-between border-2 rounded-md border-gray-300 p-2">
           <input
+            disabled
             className="mx-2 w-full"
             id="zone-code"
             name="우편번호"
             type="text"
             placeholder="우편번호"
-            value={shelterInfo.zonecode}
-            onChange={handleChange}
+            defaultValue={shelterInfo.zonecode}
           />
           <Postcode />
         </div>
@@ -30,32 +30,32 @@ const VAddressInputGroup = ({ handleChange, shelterInfo }: Props) => {
       <div className="user-address flex justify-between max-w-full">
         <input
           disabled
-          className="border-2 rounded-md border-gray-300 p-2 max-w-[33%]"
+          className="border-2 rounded-md border-gray-300 p-2 max-w-[33%] text-ellipsis"
           id="sido"
           name="시/도"
           type="text"
           placeholder="시/도"
-          value={shelterInfo.address.province}
+          defaultValue={shelterInfo.address.province}
           onChange={handleChange}
         />
         <input
           disabled
-          className="border-2 rounded-md border-gray-300 p-2 max-w-[33%]"
+          className="border-2 rounded-md border-gray-300 p-2 max-w-[33%] text-ellipsis"
           id="sigungu"
           name="시/군/구"
           type="text"
           placeholder="시/군/구"
-          value={shelterInfo.address.city}
+          defaultValue={shelterInfo.address.city}
           onChange={handleChange}
         />
         <input
           disabled
-          className="border-2 rounded-md border-gray-300 p-2 max-w-[33%]"
+          className="border-2 rounded-md border-gray-300 p-2 max-w-[33%] text-ellipsis"
           id="roadname"
           name="도로명 주소"
           type="text"
           placeholder="도로명 주소"
-          value={shelterInfo.address.roadName}
+          defaultValue={shelterInfo.address.roadName}
           onChange={handleChange}
         />
       </div>
@@ -66,6 +66,7 @@ const VAddressInputGroup = ({ handleChange, shelterInfo }: Props) => {
         type="text"
         placeholder="상세 주소(입력)"
         onChange={handleChange}
+        defaultValue={shelterInfo.address.detail}
       />
     </Container>
   );

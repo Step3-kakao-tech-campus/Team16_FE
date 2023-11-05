@@ -13,6 +13,7 @@ import ImageVideoInput from '../register/ImageVideoInput';
 const UpdateHeader = () => {
   const [selectedImageFile, setSelectedImageFile] = useState(null);
   const [selectedVideoFile, setSelectedVideoFile] = useState(null);
+  const [errorText, setErrorText] = useState<string>('');
   const registerPetData = useRecoilValue(registerState);
   const imageRef = useRef<HTMLInputElement>(null);
   const videoRef = useRef<HTMLInputElement>(null);
@@ -32,14 +33,36 @@ const UpdateHeader = () => {
   // 등록하기 관련
   const patchPet = async (formData: FormData) => {
     const loginToken = getCookie('loginToken');
-    const res = await fetch(`${process.env.REACT_APP_URI}/pet/${params}`, {
+    const response = await fetch(`${process.env.REACT_APP_URI}/pet/${params}`, {
       method: 'PATCH',
       body: formData,
       headers: {
         Authorization: `Bearer ${loginToken}`,
       },
     });
-    return res.json();
+    if (!response.ok) {
+      console.log(response.status);
+      // 로그인 화면으로 이동하기 위해 텍스트 바꿔주는 것 필요
+      switch (response.status) {
+        case 400:
+          setErrorText('이미지, 비디오 형식이 잘못되었습니다.'); // 취소
+          break;
+        case 401:
+        case 403:
+          setErrorText('로그인 정보가 만료되었습니다.'); // 로그인 페이지로 이동 / 취소
+          break;
+        case 404:
+          setErrorText('보호소를 찾을 수 없습니다.'); // 로그인 페이지로 이동 / 취소
+          break;
+        case 500:
+          setErrorText('서버에 문제가 발생했습니다.'); // 다시하기 / 취소
+          break;
+        default:
+          setErrorText('등록 정보의 형식이 잘못되었습니다.'); // 취소
+          break;
+      }
+    }
+    return response.json();
   };
   const { data, mutate, isError, isLoading, isSuccess } = useMutation(patchPet);
   const handleRegisterButtonClick = async () => {
@@ -91,6 +114,7 @@ const UpdateHeader = () => {
     isSuccess,
     isError,
     data,
+    errorText,
     modalString: '수정',
   };
   return (

@@ -2,14 +2,12 @@ import React from 'react';
 import Container from 'commons/Container';
 import Input from 'commons/Input';
 
-export interface InputGroupProps {
-  id: string;
+export interface InputGroupProps
+  extends React.HTMLAttributes<HTMLInputElement> {
   name: string;
   type: string;
-  placeholder: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   autocomplete?: string;
-  defaultValue?: string;
 }
 
 const InputGroup = ({

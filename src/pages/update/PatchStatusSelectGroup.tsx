@@ -86,11 +86,6 @@ const PatchStatusSelectGroup = ({
     }
   };
 
-  // 데이터 확인용
-  // useEffect(() => {
-  //   console.log(petStatus);
-  // }, [petStatus]);
-
   return (
     <div>
       <StatusScore

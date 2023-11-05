@@ -14,6 +14,7 @@ import UrgentListPage from 'pages/profileList/urgentList/UrgentListPage';
 import UpdatePage from 'pages/update/UpdatePage';
 import HomePage from 'pages/home/HomePage';
 import ValidateCheckLayout from 'layouts/ValidateCheckLayout';
+import EditProfilePage from 'pages/editProfile/EditProfilePage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -37,6 +38,7 @@ function App() {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/find-shelter" element={<MapPage />} />
             <Route path="/pet-update/:id" element={<UpdatePage />} />
+            <Route path="/shelter/:id/edit" element={<EditProfilePage />} />
           </ValidateCheckLayout>
           <Routes>
             <Route path="/login" element={<LoginPage />} />

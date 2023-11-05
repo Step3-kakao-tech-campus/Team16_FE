@@ -11,6 +11,7 @@ const LoginInputForm = () => {
   const [errors, setErrors] = useState<Partial<ShelterLoginType>>({});
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
+  const currentDate = new Date();
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -20,6 +21,7 @@ const LoginInputForm = () => {
   });
 
   const userfetch = () => {
+    let token: string;
     fetch(`${process.env.REACT_APP_URI}/account/login`, {
       method: 'POST',
       headers: {
@@ -30,35 +32,38 @@ const LoginInputForm = () => {
         email: userInfo.email,
         password: userInfo.password,
       }),
-    })
-      .then((res) => {
-        const jwtToken = res.headers.get('Authorization');
-        if (jwtToken) {
-          const slicedToken = jwtToken.split(' ')[1];
-          setCookie('loginToken', slicedToken);
-        } else {
-          console.log('로그인 실패로 token이 Null');
-        }
-        return res.json();
-      })
+    }).then(async (res) => {
+      const jwtToken = res.headers.get('Authorization');
+      if (jwtToken) {
+        // eslint-disable-next-line prefer-destructuring
+        token = jwtToken.split(' ')[1];
+      } else {
+        console.log('로그인 실패로 token이 Null');
+      }
+      const data = await res.json();
+      if (data.success && token) {
+        const { accountInfo, tokenExpirationDateTime } = data.response;
+        const { id, role } = accountInfo;
+        const tokenExpirationDate = new Date(tokenExpirationDateTime);
+        const timeDifferenceseconds = Math.floor(
+          (Number(tokenExpirationDate) - Number(currentDate)) / 1000,
+        );
 
-      .then((data) => {
-        console.log('data: ', data);
-        if (data.success) {
-          const { accountInfo, tokenExpirationDateTime } = data.response;
-          const { id, role } = accountInfo;
-          const expiredDate = new Date(tokenExpirationDateTime);
-
-          setCookie('userAccountInfo', `${role} ${id}`);
-          setCookie('expiredDate', String(expiredDate));
-          setCookie('accountInfo', data.response.accountInfo);
-          navigate('/');
-        } else {
-          // 형식은 맞지만 입력된 값이 가입되지 않은 계정일 때
-          alert(data.error.message);
-        }
-        setIsLoading(false);
-      });
+        setCookie('userAccountInfo', `${role} ${id}`, {
+          expires: tokenExpirationDate,
+          maxAge: timeDifferenceseconds,
+        });
+        setCookie('loginToken', token, {
+          expires: tokenExpirationDate,
+          maxAge: timeDifferenceseconds,
+        });
+        navigate('/');
+      } else {
+        // 형식은 맞지만 입력된 값이 가입되지 않은 계정일 때
+        alert(data.error.message);
+      }
+      setIsLoading(false);
+    });
   };
 
   const validateCheck = () => {

@@ -9,6 +9,7 @@ export interface RegisterModalProps {
   isError: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: any;
+  errorText: string;
   modalString: string;
 }
 
@@ -22,9 +23,9 @@ const RegisterModal = ({
   isSuccess,
   isError,
   data,
+  errorText,
   modalString,
 }: RegisterModalProps) => {
-  console.log(data);
   if (isError || data?.success === false) {
     return (
       <div
@@ -37,10 +38,7 @@ const RegisterModal = ({
               X
             </button>
           </div>
-          <span className="text-2xl text-brand-color">
-            {modalString}에 실패했습니다
-          </span>
-          <div className="text-red-600">{data?.error?.message}</div>
+          <span className="text-2xl text-brand-color">{errorText}</span>
           <div className="flex w-2/3 justify-between mt-8">
             <button
               className="text-brand-color rounded-md font-bold border border-brand-color w-16 py-2"
@@ -71,9 +69,7 @@ const RegisterModal = ({
               X
             </button>
           </div>
-          <span className="text-2xl text-brand-color">
-            {modalString}중입니다...
-          </span>
+          <span className="text-2xl text-brand-color">등록중입니다...</span>
           <img
             src="/assets/images/hourglass.png"
             alt="hourglass"
@@ -149,7 +145,7 @@ const RegisterModal = ({
       </div>
     );
   }
-  return <div>문제가 생겼습니다</div>;
+  return <div>{errorText}</div>;
 };
 
 export default RegisterModal;
