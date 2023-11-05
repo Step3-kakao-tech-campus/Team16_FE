@@ -40,6 +40,8 @@ export interface Props {
 const VShelterInfo = (props: Props) => {
   const loginAccount = getCookie('accountInfo');
   console.log(loginAccount);
+  console.log(loginAccount.role);
+  console.log(loginAccount.id);
 
   return (
     <div>

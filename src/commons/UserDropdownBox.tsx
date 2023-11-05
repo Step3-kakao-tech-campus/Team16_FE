@@ -8,8 +8,8 @@ const UserDropdownBox = () => {
   const options = ['My 정보 변경', 'My 보호소 이동', '로그아웃'];
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // 드롭다운 메뉴 열림/닫힘 상태
   const navigate = useNavigate();
-  const shelterId = getCookie('userAccountInfo');
-  const id = shelterId ? shelterId.split(' ')[1] : '';
+  const shelterId = getCookie('accountInfo');
+  const id = shelterId ? shelterId.id : '';
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
