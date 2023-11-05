@@ -7,7 +7,7 @@ export interface InputGroupProps
   name: string;
   type: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  autocomplete: string;
+  autocomplete?: string;
 }
 
 const InputGroup = ({
