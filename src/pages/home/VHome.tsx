@@ -1,10 +1,4 @@
-import {
-  Pagination,
-  A11y,
-  Autoplay,
-  Mousewheel,
-  Keyboard,
-} from 'swiper/modules';
+import { A11y, Autoplay, Mousewheel, Keyboard } from 'swiper/modules';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -42,7 +36,8 @@ export interface HomeProps {
 const VHome = (homeProps: HomeProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const isCurrentSlideMuted = (index: number) => {
-    return index !== currentIndex;
+    return index !== currentIndex - 1;
+    // 일단 이전 페이지 소리가 나오게 해놨습니다
   };
 
   return (
@@ -51,12 +46,11 @@ const VHome = (homeProps: HomeProps) => {
       <div className="flex flex-col h-[75vh] w-fit items-center">
         <Swiper
           className="flex w-full items-center justify-center"
-          modules={[Pagination, A11y, Autoplay, Mousewheel, Keyboard]}
+          modules={[A11y, Autoplay, Mousewheel, Keyboard]}
           spaceBetween={10}
           slidesPerView={1}
           grabCursor={true}
           loop={true}
-          pagination
           mousewheel={{
             thresholdTime: 1,
             sensitivity: 100,

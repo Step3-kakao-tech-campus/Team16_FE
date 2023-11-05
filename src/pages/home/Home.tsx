@@ -64,7 +64,7 @@ const Home = () => {
           setCurrentPage(currentPage + 1);
           console.log('마지막');
         } else {
-          setCurrentPage(0);
+          setCurrentPage(1);
         }
       };
 
