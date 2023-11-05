@@ -6,14 +6,16 @@ import { useParams } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
 import { useRecoilState } from 'recoil';
 import { shelterSignupState } from 'recoil/shelterState';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getCookie } from 'commons/cookie/cookie';
 import EditAddressInputGroup from './EditAddressInputGroup';
+import EditProfilePageSkeleton from './EditProfilePageSkeleton';
 
 const EditProfilePage = () => {
   const params = useParams();
   const shelterId = params.id;
   const [shelterInfo, setShelterInfo] = useRecoilState(shelterSignupState);
+  const [isButtonLoading, setIsButtonLoading] = useState<boolean>(false);
 
   const getProfileInfo = async () => {
     const response = await fetch(
@@ -63,15 +65,22 @@ const EditProfilePage = () => {
         console.error('내부 에러 : 알 수 없음');
       }
     }
+    console.log('shelterFetch');
+    console.log('response: ', response);
+    setIsButtonLoading(false);
 
     return response.json();
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsButtonLoading(true);
     shelterFetch();
+    getProfileInfo();
   };
 
-  const { data } = useQuery({
+  // isLoading으로 데이터 가져오기 전까지 보여줄 스켈레톤 만들기
+  const { data, isLoading } = useQuery({
     queryKey: ['editProfile', shelterId],
     queryFn: getProfileInfo,
   });
@@ -85,57 +94,60 @@ const EditProfilePage = () => {
         ...data?.response.shelter.address,
       },
     });
+    console.log(data);
   }, [data]);
 
   return (
     <div className="h-full">
       <GNB />
-      <div
-        className="flex flex-col justify-center items-center gap-10 min-h-[80vh]"
-        style={{
-          backgroundImage: 'url(assets/images/backgroundImage.png)',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center',
-        }}
-      >
-        <Banner className="font-semibold text-2xl">My 보호소 정보 수정</Banner>
-
-        <form
-          className="flex flex-col gap-6 w-full max-w-[400px] px-2"
-          onSubmit={handleSubmit}
+      {isLoading ? (
+        <EditProfilePageSkeleton />
+      ) : (
+        <div
+          className="flex flex-col justify-center items-center gap-10 min-h-[80vh]"
+          style={{
+            backgroundImage: 'url(assets/images/backgroundImage.png)',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center',
+          }}
         >
-          <InputGroup
-            id="shelter"
-            name="보호소 이름"
-            type="text"
-            placeholder="보호소 이름을 입력해주세요."
-            onChange={() => {}}
-            autocomplete="off"
-            defaultValue={data?.response.shelter.name}
-          />
-          <InputGroup
-            id="shelter-contact"
-            name="보호소 연락처"
-            type="text"
-            placeholder="보호소에 연락 가능한 연락처를 입력해주세요."
-            onChange={() => {}}
-            autocomplete="off"
-            defaultValue={data?.response.shelter.contact}
-          />
-          {/*  defaultValue=data.shelter.address */}{' '}
-          {/* 내부 구조 바꾸는 작업 필요 => props 받는 방식을 바꾸면 될 듯 */}
-          <EditAddressInputGroup />
-          <button className="bg-brand-color text-white w-full rounded-md p-2">
-            {/* {isLoading ? (
-              // false -> isLoading으로 넣기
-              <ClipLoader size={20} color="#fff" loading={false} />
-            ) : (
-              '정보 수정하기'
-            )} */}
-            정보 수정하기
-          </button>
-        </form>
-      </div>
+          <Banner className="font-semibold text-2xl mb-4">
+            My 보호소 정보 수정
+          </Banner>
+
+          <form
+            className="flex flex-col gap-6 w-full max-w-[400px] px-2"
+            onSubmit={handleSubmit}
+          >
+            <InputGroup
+              id="shelter"
+              name="보호소 이름"
+              type="text"
+              placeholder="보호소 이름을 입력해주세요."
+              onChange={() => {}}
+              autocomplete="off"
+              defaultValue={data?.response.shelter.name}
+            />
+            <InputGroup
+              id="shelter-contact"
+              name="보호소 연락처"
+              type="text"
+              placeholder="보호소에 연락 가능한 연락처를 입력해주세요."
+              onChange={() => {}}
+              autocomplete="off"
+              defaultValue={data?.response.shelter.contact}
+            />
+            <EditAddressInputGroup />
+            <button className="bg-brand-color text-white w-full rounded-md p-2">
+              {isButtonLoading ? (
+                <ClipLoader size={20} color="#fff" loading={isButtonLoading} />
+              ) : (
+                '정보 수정하기'
+              )}
+            </button>
+          </form>
+        </div>
+      )}
     </div>
   );
 };
