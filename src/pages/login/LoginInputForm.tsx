@@ -49,7 +49,7 @@ const LoginInputForm = () => {
           (Number(tokenExpirationDate) - Number(currentDate)) / 1000,
         );
 
-        setCookie('userAccountInfo', `${role} ${id}`, {
+        setCookie('accountInfo', `${role} ${id}`, {
           expires: tokenExpirationDate,
           maxAge: timeDifferenceseconds,
         });
