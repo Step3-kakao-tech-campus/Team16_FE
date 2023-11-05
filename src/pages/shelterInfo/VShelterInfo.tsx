@@ -63,6 +63,7 @@ const VShelterInfo = (props: Props) => {
               />
               <button
                 className={`${
+                  loginAccount &&
                   loginAccount.role === 'SHELTER' &&
                   loginAccount.id === props.shelterInfoProps.id
                     ? ' bg-slate-200 text-sm h-fit w-fit p-1  rounded-xl '
