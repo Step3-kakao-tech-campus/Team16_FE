@@ -1,8 +1,9 @@
+import React from 'react';
 import Container from 'commons/Container';
 import Input from 'commons/Input';
-import { HTMLAttributes } from 'react';
 
-export interface InputGroupProps extends HTMLAttributes<HTMLInputElement> {
+export interface InputGroupProps
+  extends React.HTMLAttributes<HTMLInputElement> {
   name: string;
   type: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
