@@ -25,6 +25,13 @@ function useMap<T>(
           'Content-Type': 'application/json',
         },
       }).then((res) => res.json()),
+    {
+      onSuccess: (data) => {
+        if (data.success === false) {
+          throw new Error(data.error.message);
+        }
+      },
+    },
   );
 
   useEffect(() => {
