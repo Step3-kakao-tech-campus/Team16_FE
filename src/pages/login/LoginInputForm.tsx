@@ -43,7 +43,14 @@ const LoginInputForm = () => {
       })
 
       .then((data) => {
+        console.log('data: ', data);
         if (data.success) {
+          const { accountInfo, tokenExpirationDateTime } = data.response;
+          const { id, role } = accountInfo;
+          const expiredDate = new Date(tokenExpirationDateTime);
+
+          setCookie('userAccountInfo', `${role} ${id}`);
+          setCookie('expiredDate', String(expiredDate));
           setCookie('accountInfo', data.response.accountInfo);
           navigate('/');
         } else {
@@ -54,15 +61,10 @@ const LoginInputForm = () => {
       });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // email, password 비었는지 확인
+  const validateCheck = () => {
     validationSchema
       .validate(userInfo, { abortEarly: false })
       .then(() => {
-        // email, password 보내기
-        setIsLoading(true);
-        userfetch();
         setErrors({});
       })
       .catch((err) => {
@@ -74,6 +76,13 @@ const LoginInputForm = () => {
         );
         setErrors(newErrors);
       });
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+    validateCheck();
+    userfetch();
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

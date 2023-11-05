@@ -1,4 +1,11 @@
-import { useState, useEffect, Dispatch, SetStateAction } from 'react';
+import {
+  useState,
+  useEffect,
+  Dispatch,
+  SetStateAction,
+  useRef,
+  RefObject,
+} from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
 type Coordinate = {
@@ -35,6 +42,8 @@ const TestMap = () => {
   const [markers, setMarkers] = useState<Array<PlaceType>>([]);
   const [searchedPlaces, setSearchedPlaces] = useState<Array<PlaceType>>([]);
   const [isExecuted, setIsExecuted] = useState<boolean>(false);
+  const mapRef = useRef<any>();
+  const markerRef = useRef<any>();
 
   // 보호소 키워드로 검색한 후 저장
   const searchKeywordPlace = (
@@ -62,6 +71,7 @@ const TestMap = () => {
   useEffect(() => {
     if (!isExecuted) searchKeywordPlace(searchedPlaces, setSearchedPlaces);
     console.log('filteredPlaces: ', searchedPlaces);
+    console.log('MapRef: ', mapRef.current);
   }, [searchedPlaces]);
 
   return (
@@ -71,6 +81,7 @@ const TestMap = () => {
         center={currentPosition}
         className="w-[500px] h-[500px]"
         level={3}
+        ref={mapRef}
       >
         {/* <MapMarker
           position={currentPosition}
@@ -82,6 +93,7 @@ const TestMap = () => {
             }, // 마커이미지의 크기입니다
           }}
           title="현재 위치"
+          ref={markerRef}
         /> */}
         {/* Marker 표시 */}
         {searchedPlaces.map((searchedPlace) => {

@@ -16,7 +16,7 @@ const VSignupPage = ({ redirectLoginPage }: Props) => {
         backgroundPosition: 'center',
       }}
     >
-      <div className="flex flex-row justify-between items-center gap-4 max-w-[400px] w-[100%]">
+      <div className="flex flex-row justify-between items-center gap-4 max-w-[400px] w-[100%] mt-4 mb-2">
         <LogoButton
           imageClassName="sm:w-8 md:w-8 lg:w-12"
           logoClassName="sm:text-2xl md:text-2xl lg:text-3xl"
