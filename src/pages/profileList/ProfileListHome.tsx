@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import useFetch from 'commons/apis/useFetch';
 import VProfileListHome, { ProfileListProps } from './VProfileListHome';
 import ProfileListHomeSkeleton from './ProfileListHomeSkeleton';
-import getPetProfiles from './api/PetApi';
 
 const ProfileListHome = () => {
   const [profileListProps, setProfileListProps] =
@@ -10,7 +10,7 @@ const ProfileListHome = () => {
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ['pet-list'],
-    queryFn: getPetProfiles,
+    queryFn: () => useFetch('/pet/profiles'),
   });
 
   useEffect(() => {

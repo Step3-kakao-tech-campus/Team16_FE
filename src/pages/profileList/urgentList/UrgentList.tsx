@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import useFetch from 'commons/apis/useFetch';
 import VUrgentList, { Props } from './VUrgentList';
 import UrgentListSkeleton from './UrgentListSkeleton';
 
@@ -15,28 +16,9 @@ const UrgentList = () => {
 
   const [urgentList, setUrgentList] = useState<Props | null>(null);
 
-  const getProfiles = async () => {
-    const response = await fetch(
-      `${process.env.REACT_APP_URI}/pet/profiles/sos?page=${currentPage}`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      },
-    );
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    const json = await response.json();
-    return json.response;
-  };
-
   const { data, isLoading, isError } = useQuery({
     queryKey: ['urgent-list', currentPage],
-    queryFn: getProfiles,
+    queryFn: () => useFetch(`/pet/profiles/sos?page=${currentPage}`),
   });
 
   useEffect(() => {

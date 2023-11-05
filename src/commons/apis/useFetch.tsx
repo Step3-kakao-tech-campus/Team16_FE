@@ -1,5 +1,5 @@
-const getPetProfiles = async () => {
-  const response = await fetch(`${process.env.REACT_APP_URI}/pet/profiles`, {
+const useFetch = async (url: any) => {
+  const response = await fetch(`${process.env.REACT_APP_URI}/${url}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -14,4 +14,4 @@ const getPetProfiles = async () => {
   return json.response;
 };
 
-export default getPetProfiles;
+export default useFetch;
