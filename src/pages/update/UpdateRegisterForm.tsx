@@ -9,34 +9,35 @@ interface PetProps {
 
 const UpdateRegisterForm = ({ petInfo }: PetProps) => {
   const [petInfoState, setPetInfo] = useRecoilState(registerState);
-
-  const handleChange = (event: React.SyntheticEvent) => {
+  const PET_INFO_REQUIRED_KEY: (keyof RegisterType)[] = [
+    'age',
+    'name',
+    'adoptionStatus',
+    'type',
+    'weight',
+    'description',
+    'sex',
+    'size',
+    'vaccinationStatus',
+    'neutralizationStatus',
+  ];
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const target = event.target as HTMLInputElement;
     const fieldName = target.id;
     const newValue = target.value;
-
-    const updatedPetInfo = {
-      ...petInfoState,
-      [fieldName]: newValue,
-    };
-
-    // 상태 업데이트
-    setPetInfo(updatedPetInfo);
-
-    // useState의 set함수로 petInfo를 업데이트해도, handleChange가 실행될 때의 petInfo는 업데이트 전의 petInfo를 가리킵니다.
-    // 따라서 tempPetInfo를 만들어서 최신의 petInfo를 사용하도록 했습니다.
-    const tempPetInfo = { ...petInfo, [fieldName]: newValue };
-    const allFieldsFilled = Object.values(tempPetInfo).every((value, index) => {
-      // isComplete는 petInfo의 모든 필드가 채워져 있을 때 true
-      if (index === Object.values(petInfo).length - 1) {
-        return true;
-      }
-      return !!value;
+    setPetInfo((prev) => {
+      const updatedPetInfo = {
+        ...prev,
+        [fieldName]: newValue,
+      };
+      const isComplete = PET_INFO_REQUIRED_KEY.every(
+        (key) => updatedPetInfo[key],
+      );
+      return {
+        ...updatedPetInfo,
+        isComplete,
+      };
     });
-    if (allFieldsFilled) {
-      console.log('검사', petInfo);
-      setPetInfo((prev) => ({ ...prev, isComplete: true }));
-    } else setPetInfo((prev) => ({ ...prev, isComplete: false }));
   };
 
   const MRegisterProps = {
