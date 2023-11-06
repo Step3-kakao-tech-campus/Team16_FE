@@ -45,20 +45,17 @@ const HomeVideo = (props: HomeVideoProps) => {
       <div
         ref={videoRef}
         onClick={() => setPlaying((prev) => !prev)}
-        className="h-asdf"
+        className="h-screen w-screen items-center justify-center"
       >
         <ReactPlayer
           url={url}
           loop={true}
           width="100%"
+          height="100%"
           playing={playing}
           muted={muted}
         />
       </div>
-      <button
-        onClick={() => setMuted(!muted)}
-        className="m-5 p-2 bg-red-900 rounded-full"
-      />
     </>
   );
 };
