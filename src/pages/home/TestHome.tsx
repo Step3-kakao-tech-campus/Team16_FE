@@ -49,7 +49,13 @@ const TestHome = () => {
 
   return (
     <div className="overflow-hidden bg-slate-500 h-[90vh]">
-      <button onClick={() => setMuted((prev) => !prev)}>mute</button>
+      <button
+        onClick={() => setMuted((prev) => !prev)}
+        className="absolute z-10"
+      >
+        {!muted && <img src="/assets/images/speaker.svg" alt="speaker" />}
+        {muted && <img src="/assets/images/mute.svg" alt="mute" />}
+      </button>
       <Swiper
         modules={[A11y, Autoplay, Mousewheel, Keyboard]}
         spaceBetween={10}
