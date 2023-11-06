@@ -1,39 +1,21 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import useFetch from 'commons/apis/useFetch';
 import VShelterInfo, { Props } from './VShelterInfo';
 import ShelterInfoSkeleton from './ShelterInfoSkeleton';
 
 const ShelterInfo = () => {
-  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태
+  const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
   const params = useParams();
   const shelterId = params.id;
 
   const [profiles, setProfiles] = useState<Props | null>(null);
 
-  const getShelter = async () => {
-    const response = await fetch(
-      `${process.env.REACT_APP_URI}/shelter/${shelterId}?page=${currentPage}`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      },
-    );
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    const json = await response.json();
-    return json.response;
-  };
-
   const { data, isLoading, isError } = useQuery({
     queryKey: ['page', currentPage],
-    queryFn: getShelter,
+    queryFn: () => useFetch(`/shelter/${shelterId}?page=${currentPage}`),
   });
   console.log(data);
 
@@ -42,7 +24,7 @@ const ShelterInfo = () => {
       const shelterInfoData = {
         name: data.shelter.name,
         id: data.shelter.id,
-        adress: data.shelter.adress,
+        adress: `${data.shelter.address.province} ${data.shelter.address.city} ${data.shelter.address.roadName} ${data.shelter.address.detail} `,
         call: data.shelter.contact,
       };
       const handlePageChange = (page: number) => {
@@ -51,15 +33,11 @@ const ShelterInfo = () => {
       };
       const pageData = {
         currentPage, // 현재 페이지 상태를 전달
-        lastPage: data.totalPages,
+        lastPage: data.petList.totalPages,
         maxLength: 7,
         setCurrentPage: handlePageChange,
       };
-      const profileListData = {
-        id: data.petList.pets.id,
-        name: data.petList.pets.name,
-        adoptionStatus: data.petList.pets.adoptionStatus,
-      };
+      const profileListData = data.petList.pets;
 
       const props: Props = {
         shelterInfoProps: shelterInfoData,

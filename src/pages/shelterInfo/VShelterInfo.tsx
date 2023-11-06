@@ -1,6 +1,9 @@
 import Pagination from 'commons/VPagenation';
 import ProfileCard from 'pages/profileList/ProfileCard';
 import { ProfileListProps } from 'pages/profileList/VProfileListHome';
+import { getCookie } from 'commons/cookie/cookie';
+import { link } from 'fs/promises';
+import { useHref } from 'react-router-dom';
 import VShelterCard from './VShelterCard';
 
 export interface ShelterInfoProps {
@@ -18,9 +21,14 @@ export interface PageNationProps {
 }
 
 export interface ProfileProps {
+  map(
+    arg0: (item: any, index: any) => import('react/jsx-runtime').JSX.Element,
+  ): import('react').ReactNode;
+  profileImageUrl: string;
   id: number;
   name: string;
   adoptionStatus: string;
+  age: number;
 }
 
 export interface Props {
@@ -30,6 +38,8 @@ export interface Props {
 }
 
 const VShelterInfo = (props: Props) => {
+  const loginAccount = getCookie('accountInfo');
+
   return (
     <div>
       <div className="mt-8 sm:mt-20">
@@ -40,14 +50,34 @@ const VShelterInfo = (props: Props) => {
           관리중인 동물
         </h2>
         <div className="grid grid-cols-1 gap-1 md:grid-cols-2 my-10 w-full whitespace-nowrap">
-          <ProfileCard
-            profileImageUrl={''}
-            petId={props.profileProps.id}
-            petName={props.profileProps.name}
-            petAge={0}
-            shelterName={''}
-            {...props.profileProps}
-          />
+          {props.profileProps.map((item, index) => (
+            <div className="flex" key={index}>
+              <ProfileCard
+                key={index}
+                petId={item.id}
+                petName={item.name}
+                petAge={item.age}
+                shelterName={''}
+                {...item}
+              />
+              <button
+                className={`${
+                  loginAccount &&
+                  loginAccount.role === 'SHELTER' &&
+                  loginAccount.id === props.shelterInfoProps.id
+                    ? ' bg-slate-200 text-sm h-fit w-fit p-1  rounded-xl '
+                    : ' text-transparent '
+                }`}
+                onClick={() => {
+                  console.log('안녕', item.id);
+                  // eslint-disable-next-line no-restricted-globals
+                  location.href = `/pet-update/${item.id}`;
+                }}
+              >
+                수정하기
+              </button>
+            </div>
+          ))}
         </div>
       </div>
       <div className="flex justify-center mb-11 sm:mb-28">

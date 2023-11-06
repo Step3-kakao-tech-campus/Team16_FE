@@ -25,7 +25,7 @@ const VLoginInputForm = ({
 }: LoginInputFormProps) => {
   return (
     <form
-      className="flex flex-col gap-4 w-full max-w-[400px]"
+      className="flex flex-col gap-3 w-full max-w-[400px]"
       onSubmit={handleSubmit}
     >
       <InputGroup

@@ -13,6 +13,8 @@ import SignupPage from 'pages/signUp/SignupPage';
 import UrgentListPage from 'pages/profileList/urgentList/UrgentListPage';
 import UpdatePage from 'pages/update/UpdatePage';
 import HomePage from 'pages/home/HomePage';
+import ValidateCheckLayout from 'layouts/ValidateCheckLayout';
+import EditProfilePage from 'pages/editProfile/EditProfilePage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,7 +27,8 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
         <BrowserRouter>
-          <Routes>
+          <ValidateCheckLayout>
+            {/* 토큰 검사가 필요한 페이지에만 검사 */}
             <Route path="/" element={<HomePage />} />
             <Route path="/pet/:id" element={<DetailPetPage />} />
             <Route path="/profile" element={<ProfileListPage />} />
@@ -33,10 +36,13 @@ function App() {
             <Route path="/profile/urgent/:page" element={<UrgentListPage />} />
             <Route path="/profile/new/:page" element={<NewListPage />} />
             <Route path="/register" element={<RegisterPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/signup" element={<SignupPage />} />
             <Route path="/find-shelter" element={<MapPage />} />
             <Route path="/pet-update/:id" element={<UpdatePage />} />
+            <Route path="/shelter/:id/edit" element={<EditProfilePage />} />
+          </ValidateCheckLayout>
+          <Routes>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
           </Routes>
         </BrowserRouter>
       </RecoilRoot>

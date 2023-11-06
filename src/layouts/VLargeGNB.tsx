@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import LogoButton from 'commons/LogoButton';
-import { getLoginState, removeToken } from 'commons/cookie/getUser';
+import UserSelectBox from 'commons/UserDropdownBox';
 
 export interface VLargeGNBProps {
   handleCategoryButtonClick: () => void;
@@ -59,22 +59,8 @@ const VLargeGNB = (props: VLargeGNBProps) => {
             <Link to="/register">등록하기</Link>
           </li>
         </ol>
-
-        <div className="flex gap-4 font-bold">
-          <Link to="/login">
-            <button
-              className="border border-2 box-content border-brand-color text-brand-color rounded-md py-1 px-4 transition duration-300 hover:bg-brand-color hover:text-white"
-              onClick={removeToken}
-            >
-              {getLoginState()}
-            </button>
-          </Link>
-          <Link to="/signup">
-            <button className="border border-brand-color border-2 bg-brand-color text-white rounded-md py-1 px-4 transition duration-300 hover:bg-white hover:text-brand-color">
-              회원가입
-            </button>
-          </Link>
-        </div>
+        {/* 여기서 변경 */}
+        <UserSelectBox />
       </div>
     </div>
   );

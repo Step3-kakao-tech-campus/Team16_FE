@@ -5,6 +5,7 @@ const HomePage = () => {
   return (
     <div>
       <GNB />
+      {/* gnb가 감싸게 하기 */}
       <Home />
     </div>
   );
