@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useState, useEffect, useRef } from 'react';
-import HomeVideo, { HomeVideoProps } from './HomeVideo';
+import HomeVideo from './HomeVideo';
 
 const TestHome = () => {
   const [muted, setMuted] = useState(true);
