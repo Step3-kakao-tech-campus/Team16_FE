@@ -6,10 +6,13 @@ export interface HomeVideoProps {
   muted: boolean;
   setMuted: (mute: boolean) => void;
   handleDoubleClick: () => void;
+  hovering: boolean;
+  setHovering: (hover: boolean) => void;
 }
 
 const HomeVideo = (props: HomeVideoProps) => {
-  const { url, muted, setMuted } = props;
+  const { url, muted, setMuted, handleDoubleClick, hovering, setHovering } =
+    props;
   const [playing, setPlaying] = useState(false);
   const videoRef = useRef(null);
 
@@ -43,11 +46,22 @@ const HomeVideo = (props: HomeVideoProps) => {
 
   return (
     <>
+      {hovering && (
+        <div className="absolute bg-black/50 top-0 right-0 w-1/6 h-full flex items-center justify-center">
+          안녕하세요
+        </div>
+      )}
       <div
         ref={videoRef}
         onClick={() => setPlaying((prev) => !prev)}
-        onDoubleClick={props.handleDoubleClick}
+        onDoubleClick={handleDoubleClick}
         className="h-screen w-screen items-center justify-center"
+        onMouseEnter={() => {
+          setHovering(true);
+          setTimeout(() => {
+            setHovering(false);
+          }, 1000);
+        }}
       >
         <ReactPlayer
           url={url}
