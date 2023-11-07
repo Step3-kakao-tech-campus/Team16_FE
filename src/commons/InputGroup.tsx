@@ -8,6 +8,7 @@ export interface InputGroupProps
   type: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   autocomplete?: string;
+  dataInputType?: string;
 }
 
 const InputGroup = ({
@@ -18,6 +19,7 @@ const InputGroup = ({
   onChange,
   autocomplete,
   defaultValue,
+  dataInputType,
 }: InputGroupProps) => {
   return (
     <Container className={'flex flex-col gap-1'}>
@@ -26,6 +28,7 @@ const InputGroup = ({
       </label>
       <Input
         id={id}
+        dataInputType={dataInputType}
         name={name}
         type={type}
         placeholder={placeholder}

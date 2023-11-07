@@ -1,6 +1,6 @@
 import Banner from 'commons/Banner';
 import LogoButton from 'commons/LogoButton';
-import SignupInputForm from 'pages/signUp/SignupInputForm';
+import SignupInputForm from 'pages/signUp/components/SignupInputForm';
 
 type Props = {
   redirectLoginPage: () => void;

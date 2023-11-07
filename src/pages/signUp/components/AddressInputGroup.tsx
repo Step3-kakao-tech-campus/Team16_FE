@@ -1,4 +1,3 @@
-import React from 'react';
 import { useRecoilState } from 'recoil';
 import { shelterSignupState } from 'recoil/shelterState';
 import VAddressInputGroup from './VAddressInputGroup';

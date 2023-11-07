@@ -1,5 +1,5 @@
 import LogoButton from 'commons/LogoButton';
-import UserSelectBox from 'commons/UserDropdownBox';
+import UserToggleBox from 'commons/UserToggleBox';
 import { Link } from 'react-router-dom';
 
 export interface VGNBProps {
@@ -34,10 +34,9 @@ const VGNB = (props: VGNBProps) => {
       </div>
       {isToggleOpen && (
         <div className="bg-white text-center z-10 flex w-content justify-center border-b">
-          <div className="lg:hidden w-full flex flex-col items-center text-xl gap-8">
+          <div className="lg:hidden w-full flex flex-col items-center text-xl gap-4">
             <div className="flex justify-center w-full gap-2">
-              {/* 여기서 변경 */}
-              <UserSelectBox />
+              <UserToggleBox />
             </div>
 
             <ol className="flex flex-col justify-center w-full gap-4">

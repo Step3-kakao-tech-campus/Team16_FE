@@ -8,11 +8,13 @@ const Input = ({
   onChange,
   autocomplete,
   defaultValue,
+  dataInputType,
 }: InputGroupProps) => {
   return (
     <input
       className="border-2 rounded-md border-gray-300 p-2"
       id={id}
+      data-input-type={dataInputType}
       name={name}
       type={type}
       placeholder={placeholder}

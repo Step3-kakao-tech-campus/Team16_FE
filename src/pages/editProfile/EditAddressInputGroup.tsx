@@ -1,4 +1,4 @@
-import VAddressInputGroup from 'pages/signUp/VAddressInputGroup';
+import VAddressInputGroup from 'pages/signUp/components/VAddressInputGroup';
 import { useRecoilState } from 'recoil';
 import { shelterSignupState } from 'recoil/shelterState';
 

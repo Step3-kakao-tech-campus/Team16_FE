@@ -1,24 +1,7 @@
-import AddressInputGroup from 'pages/signUp/AddressInputGroup';
+import AddressInputGroup from 'pages/signUp/components/AddressInputGroup';
 import InputGroup from 'commons/InputGroup';
-import React from 'react';
 import { ClipLoader } from 'react-spinners';
-import { ShelterSignupType } from 'recoil/shelterState';
-
-interface VSignupInputProps {
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  duplicateCheck: () => void;
-  emailValidText: string;
-  emailInValidText: string;
-  passwordConfirm: boolean;
-  errors: Partial<ShelterSignupType>;
-  isLoading: boolean;
-}
-
-interface ValidationProps {
-  text?: string;
-  className: string;
-}
+import { VSignupInputProps, ValidationProps } from '../signupType';
 
 const ValidateText = ({ text, className }: ValidationProps) => {
   return text ? <div className={className}>{text}</div> : null;
@@ -42,6 +25,7 @@ const VSignupInputForm = ({
       <div className="email-confirm flex place-items-end justify-center">
         <InputGroup
           id="email"
+          dataInputType="email"
           name="이메일"
           type="text"
           placeholder="이메일을 입력해주세요."
@@ -53,7 +37,15 @@ const VSignupInputForm = ({
           className="bg-brand-color text-white rounded min-w-[100px] min-h-[44px]"
           onClick={duplicateCheck}
         >
-          중복 확인
+          {isLoading.duplicateCheckIsLoading ? (
+            <ClipLoader
+              size={20}
+              color="#fff"
+              loading={isLoading.duplicateCheckIsLoading}
+            />
+          ) : (
+            '중복 확인'
+          )}
         </button>
       </div>
       <ValidateText text={emailValidText} className={'text-green-500'} />
@@ -61,6 +53,7 @@ const VSignupInputForm = ({
       <ValidateText text={errors.email} className={'text-red-500'} />
       <InputGroup
         id="password"
+        dataInputType="password"
         name="비밀번호"
         type="password"
         placeholder="비밀번호를 입력해주세요."
@@ -70,6 +63,7 @@ const VSignupInputForm = ({
       <ValidateText text={errors.password} className={'text-red-500'} />
       <InputGroup
         id="password-confirm"
+        dataInputType="password-confirm"
         name="비밀번호 확인"
         type="password"
         placeholder="비밀번호를 한번 더 입력해주세요."
@@ -81,6 +75,7 @@ const VSignupInputForm = ({
       )}
       <InputGroup
         id="shelter"
+        dataInputType="name"
         name="보호소 이름"
         type="text"
         placeholder="보호소 이름을 입력해주세요."
@@ -90,6 +85,7 @@ const VSignupInputForm = ({
       <ValidateText text={errors.name} className={'text-red-500'} />
       <InputGroup
         id="shelter-contact"
+        dataInputType="contact"
         name="보호소 연락처"
         type="text"
         placeholder="보호소에 연락 가능한 연락처를 입력해주세요."
@@ -99,8 +95,12 @@ const VSignupInputForm = ({
       <ValidateText text={errors.contact} className={'text-red-500'} />
       <AddressInputGroup />
       <button className="bg-brand-color text-white w-full rounded-md p-2">
-        {isLoading ? (
-          <ClipLoader size={20} color="#fff" loading={isLoading} />
+        {isLoading.submitIsLoading ? (
+          <ClipLoader
+            size={20}
+            color="#fff"
+            loading={isLoading.submitIsLoading}
+          />
         ) : (
           '회원가입'
         )}

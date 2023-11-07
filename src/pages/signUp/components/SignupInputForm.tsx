@@ -1,28 +1,19 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { ShelterSignupType, shelterSignupState } from 'recoil/shelterState';
 import * as Yup from 'yup';
+import { ShelterSignupType, shelterSignupState } from 'recoil/shelterState';
+import {
+  EmailConfirmProps,
+  EmailValidationProps,
+  LoadingProps,
+} from '../signupType';
 import VSignupInputForm from './VSignupInputForm';
-
-export interface EmailConfirmProps {
-  isValid: boolean;
-  checked: boolean;
-}
-
-interface EmailValidProps {
-  validText: string;
-  inValidText: string;
-  emailConfirmObj: EmailConfirmProps;
-}
 
 const SignupInputForm = () => {
   const [shelterInfo, setShelterInfo] = useRecoilState(shelterSignupState);
-  // confirm state의 경우, 일치하지 않을 때 false
-  // isValid: 중복검사 통과했는가?
-  // checked: 이메일 중복 검사를 했는가?
   const [emailConfirm, setEmailConfirm] = useState<EmailConfirmProps>({
-    isValid: true,
+    isValid: false,
     checked: false,
   });
   const [passwordConfirm, setPasswordConfirm] = useState(true);
@@ -30,7 +21,10 @@ const SignupInputForm = () => {
   const [emailInValidText, setEmailInValidText] = useState('');
 
   const [errors, setErrors] = useState<Partial<ShelterSignupType>>({});
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<LoadingProps>({
+    submitIsLoading: false,
+    duplicateCheckIsLoading: false,
+  });
 
   const navigate = useNavigate();
 
@@ -66,19 +60,27 @@ const SignupInputForm = () => {
     ),
   });
 
+  /** 회원가입 전 이메일 중복 검사를 완료했는지 / 검사 결과 적합했는지 확인
+   * @param {string} validText : 적합한 경우 화면에 나타날 Text
+   * @param {string} inValidText : 부적합한 경우 화면에 나타날 Text
+   * @param {object} emailConfirmObj : 중복 검사 시행 확인 / 적합, 부적합을 판단하는 객체
+   * @param {boolean} emailConfirmObj.isValid 적합(true), 부적합(false)을 판단
+   * @param {boolean} emailConfirmObj.checked 중복 검사 시행(true) 확인
+   */
   const getEmailValidText = ({
     validText,
     inValidText,
     emailConfirmObj,
-  }: EmailValidProps) => {
+  }: EmailValidationProps) => {
     setEmailValidText(validText);
     setEmailInValidText(inValidText);
     setEmailConfirm(emailConfirmObj);
   };
 
-  const duplicateCheck = () => {
-    // shelterInfo.email
-    fetch(`${process.env.REACT_APP_URI}/account/email`, {
+  // 이메일 중복 검사 api
+  const duplicateCheck = async () => {
+    setIsLoading((prev) => ({ ...prev, duplicateCheckIsLoading: true }));
+    const response = await fetch(`${process.env.REACT_APP_URI}/account/email`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -121,13 +123,14 @@ const SignupInputForm = () => {
           });
         }
       });
+    setIsLoading((prev) => ({ ...prev, duplicateCheckIsLoading: false }));
   };
 
-  const userfetch = () => {
+  const userFetch = () => {
     // 중복 확인이 되지 않았을 때
     if (!emailConfirm.checked) {
       alert('이메일 중복을 확인해주세요');
-      setIsLoading(false);
+      setIsLoading((prev) => ({ ...prev, submitIsLoading: false }));
     }
     // 제대로 확인되었을 때
     if (emailConfirm.isValid && emailConfirm.checked) {
@@ -156,25 +159,16 @@ const SignupInputForm = () => {
             navigate('/login');
           }
         });
-      setIsLoading(false);
+      setIsLoading((prev) => ({ ...prev, submitIsLoading: false }));
     }
   };
 
+  // input에 들어가는 value에 따라 recoilState인 shelterInfo의 값 갱신
+  // 비밀번호 일치하지 않는 경우 에러 텍스트 표시
+  // 나머지 case의 경우, input value를 저장하는 용도로만 사용하기 때문에 default로 설정
   const getInputValue = (target: HTMLInputElement) => {
-    switch (target.id) {
-      case 'email':
-        setShelterInfo((prev) => ({ ...prev, email: target.value }));
-        break;
-      case 'password':
-        setShelterInfo((prev) => ({ ...prev, password: target.value }));
-        break;
-      case 'shelter':
-        setShelterInfo((prev) => ({ ...prev, name: target.value }));
-        break;
-      case 'shelter-contact':
-        setShelterInfo((prev) => ({ ...prev, contact: target.value }));
-        break;
-      // 비밀번호 일치하지 않는 경우, 표시하기 위해 해당 부분 구현
+    const inputKey = target.dataset.inputType as string;
+    switch (inputKey) {
       case 'password-confirm':
         if (target.value !== shelterInfo.password) {
           setPasswordConfirm(false);
@@ -183,10 +177,12 @@ const SignupInputForm = () => {
         }
         break;
       default:
+        setShelterInfo((prev) => ({ ...prev, [inputKey]: target.value }));
         break;
     }
   };
 
+  // yup을 통해 input value의 validation check 후 errorText를 errors state에 저장
   const validationCheck = () => {
     validationSchema
       .validate(shelterInfo, { abortEarly: false })
@@ -219,11 +215,15 @@ const SignupInputForm = () => {
     getInputValue(target);
   };
 
+  /** 회원가입 버튼 onSubmit handler
+   * 유효성 검사 시행
+   * userFetch가 동작하는 동안 Loader를 보여주기 위해 isLoading state 사용
+   */
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     validationCheck();
-    setIsLoading(true);
-    userfetch();
+    setIsLoading((prev) => ({ ...prev, submitIsLoading: true }));
+    userFetch();
   };
 
   const SignupInputFormProps = {
