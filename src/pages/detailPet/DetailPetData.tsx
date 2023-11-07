@@ -13,10 +13,17 @@ const DetailPetData = () => {
   const { data, isLoading } = useQuery({
     queryKey: ['pet', petId],
     queryFn: () => {
-      return fetch(`${process.env.REACT_APP_URI}/pet/${petId}`).then((res) =>
-        res.json(),
-      );
+      return fetch(`${process.env.REACT_APP_URI}/pet/${petId}`).then((res) => {
+        if (res.status === 200) {
+          return res.json();
+        }
+        if (res.status === 404) {
+          throw new Error('해당 친구를 찾을 수 없어요...');
+        }
+        throw new Error('데이터 로드 중 문제가 생겼어요...');
+      });
     },
+    suspense: true,
   });
   if (isLoading) return <div>로딩중</div>;
   const labels = ['영리함', '친화력', '운동신경', '적응력', '활발함'];
@@ -27,7 +34,7 @@ const DetailPetData = () => {
     height: 400,
     canvas,
     labels,
-    data: data.response.petPolygonProfileDto,
+    data: data?.response?.petPolygonProfileDto,
     willAnimate: true,
   };
 
