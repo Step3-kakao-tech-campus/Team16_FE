@@ -7,7 +7,7 @@ import {
   EmailConfirmProps,
   EmailValidationProps,
   LoadingProps,
-} from '../signupType';
+} from '../signupType';
 import VSignupInputForm from './VSignupInputForm';
 
 const SignupInputForm = () => {

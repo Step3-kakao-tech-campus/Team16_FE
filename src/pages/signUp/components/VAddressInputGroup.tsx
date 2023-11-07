@@ -1,6 +1,6 @@
 import Container from 'commons/Container';
 import Postcode from 'commons/PostCode';
-import { AddressInputProps } from '../signupType';
+import { AddressInputProps } from '../signupType';
 
 const VAddressInputGroup = ({
   handleChange,
