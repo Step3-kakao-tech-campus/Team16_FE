@@ -1,25 +1,7 @@
-import AddressInputGroup from 'pages/signUp/AddressInputGroup';
+import AddressInputGroup from 'pages/signUp/components/AddressInputGroup';
 import InputGroup from 'commons/InputGroup';
-import React from 'react';
 import { ClipLoader } from 'react-spinners';
-import { ShelterSignupType } from 'recoil/shelterState';
-import { LoadingProps } from './SignUpType';
-
-interface VSignupInputProps {
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  duplicateCheck: () => void;
-  emailValidText: string;
-  emailInValidText: string;
-  passwordConfirm: boolean;
-  errors: Partial<ShelterSignupType>;
-  isLoading: LoadingProps;
-}
-
-interface ValidationProps {
-  text?: string;
-  className: string;
-}
+import { VSignupInputProps, ValidationProps } from '../signupType';
 
 const ValidateText = ({ text, className }: ValidationProps) => {
   return text ? <div className={className}>{text}</div> : null;

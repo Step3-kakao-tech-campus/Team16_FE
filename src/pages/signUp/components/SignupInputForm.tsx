@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import * as Yup from 'yup';
@@ -7,7 +7,7 @@ import {
   EmailConfirmProps,
   EmailValidationProps,
   LoadingProps,
-} from './SignUpType';
+} from '../signupType';
 import VSignupInputForm from './VSignupInputForm';
 
 const SignupInputForm = () => {
