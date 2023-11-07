@@ -39,6 +39,11 @@ export interface Props {
 
 const VShelterInfo = (props: Props) => {
   const loginAccount = getCookie('accountInfo');
+  const role = loginAccount ? loginAccount.split(' ')[0] : '';
+  const id = loginAccount ? loginAccount.split(' ')[1] : '';
+  console.log(loginAccount.role);
+  console.log(role);
+  console.log(id);
 
   return (
     <div>
@@ -51,7 +56,7 @@ const VShelterInfo = (props: Props) => {
         </h2>
         <div className="grid grid-cols-1 gap-1 md:grid-cols-2 my-1 w-full whitespace-nowrap">
           {props.profileProps.map((item, index) => (
-            <div className="flex" key={index}>
+            <div className="flex flex-row" key={index}>
               <ProfileCard
                 key={index}
                 petId={item.id}
@@ -63,9 +68,9 @@ const VShelterInfo = (props: Props) => {
               <button
                 className={`${
                   loginAccount &&
-                  loginAccount.role === 'SHELTER' &&
-                  loginAccount.id === props.shelterInfoProps.id
-                    ? ' bg-slate-200 text-sm h-fit w-fit p-1  rounded-xl '
+                  role === 'SHELTER' &&
+                  id === `${props.shelterInfoProps.id}`
+                    ? ' absolute ml-60 bg-slate-200 text-sm h-fit w-fit p-1  rounded-xl '
                     : ' text-transparent '
                 }`}
                 onClick={() => {
