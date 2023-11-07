@@ -14,6 +14,7 @@ const HomeVideo = (props: HomeVideoProps) => {
   const { url, muted, setMuted, handleDoubleClick, hovering, setHovering } =
     props;
   const [playing, setPlaying] = useState(false);
+  const [opacity, setOpacity] = useState(1);
   const videoRef = useRef(null);
 
   useEffect(() => {
@@ -47,8 +48,15 @@ const HomeVideo = (props: HomeVideoProps) => {
   return (
     <>
       {hovering && (
-        <div className="absolute bg-black/50 top-0 right-0 w-1/6 h-full flex items-center justify-center">
-          안녕하세요
+        <div
+          className="absolute font text-white text-3xl bg-black/50 top-0 right-0 w-1 px-10 h-full flex flex-col gap-10 items-center justify-center"
+          style={{
+            opacity,
+            transition: 'opacity 0.2s ease-in-out',
+          }}
+        >
+          <div>왼쪽으로</div>
+          <div>당겨보세요</div>
         </div>
       )}
       <div
@@ -58,9 +66,13 @@ const HomeVideo = (props: HomeVideoProps) => {
         className="h-screen w-screen items-center justify-center"
         onMouseEnter={() => {
           setHovering(true);
+          setOpacity(1);
           setTimeout(() => {
             setHovering(false);
-          }, 1000);
+          }, 1500);
+          setTimeout(() => {
+            setOpacity(0);
+          }, 1300);
         }}
       >
         <ReactPlayer
