@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { getCookie, removeCookie, setCookie } from './cookie/cookie';
+import { getCookie, removeToken, setCookie } from './cookie/cookie';
 
 // 로그인 되었을 때 상태를 보여주는 SelectBox 제작
 const UserDropdownBox = () => {
@@ -13,11 +13,6 @@ const UserDropdownBox = () => {
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
-  };
-
-  const removeToken = () => {
-    removeCookie('loginToken');
-    removeCookie('userAccountInfo');
   };
 
   const handleOptionClick = (option: string) => {

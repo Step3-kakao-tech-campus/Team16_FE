@@ -3,6 +3,7 @@ import { useRecoilState } from 'recoil';
 import { useNavigate } from 'react-router-dom';
 import { ShelterLoginType, shelterLoginState } from 'recoil/shelterState';
 import * as Yup from 'yup';
+import { useMutation } from '@tanstack/react-query';
 import VLoginInputForm from './VLoginInputForm';
 import { setCookie } from '../../commons/cookie/cookie';
 
@@ -20,9 +21,8 @@ const LoginInputForm = () => {
     password: Yup.string().required('비밀번호를 입력해주세요.'),
   });
 
-  const userfetch = () => {
-    let token: string;
-    fetch(`${process.env.REACT_APP_URI}/account/login`, {
+  const userFetch = async () => {
+    const res = await fetch(`${process.env.REACT_APP_URI}/account/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -32,38 +32,19 @@ const LoginInputForm = () => {
         email: userInfo.email,
         password: userInfo.password,
       }),
-    }).then(async (res) => {
-      const jwtToken = res.headers.get('Authorization');
-      if (jwtToken) {
-        // eslint-disable-next-line prefer-destructuring
-        token = jwtToken.split(' ')[1];
-      } else {
-        console.log('로그인 실패로 token이 Null');
-      }
-      const data = await res.json();
-      if (data.success && token) {
-        const { accountInfo, tokenExpirationDateTime } = data.response;
-        const { id, role } = accountInfo;
-        const tokenExpirationDate = new Date(tokenExpirationDateTime);
-        const timeDifferenceseconds = Math.floor(
-          (Number(tokenExpirationDate) - Number(currentDate)) / 1000,
-        );
-
-        setCookie('accountInfo', `${role} ${id}`, {
-          expires: tokenExpirationDate,
-          maxAge: timeDifferenceseconds,
-        });
-        setCookie('loginToken', token, {
-          expires: tokenExpirationDate,
-          maxAge: timeDifferenceseconds,
-        });
-        navigate('/');
-      } else {
-        // 형식은 맞지만 입력된 값이 가입되지 않은 계정일 때
-        alert(data.error.message);
-      }
-      setIsLoading(false);
     });
+
+    if (!res.ok) {
+      // error 발생 시 처리는 status 값에 따라 하는 것으로 변경 필요
+      const errorData = await res.json();
+      console.error('userFetchError: ', errorData);
+    }
+
+    const response = await res.json();
+    const jwtToken = res.headers.get('Authorization');
+    const token = jwtToken ? jwtToken.split(' ')[1] : '';
+
+    return { response, token };
   };
 
   const validateCheck = () => {
@@ -83,11 +64,32 @@ const LoginInputForm = () => {
       });
   };
 
+  const mutation = useMutation(userFetch, {
+    onSuccess: (data) => {
+      const { accountInfo, tokenExpirationDateTime } = data.response.response;
+      const { id, role } = accountInfo;
+      const tokenExpirationDate = new Date(tokenExpirationDateTime);
+      const timeDifferenceseconds = Math.floor(
+        (Number(tokenExpirationDate) - Number(currentDate)) / 1000,
+      );
+
+      setCookie('accountInfo', `${role} ${id}`, {
+        expires: tokenExpirationDate,
+        maxAge: timeDifferenceseconds,
+      });
+      setCookie('loginToken', data.token, {
+        expires: tokenExpirationDate,
+        maxAge: timeDifferenceseconds,
+      });
+      navigate('/');
+    },
+  });
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
     validateCheck();
-    userfetch();
+    mutation.mutate();
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

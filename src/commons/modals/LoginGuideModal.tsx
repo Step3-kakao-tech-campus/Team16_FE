@@ -34,7 +34,7 @@ const LoginGuideModal = () => {
           <button
             className="bg-brand-color text-white rounded-md px-4 py-1 transition duration-300 hover:bg-white hover:text-brand-color"
             onClick={() => {
-              setCookie('userAccountInfo', 'Not Login');
+              setCookie('userAccountInfo', 'Not Login', { maxAge: 60000 * 30 }); // 30분
               setIsLogined(true);
             }}
           >

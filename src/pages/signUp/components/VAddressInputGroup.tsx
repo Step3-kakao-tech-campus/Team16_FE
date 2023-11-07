@@ -1,13 +1,11 @@
 import Container from 'commons/Container';
 import Postcode from 'commons/PostCode';
-import { ShelterSignupType } from 'recoil/shelterState';
+import { AddressInputProps } from '../signupType';
 
-interface Props {
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  shelterInfo: ShelterSignupType;
-}
-
-const VAddressInputGroup = ({ handleChange, shelterInfo }: Props) => {
+const VAddressInputGroup = ({
+  handleChange,
+  shelterInfo,
+}: AddressInputProps) => {
   return (
     <Container className="flex flex-col gap-4 w-full">
       <div className="flex flex-col gap-2">
