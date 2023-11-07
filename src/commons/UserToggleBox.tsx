@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getCookie, removeCookie, setCookie } from './cookie/cookie';
+import { getCookie, removeToken, setCookie } from './cookie/cookie';
 
 const UserToggleBox = () => {
   const token = getCookie('loginToken');
@@ -11,11 +11,6 @@ const UserToggleBox = () => {
 
   const toggleTab = () => {
     setTabVisible(!isTabVisible);
-  };
-
-  const removeToken = () => {
-    removeCookie('loginToken');
-    removeCookie('userAccountInfo');
   };
 
   const handleOptionClick = (option: string) => {

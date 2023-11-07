@@ -6,6 +6,7 @@ import displayMarker from './displayMarker';
 function useMap<T>(
   containerRef: RefObject<T extends HTMLElement ? T : HTMLElement>,
 ) {
+  const { kakao } = window;
   const [map, setMap] = useState<any>();
   const [searchedPlace, setSearchedPlace] = useState<any>([]);
   const boundRef = useRef<any>();
