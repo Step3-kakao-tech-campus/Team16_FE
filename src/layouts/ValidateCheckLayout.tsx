@@ -14,8 +14,10 @@ const ValidateCheckLayout: React.FC<LayoutProps> = ({ children }) => {
   const loginToken = getCookie('loginToken');
   const userAccount = getCookie('userAccountInfo');
 
+  // userAccount에 대한 정책 수정이 필요
+  // Layout 먹이는 방식 수정
   useEffect(() => {
-    if (!loginToken && !userAccount) {
+    if (!loginToken && userAccount) {
       // loginToken이 없으면 모달 열기
       setIsLogined(false);
     }
