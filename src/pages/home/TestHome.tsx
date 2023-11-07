@@ -2,13 +2,16 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { useState, useEffect, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { A11y, Autoplay, Mousewheel, Keyboard } from 'swiper/modules';
+import { useNavigate } from 'react-router-dom';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import HomeVideo from './HomeVideo';
 
 const TestHome = () => {
   const [muted, setMuted] = useState(true);
+  const [hovering, setHovering] = useState(false);
   const [opacity, setOpacity] = useState(0);
+  const navigate = useNavigate();
   const nextPageRef = useRef(null);
   const { data, isLoading, fetchNextPage } = useInfiniteQuery(
     ['home', 1],
@@ -55,6 +58,7 @@ const TestHome = () => {
       setOpacity(0);
     }, 200);
   };
+  console.log(hovering);
 
   return (
     <div className="overflow-hidden bg-slate-500 h-[90vh]">
@@ -96,23 +100,60 @@ const TestHome = () => {
               return (
                 <SwiperSlide key={shortForm.profileShortFormUrl + index}>
                   <div ref={nextPageRef}></div>
-                  <HomeVideo
-                    url={shortForm.profileShortFormUrl}
-                    muted={muted}
-                    setMuted={setMuted}
-                    handleDoubleClick={handleDoubleClick}
-                  />
+
+                  <Swiper
+                    modules={[A11y]}
+                    slidesPerView={1}
+                    grabCursor={true}
+                    autoHeight={true}
+                    direction={'horizontal'}
+                    onSlideNextTransitionEnd={() => {
+                      navigate(`/pet/${shortForm.petId}`);
+                    }}
+                  >
+                    <SwiperSlide>
+                      <HomeVideo
+                        url={shortForm.profileShortFormUrl}
+                        muted={muted}
+                        setMuted={setMuted}
+                        handleDoubleClick={handleDoubleClick}
+                        hovering={hovering}
+                        setHovering={setHovering}
+                      />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <div className="bg-black w-52 h-52" />
+                    </SwiperSlide>
+                  </Swiper>
                 </SwiperSlide>
               );
             }
             return (
               <SwiperSlide key={shortForm.profileShortFormUrl + index}>
-                <HomeVideo
-                  url={shortForm.profileShortFormUrl}
-                  muted={muted}
-                  setMuted={setMuted}
-                  handleDoubleClick={handleDoubleClick}
-                />
+                <Swiper
+                  modules={[A11y]}
+                  slidesPerView={1}
+                  grabCursor={true}
+                  autoHeight={true}
+                  direction={'horizontal'}
+                  onSlideNextTransitionEnd={() => {
+                    navigate(`/pet/${shortForm.petId}`);
+                  }}
+                >
+                  <SwiperSlide>
+                    <HomeVideo
+                      url={shortForm.profileShortFormUrl}
+                      muted={muted}
+                      setMuted={setMuted}
+                      handleDoubleClick={handleDoubleClick}
+                      hovering={hovering}
+                      setHovering={setHovering}
+                    />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <div className="bg-black w-52 h-52" />
+                  </SwiperSlide>
+                </Swiper>
               </SwiperSlide>
             );
           }),
