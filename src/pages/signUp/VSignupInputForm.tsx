@@ -42,6 +42,7 @@ const VSignupInputForm = ({
       <div className="email-confirm flex place-items-end justify-center">
         <InputGroup
           id="email"
+          dataInputType="email"
           name="이메일"
           type="text"
           placeholder="이메일을 입력해주세요."
@@ -61,6 +62,7 @@ const VSignupInputForm = ({
       <ValidateText text={errors.email} className={'text-red-500'} />
       <InputGroup
         id="password"
+        dataInputType="password"
         name="비밀번호"
         type="password"
         placeholder="비밀번호를 입력해주세요."
@@ -70,6 +72,7 @@ const VSignupInputForm = ({
       <ValidateText text={errors.password} className={'text-red-500'} />
       <InputGroup
         id="password-confirm"
+        dataInputType="password-confirm"
         name="비밀번호 확인"
         type="password"
         placeholder="비밀번호를 한번 더 입력해주세요."
@@ -81,6 +84,7 @@ const VSignupInputForm = ({
       )}
       <InputGroup
         id="shelter"
+        dataInputType="name"
         name="보호소 이름"
         type="text"
         placeholder="보호소 이름을 입력해주세요."
@@ -90,6 +94,7 @@ const VSignupInputForm = ({
       <ValidateText text={errors.name} className={'text-red-500'} />
       <InputGroup
         id="shelter-contact"
+        dataInputType="contact"
         name="보호소 연락처"
         type="text"
         placeholder="보호소에 연락 가능한 연락처를 입력해주세요."

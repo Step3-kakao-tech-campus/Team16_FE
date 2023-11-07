@@ -161,20 +161,9 @@ const SignupInputForm = () => {
   };
 
   const getInputValue = (target: HTMLInputElement) => {
-    switch (target.id) {
-      case 'email':
-        setShelterInfo((prev) => ({ ...prev, email: target.value }));
-        break;
-      case 'password':
-        setShelterInfo((prev) => ({ ...prev, password: target.value }));
-        break;
-      case 'shelter':
-        setShelterInfo((prev) => ({ ...prev, name: target.value }));
-        break;
-      case 'shelter-contact':
-        setShelterInfo((prev) => ({ ...prev, contact: target.value }));
-        break;
-      // 비밀번호 일치하지 않는 경우, 표시하기 위해 해당 부분 구현
+    const inputKey = target.dataset.inputType as string;
+    switch (inputKey) {
+      // 비밀번호 일치하지 않는 경우 에러 텍스트 표시
       case 'password-confirm':
         if (target.value !== shelterInfo.password) {
           setPasswordConfirm(false);
@@ -182,7 +171,9 @@ const SignupInputForm = () => {
           setPasswordConfirm(true);
         }
         break;
+      // 나머지 case의 경우, input value를 저장하는 용도로만 사용하기 때문에 default로 설정
       default:
+        setShelterInfo((prev) => ({ ...prev, [inputKey]: target.value }));
         break;
     }
   };
