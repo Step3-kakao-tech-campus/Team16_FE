@@ -62,8 +62,8 @@ const TestHome = () => {
         slidesPerView={1}
         grabCursor={true}
         mousewheel={{
-          thresholdTime: 1,
           sensitivity: 100,
+          thresholdDelta: 30,
         }}
         autoHeight={true}
         direction={'vertical'}
