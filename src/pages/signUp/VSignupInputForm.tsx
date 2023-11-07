@@ -3,6 +3,7 @@ import InputGroup from 'commons/InputGroup';
 import React from 'react';
 import { ClipLoader } from 'react-spinners';
 import { ShelterSignupType } from 'recoil/shelterState';
+import { LoadingProps } from './SignUpType';
 
 interface VSignupInputProps {
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -12,7 +13,7 @@ interface VSignupInputProps {
   emailInValidText: string;
   passwordConfirm: boolean;
   errors: Partial<ShelterSignupType>;
-  isLoading: boolean;
+  isLoading: LoadingProps;
 }
 
 interface ValidationProps {
@@ -54,7 +55,15 @@ const VSignupInputForm = ({
           className="bg-brand-color text-white rounded min-w-[100px] min-h-[44px]"
           onClick={duplicateCheck}
         >
-          중복 확인
+          {isLoading.duplicateCheckIsLoading ? (
+            <ClipLoader
+              size={20}
+              color="#fff"
+              loading={isLoading.duplicateCheckIsLoading}
+            />
+          ) : (
+            '중복 확인'
+          )}
         </button>
       </div>
       <ValidateText text={emailValidText} className={'text-green-500'} />
@@ -104,8 +113,12 @@ const VSignupInputForm = ({
       <ValidateText text={errors.contact} className={'text-red-500'} />
       <AddressInputGroup />
       <button className="bg-brand-color text-white w-full rounded-md p-2">
-        {isLoading ? (
-          <ClipLoader size={20} color="#fff" loading={isLoading} />
+        {isLoading.submitIsLoading ? (
+          <ClipLoader
+            size={20}
+            color="#fff"
+            loading={isLoading.submitIsLoading}
+          />
         ) : (
           '회원가입'
         )}
