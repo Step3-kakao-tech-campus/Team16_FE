@@ -41,9 +41,6 @@ const VShelterInfo = (props: Props) => {
   const loginAccount = getCookie('accountInfo');
   const role = loginAccount ? loginAccount.split(' ')[0] : '';
   const id = loginAccount ? loginAccount.split(' ')[1] : '';
-  console.log(loginAccount.role);
-  console.log(role);
-  console.log(id);
 
   return (
     <div>

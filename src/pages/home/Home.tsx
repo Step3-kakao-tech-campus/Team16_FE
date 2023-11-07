@@ -12,16 +12,14 @@ const Home = () => {
   const [species, setSpecies] = useRecoilState<SpeciesType>(speciesState);
 
   const fetchShortForm = async (page: number) => {
-    let type = '';
-    if (species === '강아지') {
-      type = 'DOG';
-    } else if (species === '고양이') {
-      type = 'CAT';
-    } else if (species === '기타') {
-      type = 'ETC';
-    } else {
-      type = '';
-    }
+    const SPECIIES_TYPES = {
+      강아지: 'DOG',
+      고양이: 'CAT',
+      기타: 'ETC',
+      전체: '',
+    };
+    const type = SPECIIES_TYPES[species] ?? '';
+
     let area = '';
     if (region === '전국') {
       area = '';
@@ -97,10 +95,10 @@ const Home = () => {
 
   if (shortForm) {
     return species !== '전체' || region !== '전국' ? (
-      <div>
+      <div className="flex-col">
         {/* 카테고리 선택 UI 요소를 추가 */}
-        <div className="flex justify-center gap-7 items-center">
-          <text className=" text-orange-400 text-lg font-semibold">
+        <div className="flex justify-center gap-7 mt-10 items-center">
+          <text className=" text-orange-400 text-xl font-semibold">
             카테고리
           </text>
           <button
@@ -117,7 +115,9 @@ const Home = () => {
           </button>
           <text className="text-lg font-semibold"> 친구들 </text>
         </div>
-        <VHome {...shortForm} />
+        <div className="flex w-screen h-screen-80">
+          <VHome {...shortForm} />
+        </div>
       </div>
     ) : (
       <div>

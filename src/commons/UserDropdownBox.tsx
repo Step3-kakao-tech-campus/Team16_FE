@@ -10,8 +10,6 @@ const UserDropdownBox = () => {
   const navigate = useNavigate();
   const shelterId = getCookie('accountInfo');
   const id = shelterId ? shelterId.split(' ')[1] : '';
-  console.log(shelterId);
-  console.log(id);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
