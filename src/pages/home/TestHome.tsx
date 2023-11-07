@@ -8,6 +8,7 @@ import HomeVideo from './HomeVideo';
 
 const TestHome = () => {
   const [muted, setMuted] = useState(true);
+  const [opacity, setOpacity] = useState(0);
   const nextPageRef = useRef(null);
   const { data, isLoading, fetchNextPage } = useInfiniteQuery(
     ['home', 1],
@@ -47,14 +48,34 @@ const TestHome = () => {
     };
   });
 
+  const handleDoubleClick = () => {
+    setMuted((prev) => !prev);
+    setOpacity(1);
+    setTimeout(() => {
+      setOpacity(0);
+    }, 200);
+  };
+
   return (
     <div className="overflow-hidden bg-slate-500 h-[90vh]">
       <button
         onClick={() => setMuted((prev) => !prev)}
-        className="absolute z-10"
+        className="absolute z-10 w-16 h-16 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
       >
-        {!muted && <img src="/assets/images/speaker.svg" alt="speaker" />}
-        {muted && <img src="/assets/images/mute.svg" alt="mute" />}
+        {!muted && (
+          <img
+            src="/assets/images/speaker.svg"
+            alt="speaker"
+            style={{ opacity, transition: 'opacity 0.5s' }}
+          />
+        )}
+        {muted && (
+          <img
+            src="/assets/images/mute.svg"
+            alt="mute"
+            style={{ opacity, transition: 'opacity 0.5s' }}
+          />
+        )}
       </button>
       <Swiper
         modules={[A11y, Autoplay, Mousewheel, Keyboard]}
@@ -79,6 +100,7 @@ const TestHome = () => {
                     url={shortForm.profileShortFormUrl}
                     muted={muted}
                     setMuted={setMuted}
+                    handleDoubleClick={handleDoubleClick}
                   />
                 </SwiperSlide>
               );
@@ -89,6 +111,7 @@ const TestHome = () => {
                   url={shortForm.profileShortFormUrl}
                   muted={muted}
                   setMuted={setMuted}
+                  handleDoubleClick={handleDoubleClick}
                 />
               </SwiperSlide>
             );

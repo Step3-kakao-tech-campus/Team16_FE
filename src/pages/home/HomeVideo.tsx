@@ -5,6 +5,7 @@ export interface HomeVideoProps {
   url: string;
   muted: boolean;
   setMuted: (mute: boolean) => void;
+  handleDoubleClick: () => void;
 }
 
 const HomeVideo = (props: HomeVideoProps) => {
@@ -45,6 +46,7 @@ const HomeVideo = (props: HomeVideoProps) => {
       <div
         ref={videoRef}
         onClick={() => setPlaying((prev) => !prev)}
+        onDoubleClick={props.handleDoubleClick}
         className="h-screen w-screen items-center justify-center"
       >
         <ReactPlayer
