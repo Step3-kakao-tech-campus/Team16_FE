@@ -5,7 +5,7 @@ import { ShelterLoginType, shelterLoginState } from 'recoil/shelterState';
 import * as Yup from 'yup';
 import { useMutation } from '@tanstack/react-query';
 import VLoginInputForm from './VLoginInputForm';
-import { setCookie } from '../../commons/cookie/cookie';
+import { setCookie } from '../../../commons/cookie/cookie';
 
 const LoginInputForm = () => {
   const [userInfo, setUserInfo] = useRecoilState(shelterLoginState);
@@ -82,6 +82,9 @@ const LoginInputForm = () => {
         maxAge: timeDifferenceseconds,
       });
       navigate('/');
+    },
+    onError: () => {
+      setIsLoading(false);
     },
   });
 
