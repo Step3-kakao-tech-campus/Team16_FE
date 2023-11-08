@@ -1,21 +1,7 @@
-export interface AddressInfo {
-  address_name: string;
-  category_group_code: string;
-  category_group_name: string;
-  category_name: string;
-  distance: string;
-  id: string;
-  phone: string;
-  place_name: string;
-  place_url: string;
-  road_address_name: string;
-  x: string;
-  y: string;
-  isRegistered: boolean;
-}
+import { SearchedPlace } from './MapList';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const displayMarker = async (map: any, addressInfo: AddressInfo) => {
+const displayMarker = async (map: any, addressInfo: SearchedPlace) => {
   const { kakao } = window;
   const { isRegistered, x: lng, y: lat, place_name: placeName } = addressInfo;
 
