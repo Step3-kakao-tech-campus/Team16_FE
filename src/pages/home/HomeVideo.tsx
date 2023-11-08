@@ -5,15 +5,13 @@ import VideoDragBar from './VideoDragBar';
 export interface HomeVideoProps {
   url: string;
   muted: boolean;
-  setMuted: (mute: boolean) => void;
   handleDoubleClick: () => void;
   hovering: boolean;
   setHovering: (hover: boolean) => void;
 }
 
 const HomeVideo = (props: HomeVideoProps) => {
-  const { url, muted, setMuted, handleDoubleClick, hovering, setHovering } =
-    props;
+  const { url, muted, handleDoubleClick, hovering, setHovering } = props;
   const [playing, setPlaying] = useState(false);
   const [opacity, setOpacity] = useState(1);
   const videoRef = useRef(null);

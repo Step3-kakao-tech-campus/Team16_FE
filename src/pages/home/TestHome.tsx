@@ -84,7 +84,6 @@ const TestHome = () => {
       <Swiper
         modules={[A11y, Autoplay, Mousewheel, Keyboard]}
         spaceBetween={10}
-        slidesPerView={1}
         grabCursor={true}
         mousewheel={{
           sensitivity: 100,
@@ -103,7 +102,6 @@ const TestHome = () => {
 
                   <Swiper
                     modules={[A11y]}
-                    slidesPerView={1}
                     grabCursor={true}
                     autoHeight={true}
                     direction={'horizontal'}
@@ -115,7 +113,6 @@ const TestHome = () => {
                       <HomeVideo
                         url={shortForm.profileShortFormUrl}
                         muted={muted}
-                        setMuted={setMuted}
                         handleDoubleClick={handleDoubleClick}
                         hovering={hovering}
                         setHovering={setHovering}
@@ -132,7 +129,6 @@ const TestHome = () => {
               <SwiperSlide key={shortForm.profileShortFormUrl + index}>
                 <Swiper
                   modules={[A11y]}
-                  slidesPerView={1}
                   grabCursor={true}
                   autoHeight={true}
                   direction={'horizontal'}
@@ -144,7 +140,6 @@ const TestHome = () => {
                     <HomeVideo
                       url={shortForm.profileShortFormUrl}
                       muted={muted}
-                      setMuted={setMuted}
                       handleDoubleClick={handleDoubleClick}
                       hovering={hovering}
                       setHovering={setHovering}
