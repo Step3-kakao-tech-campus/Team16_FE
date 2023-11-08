@@ -8,10 +8,10 @@ import HomeVideo from './HomeVideo';
 
 export interface HomeVideoSliderProps {
   data: any;
-  nextPageRef: React.MutableRefObject<HTMLDivElement | null>;
   muted: boolean;
   setMuted: (muted: boolean) => void;
   setOpacity: (opacity: number) => void;
+  fetchNextPage: () => void;
 }
 
 interface ShortFormPage {
@@ -35,9 +35,29 @@ interface ShortForm {
 }
 
 const HomeVideoSlider = (props: HomeVideoSliderProps) => {
-  const { data, nextPageRef, muted, setMuted, setOpacity } = props;
-  const navigate = useNavigate();
+  const { data, muted, setMuted, setOpacity, fetchNextPage } = props;
   const [hovering, setHovering] = useState(false);
+  const nextPageRef = useRef(null);
+  const navigate = useNavigate();
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        fetchNextPage();
+      }
+    });
+    return () => {
+      io.disconnect();
+    };
+  });
+  useEffect(() => {
+    if (nextPageRef.current) {
+      io.observe(nextPageRef.current);
+    }
+    return () => {
+      io.disconnect();
+    };
+  });
 
   const handleDoubleClick = () => {
     setMuted(!muted);

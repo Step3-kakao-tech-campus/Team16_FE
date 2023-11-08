@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import HomeVideoSlider, { HomeVideoSliderProps } from './HomeVideoSlider';
@@ -7,8 +7,7 @@ import HomeVideoSlider, { HomeVideoSliderProps } from './HomeVideoSlider';
 const TestHome = () => {
   const [muted, setMuted] = useState(true);
   const [opacity, setOpacity] = useState(0);
-  const nextPageRef = useRef(null);
-  const { data, isLoading, fetchNextPage } = useInfiniteQuery(
+  const { data, fetchNextPage } = useInfiniteQuery(
     ['home', 1],
     ({ pageParam = 1 }) => {
       const apiUrl = `${process.env.REACT_APP_URI}/short-forms/home?page=${pageParam}&size=5`;
@@ -27,31 +26,12 @@ const TestHome = () => {
     },
   );
 
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        fetchNextPage();
-      }
-    });
-    return () => {
-      io.disconnect();
-    };
-  });
-  useEffect(() => {
-    if (nextPageRef.current) {
-      io.observe(nextPageRef.current);
-    }
-    return () => {
-      io.disconnect();
-    };
-  });
-
   const homeVideoSliderProps: HomeVideoSliderProps = {
     data,
-    nextPageRef,
     muted,
     setMuted,
     setOpacity,
+    fetchNextPage,
   };
 
   return (
