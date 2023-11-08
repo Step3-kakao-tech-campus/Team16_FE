@@ -17,7 +17,8 @@ declare global {
     kakao: any;
   }
 }
-const Map: React.FC = () => {
+
+const Map = () => {
   const mapRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState(true);
   const { map, displayMarkerByInfo, searchedPlace, mutate, mutateData } =
