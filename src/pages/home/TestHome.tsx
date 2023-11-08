@@ -119,7 +119,9 @@ const TestHome = () => {
                       />
                     </SwiperSlide>
                     <SwiperSlide>
-                      <div className="bg-black w-52 h-52" />
+                      <div className="w-full h-[90vh] flex items-center justify-center font-bold text-white bg-black">
+                        <div>동물 정보 가져오겠습니다~</div>
+                      </div>
                     </SwiperSlide>
                   </Swiper>
                 </SwiperSlide>
