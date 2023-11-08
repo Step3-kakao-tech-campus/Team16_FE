@@ -1,18 +1,17 @@
 import { useState, useRef, useEffect } from 'react';
 import ReactPlayer from 'react-player';
+import VideoDragBar from './VideoDragBar';
 
 export interface HomeVideoProps {
   url: string;
   muted: boolean;
-  setMuted: (mute: boolean) => void;
   handleDoubleClick: () => void;
   hovering: boolean;
   setHovering: (hover: boolean) => void;
 }
 
 const HomeVideo = (props: HomeVideoProps) => {
-  const { url, muted, setMuted, handleDoubleClick, hovering, setHovering } =
-    props;
+  const { url, muted, handleDoubleClick, hovering, setHovering } = props;
   const [playing, setPlaying] = useState(false);
   const [opacity, setOpacity] = useState(1);
   const videoRef = useRef(null);
@@ -47,18 +46,7 @@ const HomeVideo = (props: HomeVideoProps) => {
 
   return (
     <>
-      {hovering && (
-        <div
-          className="absolute font text-white text-3xl bg-black/50 top-0 right-0 w-1 px-10 h-full flex flex-col gap-10 items-center justify-center"
-          style={{
-            opacity,
-            transition: 'opacity 0.2s ease-in-out',
-          }}
-        >
-          <div>왼쪽으로</div>
-          <div>당겨보세요</div>
-        </div>
-      )}
+      {hovering && <VideoDragBar opacity={opacity} />}
       <div
         ref={videoRef}
         onClick={() => setPlaying((prev) => !prev)}

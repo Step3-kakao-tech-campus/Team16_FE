@@ -1,11 +1,17 @@
+import { Suspense } from 'react';
+import ErrorBoundary from 'commons/ErrorBoundary';
 import GNB from 'layouts/GNB';
-import TestHome from './TestHome';
+import Home from './Home';
 
 const HomePage = () => {
   return (
     <div>
       <GNB />
-      <TestHome />
+      <ErrorBoundary>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Home />
+        </Suspense>
+      </ErrorBoundary>
     </div>
   );
 };
