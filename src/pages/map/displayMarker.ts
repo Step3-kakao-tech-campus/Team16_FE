@@ -1,7 +1,23 @@
-const displayMarker = async (map: any, addressInfo: any) => {
+export interface AddressInfo {
+  address_name: string;
+  category_group_code: string;
+  category_group_name: string;
+  category_name: string;
+  distance: string;
+  id: string;
+  phone: string;
+  place_name: string;
+  place_url: string;
+  road_address_name: string;
+  x: string;
+  y: string;
+  isRegistered: boolean;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const displayMarker = async (map: any, addressInfo: AddressInfo) => {
   const { kakao } = window;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  const { isRegistered, x: lng, y: lat, place_name } = addressInfo;
+  const { isRegistered, x: lng, y: lat, place_name: placeName } = addressInfo;
 
   const DEFAULT_SHELTER_SRC = '/assets/images/racoon.png';
   const ANYMORY_SHELTER_SRC = '/assets/images/dog.png';
@@ -25,7 +41,7 @@ const displayMarker = async (map: any, addressInfo: any) => {
   const infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
   kakao.maps.event.addListener(marker, 'click', () => {
     infowindow.setContent(
-      `<div style="padding:5px;font-size:12px;">${place_name}</div>`,
+      `<div style="padding:5px;font-size:12px;">${placeName}</div>`,
     );
     infowindow.open(map, marker);
     setTimeout(() => {
