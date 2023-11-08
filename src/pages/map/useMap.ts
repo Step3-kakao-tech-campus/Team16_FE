@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState, RefObject, useRef } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import displayMarker from './displayMarker';
+import displayMarker, { AddressInfo } from './displayMarker';
 
 function useMap<T>(
   containerRef: RefObject<T extends HTMLElement ? T : HTMLElement>,
@@ -12,7 +12,7 @@ function useMap<T>(
   const [searchedPlace, setSearchedPlace] = useState<any>([]);
   const boundRef = useRef<any>();
 
-  const displayMarkerByInfo = async (addressInfo: any) => {
+  const displayMarkerByInfo = async (addressInfo: AddressInfo) => {
     if (!map) return;
     map.setBounds(boundRef.current);
     await displayMarker(map, addressInfo);
