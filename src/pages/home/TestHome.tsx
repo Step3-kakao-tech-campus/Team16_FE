@@ -2,7 +2,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { useState, useEffect, useRef } from 'react';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import HomeVideoSlide, { HomeVideoSlideProps } from './HomeVideoSlide';
+import HomeVideoSlider, { HomeVideoSliderProps } from './HomeVideoSlider';
 
 const TestHome = () => {
   const [muted, setMuted] = useState(true);
@@ -46,7 +46,7 @@ const TestHome = () => {
     };
   });
 
-  const homeVideoSlideProps: HomeVideoSlideProps = {
+  const homeVideoSliderProps: HomeVideoSliderProps = {
     data,
     nextPageRef,
     muted,
@@ -75,7 +75,7 @@ const TestHome = () => {
           />
         )}
       </button>
-      <HomeVideoSlide {...homeVideoSlideProps} />
+      <HomeVideoSlider {...homeVideoSliderProps} />
     </div>
   );
 };

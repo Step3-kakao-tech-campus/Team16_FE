@@ -6,7 +6,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import HomeVideo from './HomeVideo';
 
-export interface HomeVideoSlideProps {
+export interface HomeVideoSliderProps {
   data: any;
   nextPageRef: React.MutableRefObject<HTMLDivElement | null>;
   muted: boolean;
@@ -34,7 +34,7 @@ interface ShortForm {
   shelterName: string;
 }
 
-const HomeVideoSlide = (props: HomeVideoSlideProps) => {
+const HomeVideoSlider = (props: HomeVideoSliderProps) => {
   const { data, nextPageRef, muted, setMuted, setOpacity } = props;
   const navigate = useNavigate();
   const [hovering, setHovering] = useState(false);
@@ -128,4 +128,4 @@ const HomeVideoSlide = (props: HomeVideoSlideProps) => {
   );
 };
 
-export default HomeVideoSlide;
+export default HomeVideoSlider;
