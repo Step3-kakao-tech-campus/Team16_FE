@@ -88,7 +88,7 @@ const TestHome = () => {
         grabCursor={true}
         mousewheel={{
           sensitivity: 100,
-          thresholdDelta: 30,
+          thresholdDelta: 70,
         }}
         autoHeight={true}
         direction={'vertical'}

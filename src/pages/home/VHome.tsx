@@ -76,8 +76,8 @@ const VHome = (homeProps: HomeProps) => {
             prevEl: '.my-slider-box-1__btn-left',
           }}
           mousewheel={{
-            thresholdDelta: 70,
             sensitivity: 100,
+            thresholdDelta: 70,
           }}
           onSlideChange={(swiper: any) => {
             setCurrentIndex(swiper.realIndex);
