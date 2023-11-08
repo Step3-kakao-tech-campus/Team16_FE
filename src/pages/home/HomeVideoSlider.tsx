@@ -7,6 +7,7 @@ import 'swiper/css/pagination';
 import HomeVideo from './HomeVideo';
 
 export interface HomeVideoSliderProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: any;
   muted: boolean;
   setMuted: (muted: boolean) => void;
