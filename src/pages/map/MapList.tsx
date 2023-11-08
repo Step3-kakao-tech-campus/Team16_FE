@@ -24,6 +24,7 @@ const MapList = ({
   map,
 }: {
   searchedPlace: SearchedPlace[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   map: any;
 }) => {
   const { kakao } = window;
@@ -43,8 +44,6 @@ const MapList = ({
     }
     return 0;
   });
-
-  const infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
 
   return (
     <div className="w-96">
