@@ -3,6 +3,7 @@ import { useState } from 'react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import HomeVideoSlider, { HomeVideoSliderProps } from './HomeVideoSlider';
+import VideoMuteIcon from './VideoMuteIcon';
 
 const Home = () => {
   const [muted, setMuted] = useState(true);
@@ -36,25 +37,7 @@ const Home = () => {
 
   return (
     <div className="overflow-hidden bg-slate-500 h-[90vh]">
-      <button
-        onClick={() => setMuted((prev) => !prev)}
-        className="absolute z-10 w-16 h-16 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-      >
-        {!muted && (
-          <img
-            src="/assets/images/speaker.svg"
-            alt="speaker"
-            style={{ opacity, transition: 'opacity 0.5s' }}
-          />
-        )}
-        {muted && (
-          <img
-            src="/assets/images/mute.svg"
-            alt="mute"
-            style={{ opacity, transition: 'opacity 0.5s' }}
-          />
-        )}
-      </button>
+      <VideoMuteIcon muted={muted} opacity={opacity} />
       <HomeVideoSlider {...homeVideoSliderProps} />
     </div>
   );
