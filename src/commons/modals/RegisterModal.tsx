@@ -7,10 +7,10 @@ export interface RegisterModalProps {
   isLoading: boolean;
   isSuccess: boolean;
   isError: boolean;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: any;
   errorText: string;
   modalString: string;
+  buttonTextArray: any;
 }
 
 const RegisterModal = ({
@@ -24,6 +24,7 @@ const RegisterModal = ({
   isError,
   data,
   errorText,
+  buttonTextArray,
   modalString,
 }: RegisterModalProps) => {
   if (isError || data?.success === false) {
@@ -38,9 +39,31 @@ const RegisterModal = ({
               X
             </button>
           </div>
-          <span className="text-2xl text-brand-color">{errorText}</span>
-          <div className="flex w-2/3 justify-between mt-8">
-            <button
+          <span className="text-xl text-brand-color">{errorText}</span>
+          <div className="flex w-2/3 justify-around items-center mt-8 gap-6">
+            {buttonTextArray.map((buttonText: string, index: number) => {
+              if (index % 2 === 0) {
+                return (
+                  <button
+                    key={index}
+                    className="text-brand-color rounded-md font-bold border border-brand-color w-32 py-2"
+                    onClick={handleRegisterMoreButtonClick}
+                  >
+                    {buttonText}
+                  </button>
+                );
+              }
+              return (
+                <button
+                  key={index}
+                  className="bg-brand-color rounded-md font-bold text-white w-20 py-2"
+                  onClick={handleRegisterMoreButtonClick}
+                >
+                  {buttonText}
+                </button>
+              );
+            })}
+            {/* <button
               className="text-brand-color rounded-md font-bold border border-brand-color w-16 py-2"
               onClick={handleRegisterMoreButtonClick}
             >
@@ -51,7 +74,7 @@ const RegisterModal = ({
               onClick={handleRegisterButtonClick}
             >
               다시하기
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

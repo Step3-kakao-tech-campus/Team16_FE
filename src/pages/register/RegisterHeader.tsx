@@ -13,6 +13,7 @@ import ImageVideoInput from './ImageVideoInput';
 const RegisterHeader = () => {
   const [selectedImageFile, setSelectedImageFile] = useState(null);
   const [selectedVideoFile, setSelectedVideoFile] = useState(null);
+  const [buttonTextArray, setButtonTextArray] = useState<Array<string>>(['']);
   const [errorText, setErrorText] = useState<string>('');
   const registerPetData = useRecoilValue(registerState);
   const imageRef = useRef<HTMLInputElement>(null);
@@ -49,19 +50,24 @@ const RegisterHeader = () => {
       switch (response.status) {
         case 400:
           setErrorText('이미지, 비디오 형식이 잘못되었습니다.'); // 취소
+          setButtonTextArray(['취소']);
           break;
         case 401:
         case 403:
           setErrorText('로그인 정보가 만료되었습니다.'); // 로그인 페이지로 이동 / 취소
+          setButtonTextArray(['로그인하기', '취소']);
           break;
         case 404:
           setErrorText('보호소를 찾을 수 없습니다.'); // 로그인 페이지로 이동 / 취소
+          setButtonTextArray(['로그인하기', '취소']);
           break;
         case 500:
           setErrorText('서버에 문제가 발생했습니다.'); // 다시하기 / 취소
+          setButtonTextArray(['다시하기', '취소']);
           break;
         default:
           setErrorText('등록 정보의 형식이 잘못되었습니다.'); // 취소
+          setButtonTextArray(['취소']);
           break;
       }
     }
@@ -119,8 +125,8 @@ const RegisterHeader = () => {
     isError,
     data,
     errorText,
+    buttonTextArray,
     modalString: '등록',
-    // 등록 글자 필요
   };
   return (
     <>
