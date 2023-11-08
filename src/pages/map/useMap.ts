@@ -36,33 +36,43 @@ function useMap<T>(
   );
 
   useEffect(() => {
-    (() => {
-      if (!containerRef.current) return;
-      setMap(
-        new window.kakao.maps.Map(containerRef.current, {
-          center: new window.kakao.maps.LatLng(35.1759293, 126.9149701),
-          level: 3,
-        }),
-      );
-      function placesSearchCB(data: any[], status: any) {
-        if (status === kakao.maps.services.Status.OK) {
-          const bounds = new kakao.maps.LatLngBounds();
+    const mapScript = document.createElement('script');
+    mapScript.async = true;
+    mapScript.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.REACT_APP_KAKAO_KEY}&libraries=services&autoload=false`;
+    document.head.appendChild(mapScript);
 
-          for (let i = 0; i < data.length; i += 1) {
-            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+    const onLoadKakaoMap = () => {
+      if (!containerRef.current || !kakao) return;
+      window.kakao.maps.load(() => {
+        setMap(
+          new window.kakao.maps.Map(containerRef.current, {
+            center: new window.kakao.maps.LatLng(35.1759293, 126.9149701),
+            level: 3,
+          }),
+        );
+
+        function placesSearchCB(data: any[], status: any) {
+          if (status === kakao.maps.services.Status.OK) {
+            const bounds = new kakao.maps.LatLngBounds();
+
+            for (let i = 0; i < data.length; i += 1) {
+              bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+            }
+            boundRef.current = bounds;
           }
-          boundRef.current = bounds;
+          setSearchedPlace(data);
         }
-        setSearchedPlace(data);
-      }
-      const ps = new kakao.maps.services.Places(); // 키워드로 장소를 검색합니다
-      ps.keywordSearch('보호소', placesSearchCB, {
-        location: new kakao.maps.LatLng(35.1759293, 126.9149701),
-        radius: 20000,
-        sort: kakao.maps.services.SortBy.DISTANCE,
+        const ps = new kakao.maps.services.Places(); // 키워드로 장소를 검색합니다
+        ps.keywordSearch('보호소', placesSearchCB, {
+          location: new kakao.maps.LatLng(35.1759293, 126.9149701),
+          radius: 20000,
+          sort: kakao.maps.services.SortBy.DISTANCE,
+        });
       });
-    })();
-  }, [containerRef]);
+    };
+    mapScript.addEventListener('load', onLoadKakaoMap);
+    onLoadKakaoMap();
+  }, [containerRef, kakao]);
 
   return { map, displayMarkerByInfo, searchedPlace, mutate, mutateData };
 }
