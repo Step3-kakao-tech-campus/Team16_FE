@@ -22,10 +22,12 @@ export interface SearchedPlace {
 const MapList = ({
   searchedPlace,
   map,
+  loading,
 }: {
   searchedPlace: SearchedPlace[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   map: any;
+  loading: boolean;
 }) => {
   const { kakao } = window;
   const navigate = useNavigate();
@@ -44,6 +46,10 @@ const MapList = ({
     }
     return 0;
   });
+
+  if (loading) {
+    return <></>;
+  }
 
   return (
     <div className="w-96">

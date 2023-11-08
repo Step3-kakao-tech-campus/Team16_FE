@@ -5,6 +5,7 @@ import displayMarker from './displayMarker';
 
 function useMap<T>(
   containerRef: RefObject<T extends HTMLElement ? T : HTMLElement>,
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>,
 ) {
   const { kakao } = window;
   const [map, setMap] = useState<any>();
@@ -69,6 +70,7 @@ function useMap<T>(
           sort: kakao.maps.services.SortBy.DISTANCE,
         });
       });
+      setLoading(false);
     };
     mapScript.addEventListener('load', onLoadKakaoMap);
     onLoadKakaoMap();
