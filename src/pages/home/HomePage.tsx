@@ -1,11 +1,11 @@
 import GNB from 'layouts/GNB';
-import TestHome from './TestHome';
+import Home from './Home';
 
 const HomePage = () => {
   return (
     <div>
       <GNB />
-      <TestHome />
+      <Home />
     </div>
   );
 };
