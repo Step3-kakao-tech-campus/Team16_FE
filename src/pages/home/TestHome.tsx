@@ -1,17 +1,12 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useState, useEffect, useRef } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { A11y, Autoplay, Mousewheel, Keyboard } from 'swiper/modules';
-import { useNavigate } from 'react-router-dom';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import HomeVideo from './HomeVideo';
+import HomeVideoSlide, { HomeVideoSlideProps } from './HomeVideoSlide';
 
 const TestHome = () => {
   const [muted, setMuted] = useState(true);
-  const [hovering, setHovering] = useState(false);
   const [opacity, setOpacity] = useState(0);
-  const navigate = useNavigate();
   const nextPageRef = useRef(null);
   const { data, isLoading, fetchNextPage } = useInfiniteQuery(
     ['home', 1],
@@ -51,14 +46,13 @@ const TestHome = () => {
     };
   });
 
-  const handleDoubleClick = () => {
-    setMuted((prev) => !prev);
-    setOpacity(1);
-    setTimeout(() => {
-      setOpacity(0);
-    }, 200);
+  const homeVideoSlideProps: HomeVideoSlideProps = {
+    data,
+    nextPageRef,
+    muted,
+    setMuted,
+    setOpacity,
   };
-  console.log(hovering);
 
   return (
     <div className="overflow-hidden bg-slate-500 h-[90vh]">
@@ -81,83 +75,7 @@ const TestHome = () => {
           />
         )}
       </button>
-      <Swiper
-        modules={[A11y, Autoplay, Mousewheel, Keyboard]}
-        spaceBetween={10}
-        grabCursor={true}
-        mousewheel={{
-          sensitivity: 100,
-          thresholdDelta: 30,
-        }}
-        autoHeight={true}
-        direction={'vertical'}
-        keyboard={{ enabled: true, pageUpDown: true, onlyInViewport: true }}
-      >
-        {data?.pages.map((page, pagesIndex) =>
-          page.response.shortForms.map((shortForm: any, index: number) => {
-            if (pagesIndex * 5 + index === 5 * data.pages.length - 1) {
-              return (
-                <SwiperSlide key={shortForm.profileShortFormUrl + index}>
-                  <div ref={nextPageRef}></div>
-
-                  <Swiper
-                    modules={[A11y]}
-                    grabCursor={true}
-                    autoHeight={true}
-                    direction={'horizontal'}
-                    onSlideNextTransitionEnd={() => {
-                      navigate(`/pet/${shortForm.petId}`);
-                    }}
-                  >
-                    <SwiperSlide>
-                      <HomeVideo
-                        url={shortForm.profileShortFormUrl}
-                        muted={muted}
-                        handleDoubleClick={handleDoubleClick}
-                        hovering={hovering}
-                        setHovering={setHovering}
-                      />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <div className="w-full h-[90vh] flex items-center justify-center font-bold text-white bg-black">
-                        <div>동물 정보 가져오겠습니다~</div>
-                      </div>
-                    </SwiperSlide>
-                  </Swiper>
-                </SwiperSlide>
-              );
-            }
-            return (
-              <SwiperSlide key={shortForm.profileShortFormUrl + index}>
-                <Swiper
-                  modules={[A11y]}
-                  grabCursor={true}
-                  autoHeight={true}
-                  direction={'horizontal'}
-                  onSlideNextTransitionEnd={() => {
-                    navigate(`/pet/${shortForm.petId}`);
-                  }}
-                >
-                  <SwiperSlide>
-                    <HomeVideo
-                      url={shortForm.profileShortFormUrl}
-                      muted={muted}
-                      handleDoubleClick={handleDoubleClick}
-                      hovering={hovering}
-                      setHovering={setHovering}
-                    />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <div className="w-full h-[90vh] flex items-center justify-center font-bold text-white bg-black">
-                      <div>동물 정보 가져오겠습니다~</div>
-                    </div>
-                  </SwiperSlide>
-                </Swiper>
-              </SwiperSlide>
-            );
-          }),
-        )}
-      </Swiper>
+      <HomeVideoSlide {...homeVideoSlideProps} />
     </div>
   );
 };
