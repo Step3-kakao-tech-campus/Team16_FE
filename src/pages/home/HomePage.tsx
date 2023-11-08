@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import GNB from 'layouts/GNB';
 import Home from './Home';
 
@@ -5,7 +6,9 @@ const HomePage = () => {
   return (
     <div>
       <GNB />
-      <Home />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Home />
+      </Suspense>
     </div>
   );
 };
