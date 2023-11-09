@@ -33,7 +33,7 @@ const Home = () => {
       const apiUrl =
         region !== '전국' || species !== '전체'
           ? `${process.env.REACT_APP_URI}/short-forms?type=${type}&area=${area}&page=${pageParam}&size=5`
-          : `${process.env.REACT_APP_URI}/short-oms/home?page=${pageParam}&size=5`;
+          : `${process.env.REACT_APP_URI}/short-forms/home?page=${pageParam}&size=5`;
       return fetch(apiUrl, {
         method: 'GET',
         headers: {
@@ -49,9 +49,12 @@ const Home = () => {
       suspense: true,
     },
   );
+  // 에러가 특이하게 와서 이렇게 처리했습니다...
+  // onError나 onSuccess로는 잡히지 않더라고요
   if (data?.pages[0].success === false) {
     throw new Error(data?.pages[0].error.message);
   }
+
   const handleRemoveFilter = (string: string) => {
     if (string === species) {
       setSpecies('전체');
