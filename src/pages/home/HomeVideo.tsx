@@ -97,9 +97,7 @@ const HomeVideo = (props: HomeVideoProps) => {
         </div>
       )}
       {loading && index !== 0 && playing && (
-        <div className="absolute w-1/2 h-1/2 bg-black">
-          <div className="text-white text-2xl">이거는 로딩 중이라는 뜻</div>
-        </div>
+        <div className="absolute w-10 h-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 loader" />
       )}
       <div
         ref={videoRef}
