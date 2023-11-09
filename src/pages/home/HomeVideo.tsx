@@ -47,13 +47,11 @@ const HomeVideo = (props: HomeVideoProps) => {
           if (playPromise !== undefined) {
             playPromise
               .then(() => {
-                // Automatic playback started!
-                // Show playing UI.
+                // 이 때, 비디오가 재생됨.
                 setLoading(false);
               })
               .catch(() => {
-                // Auto-play was prevented
-                // Show paused UI.
+                // 재생 정지됨. 사용자가 직접 재생 버튼을 눌러야 함.
               });
           }
         } else {
