@@ -5,34 +5,31 @@ import VRadioGroup from './VRadioGroup';
 
 const RadioGroup = () => {
   const [petInfo, setPetInfo] = useRecoilState(registerState);
+  const PET_INFO_REQUIRED_KEY: (keyof RegisterType)[] = [
+    'age',
+    'name',
+    'adoptionStatus',
+    'type',
+    'weight',
+    'description',
+    'sex',
+    'size',
+    'vaccinationStatus',
+    'neutralizationStatus',
+  ];
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const target = event.target as HTMLInputElement;
-    const fieldName = target.name;
+    const fieldName = target.id;
     const newValue = target.value;
-    setPetInfo((prev) => ({ ...prev, [fieldName]: newValue }));
-
-    // useState의 set함수로 petInfo를 업데이트해도, handleChange가 실행될 때의 petInfo는 업데이트 전의 petInfo를 가리킵니다.
-    // 따라서 tempPetInfo를 만들어서 최신의 petInfo를 사용하도록 했습니다.
-    const tempPetInfo = { ...petInfo, [fieldName]: newValue };
-    const list = [
-      tempPetInfo.age,
-      tempPetInfo.name,
-      tempPetInfo.adoptionStatus,
-      tempPetInfo.type,
-      tempPetInfo.weight,
-      tempPetInfo.description,
-      tempPetInfo.sex,
-      tempPetInfo.size,
-      tempPetInfo.vaccinationStatus,
-      tempPetInfo.neutralizationStatus,
-    ];
-    const lili = list.filter((item) => {
-      return item !== '';
+    setPetInfo((prev) => {
+      const tempPetInfo = { ...prev, [fieldName]: newValue };
+      const isComplete = PET_INFO_REQUIRED_KEY.every((key) => tempPetInfo[key]);
+      return {
+        ...tempPetInfo,
+        isComplete,
+      };
     });
-    if (lili.length === 10) {
-      setPetInfo((prev) => ({ ...prev, isComplete: true }));
-    } else setPetInfo((prev) => ({ ...prev, isComplete: false }));
   };
 
   const handleSexChange = (value: string) => {
