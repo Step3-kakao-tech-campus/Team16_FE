@@ -90,10 +90,9 @@ const HomeVideo = (props: HomeVideoProps) => {
     <>
       {hovering && <VideoDragBar opacity={opacity} />}
       {((loading && index === 0) || (loading && index !== 0 && !playing)) && (
-        <div className="absolute w-1/2 h-1/2 backdrop-blur-3xl">
-          <div className="text-white text-2xl opacity-90">
-            클릭해서 재생하기
-          </div>
+        <div className="absolute w-1/2 h-1/2 backdrop-blur-2xl backdrop-brightness-50">
+          <div className="text-white">한 번 탭하면 일시정지</div>
+          <div className="text-white">두 번 탭하면 음소거가 가능해요</div>
         </div>
       )}
       {loading && index !== 0 && playing && (
