@@ -82,11 +82,11 @@ const HomeVideo = (props: HomeVideoProps) => {
     }
   };
   return (
-    <>
+    <div onClick={handleVideoClick}>
       {hovering && <VideoDragBar opacity={opacity} />}
       {((loading && index === 0) || (loading && index !== 0 && !playing)) && (
-        <div className="absolute w-fit rounded-2xl h-fit p-10 backdrop-blur-lg flex flex-col justify-center items-center align-middle bg-brand-color/50">
-          <div className="text-white">한 번 탭하면 일시정지</div>
+        <div className="absolute w-fit rounded-2xl h-fit p-10 backdrop-blur-lg flex flex-col justify-center items-center align-middle bg-brand-color/50 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <div className="text-white">한 번 탭하면 재생 / 일시정지</div>
           <div className="text-white">두 번 탭하면 음소거가 가능해요</div>
         </div>
       )}
@@ -95,7 +95,6 @@ const HomeVideo = (props: HomeVideoProps) => {
       )}
       <div
         ref={videoRef}
-        onClick={handleVideoClick}
         onDoubleClick={handleDoubleClick}
         className="h-[70vh] items-center justify-center"
         onMouseEnter={() => {
@@ -120,7 +119,7 @@ const HomeVideo = (props: HomeVideoProps) => {
           <source src={url} type="video/mp4" />
         </video>
       </div>
-    </>
+    </div>
   );
 };
 
