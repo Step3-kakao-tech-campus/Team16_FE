@@ -29,6 +29,7 @@ const router = createBrowserRouter([
     children: [
       {
         element: <ValidateCheckLayout />,
+
         children: [
           {
             path: '/',
@@ -92,7 +93,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
-        <RouterProvider router={router} />;
+        <RouterProvider router={router} />
       </RecoilRoot>
     </QueryClientProvider>
   );
