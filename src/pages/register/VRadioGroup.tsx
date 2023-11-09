@@ -103,10 +103,10 @@ const VRadioGroup = ({
           <DetailRadio
             label="했어요"
             name="neutralizationStatus"
-            value="YES"
-            selected={petInfo.neutralizationStatus === 'YES'}
+            value="했어요"
+            selected={petInfo.neutralizationStatus === '했어요'}
             onClick={() => {
-              handleNeutralizationStatusChange('YES');
+              handleNeutralizationStatusChange('했어요');
               setPetInfo((prev) => ({
                 ...prev,
                 isComplete: checkIfAllFilled(prev),
@@ -117,10 +117,10 @@ const VRadioGroup = ({
           <DetailRadio
             label="안했어요"
             name="neutralizationStatus"
-            value="NO"
-            selected={petInfo.neutralizationStatus === 'NO'}
+            value="안했어요"
+            selected={petInfo.neutralizationStatus === '안했어요'}
             onClick={() => {
-              handleNeutralizationStatusChange('NO');
+              handleNeutralizationStatusChange('안했어요');
               setPetInfo((prev) => ({
                 ...prev,
                 isComplete: checkIfAllFilled(prev),
@@ -131,10 +131,10 @@ const VRadioGroup = ({
           <DetailRadio
             label="몰라요"
             name="neutralizationStatus"
-            value="UNKNOWN"
-            selected={petInfo.neutralizationStatus === 'UNKNOWN'}
+            value="몰라요"
+            selected={petInfo.neutralizationStatus === '몰라요'}
             onClick={() => {
-              handleNeutralizationStatusChange('UNKNOWN');
+              handleNeutralizationStatusChange('몰라요');
               setPetInfo((prev) => ({
                 ...prev,
                 isComplete: checkIfAllFilled(prev),
