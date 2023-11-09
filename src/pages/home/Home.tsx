@@ -33,7 +33,7 @@ const Home = () => {
       const apiUrl =
         region !== '전국' || species !== '전체'
           ? `${process.env.REACT_APP_URI}/short-forms?type=${type}&area=${area}&page=${pageParam}&size=5`
-          : `${process.env.REACT_APP_URI}/short-forms/home?page=${pageParam}&size=5`;
+          : `${process.env.REACT_APP_URI}/short-oms/home?page=${pageParam}&size=5`;
       return fetch(apiUrl, {
         method: 'GET',
         headers: {
@@ -43,11 +43,15 @@ const Home = () => {
     },
     {
       getNextPageParam: (lastPage) => {
-        return lastPage.response.hasNext ? lastPage.response.nextPage : false;
+        return lastPage.response?.hasNext ? lastPage.response?.nextPage : false;
       },
+      keepPreviousData: true,
       suspense: true,
     },
   );
+  if (data?.pages[0].success === false) {
+    throw new Error(data?.pages[0].error.message);
+  }
   const handleRemoveFilter = (string: string) => {
     if (string === species) {
       setSpecies('전체');
