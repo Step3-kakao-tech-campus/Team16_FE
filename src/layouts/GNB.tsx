@@ -4,7 +4,7 @@ import CategoryModal, {
   CategoryModalProps,
 } from 'commons/modals/CategoryModal';
 import { CategoryModalType } from 'commons/modals/VCategoryModalList';
-import { useLocation } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import VGNB, { VGNBProps } from './VGNB';
 import VLargeGNB, { VLargeGNBProps } from './VLargeGNB';
 
@@ -56,6 +56,7 @@ const GNB = () => {
     <>
       <VGNB {...vGNBProps} />
       <VLargeGNB {...vLargeGNBProps} />
+      <Outlet />
       {isModalOpen && (
         <ModalPortal>
           <CategoryModal {...categoryModalProps} />
