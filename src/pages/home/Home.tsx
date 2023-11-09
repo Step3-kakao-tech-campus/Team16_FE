@@ -34,7 +34,6 @@ const Home = () => {
         region !== '전국' || species !== '전체'
           ? `${process.env.REACT_APP_URI}/short-forms?type=${type}&area=${area}&page=${pageParam}&size=5`
           : `${process.env.REACT_APP_URI}/short-forms/home?page=${pageParam}&size=5`;
-      console.log(apiUrl);
       return fetch(apiUrl, {
         method: 'GET',
         headers: {
@@ -53,7 +52,6 @@ const Home = () => {
     if (string === species) {
       setSpecies('전체');
     } else setRegion('전국');
-    console.log('수정');
   };
 
   const homeVideoSliderProps: HomeVideoSliderProps = {
