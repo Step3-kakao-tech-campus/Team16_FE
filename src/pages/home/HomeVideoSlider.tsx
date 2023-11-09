@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import HomeVideo from './HomeVideo';
+import VideoInfo from './VideoInfo';
 
 export interface HomeVideoSliderProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -13,7 +14,6 @@ export interface HomeVideoSliderProps {
   setMuted: (muted: boolean) => void;
   setOpacity: (opacity: number) => void;
   fetchNextPage: () => void;
-  isLoading: boolean;
 }
 
 interface ShortFormPage {
@@ -37,7 +37,7 @@ interface ShortForm {
 }
 
 const HomeVideoSlider = (props: HomeVideoSliderProps) => {
-  const { data, muted, setMuted, setOpacity, fetchNextPage, isLoading } = props;
+  const { data, muted, setMuted, setOpacity, fetchNextPage } = props;
   const [hovering, setHovering] = useState(false);
   const [playing, setPlaying] = useState(false);
   const nextPageRef = useRef(null);
@@ -87,20 +87,20 @@ const HomeVideoSlider = (props: HomeVideoSliderProps) => {
         page.response.shortForms.map((shortForm: ShortForm, index: number) => {
           if (pagesIndex * 5 + index === 5 * data.pages.length - 1) {
             return (
-              <>
-                <SwiperSlide key={shortForm.profileShortFormUrl + index}>
-                  <div ref={nextPageRef}></div>
+              <SwiperSlide key={shortForm.profileShortFormUrl + index}>
+                <div ref={nextPageRef}></div>
 
-                  <Swiper
-                    modules={[A11y]}
-                    grabCursor={true}
-                    autoHeight={true}
-                    direction={'horizontal'}
-                    onSlideNextTransitionEnd={() => {
-                      navigate(`/pet/${shortForm.petId}`);
-                    }}
-                  >
-                    <SwiperSlide>
+                <Swiper
+                  modules={[A11y]}
+                  grabCursor={true}
+                  autoHeight={true}
+                  direction={'horizontal'}
+                  onSlideNextTransitionEnd={() => {
+                    navigate(`/pet/${shortForm.petId}`);
+                  }}
+                >
+                  <SwiperSlide>
+                    <div className="h-[70vh]">
                       <HomeVideo
                         url={shortForm.profileShortFormUrl}
                         muted={muted}
@@ -111,20 +111,32 @@ const HomeVideoSlider = (props: HomeVideoSliderProps) => {
                         setPlaying={setPlaying}
                         index={pagesIndex * 5 + index}
                       />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <div className="w-full h-[90vh] flex items-center justify-center font-bold text-white bg-black">
-                        <div>동물 정보 가져오겠습니다~</div>
-                      </div>
-                    </SwiperSlide>
-                  </Swiper>
-                </SwiperSlide>
-              </>
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <div className="w-full h-[90vh] text-xl flex items-center justify-center font-bold text-white bg-black">
+                      <div>동물 정보를 가져오는 중입니다🐶</div>
+                    </div>
+                  </SwiperSlide>
+                </Swiper>
+                <div className="w-full flex justify-center">
+                  <VideoInfo
+                    name={shortForm.name}
+                    adoptionStatus={shortForm.adoptionStatus}
+                    shelterName={shortForm.shelterName}
+                    age={shortForm.age}
+                  />
+                </div>
+              </SwiperSlide>
             );
           }
           return (
-            <SwiperSlide key={shortForm.profileShortFormUrl + index}>
+            <SwiperSlide
+              key={shortForm.profileShortFormUrl + index}
+              className="flex justify-center items-centerr"
+            >
               <Swiper
+                className="bg-black"
                 modules={[A11y]}
                 grabCursor={true}
                 autoHeight={true}
@@ -134,23 +146,33 @@ const HomeVideoSlider = (props: HomeVideoSliderProps) => {
                 }}
               >
                 <SwiperSlide>
-                  <HomeVideo
-                    url={shortForm.profileShortFormUrl}
-                    muted={muted}
-                    handleDoubleClick={handleDoubleClick}
-                    hovering={hovering}
-                    setHovering={setHovering}
-                    playing={playing}
-                    setPlaying={setPlaying}
-                    index={pagesIndex * 5 + index}
-                  />
+                  <div className="flex flex-col h-[70vh] items-center justify-center">
+                    <HomeVideo
+                      url={shortForm.profileShortFormUrl}
+                      muted={muted}
+                      handleDoubleClick={handleDoubleClick}
+                      hovering={hovering}
+                      setHovering={setHovering}
+                      playing={playing}
+                      setPlaying={setPlaying}
+                      index={pagesIndex * 5 + index}
+                    />
+                  </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                  <div className="w-full h-[90vh] flex items-center justify-center font-bold text-white bg-black">
-                    <div>동물 정보 가져오겠습니다~</div>
+                  <div className="w-full h-[90vh] text-xl flex items-center justify-center font-bold text-white bg-black">
+                    <div>동물 정보를 가져오는 중입니다🐶</div>
                   </div>
                 </SwiperSlide>
               </Swiper>
+              <div className="w-full flex justify-center">
+                <VideoInfo
+                  name={shortForm.name}
+                  adoptionStatus={shortForm.adoptionStatus}
+                  shelterName={shortForm.shelterName}
+                  age={shortForm.age}
+                />
+              </div>
             </SwiperSlide>
           );
         }),

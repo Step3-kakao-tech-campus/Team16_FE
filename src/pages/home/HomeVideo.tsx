@@ -91,15 +91,12 @@ const HomeVideo = (props: HomeVideoProps) => {
   return (
     <>
       {hovering && <VideoDragBar opacity={opacity} />}
-      {/* {!playing && (
-        <img src="/assets/images/play.svg" alt="play" className="absolute" />
-      )} */}
-      {loading && index === 0 && (
+      {((loading && index === 0) || (loading && index !== 0 && !playing)) && (
         <div className="absolute w-1/2 h-1/2 bg-black">
           <div className="text-white text-2xl">클릭해서 재생하기</div>
         </div>
       )}
-      {loading && index !== 0 && (
+      {loading && index !== 0 && playing && (
         <div className="absolute w-1/2 h-1/2 bg-black">
           <div className="text-white text-2xl">이거는 로딩 중이라는 뜻</div>
         </div>
@@ -108,7 +105,7 @@ const HomeVideo = (props: HomeVideoProps) => {
         ref={videoRef}
         onClick={handleVideoClick}
         onDoubleClick={handleDoubleClick}
-        className="h-screen w-screen items-center justify-center"
+        className="h-[70vh] items-center justify-center"
         onMouseEnter={() => {
           setHovering(true);
           setOpacity(1);

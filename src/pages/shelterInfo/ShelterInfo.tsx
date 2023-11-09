@@ -17,7 +17,6 @@ const ShelterInfo = () => {
     queryKey: ['page', currentPage],
     queryFn: () => useFetch(`/shelter/${shelterId}?page=${currentPage}`),
   });
-  console.log(data);
 
   useEffect(() => {
     if (!isLoading && !isError && data) {

@@ -9,7 +9,7 @@ const UserDropdownBox = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // 드롭다운 메뉴 열림/닫힘 상태
   const navigate = useNavigate();
   const shelterId = getCookie('accountInfo');
-  const id = shelterId ? shelterId.id : '';
+  const id = shelterId ? shelterId.split(' ')[1] : '';
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -25,7 +25,7 @@ const UserDropdownBox = () => {
         break;
       case '로그아웃':
         removeToken();
-        setCookie('userAccountInfo', 'Not Login');
+        setCookie('accountInfo', 'Not Login');
         window.location.reload();
         break;
       default:
@@ -36,7 +36,7 @@ const UserDropdownBox = () => {
 
   if (!token) {
     return (
-      <div className="flex gap-4 font-bold">
+      <div className="flex gap-4 font-bold z-50">
         <button
           className="border-2 box-content border-brand-color text-brand-color rounded-md py-1 px-4 transition duration-300 hover:bg-brand-color hover:text-white"
           onClick={() => navigate('/login')}
@@ -54,12 +54,12 @@ const UserDropdownBox = () => {
   }
 
   return (
-    <div className="relative inline-block text-left">
+    <div className="relative inline-block text-left z-50">
       <div>
         <button
           onClick={toggleDropdown}
           type="button"
-          className="inline-flex justify-center w-full rounded-full border-2 border-gray-300 hover:border-gray-400 shadow-sm p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100"
+          className="inline-flex justify-center w-full rounded-full border-2 border-gray-300 hover:border-gray-400 shadow-sm p-2 focus:outline-none"
           id="options-menu"
           aria-haspopup="listbox"
           aria-expanded="true"
@@ -75,7 +75,6 @@ const UserDropdownBox = () => {
       {isDropdownOpen && (
         <div className="origin-top-right absolute border-2 border-gray-300 hover:border-gray-400 right-0 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
           <div
-            className="py-1"
             role="menu"
             aria-orientation="vertical"
             aria-labelledby="options-menu"
@@ -83,7 +82,7 @@ const UserDropdownBox = () => {
             {options.map((option, index) => (
               <div
                 key={index}
-                className="block px-4 py-2 text-sm font-bold text-gray-500 hover:bg-gray-100 hover:text-black cursor-pointer"
+                className="block px-4 py-3 text-sm font-bold text-gray-500 hover:bg-gray-100 hover:text-black cursor-pointer"
                 onClick={() => handleOptionClick(option)}
                 role="menuitem"
               >
