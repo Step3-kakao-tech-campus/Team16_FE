@@ -39,6 +39,7 @@ interface ShortForm {
 const HomeVideoSlider = (props: HomeVideoSliderProps) => {
   const { data, muted, setMuted, setOpacity, fetchNextPage } = props;
   const [hovering, setHovering] = useState(false);
+  const [playing, setPlaying] = useState(false);
   const nextPageRef = useRef(null);
   const navigate = useNavigate();
 
@@ -106,6 +107,9 @@ const HomeVideoSlider = (props: HomeVideoSliderProps) => {
                         handleDoubleClick={handleDoubleClick}
                         hovering={hovering}
                         setHovering={setHovering}
+                        playing={playing}
+                        setPlaying={setPlaying}
+                        index={pagesIndex * 5 + index}
                       />
                     </div>
                   </SwiperSlide>
@@ -149,6 +153,9 @@ const HomeVideoSlider = (props: HomeVideoSliderProps) => {
                       handleDoubleClick={handleDoubleClick}
                       hovering={hovering}
                       setHovering={setHovering}
+                      playing={playing}
+                      setPlaying={setPlaying}
+                      index={pagesIndex * 5 + index}
                     />
                   </div>
                 </SwiperSlide>
