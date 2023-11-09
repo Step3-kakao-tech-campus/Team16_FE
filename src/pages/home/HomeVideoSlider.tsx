@@ -6,6 +6,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import HomeVideo from './HomeVideo';
 import VideoInfo from './VideoInfo';
+import Skeleton from './Skeleton';
 
 export interface HomeVideoSliderProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -114,9 +115,7 @@ const HomeVideoSlider = (props: HomeVideoSliderProps) => {
                     </div>
                   </SwiperSlide>
                   <SwiperSlide>
-                    <div className="w-full h-[90vh] text-xl flex items-center justify-center font-bold text-white bg-black">
-                      <div>동물 정보를 가져오는 중입니다🐶</div>
-                    </div>
+                    <Skeleton text="동물 정보를 가져오는 중입니다🐶" />
                   </SwiperSlide>
                 </Swiper>
                 <div className="w-full flex justify-center">
@@ -160,9 +159,7 @@ const HomeVideoSlider = (props: HomeVideoSliderProps) => {
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                  <div className="w-full h-[90vh] text-xl flex items-center justify-center font-bold text-white bg-black">
-                    <div>동물 정보를 가져오는 중입니다🐶</div>
-                  </div>
+                  <Skeleton text="동물 정보를 가져오는 중입니다🐶" />
                 </SwiperSlide>
               </Swiper>
               <div className="w-full flex justify-center">
