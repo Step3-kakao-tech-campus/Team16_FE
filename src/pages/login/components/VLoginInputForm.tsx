@@ -1,19 +1,8 @@
 import InputGroup from 'commons/InputGroup';
-import { ShelterLoginType } from 'recoil/shelterState';
 import { ClipLoader } from 'react-spinners';
+import { LoginInputFormProps, ValidationTextProps } from '../loginType';
 
-interface LoginInputFormProps {
-  errors: Partial<ShelterLoginType>;
-  isLoading: boolean;
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-}
-
-interface ValidationProps {
-  text?: string;
-}
-
-const ValidateText = ({ text }: ValidationProps) => {
+const ValidateText = ({ text }: ValidationTextProps) => {
   return <div className="text-red-500">{text}</div>;
 };
 

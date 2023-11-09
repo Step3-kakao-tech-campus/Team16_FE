@@ -1,12 +1,9 @@
 import Banner from 'commons/Banner';
 import LogoButton from 'commons/LogoButton';
-import LoginInputForm from 'pages/login/LoginInputForm';
+import LoginInputForm from 'pages/login/components/LoginInputForm';
+import { VLoginPageProps } from './loginType';
 
-type Props = {
-  redirectSignupPage: () => void;
-};
-
-const VLoginPage = ({ redirectSignupPage }: Props) => {
+const VLoginPage = ({ redirectSignupPage }: VLoginPageProps) => {
   return (
     <div className="flex flex-col justify-around">
       <div

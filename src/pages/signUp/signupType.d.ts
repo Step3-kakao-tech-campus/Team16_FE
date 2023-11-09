@@ -21,6 +21,11 @@ export interface AddressInputProps {
   shelterInfo: ShelterSignupType;
 }
 
+export interface ValidationProps {
+  text?: string;
+  className: string;
+}
+
 export interface VSignupInputProps {
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -30,9 +35,4 @@ export interface VSignupInputProps {
   passwordConfirm: boolean;
   errors: Partial<ShelterSignupType>;
   isLoading: LoadingProps;
-}
-
-export interface ValidationProps {
-  text?: string;
-  className: string;
 }
