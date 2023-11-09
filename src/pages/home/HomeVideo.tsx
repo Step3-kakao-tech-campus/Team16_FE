@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from 'react';
-import ReactPlayer from 'react-player';
 import VideoDragBar from './VideoDragBar';
 
 export interface HomeVideoProps {
