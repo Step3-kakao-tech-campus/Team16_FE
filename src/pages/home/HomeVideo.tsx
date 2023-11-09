@@ -43,8 +43,6 @@ const HomeVideo = (props: HomeVideoProps) => {
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        console.log(entry.isIntersecting, !playing);
-
         if (entry.isIntersecting && playing) {
           const playPromise = videoPlayerRef.current?.play();
           if (playPromise !== undefined) {
@@ -92,8 +90,10 @@ const HomeVideo = (props: HomeVideoProps) => {
     <>
       {hovering && <VideoDragBar opacity={opacity} />}
       {((loading && index === 0) || (loading && index !== 0 && !playing)) && (
-        <div className="absolute w-1/2 h-1/2 bg-black">
-          <div className="text-white text-2xl">클릭해서 재생하기</div>
+        <div className="absolute w-1/2 h-1/2 backdrop-blur-3xl">
+          <div className="text-white text-2xl opacity-90">
+            클릭해서 재생하기
+          </div>
         </div>
       )}
       {loading && index !== 0 && playing && (
