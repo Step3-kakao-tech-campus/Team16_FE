@@ -21,7 +21,6 @@ const VLargeGNB = (props: VLargeGNBProps) => {
     <div className="flex w-full h-10 my-5 justify-center">
       <div className="lg:flex w-11/12 hidden items-center justify-between text-xl gap-10">
         <LogoButton />
-
         <ol className="flex gap-4 h-8">
           <li>
             <button
@@ -59,7 +58,6 @@ const VLargeGNB = (props: VLargeGNBProps) => {
             <Link to="/register">등록하기</Link>
           </li>
         </ol>
-        {/* 여기서 변경 */}
         <UserSelectBox />
       </div>
     </div>

@@ -1,5 +1,3 @@
-import GNB from 'layouts/GNB';
-import React from 'react';
 import Banner from 'commons/Banner';
 import InputGroup from 'commons/InputGroup';
 import { ClipLoader } from 'react-spinners';
@@ -23,7 +21,6 @@ const VEditProfilePage = ({
 
   return (
     <div className="h-full">
-      <GNB />
       {getLoading ? (
         <EditProfilePageSkeleton />
       ) : (

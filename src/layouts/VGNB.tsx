@@ -38,7 +38,6 @@ const VGNB = (props: VGNBProps) => {
             <div className="flex justify-center w-full gap-2">
               <UserToggleBox />
             </div>
-
             <ol className="flex flex-col justify-center w-full gap-4">
               <li className="border-b pb-4">
                 <button onClick={handleCategoryButtonClick}>카테고리</button>
