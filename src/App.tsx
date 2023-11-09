@@ -16,6 +16,8 @@ import HomePage from 'pages/home/HomePage';
 import ValidateCheckLayout from 'layouts/ValidateCheckLayout';
 import EditProfilePage from 'pages/editProfile/EditProfilePage';
 import GNB from 'layouts/GNB';
+import NotFound from 'pages/notFound/NotFound';
+import ErrorBoundary from 'commons/ErrorBoundary';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -70,6 +72,10 @@ const router = createBrowserRouter([
             path: '/shelter/:id/edit',
             element: <EditProfilePage />,
           },
+          {
+            path: '*',
+            element: <NotFound />,
+          },
         ],
       },
     ],
@@ -90,11 +96,13 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <RecoilRoot>
-        <RouterProvider router={router} />;
-      </RecoilRoot>
-    </QueryClientProvider>
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <RecoilRoot>
+          <RouterProvider router={router} />;
+        </RecoilRoot>
+      </QueryClientProvider>
+    </ErrorBoundary>
   );
 }
 
