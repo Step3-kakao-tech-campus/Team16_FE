@@ -3,26 +3,28 @@ import React from 'react';
 import Banner from 'commons/Banner';
 import InputGroup from 'commons/InputGroup';
 import { ClipLoader } from 'react-spinners';
+import { shelterSignupState } from 'recoil/shelterState';
+import { useRecoilValue } from 'recoil';
 import EditProfilePageSkeleton from './EditProfilePageSkeleton';
 import EditAddressInputGroup from './EditAddressInputGroup';
 
 interface VEditProfileProps {
-  isLoading: boolean;
-  isButtonLoading: boolean;
+  getLoading: boolean;
+  postloading: boolean;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  data: any;
 }
 
 const VEditProfilePage = ({
-  isLoading,
-  isButtonLoading,
+  getLoading,
+  postloading,
   handleSubmit,
-  data,
 }: VEditProfileProps) => {
+  const shelterInfo = useRecoilValue(shelterSignupState);
+
   return (
     <div className="h-full">
       <GNB />
-      {isLoading ? (
+      {getLoading ? (
         <EditProfilePageSkeleton />
       ) : (
         <div
@@ -46,23 +48,21 @@ const VEditProfilePage = ({
               name="보호소 이름"
               type="text"
               placeholder="보호소 이름을 입력해주세요."
-              onChange={() => {}}
               autocomplete="off"
-              defaultValue={data?.response.shelter.name}
+              defaultValue={shelterInfo.name}
             />
             <InputGroup
               id="shelter-contact"
               name="보호소 연락처"
               type="text"
               placeholder="보호소에 연락 가능한 연락처를 입력해주세요."
-              onChange={() => {}}
               autocomplete="off"
-              defaultValue={data?.response.shelter.contact}
+              defaultValue={shelterInfo.contact}
             />
             <EditAddressInputGroup />
             <button className="bg-brand-color text-white w-full rounded-md p-2">
-              {isButtonLoading ? (
-                <ClipLoader size={20} color="#fff" loading={isButtonLoading} />
+              {postloading ? (
+                <ClipLoader size={20} color="#fff" loading={postloading} />
               ) : (
                 '정보 수정하기'
               )}
