@@ -56,11 +56,7 @@ const HomeVideo = (props: HomeVideoProps) => {
                 // Show paused UI.
               });
           }
-        } else if (entry.isIntersecting && !playing) {
-          videoPlayerRef.current?.pause();
-        } else if (!entry.isIntersecting && playing) {
-          videoPlayerRef.current?.pause();
-        } else if (!entry.isIntersecting && !playing) {
+        } else {
           videoPlayerRef.current?.pause();
         }
       });
