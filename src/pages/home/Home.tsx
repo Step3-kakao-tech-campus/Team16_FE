@@ -8,7 +8,7 @@ import VideoMuteIcon from './VideoMuteIcon';
 const Home = () => {
   const [muted, setMuted] = useState(true);
   const [opacity, setOpacity] = useState(0);
-  const { data, fetchNextPage } = useInfiniteQuery(
+  const { data, isLoading, fetchNextPage } = useInfiniteQuery(
     ['home', 1],
     ({ pageParam = 1 }) => {
       const apiUrl = `${process.env.REACT_APP_URI}/short-forms/home?page=${pageParam}&size=5`;
@@ -33,10 +33,11 @@ const Home = () => {
     setMuted,
     setOpacity,
     fetchNextPage,
+    isLoading,
   };
 
   return (
-    <div className="overflow-hidden bg-slate-500 h-[90vh]">
+    <div className="overflow-hidden h-[90vh]">
       <VideoMuteIcon muted={muted} opacity={opacity} />
       <HomeVideoSlider {...homeVideoSliderProps} />
     </div>

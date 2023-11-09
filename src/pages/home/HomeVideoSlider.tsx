@@ -13,6 +13,7 @@ export interface HomeVideoSliderProps {
   setMuted: (muted: boolean) => void;
   setOpacity: (opacity: number) => void;
   fetchNextPage: () => void;
+  isLoading: boolean;
 }
 
 interface ShortFormPage {
@@ -36,8 +37,9 @@ interface ShortForm {
 }
 
 const HomeVideoSlider = (props: HomeVideoSliderProps) => {
-  const { data, muted, setMuted, setOpacity, fetchNextPage } = props;
+  const { data, muted, setMuted, setOpacity, fetchNextPage, isLoading } = props;
   const [hovering, setHovering] = useState(false);
+  const [playing, setPlaying] = useState(false);
   const nextPageRef = useRef(null);
   const navigate = useNavigate();
 
@@ -85,34 +87,39 @@ const HomeVideoSlider = (props: HomeVideoSliderProps) => {
         page.response.shortForms.map((shortForm: ShortForm, index: number) => {
           if (pagesIndex * 5 + index === 5 * data.pages.length - 1) {
             return (
-              <SwiperSlide key={shortForm.profileShortFormUrl + index}>
-                <div ref={nextPageRef}></div>
+              <>
+                <SwiperSlide key={shortForm.profileShortFormUrl + index}>
+                  <div ref={nextPageRef}></div>
 
-                <Swiper
-                  modules={[A11y]}
-                  grabCursor={true}
-                  autoHeight={true}
-                  direction={'horizontal'}
-                  onSlideNextTransitionEnd={() => {
-                    navigate(`/pet/${shortForm.petId}`);
-                  }}
-                >
-                  <SwiperSlide>
-                    <HomeVideo
-                      url={shortForm.profileShortFormUrl}
-                      muted={muted}
-                      handleDoubleClick={handleDoubleClick}
-                      hovering={hovering}
-                      setHovering={setHovering}
-                    />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <div className="w-full h-[90vh] flex items-center justify-center font-bold text-white bg-black">
-                      <div>동물 정보 가져오겠습니다~</div>
-                    </div>
-                  </SwiperSlide>
-                </Swiper>
-              </SwiperSlide>
+                  <Swiper
+                    modules={[A11y]}
+                    grabCursor={true}
+                    autoHeight={true}
+                    direction={'horizontal'}
+                    onSlideNextTransitionEnd={() => {
+                      navigate(`/pet/${shortForm.petId}`);
+                    }}
+                  >
+                    <SwiperSlide>
+                      <HomeVideo
+                        url={shortForm.profileShortFormUrl}
+                        muted={muted}
+                        handleDoubleClick={handleDoubleClick}
+                        hovering={hovering}
+                        setHovering={setHovering}
+                        playing={playing}
+                        setPlaying={setPlaying}
+                        index={pagesIndex * 5 + index}
+                      />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <div className="w-full h-[90vh] flex items-center justify-center font-bold text-white bg-black">
+                        <div>동물 정보 가져오겠습니다~</div>
+                      </div>
+                    </SwiperSlide>
+                  </Swiper>
+                </SwiperSlide>
+              </>
             );
           }
           return (
@@ -133,6 +140,9 @@ const HomeVideoSlider = (props: HomeVideoSliderProps) => {
                     handleDoubleClick={handleDoubleClick}
                     hovering={hovering}
                     setHovering={setHovering}
+                    playing={playing}
+                    setPlaying={setPlaying}
+                    index={pagesIndex * 5 + index}
                   />
                 </SwiperSlide>
                 <SwiperSlide>
