@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from 'react';
-import ReactPlayer from 'react-player';
 import VideoDragBar from './VideoDragBar';
 
 export interface HomeVideoProps {
@@ -8,27 +7,57 @@ export interface HomeVideoProps {
   handleDoubleClick: () => void;
   hovering: boolean;
   setHovering: (hover: boolean) => void;
+  playing: boolean;
+  setPlaying: (playing: boolean) => void;
+  index: number;
 }
 
 const HomeVideo = (props: HomeVideoProps) => {
-  const { url, muted, handleDoubleClick, hovering, setHovering } = props;
-  const [playing, setPlaying] = useState(false);
+  const {
+    url,
+    muted,
+    handleDoubleClick,
+    hovering,
+    setHovering,
+    playing,
+    setPlaying,
+    index,
+  } = props;
   const [opacity, setOpacity] = useState(1);
   const videoRef = useRef(null);
+  const videoPlayerRef = useRef<HTMLVideoElement>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (videoPlayerRef.current) {
+      // 음소거 상태로 만들기
+      videoPlayerRef.current.defaultMuted = true;
+      videoPlayerRef.current.playsInline = true;
+    }
     const options = {
       root: null,
       rootMargin: '0px',
-      threshold: 0.5,
+      threshold: 0.6,
     };
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setPlaying(true);
+        if (entry.isIntersecting && playing) {
+          const playPromise = videoPlayerRef.current?.play();
+          if (playPromise !== undefined) {
+            playPromise
+              .then(() => {
+                // Automatic playback started!
+                // Show playing UI.
+                setLoading(false);
+              })
+              .catch((error) => {
+                // Auto-play was prevented
+                // Show paused UI.
+              });
+          }
         } else {
-          setPlaying(false);
+          videoPlayerRef.current?.pause();
         }
       });
     }, options);
@@ -42,14 +71,31 @@ const HomeVideo = (props: HomeVideoProps) => {
         observer.unobserve(videoRef.current);
       }
     };
-  }, []);
+  }, [playing]);
 
+  const handleVideoClick = () => {
+    setPlaying(!playing);
+    if (videoPlayerRef.current && videoPlayerRef.current.paused) {
+      videoPlayerRef.current.play();
+    } else if (videoPlayerRef.current && !videoPlayerRef.current.paused) {
+      videoPlayerRef.current.pause();
+    }
+  };
   return (
     <>
       {hovering && <VideoDragBar opacity={opacity} />}
+      {((loading && index === 0) || (loading && index !== 0 && !playing)) && (
+        <div className="absolute w-1/2 h-1/2 backdrop-blur-2xl backdrop-brightness-50">
+          <div className="text-white">한 번 탭하면 일시정지</div>
+          <div className="text-white">두 번 탭하면 음소거가 가능해요</div>
+        </div>
+      )}
+      {loading && index !== 0 && playing && (
+        <div className="absolute w-10 h-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 loader" />
+      )}
       <div
         ref={videoRef}
-        onClick={() => setPlaying((prev) => !prev)}
+        onClick={handleVideoClick}
         onDoubleClick={handleDoubleClick}
         className="h-[70vh] items-center justify-center"
         onMouseEnter={() => {
@@ -63,14 +109,15 @@ const HomeVideo = (props: HomeVideoProps) => {
           }, 1300);
         }}
       >
-        <ReactPlayer
-          url={url}
-          loop={true}
-          width="100%"
-          height="100%"
-          playing={playing}
-          muted={muted}
-        />
+        <video
+          ref={videoPlayerRef}
+          muted={!muted}
+          autoPlay={playing}
+          loop
+          playsInline
+        >
+          <source src={url} type="video/mp4" />
+        </video>
       </div>
     </>
   );
