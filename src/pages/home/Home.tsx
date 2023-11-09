@@ -16,13 +16,13 @@ const Home = () => {
   const { data, fetchNextPage } = useInfiniteQuery(
     ['home', 1, region, species],
     ({ pageParam = 1 }) => {
-      const SPECIIES_TYPES = {
+      const SPECIES_TYPES = {
         강아지: 'DOG',
         고양이: 'CAT',
         기타: 'ETC',
         전체: '',
       };
-      const type = SPECIIES_TYPES[species] ?? '';
+      const type = SPECIES_TYPES[species] ?? '';
 
       let area = '';
       if (region === '전국') {
