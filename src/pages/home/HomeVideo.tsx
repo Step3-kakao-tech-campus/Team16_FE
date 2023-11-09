@@ -51,7 +51,7 @@ const HomeVideo = (props: HomeVideoProps) => {
                 // Show playing UI.
                 setLoading(false);
               })
-              .catch((error) => {
+              .catch(() => {
                 // Auto-play was prevented
                 // Show paused UI.
               });
