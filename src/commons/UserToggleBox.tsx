@@ -16,14 +16,13 @@ const UserToggleBox = () => {
   const handleOptionClick = (option: string) => {
     switch (option) {
       case 'My 정보 변경':
-        navigate(`/shelter/${id}/edit`); // 아직 회원정보 수정 페이지 구현 안됨
+        navigate(`/shelter/${id}/edit`);
         break;
       case 'My 보호소 이동':
         navigate(`/shelter/${id}/1`);
         break;
       case '로그아웃':
         removeToken();
-        setCookie('userAccountInfo', 'Not Login');
         window.location.reload();
         break;
       default:

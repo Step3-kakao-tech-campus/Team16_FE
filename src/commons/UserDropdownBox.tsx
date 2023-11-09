@@ -25,7 +25,6 @@ const UserDropdownBox = () => {
         break;
       case '로그아웃':
         removeToken();
-        setCookie('accountInfo', 'Not Login');
         window.location.reload();
         break;
       default:
