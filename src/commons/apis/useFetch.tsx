@@ -1,4 +1,4 @@
-const useFetch = async (url: any) => {
+const useFetch = async (url: string) => {
   const response = await fetch(`${process.env.REACT_APP_URI}/${url}`, {
     method: 'GET',
     headers: {
