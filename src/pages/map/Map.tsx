@@ -7,8 +7,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable no-new */
-import React, { useEffect, useRef } from 'react';
-import MapList, { SearchedPlace } from './MapList';
+import { useState, useEffect, useRef } from 'react';
+import MapList from './MapList';
+import MapSkeleton from './MapSkeleton';
 import useMap from './useMap';
 
 declare global {
@@ -16,10 +17,12 @@ declare global {
     kakao: any;
   }
 }
-const Map: React.FC = () => {
+
+const Map = () => {
   const mapRef = useRef<HTMLDivElement>(null);
+  const [loading, setLoading] = useState(true);
   const { map, displayMarkerByInfo, searchedPlace, mutate, mutateData } =
-    useMap(mapRef);
+    useMap(mapRef, setLoading);
   useEffect(() => {
     mutate(searchedPlace);
   }, [searchedPlace]);
@@ -40,8 +43,9 @@ const Map: React.FC = () => {
 
   return (
     <div className="Map flex flex-col md:flex-row items-center justify-center gap-8">
-      <div ref={mapRef} className="w-96 h-96" />
-      <MapList searchedPlace={searchedPlace} map={map} />
+      <div ref={mapRef} className={`w-96 h-96 ${loading ? 'hidden' : ''}`} />
+      {loading && <MapSkeleton listSize={4} />}
+      <MapList searchedPlace={searchedPlace} map={map} loading={loading} />
     </div>
   );
 };

@@ -2,16 +2,18 @@
 import { useEffect, useState, RefObject, useRef } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import displayMarker from './displayMarker';
+import { SearchedPlace } from './MapList';
 
 function useMap<T>(
   containerRef: RefObject<T extends HTMLElement ? T : HTMLElement>,
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>,
 ) {
   const { kakao } = window;
   const [map, setMap] = useState<any>();
   const [searchedPlace, setSearchedPlace] = useState<any>([]);
   const boundRef = useRef<any>();
 
-  const displayMarkerByInfo = async (addressInfo: any) => {
+  const displayMarkerByInfo = async (addressInfo: SearchedPlace) => {
     if (!map) return;
     map.setBounds(boundRef.current);
     await displayMarker(map, addressInfo);
@@ -36,33 +38,44 @@ function useMap<T>(
   );
 
   useEffect(() => {
-    (() => {
-      if (!containerRef.current) return;
-      setMap(
-        new window.kakao.maps.Map(containerRef.current, {
-          center: new window.kakao.maps.LatLng(35.1759293, 126.9149701),
-          level: 3,
-        }),
-      );
-      function placesSearchCB(data: any[], status: any) {
-        if (status === kakao.maps.services.Status.OK) {
-          const bounds = new kakao.maps.LatLngBounds();
+    const mapScript = document.createElement('script');
+    mapScript.async = true;
+    mapScript.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.REACT_APP_KAKAO_KEY}&libraries=services&autoload=false`;
+    document.head.appendChild(mapScript);
 
-          for (let i = 0; i < data.length; i += 1) {
-            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+    const onLoadKakaoMap = () => {
+      if (!containerRef.current || !kakao) return;
+      window.kakao.maps.load(() => {
+        setMap(
+          new window.kakao.maps.Map(containerRef.current, {
+            center: new window.kakao.maps.LatLng(35.1759293, 126.9149701),
+            level: 3,
+          }),
+        );
+
+        function placesSearchCB(data: any[], status: any) {
+          if (status === kakao.maps.services.Status.OK) {
+            const bounds = new kakao.maps.LatLngBounds();
+
+            for (let i = 0; i < data.length; i += 1) {
+              bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+            }
+            boundRef.current = bounds;
           }
-          boundRef.current = bounds;
+          setSearchedPlace(data);
         }
-        setSearchedPlace(data);
-      }
-      const ps = new kakao.maps.services.Places(); // 키워드로 장소를 검색합니다
-      ps.keywordSearch('보호소', placesSearchCB, {
-        location: new kakao.maps.LatLng(35.1759293, 126.9149701),
-        radius: 20000,
-        sort: kakao.maps.services.SortBy.DISTANCE,
+        const ps = new kakao.maps.services.Places(); // 키워드로 장소를 검색합니다
+        ps.keywordSearch('보호소', placesSearchCB, {
+          location: new kakao.maps.LatLng(35.1759293, 126.9149701),
+          radius: 20000,
+          sort: kakao.maps.services.SortBy.DISTANCE,
+        });
       });
-    })();
-  }, [containerRef]);
+      setLoading(false);
+    };
+    mapScript.addEventListener('load', onLoadKakaoMap);
+    onLoadKakaoMap();
+  }, [containerRef, kakao]);
 
   return { map, displayMarkerByInfo, searchedPlace, mutate, mutateData };
 }

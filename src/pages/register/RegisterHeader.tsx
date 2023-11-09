@@ -11,9 +11,16 @@ import registerState from 'recoil/registerState';
 import ImageVideoInput from './ImageVideoInput';
 
 const RegisterHeader = () => {
-  const [selectedImageFile, setSelectedImageFile] = useState(null);
-  const [selectedVideoFile, setSelectedVideoFile] = useState(null);
+  const [selectedImageFile, setSelectedImageFile] = useState<Blob>();
+  const [selectedVideoFile, setSelectedVideoFile] = useState<Blob>();
+  // text, textArray의 경우, 하나로 리펙토링 할 수 있을 듯
   const [errorText, setErrorText] = useState<string>('');
+  const [buttonTextArray, setButtonTextArray] = useState<Array<string>>(['']);
+  const [confirmText, setConfirmText] = useState<string>('등록하시겠습니까?');
+  const [confirmTextArray, setConfirmTextArray] = useState<Array<string>>([
+    '아니오',
+    '예',
+  ]);
   const registerPetData = useRecoilValue(registerState);
   const imageRef = useRef<HTMLInputElement>(null);
   const videoRef = useRef<HTMLInputElement>(null);
@@ -23,6 +30,8 @@ const RegisterHeader = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleModalCloseClick = () => {
     setIsModalOpen(false);
+    setConfirmTextArray(['아니오', '예']);
+    setConfirmText('등록하시겠습니까?');
   };
   const handleModalOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
@@ -31,11 +40,8 @@ const RegisterHeader = () => {
   };
 
   // 등록하기 관련
-  // eslint-disable-next-line consistent-return
   const postPet = async (formData: FormData) => {
     const loginToken = getCookie('loginToken');
-    console.log('token', loginToken);
-
     const response = await fetch(`${process.env.REACT_APP_URI}/pet`, {
       method: 'POST',
       body: formData,
@@ -44,33 +50,46 @@ const RegisterHeader = () => {
       },
     });
     if (!response.ok) {
-      console.log(response.status);
       // 로그인 화면으로 이동하기 위해 텍스트 바꿔주는 것 필요
       switch (response.status) {
         case 400:
           setErrorText('이미지, 비디오 형식이 잘못되었습니다.'); // 취소
+          setButtonTextArray(['취소']);
           break;
         case 401:
         case 403:
           setErrorText('로그인 정보가 만료되었습니다.'); // 로그인 페이지로 이동 / 취소
+          setButtonTextArray(['로그인하기', '취소']);
           break;
         case 404:
           setErrorText('보호소를 찾을 수 없습니다.'); // 로그인 페이지로 이동 / 취소
+          setButtonTextArray(['로그인하기', '취소']);
           break;
         case 500:
           setErrorText('서버에 문제가 발생했습니다.'); // 다시하기 / 취소
+          setButtonTextArray(['다시하기', '취소']);
           break;
         default:
           setErrorText('등록 정보의 형식이 잘못되었습니다.'); // 취소
+          setButtonTextArray(['취소']);
           break;
       }
     }
+
     return response.json();
   };
-  const { data, mutate, isError, isLoading, isSuccess } = useMutation(postPet);
+  const { data, isError, isLoading, isSuccess } = useMutation(postPet);
   const handleRegisterButtonClick = async () => {
-    if (!selectedImageFile || !selectedVideoFile || !registerPetData.isComplete)
+    if (
+      !selectedImageFile ||
+      !selectedVideoFile ||
+      !registerPetData.isComplete
+    ) {
+      setConfirmText('필수항목을 입력해주세요.');
+      setConfirmTextArray(['돌아가기']);
       return;
+    }
+
     const formData = new FormData();
     formData.append('profileVideo', selectedVideoFile);
     formData.append('profileImage', selectedImageFile);
@@ -81,12 +100,6 @@ const RegisterHeader = () => {
         type: 'application/json',
       }),
     );
-    try {
-      const res = mutate(formData);
-      console.log(res);
-    } catch (err: unknown) {
-      console.log(err);
-    }
   };
   const handleCustomButtonClick = (
     fileRef: React.RefObject<HTMLInputElement> | null,
@@ -94,13 +107,14 @@ const RegisterHeader = () => {
     fileRef?.current?.click();
   };
 
-  const handleInputChange = (e: any) => {
-    if (!e.target.files[0]) return;
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const targetFile = e.target.files as FileList;
+    if (!targetFile[0]) return;
 
-    if (e.target.files[0].type.includes('image')) {
-      setSelectedImageFile(e.target.files[0]);
-    } else if (e.target.files[0].type.includes('video')) {
-      setSelectedVideoFile(e.target.files[0]);
+    if (targetFile[0].type.includes('image')) {
+      setSelectedImageFile(targetFile[0]);
+    } else if (targetFile[0].type.includes('video')) {
+      setSelectedVideoFile(targetFile[0]);
     }
   };
 
@@ -119,8 +133,9 @@ const RegisterHeader = () => {
     isError,
     data,
     errorText,
-    modalString: '등록',
-    // 등록 글자 필요
+    buttonTextArray,
+    confirmText,
+    confirmTextArray,
   };
   return (
     <>
