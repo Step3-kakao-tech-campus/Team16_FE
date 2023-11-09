@@ -18,7 +18,6 @@ const EditAddressInputGroup = () => {
 
   const AddressInputGroupProps = {
     handleChange,
-    shelterInfo,
   };
   return <VAddressInputGroup {...AddressInputGroupProps} />;
 };
