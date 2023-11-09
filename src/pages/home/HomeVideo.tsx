@@ -51,7 +51,7 @@ const HomeVideo = (props: HomeVideoProps) => {
         ref={videoRef}
         onClick={() => setPlaying((prev) => !prev)}
         onDoubleClick={handleDoubleClick}
-        className="h-screen w-screen items-center justify-center"
+        className="h-[70vh] items-center justify-center"
         onMouseEnter={() => {
           setHovering(true);
           setOpacity(1);

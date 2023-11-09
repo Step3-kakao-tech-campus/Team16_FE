@@ -9,7 +9,7 @@ const UserDropdownBox = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // 드롭다운 메뉴 열림/닫힘 상태
   const navigate = useNavigate();
   const shelterId = getCookie('accountInfo');
-  const id = shelterId ? shelterId.id : '';
+  const id = shelterId ? shelterId.split(' ')[1] : '';
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -25,7 +25,7 @@ const UserDropdownBox = () => {
         break;
       case '로그아웃':
         removeToken();
-        setCookie('userAccountInfo', 'Not Login');
+        setCookie('accountInfo', 'Not Login');
         window.location.reload();
         break;
       default:

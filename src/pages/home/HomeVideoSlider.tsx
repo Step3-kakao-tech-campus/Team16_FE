@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import HomeVideo from './HomeVideo';
+import VideoInfo from './VideoInfo';
 
 export interface HomeVideoSliderProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -98,26 +99,40 @@ const HomeVideoSlider = (props: HomeVideoSliderProps) => {
                   }}
                 >
                   <SwiperSlide>
-                    <HomeVideo
-                      url={shortForm.profileShortFormUrl}
-                      muted={muted}
-                      handleDoubleClick={handleDoubleClick}
-                      hovering={hovering}
-                      setHovering={setHovering}
-                    />
+                    <div className="h-[70vh]">
+                      <HomeVideo
+                        url={shortForm.profileShortFormUrl}
+                        muted={muted}
+                        handleDoubleClick={handleDoubleClick}
+                        hovering={hovering}
+                        setHovering={setHovering}
+                      />
+                    </div>
                   </SwiperSlide>
                   <SwiperSlide>
-                    <div className="w-full h-[90vh] flex items-center justify-center font-bold text-white bg-black">
-                      <div>동물 정보 가져오겠습니다~</div>
+                    <div className="w-full h-[90vh] text-xl flex items-center justify-center font-bold text-white bg-black">
+                      <div>동물 정보를 가져오는 중입니다🐶</div>
                     </div>
                   </SwiperSlide>
                 </Swiper>
+                <div className="w-full flex justify-center">
+                  <VideoInfo
+                    name={shortForm.name}
+                    adoptionStatus={shortForm.adoptionStatus}
+                    shelterName={shortForm.shelterName}
+                    age={shortForm.age}
+                  />
+                </div>
               </SwiperSlide>
             );
           }
           return (
-            <SwiperSlide key={shortForm.profileShortFormUrl + index}>
+            <SwiperSlide
+              key={shortForm.profileShortFormUrl + index}
+              className="flex justify-center items-centerr"
+            >
               <Swiper
+                className="bg-black"
                 modules={[A11y]}
                 grabCursor={true}
                 autoHeight={true}
@@ -127,20 +142,30 @@ const HomeVideoSlider = (props: HomeVideoSliderProps) => {
                 }}
               >
                 <SwiperSlide>
-                  <HomeVideo
-                    url={shortForm.profileShortFormUrl}
-                    muted={muted}
-                    handleDoubleClick={handleDoubleClick}
-                    hovering={hovering}
-                    setHovering={setHovering}
-                  />
+                  <div className="flex flex-col h-[70vh] items-center justify-center">
+                    <HomeVideo
+                      url={shortForm.profileShortFormUrl}
+                      muted={muted}
+                      handleDoubleClick={handleDoubleClick}
+                      hovering={hovering}
+                      setHovering={setHovering}
+                    />
+                  </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                  <div className="w-full h-[90vh] flex items-center justify-center font-bold text-white bg-black">
-                    <div>동물 정보 가져오겠습니다~</div>
+                  <div className="w-full h-[90vh] text-xl flex items-center justify-center font-bold text-white bg-black">
+                    <div>동물 정보를 가져오는 중입니다🐶</div>
                   </div>
                 </SwiperSlide>
               </Swiper>
+              <div className="w-full flex justify-center">
+                <VideoInfo
+                  name={shortForm.name}
+                  adoptionStatus={shortForm.adoptionStatus}
+                  shelterName={shortForm.shelterName}
+                  age={shortForm.age}
+                />
+              </div>
             </SwiperSlide>
           );
         }),

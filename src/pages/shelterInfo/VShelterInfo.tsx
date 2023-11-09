@@ -39,6 +39,8 @@ export interface Props {
 
 const VShelterInfo = (props: Props) => {
   const loginAccount = getCookie('accountInfo');
+  const role = loginAccount ? loginAccount.split(' ')[0] : '';
+  const id = loginAccount ? loginAccount.split(' ')[1] : '';
 
   return (
     <div>
@@ -46,12 +48,12 @@ const VShelterInfo = (props: Props) => {
         <VShelterCard {...props.shelterInfoProps} />
       </div>
       <div className="mx-16 sm:mx-40 lg:mx-64 my-14">
-        <h2 className="flex w-full font-bold text-xl sm:text-2xl items-center whitespace-nowrap">
+        <h2 className="flex w-full font-bold text-xl sm:text-2xl items-center mb-5 whitespace-nowrap">
           관리중인 동물
         </h2>
-        <div className="grid grid-cols-1 gap-1 md:grid-cols-2 my-10 w-full whitespace-nowrap">
+        <div className="grid grid-cols-1 gap-1 md:grid-cols-2 my-1 w-full whitespace-nowrap">
           {props.profileProps.map((item, index) => (
-            <div className="flex" key={index}>
+            <div className="flex flex-row" key={index}>
               <ProfileCard
                 key={index}
                 petId={item.id}
@@ -63,9 +65,9 @@ const VShelterInfo = (props: Props) => {
               <button
                 className={`${
                   loginAccount &&
-                  loginAccount.role === 'SHELTER' &&
-                  loginAccount.id === props.shelterInfoProps.id
-                    ? ' bg-slate-200 text-sm h-fit w-fit p-1  rounded-xl '
+                  role === 'SHELTER' &&
+                  id === `${props.shelterInfoProps.id}`
+                    ? ' absolute ml-60 bg-slate-200 text-sm h-fit w-fit p-1  rounded-xl '
                     : ' text-transparent '
                 }`}
                 onClick={() => {
@@ -80,7 +82,7 @@ const VShelterInfo = (props: Props) => {
           ))}
         </div>
       </div>
-      <div className="flex justify-center mb-11 sm:mb-28">
+      <div className="flex justify-center mt-5 mb-11 sm:mb-28">
         <Pagination
           currentPage={props.pageNationProps.currentPage}
           lastPage={props.pageNationProps.lastPage}
