@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+import ErrorBoundary from 'commons/ErrorBoundary';
 import GNB from 'layouts/GNB';
 import Home from './Home';
 
@@ -5,8 +7,11 @@ const HomePage = () => {
   return (
     <div>
       <GNB />
-      {/* gnb가 감싸게 하기 */}
-      <Home />
+      <ErrorBoundary>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Home />
+        </Suspense>
+      </ErrorBoundary>
     </div>
   );
 };

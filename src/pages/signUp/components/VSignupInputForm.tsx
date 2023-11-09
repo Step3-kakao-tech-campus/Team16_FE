@@ -1,7 +1,7 @@
 import AddressInputGroup from 'pages/signUp/components/AddressInputGroup';
 import InputGroup from 'commons/InputGroup';
 import { ClipLoader } from 'react-spinners';
-import { VSignupInputProps, ValidationProps } from '../signupType';
+import { VSignupInputProps, ValidationProps } from '../signupType';
 
 const ValidateText = ({ text, className }: ValidationProps) => {
   return text ? <div className={className}>{text}</div> : null;
