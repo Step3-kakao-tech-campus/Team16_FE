@@ -47,7 +47,7 @@ class ErrorBoundary extends Component<Props, State> {
             <h2 className="text-2xl font-bold">{this.state.error.message}</h2>
             <Link
               to="/"
-              className="border flex items-center justify-center box-border border-brand-color border-2 bg-brand-color text-white rounded-md w-20 py-1 hover:bg-white hover:text-brand-color transition duration-300 ease-in-out"
+              className="flex items-center justify-center box-border border-brand-color border-2 bg-brand-color text-white rounded-md w-20 py-1 hover:bg-white hover:text-brand-color transition duration-300 ease-in-out"
             >
               홈으로
             </Link>
@@ -64,7 +64,7 @@ class ErrorBoundary extends Component<Props, State> {
           </h2>
           <Link
             to="/"
-            className="border flex items-center justify-center box-border border-brand-color border-2 bg-brand-color text-white rounded-md w-20 py-1 hover:bg-white hover:text-brand-color transition duration-300 ease-in-out"
+            className="flex items-center justify-center box-border border-brand-color border-2 bg-brand-color text-white rounded-md w-20 py-1 hover:bg-white hover:text-brand-color transition duration-300 ease-in-out"
           >
             홈으로
           </Link>
