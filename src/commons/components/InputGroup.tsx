@@ -1,6 +1,6 @@
 import React from 'react';
 import Container from 'commons/components/Container';
-import Input from 'commons/Input';
+import Input from 'commons/components/Input';
 
 export interface InputGroupProps
   extends React.HTMLAttributes<HTMLInputElement> {

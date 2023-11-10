@@ -1,5 +1,5 @@
 import Container from 'commons/components/Container';
-import Postcode from 'commons/PostCode';
+import Postcode from 'commons/components/PostCode';
 import { useRecoilValue } from 'recoil';
 import { shelterSignupState } from 'recoil/shelterState';
 import { AddressInputProps } from '../signupType';

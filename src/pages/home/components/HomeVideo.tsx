@@ -1,16 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
-import VideoOverlay, { VideoOverlayProps } from './VideoOverlay';
-
-export interface HomeVideoProps {
-  url: string;
-  muted: boolean;
-  handleDoubleClick: () => void;
-  hovering: boolean;
-  setHovering: (hover: boolean) => void;
-  playing: boolean;
-  setPlaying: (playing: boolean) => void;
-  index: number;
-}
+import VideoOverlay from './VideoOverlay';
+import { HomeVideoProps, VideoOverlayProps } from '../homeType';
 
 const HomeVideo = (props: HomeVideoProps) => {
   const {

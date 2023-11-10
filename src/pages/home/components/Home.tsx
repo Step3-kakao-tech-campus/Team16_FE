@@ -5,8 +5,9 @@ import 'swiper/css/pagination';
 import { useRecoilState } from 'recoil';
 import speciesState, { SpeciesType } from 'recoil/speciesState';
 import regionState, { RegionType } from 'recoil/regionState';
-import HomeVideoSlider, { HomeVideoSliderProps } from './HomeVideoSlider';
+import HomeVideoSlider from './HomeVideoSlider';
 import VideoMuteIcon from './VideoMuteIcon';
+import { HomeVideoSliderProps } from '../homeType';
 
 const Home = () => {
   const [muted, setMuted] = useState(true);

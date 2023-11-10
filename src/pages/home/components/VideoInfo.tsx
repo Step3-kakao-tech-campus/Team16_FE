@@ -1,9 +1,4 @@
-interface ShortForm {
-  adoptionStatus: string;
-  age: string;
-  name: string;
-  shelterName: string;
-}
+import { ShortForm } from '../homeType';
 
 const VideoInfo = (props: ShortForm) => {
   return (

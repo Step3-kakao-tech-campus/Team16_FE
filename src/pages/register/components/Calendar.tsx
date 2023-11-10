@@ -5,7 +5,7 @@ import {
   CurrentMonthDays,
   NextMonthDays,
   PrevMonthDays,
-} from '../../../commons/MonthDays';
+} from '../../../commons/components/MonthDays';
 import { CalendarProps } from '../registerType';
 
 const Calendar = ({ handleClick }: CalendarProps) => {

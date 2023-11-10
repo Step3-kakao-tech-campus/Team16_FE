@@ -1,7 +1,4 @@
-export interface VideoMuteIconProps {
-  muted: boolean;
-  opacity: number;
-}
+import { VideoMuteIconProps } from '../homeType';
 
 const VideoMuteIcon = (props: VideoMuteIconProps) => {
   const { muted, opacity } = props;

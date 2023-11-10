@@ -1,12 +1,5 @@
 import VideoDragBar from './VideoDragBar';
-
-export interface VideoOverlayProps {
-  opacity: number;
-  hovering: boolean;
-  loading: boolean;
-  playing: boolean;
-  index: number;
-}
+import { VideoOverlayProps } from '../homeType';
 
 const VideoOverlay = (props: VideoOverlayProps) => {
   const { opacity, hovering, loading, playing, index } = props;
