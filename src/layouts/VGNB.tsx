@@ -28,7 +28,15 @@ const VGNB = (props: VGNBProps) => {
         <div className="flex w-11/12 justify-between items-center">
           <LogoButton />
           <button className="text-3xl" onClick={handleToggleClick}>
-            <img className="w-8" src="/assets/images/menu.png" alt="메뉴" />
+            <img
+              className="w-8"
+              src="/assets/images/menu.png"
+              alt="메뉴"
+              style={{
+                width: '35px',
+                height: '28px',
+              }}
+            />
           </button>
         </div>
       </div>

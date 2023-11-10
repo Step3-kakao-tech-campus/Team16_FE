@@ -13,6 +13,10 @@ const LogoButton = ({ imageClassName, logoClassName }: LogoButtonProps) => {
           className={`w-8 ${imageClassName}`}
           src="/assets/images/paw.png"
           alt="애니모리 로고"
+          style={{
+            width: '32px',
+            height: '32px',
+          }}
         />
         <h1 className={`text-brand-color font-bold text-2xl ${logoClassName}`}>
           애니모리
