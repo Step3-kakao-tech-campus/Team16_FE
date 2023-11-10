@@ -7,8 +7,9 @@ import speciesState, { SpeciesType } from 'recoil/speciesState';
 import regionState, { RegionType } from 'recoil/regionState';
 import HomeVideoSlider from './HomeVideoSlider';
 import VideoMuteIcon from './VideoMuteIcon';
-import { HomeVideoSliderProps } from '../homeType';
+import { HomeVideoSliderProps, CategoryBarProps } from '../homeType';
 import HomeNoData from './HomeNoData';
+import CategoryBar from './CategoryBar';
 
 const Home = () => {
   const [muted, setMuted] = useState(false);
@@ -70,35 +71,19 @@ const Home = () => {
     setOpacity,
     fetchNextPage,
   };
+  const categoryBarProps: CategoryBarProps = {
+    species,
+    region,
+    handleRemoveFilter,
+  };
 
   const noData = data?.pages[0].response?.shortForms.length === 0;
+  const categoryAvailable = region !== '전국' || species !== '전체';
 
-  return region !== '전국' || species !== '전체' ? (
-    <div className="overflow-hidden bg-white h-[95vh]">
-      <div className="flex justify-center gap-7 my-3 items-center">
-        <span className=" text-orange-400 text-xl font-semibold">카테고리</span>
-        <button
-          className="flex bg-orange-400 rounded-full px-5 py-2 text-white"
-          onClick={() => handleRemoveFilter(species)}
-        >
-          {species} x
-        </button>
-        <button
-          className="flex bg-orange-400 rounded-full px-5 py-2 text-white"
-          onClick={() => handleRemoveFilter(region)}
-        >
-          {region} x
-        </button>
-        <span className="text-lg font-semibold"> 친구들 </span>
-      </div>
-
-      {noData && <HomeNoData species={species} />}
-      <VideoMuteIcon muted={muted} opacity={opacity} />
-      <HomeVideoSlider {...homeVideoSliderProps} />
-    </div>
-  ) : (
+  return (
     <div className="overflow-hidden bg-white h-[85vh]">
-      <HomeNoData species={species} />
+      {categoryAvailable && <CategoryBar {...categoryBarProps} />}
+      {noData && <HomeNoData species={species} />}
       <VideoMuteIcon muted={muted} opacity={opacity} />
       <HomeVideoSlider {...homeVideoSliderProps} />
     </div>
