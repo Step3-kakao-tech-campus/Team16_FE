@@ -3,7 +3,7 @@ import InputGroup from 'commons/components/InputGroup';
 import { ClipLoader } from 'react-spinners';
 import { VSignupInputProps } from '../signupType';
 import ValidateText from './ValidateText';
-import SignupGuideModal from '../../../commons/modals/TextGuideModal';
+import TextGuideModal from '../../../commons/modals/TextGuideModal';
 
 const VSignupInputForm = ({
   handleChange,
@@ -109,7 +109,7 @@ const VSignupInputForm = ({
         </button>
       </form>
 
-      <SignupGuideModal
+      <TextGuideModal
         open={modalOpen}
         text={modalText}
         onClose={handleModalClose}

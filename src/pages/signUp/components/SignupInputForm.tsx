@@ -179,11 +179,8 @@ const SignupInputForm = () => {
               setModalOpen(true);
             }
             if (res.status === 500) {
-              <SignupGuideModal
-                open={modalOpen}
-                text={'서버에 오류가 발생했습니다.'}
-                onClose={handleModalClose}
-              />;
+              setModalText('서버에 오류가 발생했습니다.');
+              setModalOpen(true);
             }
           }
           return res.json();
