@@ -42,9 +42,3 @@ export interface VSignupInputProps {
 export interface SignupPageProps {
   redirectLoginPage: () => void;
 }
-
-export interface SignupGuideModalProps {
-  open: boolean;
-  text: string;
-  onClose: () => void;
-}

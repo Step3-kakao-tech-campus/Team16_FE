@@ -1,6 +1,10 @@
-import { SignupGuideModalProps } from '../signupType';
+interface TextGuideModalProps {
+  open: boolean;
+  text: string;
+  onClose: () => void;
+}
 
-const SignupGuideModal = ({ text, open, onClose }: SignupGuideModalProps) => {
+const TextGuideModal = ({ text, open, onClose }: TextGuideModalProps) => {
   if (!open) {
     return null;
   }
@@ -20,4 +24,4 @@ const SignupGuideModal = ({ text, open, onClose }: SignupGuideModalProps) => {
   );
 };
 
-export default SignupGuideModal;
+export default TextGuideModal;

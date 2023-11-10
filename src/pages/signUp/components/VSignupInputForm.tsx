@@ -3,7 +3,7 @@ import InputGroup from 'commons/components/InputGroup';
 import { ClipLoader } from 'react-spinners';
 import { VSignupInputProps } from '../signupType';
 import ValidateText from './ValidateText';
-import SignupGuideModal from './SignupGuideModal';
+import SignupGuideModal from '../../../commons/modals/TextGuideModal';
 
 const VSignupInputForm = ({
   handleChange,
