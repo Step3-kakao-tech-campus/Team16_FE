@@ -47,13 +47,14 @@ const VGNB = (props: VGNBProps) => {
               <UserToggleBox />
             </div>
             <ol className="flex flex-col justify-center w-full gap-4">
-              <li className="border-b pb-4">
+              <li className="border-b pb-4" onClick={handleToggleClick}>
                 <button onClick={handleCategoryButtonClick}>카테고리</button>
               </li>
               <li
                 className={`${
                   isProfilePage ? 'text-brand-color' : ''
                 } border-b pb-4`}
+                onClick={handleToggleClick}
               >
                 <Link to="/profile">프로필 목록</Link>
               </li>
@@ -61,6 +62,7 @@ const VGNB = (props: VGNBProps) => {
                 className={`${
                   isFindShelterPage ? 'text-brand-color' : ''
                 } border-b pb-4`}
+                onClick={handleToggleClick}
               >
                 <Link to="/find-shelter">내 주변 보호소 찾기</Link>
               </li>
@@ -68,6 +70,7 @@ const VGNB = (props: VGNBProps) => {
                 className={`${
                   isRegisterPage ? 'text-brand-color' : ''
                 } border-b pb-4`}
+                onClick={handleToggleClick}
               >
                 <Link to="/register">등록하기</Link>
               </li>
