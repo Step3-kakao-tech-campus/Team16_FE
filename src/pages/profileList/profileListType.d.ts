@@ -10,25 +10,11 @@ export interface VProfileInfoProps {
   petName: string;
   petAge: number | null;
   shelterName: string;
-  adoptionStatus: string;
+  adoptionStatus?: string;
+  protectionExpirationDate?: string;
 }
 
-export interface SosListProps {
-  map(
-    arg0: (
-      sosItem: any,
-      index: number,
-    ) => import('react/jsx-runtime').JSX.Element,
-  ): import('react').ReactNode;
-  profileImageUrl: string;
-  petId: number;
-  petName: string;
-  petAge: number;
-  shelterName: string;
-  protectionExpirationDate: string;
-}
-
-export interface NewListProps {
+export interface ListProps {
   map(
     arg0: (
       newItem: any,
@@ -40,12 +26,17 @@ export interface NewListProps {
   petName: string;
   petAge: number;
   shelterName: string;
-  adoptionStatus: string;
+  status: string;
+}
+
+export interface Profiles {
+  sosProps: ListProps;
+  newProps: ListProps;
 }
 
 export interface ProfileListProps {
-  sosListProps: SosListProps;
-  newListProps: NewListProps;
+  listProps: ListProps;
+  pageProps: PageNationProps;
 }
 
 // NewList
@@ -54,15 +45,4 @@ export interface PageNationProps {
   currentPage: number;
   lastPage: number;
   maxLength: number;
-}
-
-export interface VNewListProps {
-  profileListProps: NewListProps;
-  pageNationProps: PageNationProps;
-}
-
-// UrgentList
-export interface VUrgentListProps {
-  profileListProps: SosListProps;
-  pageNationProps: PageNationProps;
 }

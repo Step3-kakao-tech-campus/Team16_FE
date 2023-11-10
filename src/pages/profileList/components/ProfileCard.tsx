@@ -1,6 +1,6 @@
-import { VProfileInfoProps } from '../profileListType';
+import { ListProps } from '../profileListType';
 
-const ProfileCard = (vProfileInfoProps: VProfileInfoProps) => (
+const ProfileCard = (vProfileInfoProps: ListProps) => (
   <div className="flex flex-col items-center justify-center m-1 flex-nowrap">
     <a
       href={`/pet/${vProfileInfoProps.petId}`}
@@ -23,12 +23,10 @@ const ProfileCard = (vProfileInfoProps: VProfileInfoProps) => (
         <div className="text-sm text-gray-400">
           {vProfileInfoProps.shelterName}
         </div>
-        <div className=" text-sm font-semibold">
-          {vProfileInfoProps.adoptionStatus}
-        </div>
+        <div className=" text-sm font-semibold">{vProfileInfoProps.status}</div>
       </div>
     </a>
-    <hr className=" w-9/12 h-1 mt-4"></hr>
+    <hr className=" w-64 h-1 mt-4"></hr>
   </div>
 );
 

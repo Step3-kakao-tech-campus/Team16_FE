@@ -1,10 +1,11 @@
-import NewList from 'pages/profileList/newList/NewList';
+import ErrorBoundary from 'layouts/ErrorBoundary';
+import ProfileList from '../components/ProfileList';
 
 const NewListPage = () => {
   return (
-    <>
-      <NewList />
-    </>
+    <ErrorBoundary>
+      <ProfileList prop="new" />
+    </ErrorBoundary>
   );
 };
 

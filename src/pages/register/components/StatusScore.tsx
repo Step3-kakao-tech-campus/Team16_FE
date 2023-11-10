@@ -19,7 +19,7 @@ const StatusScore = ({ status, selectedOption, handleChange }: StatusProps) => {
         <span className="flex text-base sm:text-sm lg:text-lg font-semibold">
           Low
         </span>
-        <div className="flex flex-row items-center">
+        <div className="flex flex-row w-72 sm:w-auto items-center">
           <input
             type="radio"
             value="1"
