@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import ErrorBoundary from 'commons/ErrorBoundary';
-import UpdateTemplate from './UpdateTemplate';
+import UpdateTemplate from './components/UpdateTemplate';
 
 const UpdatePage = () => {
   return (

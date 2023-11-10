@@ -1,9 +1,10 @@
 import { getCookie } from 'commons/cookie/cookie';
-import LoginGuideModal from 'commons/modals/LoginGuideModal';
-import { useEffect } from 'react';
+import { lazy, useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { tokenCheckState } from 'recoil/shelterState';
+
+const LoginGuideModal = lazy(() => import('commons/modals/LoginGuideModal'));
 
 const ValidateCheckLayout = () => {
   const setIsLogined = useSetRecoilState(tokenCheckState);

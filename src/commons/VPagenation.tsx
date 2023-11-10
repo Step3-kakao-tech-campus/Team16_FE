@@ -1,4 +1,4 @@
-import PageButton from 'pages/profileList/PageButton';
+import PageButton from 'pages/profileList/components/PageButton';
 
 export function getPaginationItems(
   currentPage: number,

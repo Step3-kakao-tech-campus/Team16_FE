@@ -1,7 +1,7 @@
-import DayModalInput from 'pages/register/DayModalInput';
-import MRegisterForm from 'pages/register/MRegisterForm';
-import StatusSelectGroup from './StatusSelectGroup';
-import RegisterHeader from './RegisterHeader';
+import DayModalInput from 'pages/register/components/DayModalInput';
+import MRegisterForm from 'pages/register/components/MRegisterForm';
+import StatusSelectGroup from './components/StatusSelectGroup';
+import RegisterHeader from './components/RegisterHeader';
 
 const RegisterPage = () => {
   return (

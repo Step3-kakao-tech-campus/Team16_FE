@@ -1,4 +1,4 @@
-import Map from 'pages/map/Map';
+import Map from 'pages/map/components/Map';
 import ErrorBoundary from 'commons/ErrorBoundary';
 
 const MapPage = () => {

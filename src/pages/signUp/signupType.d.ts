@@ -35,3 +35,7 @@ export interface VSignupInputProps {
   errors: Partial<ShelterSignupType>;
   isLoading: LoadingProps;
 }
+
+export interface SignupPageProps {
+  redirectLoginPage: () => void;
+}

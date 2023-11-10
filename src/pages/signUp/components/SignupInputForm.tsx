@@ -80,7 +80,7 @@ const SignupInputForm = () => {
   // 이메일 중복 검사 api
   const duplicateCheck = async () => {
     setIsLoading((prev) => ({ ...prev, duplicateCheckIsLoading: true }));
-    const response = await fetch(`${process.env.REACT_APP_URI}/account/email`, {
+    await fetch(`${process.env.REACT_APP_URI}/account/email`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -154,7 +154,7 @@ const SignupInputForm = () => {
         })
         .then((data) => {
           if (!data.success) {
-            alert(data.error.message); // 이 부분은 주소 받는 거 때문에 그냥 텍스트만 넣기 애매함
+            alert(data.error.message);
           } else {
             navigate('/login');
           }

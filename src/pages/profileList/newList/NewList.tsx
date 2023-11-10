@@ -2,8 +2,9 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import useFetch from 'commons/apis/useFetch';
-import VNewList, { Props } from './VNewList';
+import VNewList from './VNewList';
 import NewListSkeleton from './NewListSkeleton';
+import { VNewListProps } from '../profileListType';
 
 const NewList = () => {
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태
@@ -14,7 +15,7 @@ const NewList = () => {
     navigate(`/profile/new/${page}`);
   };
 
-  const [newList, setNewList] = useState<Props | null>(null);
+  const [newList, setNewList] = useState<VNewListProps | null>(null);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ['new-list', currentPage],
@@ -32,7 +33,7 @@ const NewList = () => {
 
       const newListData = data.newList;
 
-      const newListProps: Props = {
+      const newListProps: VNewListProps = {
         pageNationProps: pageData,
         profileListProps: newListData,
       };

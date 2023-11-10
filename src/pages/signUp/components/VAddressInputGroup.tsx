@@ -1,11 +1,12 @@
 import Container from 'commons/Container';
 import Postcode from 'commons/PostCode';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { shelterSignupState } from 'recoil/shelterState';
 import { AddressInputProps } from '../signupType';
 
 const VAddressInputGroup = ({ handleChange }: AddressInputProps) => {
-  const [shelterInfo, setShelterInfo] = useRecoilState(shelterSignupState);
+  const shelterInfo = useRecoilValue(shelterSignupState);
+
   return (
     <Container className="flex flex-col gap-4 w-full">
       <div className="flex flex-col gap-2">

@@ -2,8 +2,9 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import useFetch from 'commons/apis/useFetch';
-import VUrgentList, { Props } from './VUrgentList';
+import VUrgentList from './VUrgentList';
 import UrgentListSkeleton from './UrgentListSkeleton';
+import { VUrgentListProps } from '../profileListType';
 
 const UrgentList = () => {
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태
@@ -14,7 +15,7 @@ const UrgentList = () => {
     navigate(`/profile/urgent/${page}`);
   };
 
-  const [urgentList, setUrgentList] = useState<Props | null>(null);
+  const [urgentList, setUrgentList] = useState<VUrgentListProps | null>(null);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ['urgent-list', currentPage],
@@ -32,7 +33,7 @@ const UrgentList = () => {
 
       const urgentListData = data.sosList;
 
-      const urgentListProps: Props = {
+      const urgentListProps: VUrgentListProps = {
         pageNationProps: pageData,
         profileListProps: urgentListData,
       };

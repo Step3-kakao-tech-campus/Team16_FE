@@ -1,4 +1,4 @@
-import ShelterInfo from './ShelterInfo';
+import ShelterInfo from './components/ShelterInfo';
 
 const ShelterInfoPage = () => {
   return (

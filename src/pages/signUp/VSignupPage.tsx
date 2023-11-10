@@ -1,12 +1,9 @@
 import Banner from 'commons/Banner';
 import LogoButton from 'commons/LogoButton';
 import SignupInputForm from 'pages/signUp/components/SignupInputForm';
+import { SignupPageProps } from './signupType';
 
-type Props = {
-  redirectLoginPage: () => void;
-};
-
-const VSignupPage = ({ redirectLoginPage }: Props) => {
+const VSignupPage = ({ redirectLoginPage }: SignupPageProps) => {
   return (
     <div
       className="flex flex-col justify-center items-center gap-4 min-h-screen"
