@@ -11,14 +11,14 @@ const VShelterInfo = (props: ShelterInfoPageProps) => {
 
   return (
     <div>
-      <div className="mt-8 sm:mt-20">
+      <div className="mt-8 sm:mt-20 flex justify-center ">
         <VShelterCard {...props.shelterInfoProps} />
       </div>
-      <div className="mx-16 sm:mx-40 lg:mx-64 my-14">
+      <div className="mx-8 justify-center sm:mx-40 lg:mx-64 my-14">
         <h2 className="flex w-full font-bold text-xl sm:text-2xl items-center mb-5 whitespace-nowrap">
           관리중인 동물
         </h2>
-        <div className="grid grid-cols-1 gap-1 md:grid-cols-2 my-1 w-full whitespace-nowrap">
+        <div className="grid grid-cols-1 items-center place-items-center gap-1 md:grid-cols-2 my-1 w-full">
           {props.profileProps.map((item, index) => (
             <div className="flex flex-row" key={index}>
               <ProfileCard
@@ -35,7 +35,7 @@ const VShelterInfo = (props: ShelterInfoPageProps) => {
                   role === 'SHELTER' &&
                   id === `${props.shelterInfoProps.id}`
                     ? ' absolute ml-60 bg-slate-200 text-sm h-fit w-fit p-1  rounded-xl '
-                    : ' text-transparent '
+                    : ' text-transparent opacity-0'
                 }`}
                 onClick={() => {
                   // eslint-disable-next-line no-restricted-globals

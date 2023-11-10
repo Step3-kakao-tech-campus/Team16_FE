@@ -12,7 +12,7 @@ const ProfileList = (prop: { prop: string }) => {
   // 페이지 변경 함수
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-    navigate(`/profile/${prop}/${page}`);
+    navigate(`/profile/${prop.prop}/${page}`);
   };
   const word = prop.prop === 'urgent' ? 'sos' : prop.prop;
   console.log(word);
