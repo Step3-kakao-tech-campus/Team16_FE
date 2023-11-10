@@ -2,8 +2,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import useFetch from 'commons/apis/useFetch';
-import VShelterInfo, { ShelterInfoPageProps } from './VShelterInfo';
+import VShelterInfo from './VShelterInfo';
 import ShelterInfoSkeleton from './ShelterInfoSkeleton';
+import { ShelterInfoPageProps } from '../shelterInfoType';
 
 const ShelterInfo = () => {
   const [currentPage, setCurrentPage] = useState(1);
