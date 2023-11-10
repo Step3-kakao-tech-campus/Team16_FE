@@ -9,7 +9,6 @@ import {
   LoadingProps,
 } from '../signupType';
 import VSignupInputForm from './VSignupInputForm';
-import SignupGuideModal from '../../../commons/modals/TextGuideModal';
 
 const SignupInputForm = () => {
   const [shelterInfo, setShelterInfo] = useRecoilState(shelterSignupState);
