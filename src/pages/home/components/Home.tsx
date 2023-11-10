@@ -8,6 +8,7 @@ import regionState, { RegionType } from 'recoil/regionState';
 import HomeVideoSlider from './HomeVideoSlider';
 import VideoMuteIcon from './VideoMuteIcon';
 import { HomeVideoSliderProps } from '../homeType';
+import HomeNoData from './HomeNoData';
 
 const Home = () => {
   const [muted, setMuted] = useState(false);
@@ -70,6 +71,8 @@ const Home = () => {
     fetchNextPage,
   };
 
+  const noData = data?.pages[0].response?.shortForms.length === 0;
+
   return region !== '전국' || species !== '전체' ? (
     <div className="overflow-hidden bg-white h-[95vh]">
       <div className="flex justify-center gap-7 my-3 items-center">
@@ -88,11 +91,14 @@ const Home = () => {
         </button>
         <span className="text-lg font-semibold"> 친구들 </span>
       </div>
+
+      {noData && <HomeNoData species={species} />}
       <VideoMuteIcon muted={muted} opacity={opacity} />
       <HomeVideoSlider {...homeVideoSliderProps} />
     </div>
   ) : (
     <div className="overflow-hidden bg-white h-[85vh]">
+      <HomeNoData species={species} />
       <VideoMuteIcon muted={muted} opacity={opacity} />
       <HomeVideoSlider {...homeVideoSliderProps} />
     </div>
