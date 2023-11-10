@@ -5,7 +5,7 @@ import { ShelterLoginType, shelterLoginState } from 'recoil/shelterState';
 import * as Yup from 'yup';
 import { useMutation } from '@tanstack/react-query';
 import VLoginInputForm from './VLoginInputForm';
-import { setCookie } from '../../../commons/cookie/cookie';
+import { getCookie, setCookie } from '../../../commons/cookie/cookie';
 
 const LoginInputForm = () => {
   const [userInfo, setUserInfo] = useRecoilState(shelterLoginState);
@@ -20,6 +20,14 @@ const LoginInputForm = () => {
       .required('이메일을 입력해주세요.'),
     password: Yup.string().required('비밀번호를 입력해주세요.'),
   });
+
+  const setBeginnerState = () => {
+    if (!getCookie('isFirstTime')) {
+      setCookie('isFirstTime', 'True', {
+        maxAge: 60000 * 60 * 24 * 30,
+      });
+    }
+  };
 
   const userFetch = async () => {
     const res = await fetch(`${process.env.REACT_APP_URI}/account/login`, {
@@ -82,6 +90,7 @@ const LoginInputForm = () => {
       setCookie('loginState', 'Login', {
         maxAge: 60000 * 60 * 24,
       });
+      setBeginnerState();
 
       navigate('/');
     },
