@@ -96,7 +96,9 @@ const HomeVideo = (props: HomeVideoProps) => {
         onMouseEnter={handleMouseEnter}
       >
         <VideoOverlay {...videoOverlayProps} />
-        {index !== 0 && <div className="w-10 h-10 loader top-1/2 absolute" />}
+        {loading && index !== 0 && playing && (
+          <div className="w-10 h-10 loader top-1/2 absolute" />
+        )}
         <video
           className="w-full h-full"
           ref={videoPlayerRef}
