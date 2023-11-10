@@ -1,5 +1,5 @@
-import LogoButton from 'commons/LogoButton';
-import UserToggleBox from 'commons/UserToggleBox';
+import LogoButton from 'commons/components/LogoButton';
+import UserToggleBox from 'commons/components/UserToggleBox';
 import { Link } from 'react-router-dom';
 
 export interface VGNBProps {
@@ -28,7 +28,15 @@ const VGNB = (props: VGNBProps) => {
         <div className="flex w-11/12 justify-between items-center">
           <LogoButton />
           <button className="text-3xl" onClick={handleToggleClick}>
-            <img className="w-8" src="/assets/images/menu.png" alt="메뉴" />
+            <img
+              className="w-8"
+              src="/assets/images/menu.png"
+              alt="메뉴"
+              style={{
+                width: '35px',
+                height: '28px',
+              }}
+            />
           </button>
         </div>
       </div>
@@ -38,15 +46,15 @@ const VGNB = (props: VGNBProps) => {
             <div className="flex justify-center w-full gap-2">
               <UserToggleBox />
             </div>
-
             <ol className="flex flex-col justify-center w-full gap-4">
-              <li className="border-b pb-4">
+              <li className="border-b pb-4" onClick={handleToggleClick}>
                 <button onClick={handleCategoryButtonClick}>카테고리</button>
               </li>
               <li
                 className={`${
                   isProfilePage ? 'text-brand-color' : ''
                 } border-b pb-4`}
+                onClick={handleToggleClick}
               >
                 <Link to="/profile">프로필 목록</Link>
               </li>
@@ -54,6 +62,7 @@ const VGNB = (props: VGNBProps) => {
                 className={`${
                   isFindShelterPage ? 'text-brand-color' : ''
                 } border-b pb-4`}
+                onClick={handleToggleClick}
               >
                 <Link to="/find-shelter">내 주변 보호소 찾기</Link>
               </li>
@@ -61,6 +70,7 @@ const VGNB = (props: VGNBProps) => {
                 className={`${
                   isRegisterPage ? 'text-brand-color' : ''
                 } border-b pb-4`}
+                onClick={handleToggleClick}
               >
                 <Link to="/register">등록하기</Link>
               </li>

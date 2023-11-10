@@ -1,18 +1,11 @@
-import GNB from 'layouts/GNB';
-import React from 'react';
-import Banner from 'commons/Banner';
-import InputGroup from 'commons/InputGroup';
+import Banner from 'commons/components/Banner';
+import InputGroup from 'commons/components/InputGroup';
 import { ClipLoader } from 'react-spinners';
 import { shelterSignupState } from 'recoil/shelterState';
 import { useRecoilValue } from 'recoil';
-import EditProfilePageSkeleton from './EditProfilePageSkeleton';
-import EditAddressInputGroup from './EditAddressInputGroup';
-
-interface VEditProfileProps {
-  getLoading: boolean;
-  postloading: boolean;
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-}
+import EditProfilePageSkeleton from './components/EditProfilePageSkeleton';
+import EditAddressInputGroup from './components/EditAddressInputGroup';
+import { VEditProfileProps } from './editProfileType';
 
 const VEditProfilePage = ({
   getLoading,
@@ -23,7 +16,6 @@ const VEditProfilePage = ({
 
   return (
     <div className="h-full">
-      <GNB />
       {getLoading ? (
         <EditProfilePageSkeleton />
       ) : (

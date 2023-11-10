@@ -1,12 +1,10 @@
-import GNB from 'layouts/GNB';
-import ShelterInfo from './ShelterInfo';
+import ShelterInfo from './components/ShelterInfo';
 
 const ShelterInfoPage = () => {
   return (
-    <div>
-      <GNB />
+    <>
       <ShelterInfo />
-    </div>
+    </>
   );
 };
 

@@ -1,10 +1,11 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { shelterSignupState } from 'recoil/shelterState';
 import { getCookie } from 'commons/cookie/cookie';
 import usePostFetch from 'commons/apis/usePostFetch';
 import useGetFetch from 'commons/apis/useGetFetch';
+import { useEffect } from 'react';
 import VEditProfilePage from './VEditProfilePage';
 
 const EditProfilePage = () => {
@@ -34,15 +35,7 @@ const EditProfilePage = () => {
     },
   );
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    postData();
-    getData();
-  };
-
-  const { error } = useQuery({
-    queryKey: ['editProfile', shelterId],
-    queryFn: getData,
+  const mutation = useMutation(getData, {
     onSuccess: (info) => {
       setShelterInfo({
         ...shelterInfo,
@@ -54,6 +47,15 @@ const EditProfilePage = () => {
       });
     },
   });
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    postData();
+  };
+
+  useEffect(() => {
+    mutation.mutate();
+  }, []);
 
   const EditProfileProps = {
     getLoading,

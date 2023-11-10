@@ -1,45 +1,29 @@
 import { getCookie } from 'commons/cookie/cookie';
-import LoginGuideModal from 'commons/modals/LoginGuideModal';
-import React, { useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { lazy, useEffect } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { tokenCheckState } from 'recoil/shelterState';
 
-interface LayoutProps {
-  children: React.ReactNode;
-}
+const LoginGuideModal = lazy(() => import('commons/modals/LoginGuideModal'));
 
-const ValidateCheckLayout: React.FC<LayoutProps> = ({ children }) => {
+const ValidateCheckLayout = () => {
   const setIsLogined = useSetRecoilState(tokenCheckState);
   const loginToken = getCookie('loginToken');
-  const userAccount = getCookie('userAccountInfo');
+  const loginState = getCookie('loginState');
+  const location = useLocation();
 
-  // userAccount에 대한 정책 수정이 필요
-  // Layout 먹이는 방식 수정
+  // 로그인 정보가 담긴 쿠키가 만료된 상태에서 사용자가 api 호출 관련 기능을 쓰기 전에 미리 알려주기
   useEffect(() => {
-    if (!loginToken && userAccount === 'Login') {
-      // loginToken이 없으면 모달 열기
+    if (!loginToken && loginState === 'Login') {
       setIsLogined(false);
     }
-    console.log('token 로직 동작');
-  }, [loginToken, userAccount]);
+  }, [location]);
 
   return (
-    <div>
-      <Routes>
-        <Route path="/" element={<LoginGuideModal />} />;
-        <Route path="/pet/:id" element={<LoginGuideModal />} />;
-        <Route path="/profile" element={<LoginGuideModal />} />;
-        <Route path="/shelter/:id/:page" element={<LoginGuideModal />} />;
-        <Route path="/profile/urgent/:page" element={<LoginGuideModal />} />;
-        <Route path="/profile/new/:page" element={<LoginGuideModal />} />;
-        <Route path="/register" element={<LoginGuideModal />} />;
-        <Route path="/find-shelter" element={<LoginGuideModal />} />;
-        <Route path="/pet-update/:id" element={<LoginGuideModal />} />;
-      </Routes>
-      {/* <LoginGuideModal /> */}
-      <Routes>{children}</Routes>
-    </div>
+    <>
+      <Outlet />
+      <LoginGuideModal />
+    </>
   );
 };
 

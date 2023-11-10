@@ -1,11 +1,9 @@
-import DetailPetData from 'pages/detailPet/DetailPetData';
-import GNB from 'layouts/GNB';
-import ErrorBoundary from 'commons/ErrorBoundary';
+import DetailPetData from 'pages/detailPet/components/DetailPetData';
+import ErrorBoundary from 'layouts/ErrorBoundary';
 
 const DetailPetPage = () => {
   return (
     <>
-      <GNB />
       <ErrorBoundary>
         <DetailPetData />
       </ErrorBoundary>

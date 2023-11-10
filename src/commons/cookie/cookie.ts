@@ -26,5 +26,6 @@ export const removeCookie = (name: string) => {
 
 export const removeToken = () => {
   removeCookie('loginToken');
-  removeCookie('userAccountInfo');
+  removeCookie('accountInfo');
+  removeCookie('loginState');
 };

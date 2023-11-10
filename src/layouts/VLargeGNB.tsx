@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import LogoButton from 'commons/LogoButton';
-import UserSelectBox from 'commons/UserDropdownBox';
+import LogoButton from 'commons/components/LogoButton';
+import UserSelectBox from 'commons/components/UserDropdownBox';
 
 export interface VLargeGNBProps {
   handleCategoryButtonClick: () => void;
@@ -18,10 +18,9 @@ const VLargeGNB = (props: VLargeGNBProps) => {
   } = props;
 
   return (
-    <div className="flex w-full h-10 my-5 justify-center">
-      <div className="lg:flex w-11/12 hidden items-center justify-between text-xl gap-10">
+    <div className="lg:flex hidden w-full h-10 my-5 justify-center">
+      <div className="lg:flex w-11/12 items-center justify-between text-xl gap-10">
         <LogoButton />
-
         <ol className="flex gap-4 h-8">
           <li>
             <button
@@ -59,7 +58,6 @@ const VLargeGNB = (props: VLargeGNBProps) => {
             <Link to="/register">등록하기</Link>
           </li>
         </ol>
-        {/* 여기서 변경 */}
         <UserSelectBox />
       </div>
     </div>

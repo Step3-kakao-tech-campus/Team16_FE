@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState, RefObject, useRef } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import displayMarker from './displayMarker';
-import { SearchedPlace } from './MapList';
+import displayMarker from './components/displayMarker';
+import { SearchedPlace } from './mapType';
 
 function useMap<T>(
   containerRef: RefObject<T extends HTMLElement ? T : HTMLElement>,
@@ -30,6 +30,7 @@ function useMap<T>(
       }).then((res) => res.json()),
     {
       onSuccess: (data) => {
+        setLoading(false);
         if (data.success === false) {
           throw new Error(data.error.message);
         }
@@ -71,7 +72,6 @@ function useMap<T>(
           sort: kakao.maps.services.SortBy.DISTANCE,
         });
       });
-      setLoading(false);
     };
     mapScript.addEventListener('load', onLoadKakaoMap);
     onLoadKakaoMap();

@@ -1,14 +1,17 @@
 import { Suspense } from 'react';
-import ErrorBoundary from 'commons/ErrorBoundary';
-import GNB from 'layouts/GNB';
-import Home from './Home';
+import ErrorBoundary from 'layouts/ErrorBoundary';
+import Home from './components/Home';
+import Skeleton from './components/HomeSkeleton';
 
 const HomePage = () => {
   return (
     <div>
-      <GNB />
       <ErrorBoundary>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense
+          fallback={
+            <Skeleton text="친구들을 데려오는 중입니다🐶" loader={true} />
+          }
+        >
           <Home />
         </Suspense>
       </ErrorBoundary>
