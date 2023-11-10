@@ -1,4 +1,4 @@
-import ProfileListHome from 'pages/profileList/ProfileListHome';
+import ProfileListHome from 'pages/profileList/components/ProfileListHome';
 
 const ProfileListPage = () => {
   return (

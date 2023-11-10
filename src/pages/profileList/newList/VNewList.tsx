@@ -1,20 +1,8 @@
-import ProfileCard from 'pages/profileList/ProfileCard';
-import Pagination from '../../../commons/Pagenation';
-import { NewListProps } from '../VProfileListHome';
+import ProfileCard from 'pages/profileList/components/ProfileCard';
+import Pagination from '../../../commons/components/Pagenation';
+import { VNewListProps } from '../profileListType';
 
-export interface PageNationProps {
-  setCurrentPage: (page: number) => void;
-  currentPage: number;
-  lastPage: number;
-  maxLength: number;
-}
-
-export interface Props {
-  profileListProps: NewListProps;
-  pageNationProps: PageNationProps;
-}
-
-const VNewList = (props: Props) => (
+const VNewList = (props: VNewListProps) => (
   <div className="mx-16 sm:mx-40 lg:mx-64 my-14">
     <h2 className="flex w-full font-bold text-xl sm:text-2xl mb-5 items-center whitespace-nowrap">
       신규 애니모리 친구들

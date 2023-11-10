@@ -1,4 +1,4 @@
-import InputGroup from 'commons/InputGroup';
+import InputGroup from 'commons/components/InputGroup';
 import { ClipLoader } from 'react-spinners';
 import { LoginInputFormProps, ValidationTextProps } from '../loginType';
 

@@ -18,7 +18,6 @@ export interface EmailValidationProps {
 
 export interface AddressInputProps {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  shelterInfo: ShelterSignupType;
 }
 
 export interface ValidationProps {
@@ -35,4 +34,8 @@ export interface VSignupInputProps {
   passwordConfirm: boolean;
   errors: Partial<ShelterSignupType>;
   isLoading: LoadingProps;
+}
+
+export interface SignupPageProps {
+  redirectLoginPage: () => void;
 }

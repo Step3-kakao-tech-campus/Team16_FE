@@ -1,11 +1,12 @@
-import Container from 'commons/Container';
-import Postcode from 'commons/PostCode';
+import Container from 'commons/components/Container';
+import Postcode from 'commons/components/PostCode';
+import { useRecoilValue } from 'recoil';
+import { shelterSignupState } from 'recoil/shelterState';
 import { AddressInputProps } from '../signupType';
 
-const VAddressInputGroup = ({
-  handleChange,
-  shelterInfo,
-}: AddressInputProps) => {
+const VAddressInputGroup = ({ handleChange }: AddressInputProps) => {
+  const shelterInfo = useRecoilValue(shelterSignupState);
+
   return (
     <Container className="flex flex-col gap-4 w-full">
       <div className="flex flex-col gap-2">
@@ -20,7 +21,7 @@ const VAddressInputGroup = ({
             name="우편번호"
             type="text"
             placeholder="우편번호"
-            defaultValue={shelterInfo.zonecode}
+            value={shelterInfo.zonecode}
           />
           <Postcode />
         </div>
@@ -33,7 +34,7 @@ const VAddressInputGroup = ({
           name="시/도"
           type="text"
           placeholder="시/도"
-          defaultValue={shelterInfo.address.province}
+          value={shelterInfo.address.province}
           onChange={handleChange}
         />
         <input
@@ -43,7 +44,7 @@ const VAddressInputGroup = ({
           name="시/군/구"
           type="text"
           placeholder="시/군/구"
-          defaultValue={shelterInfo.address.city}
+          value={shelterInfo.address.city}
           onChange={handleChange}
         />
         <input
@@ -53,7 +54,7 @@ const VAddressInputGroup = ({
           name="도로명 주소"
           type="text"
           placeholder="도로명 주소"
-          defaultValue={shelterInfo.address.roadName}
+          value={shelterInfo.address.roadName}
           onChange={handleChange}
         />
       </div>
@@ -64,7 +65,7 @@ const VAddressInputGroup = ({
         type="text"
         placeholder="상세 주소(입력)"
         onChange={handleChange}
-        defaultValue={shelterInfo.address.detail}
+        value={shelterInfo.address.detail}
       />
     </Container>
   );

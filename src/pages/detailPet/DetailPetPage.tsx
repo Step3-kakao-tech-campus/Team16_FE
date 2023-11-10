@@ -1,5 +1,5 @@
-import DetailPetData from 'pages/detailPet/DetailPetData';
-import ErrorBoundary from 'commons/ErrorBoundary';
+import DetailPetData from 'pages/detailPet/components/DetailPetData';
+import ErrorBoundary from 'layouts/ErrorBoundary';
 
 const DetailPetPage = () => {
   return (

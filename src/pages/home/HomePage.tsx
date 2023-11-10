@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
-import ErrorBoundary from 'commons/ErrorBoundary';
-import Home from './Home';
-import Skeleton from './Skeleton';
+import ErrorBoundary from 'layouts/ErrorBoundary';
+import Home from './components/Home';
+import Skeleton from './components/HomeSkeleton';
 
 const HomePage = () => {
   return (

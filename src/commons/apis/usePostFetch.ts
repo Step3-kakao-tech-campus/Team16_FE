@@ -1,7 +1,8 @@
 import { useState } from 'react';
 
 const usePostFetch = (url: string, options: object) => {
-  const [data, setData] = useState();
+  const [data, setData] = useState<Promise<any>>();
+  const [error, setError] = useState<Promise<Error>>();
   const [postStatusCode, setStatusCode] = useState<number>();
   const [postloading, setLoading] = useState<boolean>(false);
 
@@ -14,17 +15,16 @@ const usePostFetch = (url: string, options: object) => {
         setStatusCode(response.status);
         return;
       }
-
       const jsonData = await response.json();
       setData(jsonData);
     } catch (err) {
-      console.error('Error: ', err);
+      setError(err as Promise<Error>);
     } finally {
       setLoading(false);
     }
   };
 
-  return { data, postStatusCode, postloading, postData };
+  return { data, error, postStatusCode, postloading, postData };
 };
 
 export default usePostFetch;

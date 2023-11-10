@@ -74,13 +74,15 @@ const LoginInputForm = () => {
       );
 
       setCookie('accountInfo', `${role} ${id}`, {
-        expires: tokenExpirationDate,
         maxAge: timeDifferenceseconds,
       });
       setCookie('loginToken', data.token, {
-        expires: tokenExpirationDate,
         maxAge: timeDifferenceseconds,
       });
+      setCookie('loginState', 'Login', {
+        maxAge: 60000 * 60 * 24,
+      });
+
       navigate('/');
     },
     onError: () => {
