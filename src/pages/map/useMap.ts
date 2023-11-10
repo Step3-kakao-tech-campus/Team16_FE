@@ -30,6 +30,7 @@ function useMap<T>(
       }).then((res) => res.json()),
     {
       onSuccess: (data) => {
+        setLoading(false);
         if (data.success === false) {
           throw new Error(data.error.message);
         }
@@ -71,7 +72,6 @@ function useMap<T>(
           sort: kakao.maps.services.SortBy.DISTANCE,
         });
       });
-      setLoading(false);
     };
     mapScript.addEventListener('load', onLoadKakaoMap);
     onLoadKakaoMap();

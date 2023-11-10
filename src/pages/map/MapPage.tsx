@@ -3,11 +3,9 @@ import ErrorBoundary from 'commons/ErrorBoundary';
 
 const MapPage = () => {
   return (
-    <>
-      <ErrorBoundary>
-        <Map />
-      </ErrorBoundary>
-    </>
+    <ErrorBoundary>
+      <Map />
+    </ErrorBoundary>
   );
 };
 
