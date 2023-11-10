@@ -53,7 +53,7 @@ const EditProfileTemplate = () => {
         setModalText('해당 보호소는 없는 보호소입니다.');
         setModalOpen(true);
       }
-      if (getStatusCode === 404) {
+      if (getStatusCode === 500) {
         setModalText('서버에 오류가 발생했습니다.');
         setModalOpen(true);
       }
