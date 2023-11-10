@@ -6,6 +6,7 @@ import { SearchedPlace } from './mapType';
 
 function useMap<T>(
   containerRef: RefObject<T extends HTMLElement ? T : HTMLElement>,
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>,
 ) {
   const { kakao } = window;
   const [map, setMap] = useState<any>();
@@ -29,6 +30,7 @@ function useMap<T>(
       }).then((res) => res.json()),
     {
       onSuccess: (data) => {
+        setLoading(false);
         if (data.success === false) {
           throw new Error(data.error.message);
         }
