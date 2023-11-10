@@ -17,7 +17,6 @@ import ValidateCheckLayout from 'layouts/ValidateCheckLayout';
 import EditProfilePage from 'pages/editProfile/EditProfilePage';
 import GNB from 'layouts/GNB';
 import NotFound from 'pages/notFound/NotFound';
-import ErrorBoundary from 'commons/ErrorBoundary';
 
 const queryClient = new QueryClient({
   defaultOptions: {

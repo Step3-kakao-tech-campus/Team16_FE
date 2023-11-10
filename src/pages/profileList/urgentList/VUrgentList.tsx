@@ -1,5 +1,5 @@
 import ProfileCard from 'pages/profileList/components/ProfileCard';
-import Pagination from '../../../commons/Pagenation';
+import Pagination from '../../../commons/components/Pagenation';
 import { VUrgentListProps } from '../profileListType';
 
 const VUrgentList = (props: VUrgentListProps) => {

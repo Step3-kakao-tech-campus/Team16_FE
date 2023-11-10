@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import LogoButton from 'commons/LogoButton';
-import UserSelectBox from 'commons/UserDropdownBox';
+import LogoButton from 'commons/components/LogoButton';
+import UserSelectBox from 'commons/components/UserDropdownBox';
 
 export interface VLargeGNBProps {
   handleCategoryButtonClick: () => void;

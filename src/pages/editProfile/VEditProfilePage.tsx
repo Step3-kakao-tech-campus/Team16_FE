@@ -1,5 +1,5 @@
-import Banner from 'commons/Banner';
-import InputGroup from 'commons/InputGroup';
+import Banner from 'commons/components/Banner';
+import InputGroup from 'commons/components/InputGroup';
 import { ClipLoader } from 'react-spinners';
 import { shelterSignupState } from 'recoil/shelterState';
 import { useRecoilValue } from 'recoil';

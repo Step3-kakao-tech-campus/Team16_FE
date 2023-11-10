@@ -1,4 +1,4 @@
-import Banner from 'commons/Banner';
+import Banner from 'commons/components/Banner';
 
 const EditProfilePageSkeleton = () => {
   return (

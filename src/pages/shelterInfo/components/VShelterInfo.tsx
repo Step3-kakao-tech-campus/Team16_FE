@@ -1,4 +1,4 @@
-import Pagination from 'commons/VPagenation';
+import Pagination from 'commons/components/VPagenation';
 import ProfileCard from 'pages/profileList/components/ProfileCard';
 import { getCookie } from 'commons/cookie/cookie';
 import VShelterCard from './VShelterCard';

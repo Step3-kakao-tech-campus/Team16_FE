@@ -1,5 +1,5 @@
-import Banner from 'commons/Banner';
-import LogoButton from 'commons/LogoButton';
+import Banner from 'commons/components/Banner';
+import LogoButton from 'commons/components/LogoButton';
 import LoginInputForm from 'pages/login/components/LoginInputForm';
 import { VLoginPageProps } from './loginType';
 

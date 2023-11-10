@@ -1,5 +1,5 @@
-import LogoButton from 'commons/LogoButton';
-import UserToggleBox from 'commons/UserToggleBox';
+import LogoButton from 'commons/components/LogoButton';
+import UserToggleBox from 'commons/components/UserToggleBox';
 import { Link } from 'react-router-dom';
 
 export interface VGNBProps {

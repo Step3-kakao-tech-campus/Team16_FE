@@ -1,6 +1,6 @@
 import RadioGroup from 'pages/register/components/RadioGroup';
-import SelectBox from 'commons/SelectBox';
-import InputGroup from 'commons/InputGroup';
+import SelectBox from 'commons/components/SelectBox';
+import InputGroup from 'commons/components/InputGroup';
 import { RegisterProps } from '../updateType';
 
 const VMRegisterForm = ({ handleChange, petInfo }: RegisterProps) => {

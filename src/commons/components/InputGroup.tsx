@@ -1,5 +1,5 @@
 import React from 'react';
-import Container from 'commons/Container';
+import Container from 'commons/components/Container';
 import Input from 'commons/Input';
 
 export interface InputGroupProps

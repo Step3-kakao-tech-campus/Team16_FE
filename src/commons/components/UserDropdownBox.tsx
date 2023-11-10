@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { getCookie, removeToken } from './cookie/cookie';
+import { getCookie, removeToken } from '../cookie/cookie';
 
 // 로그인 되었을 때 상태를 보여주는 SelectBox 제작
 const UserDropdownBox = () => {

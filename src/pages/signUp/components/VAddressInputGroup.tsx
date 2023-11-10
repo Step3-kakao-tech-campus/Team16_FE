@@ -1,4 +1,4 @@
-import Container from 'commons/Container';
+import Container from 'commons/components/Container';
 import Postcode from 'commons/PostCode';
 import { useRecoilValue } from 'recoil';
 import { shelterSignupState } from 'recoil/shelterState';

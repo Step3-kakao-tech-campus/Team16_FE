@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import ErrorBoundary from 'commons/ErrorBoundary';
+import ErrorBoundary from 'layouts/ErrorBoundary';
 import Home from './Home';
 import Skeleton from './Skeleton';
 
