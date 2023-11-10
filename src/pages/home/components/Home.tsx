@@ -10,7 +10,7 @@ import VideoMuteIcon from './VideoMuteIcon';
 import { HomeVideoSliderProps } from '../homeType';
 
 const Home = () => {
-  const [muted, setMuted] = useState(true);
+  const [muted, setMuted] = useState(false);
   const [opacity, setOpacity] = useState(0);
   const [species, setSpecies] = useRecoilState<SpeciesType>(speciesState);
   const [region, setRegion] = useRecoilState<RegionType>(regionState);

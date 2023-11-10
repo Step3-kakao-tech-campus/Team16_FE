@@ -99,7 +99,7 @@ const HomeVideo = (props: HomeVideoProps) => {
         <video
           className="w-full h-full"
           ref={videoPlayerRef}
-          muted={!muted}
+          muted={muted}
           autoPlay={playing}
           loop
           playsInline

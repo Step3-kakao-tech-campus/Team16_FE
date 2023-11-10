@@ -7,7 +7,7 @@ const displayMarker = async (map: any, addressInfo: SearchedPlace) => {
 
   const DEFAULT_SHELTER_SRC = '/assets/images/racoon.png';
   const ANYMORY_SHELTER_SRC = '/assets/images/dog.png';
-  const imageSize = new kakao.maps.Size(64, 69);
+  const imageSize = new kakao.maps.Size(64, 64);
 
   const markerImageDefault = new kakao.maps.MarkerImage(
     DEFAULT_SHELTER_SRC,

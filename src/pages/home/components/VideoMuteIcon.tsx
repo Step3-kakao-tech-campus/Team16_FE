@@ -8,14 +8,24 @@ const VideoMuteIcon = (props: VideoMuteIconProps) => {
         <img
           src="/assets/images/speaker.svg"
           alt="speaker"
-          style={{ opacity, transition: 'opacity 0.5s' }}
+          style={{
+            opacity,
+            transition: 'opacity 0.5s',
+            width: '100%',
+            height: '100%',
+          }}
         />
       )}
       {muted && (
         <img
           src="/assets/images/mute.svg"
           alt="mute"
-          style={{ opacity, transition: 'opacity 0.5s' }}
+          style={{
+            opacity,
+            transition: 'opacity 0.5s',
+            width: '100%',
+            height: '100%',
+          }}
         />
       )}
     </div>

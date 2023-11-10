@@ -12,6 +12,7 @@ normal, bold만 적용시켜놨습니다.
   src: url(../public/assets/fonts/Pretendard-Regular.woff) format('woff');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -19,6 +20,7 @@ normal, bold만 적용시켜놨습니다.
   src: url(../public/assets/fonts/Pretendard-Bold.woff) format('woff');
   font-weight: bold;
   font-style: normal;
+  font-display: swap;
 }
 
 /* 로더 */
