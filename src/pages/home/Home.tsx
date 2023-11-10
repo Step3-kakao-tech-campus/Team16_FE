@@ -16,13 +16,13 @@ const Home = () => {
   const { data, fetchNextPage } = useInfiniteQuery(
     ['home', 1, region, species],
     ({ pageParam = 1 }) => {
-      const SPECIIES_TYPES = {
+      const SPECIES_TYPES = {
         강아지: 'DOG',
         고양이: 'CAT',
         기타: 'ETC',
         전체: '',
       };
-      const type = SPECIIES_TYPES[species] ?? '';
+      const type = SPECIES_TYPES[species] ?? '';
 
       let area = '';
       if (region === '전국') {
@@ -43,11 +43,18 @@ const Home = () => {
     },
     {
       getNextPageParam: (lastPage) => {
-        return lastPage.response.hasNext ? lastPage.response.nextPage : false;
+        return lastPage.response?.hasNext ? lastPage.response?.nextPage : false;
       },
+      keepPreviousData: true,
       suspense: true,
     },
   );
+  // 에러가 특이하게 와서 이렇게 처리했습니다...
+  // onError나 onSuccess로는 잡히지 않더라고요
+  if (data?.pages[0].success === false) {
+    throw new Error(data?.pages[0].error.message);
+  }
+
   const handleRemoveFilter = (string: string) => {
     if (string === species) {
       setSpecies('전체');
@@ -65,7 +72,7 @@ const Home = () => {
   return region !== '전국' || species !== '전체' ? (
     <div className="overflow-hidden bg-white h-[95vh]">
       <div className="flex justify-center gap-7 my-3 items-center">
-        <text className=" text-orange-400 text-xl font-semibold">카테고리</text>
+        <span className=" text-orange-400 text-xl font-semibold">카테고리</span>
         <button
           className="flex bg-orange-400 rounded-full px-5 py-2 text-white"
           onClick={() => handleRemoveFilter(species)}
@@ -78,7 +85,7 @@ const Home = () => {
         >
           {region} x
         </button>
-        <text className="text-lg font-semibold"> 친구들 </text>
+        <span className="text-lg font-semibold"> 친구들 </span>
       </div>
       <VideoMuteIcon muted={muted} opacity={opacity} />
       <HomeVideoSlider {...homeVideoSliderProps} />
