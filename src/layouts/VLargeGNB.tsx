@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import LogoButton from 'commons/components/LogoButton';
 import UserSelectBox from 'commons/components/UserDropdownBox';
+import { getCookie } from 'commons/cookie/cookie';
 
 export interface VLargeGNBProps {
   handleCategoryButtonClick: () => void;
@@ -16,6 +17,7 @@ const VLargeGNB = (props: VLargeGNBProps) => {
     isFindShelterPage,
     isRegisterPage,
   } = props;
+  const token = getCookie('loginToken');
 
   return (
     <div className="lg:flex hidden w-full h-10 my-5 justify-center">
@@ -48,15 +50,17 @@ const VLargeGNB = (props: VLargeGNBProps) => {
           >
             <Link to="/find-shelter">내 주변 보호소 찾기</Link>
           </li>
-          <li
-            className={`${
-              isRegisterPage
-                ? 'text-brand-color'
-                : 'hover:text-brand-color hover:border-b-2 hover:border-brand-color'
-            }`}
-          >
-            <Link to="/register">등록하기</Link>
-          </li>
+          {token && (
+            <li
+              className={`${
+                isRegisterPage
+                  ? 'text-brand-color'
+                  : 'hover:text-brand-color hover:border-b-2 hover:border-brand-color'
+              }`}
+            >
+              <Link to="/register">등록하기</Link>
+            </li>
+          )}
         </ol>
         <UserSelectBox />
       </div>
