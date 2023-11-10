@@ -58,3 +58,9 @@ export interface VideoOverlayProps {
   playing: boolean;
   index: number;
 }
+
+export interface CategoryBarProps {
+  handleRemoveFilter: (speciesOrRegion: string) => void;
+  species: string;
+  region: string;
+}

@@ -18,8 +18,8 @@ const VLargeGNB = (props: VLargeGNBProps) => {
   } = props;
 
   return (
-    <div className="flex w-full h-10 my-5 justify-center">
-      <div className="lg:flex w-11/12 hidden items-center justify-between text-xl gap-10">
+    <div className="lg:flex hidden w-full h-10 my-5 justify-center">
+      <div className="lg:flex w-11/12 items-center justify-between text-xl gap-10">
         <LogoButton />
         <ol className="flex gap-4 h-8">
           <li>
