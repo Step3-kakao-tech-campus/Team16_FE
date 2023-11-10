@@ -11,6 +11,8 @@ const LoginInputForm = () => {
   const [userInfo, setUserInfo] = useRecoilState(shelterLoginState);
   const [errors, setErrors] = useState<Partial<ShelterLoginType>>({});
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [modalText, setModalText] = useState<string>('');
   const navigate = useNavigate();
   const currentDate = new Date();
 
@@ -44,8 +46,14 @@ const LoginInputForm = () => {
 
     if (!res.ok) {
       // error 발생 시 처리는 status 값에 따라 하는 것으로 변경 필요
-      const errorData = await res.json();
-      console.error('userFetchError: ', errorData);
+      if (res.status === 400) {
+        setModalText('이메일, 비밀번호를 확인해주세요.');
+        setModalOpen(true);
+      }
+      if (res.status === 500) {
+        setModalText('서버에 오류가 발생했습니다.');
+        setModalOpen(true);
+      }
     }
 
     const response = await res.json();
@@ -102,8 +110,11 @@ const LoginInputForm = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-    validateCheck();
-    mutation.mutate();
+    try {
+      validateCheck();
+    } finally {
+      mutation.mutate();
+    }
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -115,11 +126,18 @@ const LoginInputForm = () => {
     }
   };
 
+  const handleModalClose = () => {
+    setModalOpen(false);
+  };
+
   const LoginInputFormProps = {
     handleChange,
     handleSubmit,
     errors,
     isLoading,
+    modalOpen,
+    modalText,
+    handleModalClose,
   };
 
   return <VLoginInputForm {...LoginInputFormProps} />;

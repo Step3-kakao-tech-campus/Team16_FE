@@ -3,7 +3,7 @@ import { useState } from 'react';
 const usePostFetch = (url: string, options: object) => {
   const [data, setData] = useState<Promise<any>>();
   const [error, setError] = useState<Promise<Error>>();
-  const [postStatusCode, setStatusCode] = useState<number>();
+  const [postStatusCode, setStatusCode] = useState<number>(200);
   const [postloading, setLoading] = useState<boolean>(false);
 
   const postData = async () => {

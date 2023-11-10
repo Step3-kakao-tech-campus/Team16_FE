@@ -5,6 +5,9 @@ export interface LoginInputFormProps {
   isLoading: boolean;
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  modalOpen: boolean;
+  modalText: string;
+  handleModalClose: () => void;
 }
 
 export interface ValidationTextProps {
