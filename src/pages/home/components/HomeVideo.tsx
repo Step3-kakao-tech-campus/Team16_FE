@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import AutoplayGuideModal from 'commons/modals/SafariAutoplayGuideModal';
 import VideoOverlay from './VideoOverlay';
 import { HomeVideoProps, VideoOverlayProps } from '../homeType';
 
@@ -17,6 +18,7 @@ const HomeVideo = (props: HomeVideoProps) => {
   const videoRef = useRef(null);
   const videoPlayerRef = useRef<HTMLVideoElement>(null);
   const [loading, setLoading] = useState(true);
+  const browserInfo = window.navigator.userAgent.toLowerCase();
 
   useEffect(() => {
     if (videoPlayerRef.current) {
@@ -110,6 +112,7 @@ const HomeVideo = (props: HomeVideoProps) => {
           <source src={url} type="video/mp4" />
         </video>
       </div>
+      <AutoplayGuideModal browserInfo={browserInfo} />
     </>
   );
 };
