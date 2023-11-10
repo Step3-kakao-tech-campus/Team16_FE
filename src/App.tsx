@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import DetailPetPage from 'pages/detailPet/DetailPetPage';
-import ProfileListPage from 'pages/profileList/ProfileListPage';
+import ProfileListPage from 'pages/profileList/profileListHome/ProfileListPage';
 import LoginPage from 'pages/login/LoginPage';
 import MapPage from 'pages/map/MapPage';
 import NewListPage from 'pages/profileList/newList/NewListPage';
@@ -46,7 +46,8 @@ const routes = [
           },
           {
             path: '/profile',
-            lazy: () => import('pages/profileList/ProfileListPage'),
+            lazy: () =>
+              import('pages/profileList/profileListHome/ProfileListPage'),
             element: <ProfileListPage />,
           },
           {

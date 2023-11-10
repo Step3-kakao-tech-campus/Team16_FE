@@ -16,27 +16,19 @@ const Home = () => {
   const [opacity, setOpacity] = useState(0);
   const [species, setSpecies] = useRecoilState<SpeciesType>(speciesState);
   const [region, setRegion] = useRecoilState<RegionType>(regionState);
+  const SPECIES_TYPES = {
+    강아지: 'DOG',
+    고양이: 'CAT',
+    기타: 'ETC',
+    전체: '',
+  };
+  const type = SPECIES_TYPES[species] ?? '';
+
+  const area = region === '전국' ? '' : region;
   const { data, fetchNextPage } = useInfiniteQuery(
     ['home', 1, region, species],
     ({ pageParam = 1 }) => {
-      const SPECIES_TYPES = {
-        강아지: 'DOG',
-        고양이: 'CAT',
-        기타: 'ETC',
-        전체: '',
-      };
-      const type = SPECIES_TYPES[species] ?? '';
-
-      let area = '';
-      if (region === '전국') {
-        area = '';
-      } else {
-        area = region;
-      }
-      const apiUrl =
-        region !== '전국' || species !== '전체'
-          ? `${process.env.REACT_APP_URI}/short-forms?type=${type}&area=${area}&page=${pageParam}&size=5`
-          : `${process.env.REACT_APP_URI}/short-forms/home?page=${pageParam}&size=5`;
+      const apiUrl = `${process.env.REACT_APP_URI}/short-forms?type=${type}&area=${area}&page=${pageParam}&size=5`;
       return fetch(apiUrl, {
         method: 'GET',
         headers: {

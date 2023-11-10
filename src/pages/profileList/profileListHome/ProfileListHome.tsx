@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import useFetch from 'commons/apis/useFetch';
+import { Profiles } from '../profileListType';
 import VProfileListHome from './VProfileListHome';
-import ProfileListHomeSkeleton from './ProfileListHomeSkeleton';
-import { ProfileListProps } from '../profileListType';
+import ProfileList from '../components/ProfileList';
 
 const ProfileListHome = () => {
-  const [profileListProps, setProfileListProps] =
-    useState<ProfileListProps | null>(null);
+  const [profileListProps, setProfileListProps] = useState<Profiles | null>(
+    null,
+  );
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ['pet-list'],
@@ -20,9 +21,9 @@ const ProfileListHome = () => {
 
       const newListData = data.newList;
 
-      const updatedProfileListProps: ProfileListProps = {
-        sosListProps: sosListData,
-        newListProps: newListData,
+      const updatedProfileListProps: Profiles = {
+        sosProps: sosListData,
+        newProps: newListData,
       };
 
       setProfileListProps(updatedProfileListProps);
@@ -30,7 +31,7 @@ const ProfileListHome = () => {
   }, [data, isLoading, isError]);
 
   if (isLoading) {
-    return <ProfileListHomeSkeleton />;
+    return <ProfileList prop="home" />;
   }
 
   if (isError) {

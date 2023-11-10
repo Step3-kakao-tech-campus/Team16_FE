@@ -1,10 +1,11 @@
-import UrgentList from 'pages/profileList/urgentList/UrgentList';
+import ErrorBoundary from 'layouts/ErrorBoundary';
+import ProfileList from '../components/ProfileList';
 
 const UrgentListPage = () => {
   return (
-    <>
-      <UrgentList />
-    </>
+    <ErrorBoundary>
+      <ProfileList prop="urgent" />
+    </ErrorBoundary>
   );
 };
 
