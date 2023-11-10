@@ -92,10 +92,11 @@ const HomeVideo = (props: HomeVideoProps) => {
         ref={videoRef}
         onClick={handleVideoClick}
         onDoubleClick={handleDoubleClick}
-        className="h-[70vh] items-center justify-center"
+        className="h-[70vh] flex flex-col items-center justify-center"
         onMouseEnter={handleMouseEnter}
       >
         <VideoOverlay {...videoOverlayProps} />
+        {index !== 0 && <div className="w-10 h-10 loader top-1/2 absolute" />}
         <video
           className="w-full h-full"
           ref={videoPlayerRef}

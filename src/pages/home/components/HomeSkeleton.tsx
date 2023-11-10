@@ -6,14 +6,12 @@ const Skeleton = ({
   loader?: boolean;
 }) => {
   return (
-    <>
-      {loader && (
-        <div className="loader w-16 h-16 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
-      )}
+    <div className="flex flex-col justify-center items-center w-full h-full">
+      {loader && <div className="w-10 h-10 loader top-1/2 absolute" />}
       <div className="w-full h-[70vh] text-xl flex items-center justify-center font-bold text-white bg-black">
         <span>{text}</span>
       </div>
-    </>
+    </div>
   );
 };
 
