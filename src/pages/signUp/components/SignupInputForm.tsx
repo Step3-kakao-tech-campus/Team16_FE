@@ -79,6 +79,7 @@ const SignupInputForm = () => {
 
   // 이메일 중복 검사 api
   const duplicateCheck = async () => {
+    setErrors({});
     setIsLoading((prev) => ({ ...prev, duplicateCheckIsLoading: true }));
     await fetch(`${process.env.REACT_APP_URI}/account/email`, {
       method: 'POST',
@@ -219,11 +220,11 @@ const SignupInputForm = () => {
    * 유효성 검사 시행
    * userFetch가 동작하는 동안 Loader를 보여주기 위해 isLoading state 사용
    */
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    validationCheck();
+    await validationCheck();
     setIsLoading((prev) => ({ ...prev, submitIsLoading: true }));
-    userFetch();
+    await userFetch();
   };
 
   const SignupInputFormProps = {
