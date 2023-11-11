@@ -23,6 +23,9 @@ const ProfileCard = (vProfileInfoProps: ListProps) => {
         <div className=" w-44 whitespace-nowrap">
           <div className="flex text-base font-semibold flex-row items-center">
             {vProfileInfoProps.petName}
+            <div className="text-lg font-semibold ml-2 text-gray-500">
+              {vProfileInfoProps.sex === 'MALE' ? '♂️' : '♀️'}
+            </div>
             <div className="flex ml-4 text-sm text-brand-color">
               {vProfileInfoProps.petAge}
             </div>
@@ -30,6 +33,7 @@ const ProfileCard = (vProfileInfoProps: ListProps) => {
           <div className="text-sm text-gray-500">
             {vProfileInfoProps.shelterName}
           </div>
+
           <div className={` text-base mt-2 font-semibold ${textColor}`}>
             {vProfileInfoProps.status}
           </div>

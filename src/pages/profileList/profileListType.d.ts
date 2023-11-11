@@ -12,6 +12,7 @@ export interface VProfileInfoProps {
   shelterName: string;
   adoptionStatus?: string;
   protectionExpirationDate?: string;
+  sex: string;
 }
 
 export interface ListProps {
@@ -26,6 +27,7 @@ export interface ListProps {
   petName: string;
   petAge: number;
   shelterName: string;
+  sex: string;
   status: string;
 }
 

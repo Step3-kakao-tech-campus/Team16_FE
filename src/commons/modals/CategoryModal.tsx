@@ -50,6 +50,8 @@ const CategoryModal = ({
   const handleSpeciesClick = (speciess: SpeciesType) => {
     setSpecies(speciess);
     setSpeciesOrRegion('region');
+    handleModalCloseClick();
+    navigate(`/`);
   };
   const handleRegionClick = (regions: RegionType) => {
     setRegion(regions);
