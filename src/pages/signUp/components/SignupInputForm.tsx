@@ -141,7 +141,7 @@ const SignupInputForm = () => {
    * 필수 정보가 입력되었는지 확인
    * 정보가 제대로 입력되었을 때 api 요청
    */
-  const userFetch = () => {
+  const userFetch = async () => {
     getEmailValidText({
       validText: '',
       inValidText: '',
@@ -153,10 +153,10 @@ const SignupInputForm = () => {
     if (!emailConfirm.checked) {
       setErrors({});
       setModalText('이메일을 중복을 확인해주세요.');
-      setIsLoading((prev) => ({ ...prev, submitIsLoading: false }));
       setModalOpen(true);
+      setIsLoading((prev) => ({ ...prev, submitIsLoading: false }));
     } else if (emailConfirm.isValid && emailConfirm.checked) {
-      fetch(`${process.env.REACT_APP_URI}/account/shelter`, {
+      await fetch(`${process.env.REACT_APP_URI}/account/shelter`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
