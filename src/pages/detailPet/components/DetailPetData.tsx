@@ -26,7 +26,6 @@ const DetailPetData = () => {
     suspense: true,
     retry: false,
   });
-  if (isLoading) return <div>로딩중</div>;
   const labels = ['영리함', '친화력', '운동신경', '적응력', '활발함'];
 
   const radarChartProps: RadarChartProps = {
