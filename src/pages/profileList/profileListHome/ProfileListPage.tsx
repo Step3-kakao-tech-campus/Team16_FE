@@ -1,7 +1,7 @@
 import ErrorBoundary from 'layouts/ErrorBoundary';
-import ProfileListHome from './ProfileListHome';
 import { Suspense } from 'react';
 import { ClipLoader } from 'react-spinners';
+import ProfileListHome from './ProfileListHome';
 
 const ProfileListPage = () => {
   return (
