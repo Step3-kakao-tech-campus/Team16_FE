@@ -4,8 +4,16 @@ import { DetailPetInfoProps } from '../detailPetType';
 const VDetailPetInfo = (data: DetailPetInfoProps) => {
   return (
     <div className="flex flex-col items-center">
-      <h2 className="text-3xl w-full mb-10">{data.name}</h2>
       <div className="flex flex-col items-center text-sm md:text-base">
+        <div className="flex py-7 justify-around">
+          <div className="flex">
+            <h2 className="text-3xl w-36 mb-10">{data.name}</h2>
+          </div>
+          <div className="flex">
+            <span className="w-20 block font-bold"></span>
+            <span className="w-36 block"></span>
+          </div>
+        </div>
         <div className="flex py-7 justify-around">
           <div className="flex">
             <span className="w-16 block font-bold">나이</span>
