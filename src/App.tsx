@@ -5,7 +5,6 @@ import {
   RouteObject,
   RouterProvider,
 } from 'react-router-dom';
-import { Suspense } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import DetailPetPage from 'pages/detailPet/DetailPetPage';
 import ProfileListPage from 'pages/profileList/profileListHome/ProfileListPage';
@@ -22,7 +21,6 @@ import GNB from 'layouts/GNB';
 import NotFound from 'pages/notFound/NotFound';
 import HomePage from 'pages/home/HomePage';
 import UpdatePage from 'pages/update/UpdatePage';
-import { ClipLoader } from 'react-spinners';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -115,9 +113,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
-        <Suspense fallback={<ClipLoader />}>
-          <RouterProvider router={router} />
-        </Suspense>
+        <RouterProvider router={router} />
       </RecoilRoot>
     </QueryClientProvider>
   );

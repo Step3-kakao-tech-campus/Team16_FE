@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable class-methods-use-this */
 import React, { Component, ErrorInfo, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
