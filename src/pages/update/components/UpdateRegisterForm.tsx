@@ -1,10 +1,11 @@
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import registerState, { RegisterType } from 'recoil/registerState';
 import VMRegisterForm from './VUpdateRegisterForm';
 import { PetProps } from '../updateType';
 
 const UpdateRegisterForm = ({ petInfo }: PetProps) => {
   const setPetInfoState = useSetRecoilState(registerState);
+
   const PET_INFO_REQUIRED_KEY: (keyof RegisterType)[] = [
     'age',
     'name',

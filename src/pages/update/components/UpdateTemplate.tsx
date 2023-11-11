@@ -37,18 +37,34 @@ const UpdateTemplate = () => {
     return res;
   };
 
-  const { isLoading, isError } = useQuery({
+  const { isError } = useQuery({
     queryKey: ['pet-update'],
     queryFn: () => getPetInfo(),
     onSuccess: (fetchedData) => {
-      const { profileImageUrl, profileShortFormUrl, ...rest } = fetchedData;
-      setUpdateState({ ...rest, isComplete: true });
+      const {
+        profileImageUrl,
+        profileShortFormUrl,
+        neutralizationStatus,
+        ...rest
+      } = fetchedData;
+      let updatedNeutralizationStatus;
+      if (neutralizationStatus === '했어요') {
+        updatedNeutralizationStatus = 'YES';
+      } else if (updatedNeutralizationStatus === '안했어요') {
+        updatedNeutralizationStatus = 'NO';
+      } else {
+        updatedNeutralizationStatus = 'UNKNOWN';
+      }
+
+      setUpdateState({
+        ...rest,
+        neutralizationStatus: updatedNeutralizationStatus,
+        isComplete: true,
+      });
     },
     suspense: true,
   });
-  if (isLoading) {
-    return <div>로딩중</div>;
-  }
+
   if (isError) {
     return <div>Error: {isError}</div>;
   }
