@@ -3,14 +3,19 @@ import InputGroup from 'commons/components/InputGroup';
 import { ClipLoader } from 'react-spinners';
 import { shelterSignupState } from 'recoil/shelterState';
 import { useRecoilValue } from 'recoil';
-import EditProfilePageSkeleton from './components/EditProfilePageSkeleton';
-import EditAddressInputGroup from './components/EditAddressInputGroup';
-import { VEditProfileProps } from './editProfileType';
+import TextGuideModal from 'commons/modals/TextGuideModal';
+import EditProfilePageSkeleton from './EditProfilePageSkeleton';
+import EditAddressInputGroup from './EditAddressInputGroup';
+import { VEditProfileProps } from '../editProfileType';
 
-const VEditProfilePage = ({
+const VEditProfileTemplate = ({
   getLoading,
   postloading,
+  modalOpen,
+  modalText,
+  handleModalClose,
   handleSubmit,
+  handleChange,
 }: VEditProfileProps) => {
   const shelterInfo = useRecoilValue(shelterSignupState);
 
@@ -37,19 +42,23 @@ const VEditProfilePage = ({
           >
             <InputGroup
               id="shelter"
+              dataInputType="name"
               name="보호소 이름"
               type="text"
               placeholder="보호소 이름을 입력해주세요."
               autocomplete="off"
               defaultValue={shelterInfo.name}
+              onChange={handleChange}
             />
             <InputGroup
               id="shelter-contact"
+              dataInputType="contact"
               name="보호소 연락처"
               type="text"
               placeholder="보호소에 연락 가능한 연락처를 입력해주세요."
               autocomplete="off"
               defaultValue={shelterInfo.contact}
+              onChange={handleChange}
             />
             <EditAddressInputGroup />
             <button className="bg-brand-color text-white w-full rounded-md p-2">
@@ -60,10 +69,16 @@ const VEditProfilePage = ({
               )}
             </button>
           </form>
+
+          <TextGuideModal
+            open={modalOpen}
+            text={modalText}
+            onClose={handleModalClose}
+          />
         </div>
       )}
     </div>
   );
 };
 
-export default VEditProfilePage;
+export default VEditProfileTemplate;
