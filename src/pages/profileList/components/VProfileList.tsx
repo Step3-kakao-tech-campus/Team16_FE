@@ -11,7 +11,7 @@ const VProfileList = ({
 }) => {
   return (
     <div className="mx-16 sm:mx-32 lg:mx-64 my-14">
-      <h2 className="flex w-full font-bold text-xl sm:text-2xl mb-5 items-center whitespace-nowrap">
+      <h2 className="flex w-full font-bold text-xl sm:text-2xl mb-10 items-center whitespace-nowrap">
         {title}
       </h2>
       <div className="grid grid-cols-1 gap-1 md:grid-cols-2 my-1 w-full whitespace-nowrap">

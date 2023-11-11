@@ -8,7 +8,7 @@ const Loader = (props: LoaderProps) => {
     <>
       {loadingButApiIsOkay ||
         (loading && (
-          <div className="w-screen h-screen flex flex-col items-center gap-8 justify-center">
+          <div className=" w-screen h-[50vh] flex flex-col items-center gap-8 justify-center">
             <h1 className="font-bold">{loading} 중 입니다...</h1>
             {loadingButApiIsOkay && <span>서버가 느려요... 기다려주세요!</span>}
             {longLoading && (

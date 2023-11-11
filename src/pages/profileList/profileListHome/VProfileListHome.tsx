@@ -3,8 +3,8 @@ import { Profiles } from '../profileListType';
 
 const VProfileListHome = (profileListProps: Profiles) => {
   return (
-    <div className="mx-16 sm:mx-32 lg:mx-64 my-14">
-      <h2 className="flex w-full font-bold text-xl sm:text-2xl  items-center mb-5 whitespace-nowrap">
+    <div className="mx-14 sm:mx-32 lg:mx-64 my-14">
+      <h2 className="flex w-full font-bold text-xl sm:text-2xl  items-center mb-10 whitespace-nowrap">
         긴급 도움이 필요해요!
         <a
           href="profile/urgent/1"
@@ -22,7 +22,7 @@ const VProfileListHome = (profileListProps: Profiles) => {
           />
         ))}
       </div>
-      <h2 className="flex w-full font-bold text-xl sm:text-2xl justify-center mt-10 mb-5 items-center whitespace-nowrap">
+      <h2 className="flex w-full font-bold text-xl sm:text-2xl justify-center mt-10 mb-10 items-center whitespace-nowrap">
         신규 애니모리 친구들
         <a
           href="/profile/new/1"

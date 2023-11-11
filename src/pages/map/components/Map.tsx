@@ -57,7 +57,7 @@ const Map = () => {
   return (
     <>
       <Loader {...loaderProps} />
-      <div className="Map flex flex-col md:flex-row items-center justify-center gap-8">
+      <div className="Map mt-16 flex flex-col md:flex-row items-center justify-center gap-8">
         <div ref={mapRef} className={`w-96 h-96`} />
         <MapList searchedPlace={searchedPlace} map={map} />
       </div>
