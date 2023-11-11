@@ -6,11 +6,7 @@ import ProfileList from '../components/ProfileList';
 const UrgentListPage = () => {
   return (
     <Suspense
-      fallback={
-        <div className="w-screen h-screen flex items-center justify-center">
-          <ClipLoader color="black" loading={true} size={50} />
-        </div>
-      }
+      fallback={<ClipLoader className="absolute top-[50%] left-{50%}" />}
     >
       <ErrorBoundary>
         <ProfileList prop="urgent" />

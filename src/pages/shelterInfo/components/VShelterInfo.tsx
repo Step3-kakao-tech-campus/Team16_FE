@@ -32,7 +32,9 @@ const VShelterInfo = (props: ShelterInfoPageProps) => {
                   petName={item.name}
                   petAge={item.age}
                   shelterName={''}
-                  status={item.adoptionStatus === 'YES' ? '입양완료' : '미입양'}
+                  status={
+                    item.adoptionStatus === 'YES' ? '입양 완료' : '미입양'
+                  }
                   {...item}
                 />
                 <button

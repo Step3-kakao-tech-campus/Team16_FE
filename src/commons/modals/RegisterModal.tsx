@@ -135,7 +135,13 @@ const RegisterModal = ({
               X
             </button>
           </div>
-          <span className="text-2xl text-brand-color">{confirmText}</span>
+          <span className="text-2xl flex flex-col items-center justify-center text-brand-color">
+            <div>{confirmText}</div>
+            <div className=" text-sm  text-red-400">
+              {' '}
+              (파일 용량을 확인해주세요)
+            </div>
+          </span>
           <div className="flex w-2/3 justify-around items-center mt-8 gap-6">
             {confirmTextArray.map((text: string, index: number) => {
               // 1개만 있을 때 스타일을 다르게 주기 위해

@@ -10,7 +10,6 @@ const VImageVideoInput = (props: VImageVideoInputProps) => {
     isImageSelected,
     isVideoSelected,
   } = props;
-
   return (
     <div className="flex gap-10 flex-col md:flex-row items-center justify-center">
       <FileInput

@@ -31,16 +31,11 @@ const SelectBox = ({ id, label }: IdProps) => {
   const [selectedType, setSelectedType] = useRecoilState(registerState);
 
   const year = selectedType.age.substring(0, selectedType.age.indexOf('년'));
-  console.log('년', year);
   const month = selectedType.age.substring(
     selectedType.age.indexOf('년') + 1,
     selectedType.age.indexOf('개'),
   );
   const handleChange = (value: string) => {
-    console.log(selectedType.age);
-    console.log(value);
-
-    console.log('달', month);
     if (label === '종🔸') {
       setSelectedType((prevType) => ({
         ...prevType,
@@ -51,13 +46,11 @@ const SelectBox = ({ id, label }: IdProps) => {
         ...prevType,
         age: `${year}년${value}개월`,
       }));
-      console.log(value);
     } else {
       setSelectedType((prevType) => ({
         ...prevType,
         age: `${value}년${month}개월`,
       }));
-      console.log(value);
     }
   };
 
