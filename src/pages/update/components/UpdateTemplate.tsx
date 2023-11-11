@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { getCookie } from 'commons/cookie/cookie';
-import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import registerState from 'recoil/registerState';
@@ -14,11 +13,6 @@ const UpdateTemplate = () => {
   const petId = params.id;
   const cookie = getCookie('loginToken');
   const [updateState, setUpdateState] = useRecoilState(registerState);
-  // 여기는 setError를 안 쓰고 밑에서 new Error를 받아서 쓰고 있는데, 차라리 error를 useQuery에서 받는 게 어떤가요?
-  const [error, setError] = useState({
-    isError: false,
-    errorMessage: '',
-  });
 
   const getPetInfo = async () => {
     const res = await fetch(
@@ -43,7 +37,7 @@ const UpdateTemplate = () => {
     return res;
   };
 
-  const { isError } = useQuery({
+  const { isLoading, isError } = useQuery({
     queryKey: ['pet-update'],
     queryFn: () => getPetInfo(),
     onSuccess: (fetchedData) => {
@@ -52,9 +46,11 @@ const UpdateTemplate = () => {
     },
     suspense: true,
   });
-
+  if (isLoading) {
+    return <div>로딩중</div>;
+  }
   if (isError) {
-    return <div className="bg-slate-500 h-screen">{error.errorMessage}</div>;
+    return <div>Error: {isError}</div>;
   }
 
   return (

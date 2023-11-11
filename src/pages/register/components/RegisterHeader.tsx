@@ -16,7 +16,6 @@ const MAX_IMAGE_FILE_SIZE_MB = 5;
 const RegisterHeader = () => {
   const [selectedImageFile, setSelectedImageFile] = useState<Blob>();
   const [selectedVideoFile, setSelectedVideoFile] = useState<Blob>();
-  // text, textArray의 경우, 하나로 리펙토링 할 수 있을 듯
   const [errorText, setErrorText] = useState<string>('');
   const [buttonTextArray, setButtonTextArray] = useState<Array<string>>(['']);
   const [confirmText, setConfirmText] = useState<string>('등록하시겠습니까?');
@@ -55,7 +54,6 @@ const RegisterHeader = () => {
     setConfirmText('등록하시겠습니까?');
     setConfirmTextArray(['아니오', '예']);
     if (!response.ok) {
-      // 로그인 화면으로 이동하기 위해 텍스트 바꿔주는 것 필요
       switch (response.status) {
         case 400:
           setErrorText('이미지, 비디오 형식이 잘못되었습니다.'); // 취소
