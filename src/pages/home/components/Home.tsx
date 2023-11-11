@@ -73,7 +73,7 @@ const Home = () => {
   const categoryAvailable = region !== '전국' || species !== '전체';
 
   return (
-    <div className="overflow-hidden bg-white h-[85vh]">
+    <div className=" bg-white h-[85vh]">
       {categoryAvailable && <CategoryBar {...categoryBarProps} />}
       {noData && <HomeNoData species={species} />}
       <VideoMuteIcon muted={muted} opacity={opacity} />

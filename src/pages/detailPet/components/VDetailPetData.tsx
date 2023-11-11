@@ -18,7 +18,7 @@ const VDetailPetData = ({
       <img
         className="relative w-96 cursor-pointer lg:mr-20 lg:ml-20 lg:w-1/2"
         src={detailPetInfoProps.profileImageUrl}
-        alt="z"
+        alt="유기동물 프로필 사진"
         onClick={handleModalImageClick}
       />
       <ModalPortal>

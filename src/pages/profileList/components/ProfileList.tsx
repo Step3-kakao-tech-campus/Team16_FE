@@ -15,7 +15,6 @@ const ProfileList = (prop: { prop: string }) => {
     navigate(`/profile/${prop.prop}/${page}`);
   };
   const word = prop.prop === 'urgent' ? 'sos' : prop.prop;
-  console.log(word);
 
   const [list, setList] = useState<ProfileListProps | null>(null);
 

@@ -10,7 +10,7 @@ const ProfileCard = (vProfileInfoProps: ListProps) => (
         <img
           className="flex object-cover w-full h-full cursor-pointer "
           src={vProfileInfoProps.profileImageUrl}
-          alt=""
+          alt="유기동물 사진"
         />
       </div>
       <div className=" w-44 whitespace-nowrap">
