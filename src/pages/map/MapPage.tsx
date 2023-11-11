@@ -1,15 +1,11 @@
-import Map from 'pages/map/Map';
-import GNB from 'layouts/GNB';
-import ErrorBoundary from 'commons/ErrorBoundary';
+import Map from 'pages/map/components/Map';
+import ErrorBoundary from 'layouts/ErrorBoundary';
 
 const MapPage = () => {
   return (
-    <div>
-      <GNB />
-      <ErrorBoundary>
-        <Map />
-      </ErrorBoundary>
-    </div>
+    <ErrorBoundary>
+      <Map />
+    </ErrorBoundary>
   );
 };
 

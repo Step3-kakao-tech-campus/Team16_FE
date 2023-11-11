@@ -1,12 +1,17 @@
-import UrgentList from 'pages/profileList/urgentList/UrgentList';
-import GNB from 'layouts/GNB';
+import ErrorBoundary from 'layouts/ErrorBoundary';
+import { ClipLoader } from 'react-spinners';
+import { Suspense } from 'react';
+import ProfileList from '../components/ProfileList';
 
 const UrgentListPage = () => {
   return (
-    <div>
-      <GNB />
-      <UrgentList />
-    </div>
+    <Suspense
+      fallback={<ClipLoader className="absolute top-[50%] left-{50%}" />}
+    >
+      <ErrorBoundary>
+        <ProfileList prop="urgent" />
+      </ErrorBoundary>
+    </Suspense>
   );
 };
 

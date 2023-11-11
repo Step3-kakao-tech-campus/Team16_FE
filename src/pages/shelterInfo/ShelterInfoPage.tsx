@@ -1,12 +1,15 @@
-import GNB from 'layouts/GNB';
-import ShelterInfo from './ShelterInfo';
+import { Suspense } from 'react';
+import ErrorBoundary from 'layouts/ErrorBoundary';
+import ShelterInfo from './components/ShelterInfo';
+import ShelterInfoSkeleton from './components/ShelterInfoSkeleton';
 
 const ShelterInfoPage = () => {
   return (
-    <div>
-      <GNB />
-      <ShelterInfo />
-    </div>
+    <ErrorBoundary>
+      <Suspense fallback={<ShelterInfoSkeleton />}>
+        <ShelterInfo />
+      </Suspense>
+    </ErrorBoundary>
   );
 };
 

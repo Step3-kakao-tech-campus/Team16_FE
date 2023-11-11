@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useRecoilState } from 'recoil';
 import regionState, { RegionType } from 'recoil/regionState';
 import speciesState, { SpeciesType } from 'recoil/speciesState';
@@ -5,7 +6,7 @@ import CategoryModalList, {
   CategoryModalType,
   VCategoryModalListProps,
 } from 'commons/modals/VCategoryModalList';
-import { redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export interface CategoryModalProps {
   handleModalCloseClick: () => void;
@@ -30,7 +31,7 @@ const CategoryModal = ({
     '서울',
     '경기',
     '인천',
-    '제주특별자치도',
+    '제주',
     '충북',
     '충남',
     '대전',
@@ -42,13 +43,15 @@ const CategoryModal = ({
     '전북',
     '전남',
     '광주',
-    '강원특별자치도',
-    '세종특별자치시',
+    '강원',
+    '세종',
   ];
 
   const handleSpeciesClick = (speciess: SpeciesType) => {
     setSpecies(speciess);
     setSpeciesOrRegion('region');
+    handleModalCloseClick();
+    navigate(`/`);
   };
   const handleRegionClick = (regions: RegionType) => {
     setRegion(regions);
