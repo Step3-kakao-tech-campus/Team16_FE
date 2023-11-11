@@ -10,7 +10,7 @@ const DetailPetData = () => {
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
   const [modal, setModal] = useState(false);
 
-  const { data, isLoading } = useQuery({
+  const { data } = useQuery({
     queryKey: ['pet', petId],
     queryFn: () => {
       return fetch(`${process.env.REACT_APP_URI}/pet/${petId}`).then((res) => {
@@ -24,8 +24,8 @@ const DetailPetData = () => {
       });
     },
     suspense: true,
+    retry: false,
   });
-  if (isLoading) return <div>로딩중</div>;
   const labels = ['영리함', '친화력', '운동신경', '적응력', '활발함'];
 
   const radarChartProps: RadarChartProps = {

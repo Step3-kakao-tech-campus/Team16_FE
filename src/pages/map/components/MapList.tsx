@@ -6,12 +6,10 @@ import { SearchedPlace } from '../mapType';
 const MapList = ({
   searchedPlace,
   map,
-  loading,
 }: {
   searchedPlace: SearchedPlace[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   map: any;
-  loading: boolean;
 }) => {
   const { kakao } = window;
   const navigate = useNavigate();
@@ -33,7 +31,6 @@ const MapList = ({
 
   return (
     <>
-      {loading && <div className="loader" />}
       <div className="w-96">
         {searchedPlace.map((place) => (
           <div

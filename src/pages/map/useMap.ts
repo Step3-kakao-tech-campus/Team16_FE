@@ -6,7 +6,7 @@ import { SearchedPlace } from './mapType';
 
 function useMap<T>(
   containerRef: RefObject<T extends HTMLElement ? T : HTMLElement>,
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+  setLoading: React.Dispatch<React.SetStateAction<string>>,
 ) {
   const { kakao } = window;
   const [map, setMap] = useState<any>();
@@ -30,7 +30,6 @@ function useMap<T>(
       }).then((res) => res.json()),
     {
       onSuccess: (data) => {
-        setLoading(false);
         if (data.success === false) {
           throw new Error(data.error.message);
         }
@@ -46,6 +45,7 @@ function useMap<T>(
 
     const onLoadKakaoMap = () => {
       if (!containerRef.current || !kakao) return;
+      setLoading('근처 보호소 검색');
       window.kakao.maps.load(() => {
         setMap(
           new window.kakao.maps.Map(containerRef.current, {
@@ -55,6 +55,7 @@ function useMap<T>(
         );
 
         function placesSearchCB(data: any[], status: any) {
+          setLoading('');
           if (status === kakao.maps.services.Status.OK) {
             const bounds = new kakao.maps.LatLngBounds();
 
