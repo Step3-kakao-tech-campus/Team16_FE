@@ -34,7 +34,12 @@ const Home = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-      }).then((res) => res.json());
+      }).then((res) => {
+        if (res.status === 500) {
+          throw new Error('서버에 문제가 생겼어요...');
+        }
+        return res.json();
+      });
     },
     {
       getNextPageParam: (lastPage) => {
