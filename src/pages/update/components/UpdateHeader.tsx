@@ -10,6 +10,9 @@ import { useRecoilValue } from 'recoil';
 import registerState from 'recoil/registerState';
 import ImageVideoInput from '../../register/components/ImageVideoInput';
 
+const MAX_VIDEO_FILE_SIZE_MB = 15;
+const MAX_IMAGE_FILE_SIZE_MB = 5;
+
 const UpdateHeader = () => {
   const [selectedImageFile, setSelectedImageFile] = useState<Blob>();
   const [selectedVideoFile, setSelectedVideoFile] = useState<Blob>();
@@ -47,6 +50,8 @@ const UpdateHeader = () => {
         Authorization: `Bearer ${loginToken}`,
       },
     });
+    setConfirmText('등록하시겠습니까?');
+    setConfirmTextArray(['아니오', '예']);
     if (!response.ok) {
       // 로그인 화면으로 이동하기 위해 텍스트 바꿔주는 것 필요
       switch (response.status) {
@@ -75,17 +80,33 @@ const UpdateHeader = () => {
     }
     return response.json();
   };
-  const { data, isError, isLoading, isSuccess } = useMutation(patchPet);
+  const { data, isError, isLoading, isSuccess, mutate } = useMutation(patchPet);
   const handleRegisterButtonClick = async () => {
+    const formData = new FormData();
+
     if (!registerPetData.isComplete) {
       setConfirmText('필수항목을 입력해주세요.');
       setConfirmTextArray(['돌아가기']);
       return;
     }
 
-    const formData = new FormData();
-    if (selectedVideoFile) formData.append('profileVideo', selectedVideoFile);
-    if (selectedImageFile) formData.append('profileImage', selectedImageFile);
+    if (selectedVideoFile) {
+      const videoFileSizeInMB = selectedVideoFile.size / (1024 * 1024);
+      formData.append('profileVideo', selectedVideoFile);
+      if (videoFileSizeInMB > 15) {
+        setConfirmText('등록가능한 파일의 크기를 초과했습니다.');
+        setConfirmTextArray(['돌아가기']);
+      }
+    }
+    if (selectedImageFile) {
+      const imageFileSizeInMB = selectedImageFile.size / (1024 * 1024);
+      formData.append('profileImage', selectedImageFile);
+      if (imageFileSizeInMB > 5) {
+        setConfirmText('등록가능한 파일의 크기를 초과했습니다.');
+        setConfirmTextArray(['돌아가기']);
+      }
+    }
+
     const { isComplete, ...restRegisterPetData } = registerPetData;
     formData.append(
       'petInfo',
@@ -93,6 +114,7 @@ const UpdateHeader = () => {
         type: 'application/json',
       }),
     );
+    mutate(formData);
   };
   const handleCustomButtonClick = (
     fileRef: React.RefObject<HTMLInputElement> | null,
@@ -139,7 +161,7 @@ const UpdateHeader = () => {
             onClick={() => setIsModalOpen(true)}
             className="bg-brand-color rounded-md font-bold text-white w-20 py-2"
           >
-            수정완료
+            수정하기
           </button>
         </div>
         <ImageVideoInput

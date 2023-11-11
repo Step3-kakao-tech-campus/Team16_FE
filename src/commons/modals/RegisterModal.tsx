@@ -41,14 +41,16 @@ const RegisterModal = ({
               X
             </button>
           </div>
-          <span className="text-xl text-brand-color">{errorText}</span>
+          <span className="text-xl text-center text-brand-color">
+            {errorText}
+          </span>
           <div className="flex w-2/3 justify-around items-center mt-8 gap-6">
             {buttonTextArray.map((buttonText: string, index: number) => {
               if (index % 2 === 0) {
                 return (
                   <button
                     key={index}
-                    className="text-brand-color rounded-md font-bold border border-brand-color w-32 py-2"
+                    className="text-brand-color rounded-md font-bold border border-brand-color w-28 py-2"
                     onClick={handleRegisterMoreButtonClick}
                   >
                     {buttonText}
@@ -135,7 +137,9 @@ const RegisterModal = ({
               X
             </button>
           </div>
-          <span className="text-2xl text-brand-color">{confirmText}</span>
+          <span className="text-2xl text-center mx-4 text-brand-color">
+            {confirmText}
+          </span>
           <div className="flex w-2/3 justify-around items-center mt-8 gap-6">
             {confirmTextArray.map((text: string, index: number) => {
               // 1개만 있을 때 스타일을 다르게 주기 위해
