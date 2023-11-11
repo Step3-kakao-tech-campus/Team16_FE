@@ -10,6 +10,9 @@ import { useRecoilValue } from 'recoil';
 import registerState from 'recoil/registerState';
 import ImageVideoInput from './ImageVideoInput';
 
+const MAX_VIDEO_FILE_SIZE_MB = 15;
+const MAX_IMAGE_FILE_SIZE_MB = 5;
+
 const RegisterHeader = () => {
   const [selectedImageFile, setSelectedImageFile] = useState<Blob>();
   const [selectedVideoFile, setSelectedVideoFile] = useState<Blob>();
@@ -48,6 +51,8 @@ const RegisterHeader = () => {
         Authorization: `Bearer ${loginToken}`,
       },
     });
+    setConfirmText('등록하시겠습니까?');
+    setConfirmTextArray(['아니오', '예']);
     if (!response.ok) {
       switch (response.status) {
         case 400:
@@ -76,8 +81,9 @@ const RegisterHeader = () => {
 
     return response.json();
   };
-  const { data, isError, isLoading, isSuccess } = useMutation(postPet);
+  const { data, isError, isLoading, isSuccess, mutate } = useMutation(postPet);
   const handleRegisterButtonClick = async () => {
+    const formData = new FormData();
     if (
       !selectedImageFile ||
       !selectedVideoFile ||
@@ -87,10 +93,15 @@ const RegisterHeader = () => {
       setConfirmTextArray(['돌아가기']);
       return;
     }
-
-    const formData = new FormData();
     formData.append('profileVideo', selectedVideoFile);
     formData.append('profileImage', selectedImageFile);
+
+    const imageFileSizeInMB = selectedImageFile.size / (1024 * 1024);
+    const videoFileSizeInMB = selectedVideoFile.size / (1024 * 1024);
+    if (imageFileSizeInMB > 5 || videoFileSizeInMB > 15) {
+      setConfirmText('등록가능한 파일의 크기를 초과했습니다.');
+      setConfirmTextArray(['돌아가기']);
+    }
     const { isComplete, ...restRegisterPetData } = registerPetData;
     formData.append(
       'petInfo',
@@ -98,7 +109,9 @@ const RegisterHeader = () => {
         type: 'application/json',
       }),
     );
+    mutate(formData);
   };
+
   const handleCustomButtonClick = (
     fileRef: React.RefObject<HTMLInputElement> | null,
   ) => {
@@ -143,7 +156,7 @@ const RegisterHeader = () => {
             onClick={() => setIsModalOpen(true)}
             className="bg-brand-color rounded-md font-bold text-white w-20 py-2"
           >
-            등록완료
+            등록하기
           </button>
         </div>
         <ImageVideoInput
