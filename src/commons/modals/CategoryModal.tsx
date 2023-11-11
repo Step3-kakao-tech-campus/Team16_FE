@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useRecoilState } from 'recoil';
 import regionState, { RegionType } from 'recoil/regionState';
 import speciesState, { SpeciesType } from 'recoil/speciesState';
