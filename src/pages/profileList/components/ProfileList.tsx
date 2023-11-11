@@ -14,13 +14,15 @@ const ProfileList = (prop: { prop: string }) => {
     setCurrentPage(page);
     navigate(`/profile/${prop.prop}/${page}`);
   };
+
   const word = prop.prop === 'urgent' ? 'sos' : prop.prop;
+  const urlWord = word === 'home' ? '' : word;
 
   const [list, setList] = useState<ProfileListProps | null>(null);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ['list', currentPage],
-    queryFn: () => useFetch(`/pet/profiles/${word}?page=${currentPage}`),
+    queryFn: () => useFetch(`/pet/profiles/${urlWord}?page=${currentPage}`),
   });
 
   useEffect(() => {
