@@ -143,7 +143,7 @@ const Calendar = ({ handleClick }: CalendarProps) => {
               key={index}
               day={day}
               index={index}
-              className={'prevMonthDay text-gray-400 py-2'}
+              className={'prevMonthDay text-gray-400 w-[50px] h-[50px] py-2'}
               prevMonth={() =>
                 prevMonth(currentDate.getFullYear(), currentDate.getMonth())
               }
@@ -277,7 +277,7 @@ const Calendar = ({ handleClick }: CalendarProps) => {
           >
             {'<'}
           </button>
-          <div className="current-month-year text-2xl font-bold">
+          <div className="current-month-year text-2xl font-bold max-h-[375px]">
             {months[currentDate.getMonth()]} {currentDate.getFullYear()}
           </div>
           <button
@@ -297,9 +297,9 @@ const Calendar = ({ handleClick }: CalendarProps) => {
             </tr>
           ))}
         </thead>
-        <tbody className="h-full grid gap-2">
+        <tbody className="grid gap-2">
           {calendarRows.map((row: JSX.Element[], index: number) => (
-            <tr key={index} className="text-center grid grid-cols-7">
+            <tr key={index} className="text-center grid grid-cols-7 h-[50px]">
               {row}
             </tr>
           ))}

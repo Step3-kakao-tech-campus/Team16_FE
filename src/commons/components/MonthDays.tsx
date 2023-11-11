@@ -29,7 +29,7 @@ export const CurrentMonthDays = ({
   handleClick,
 }: CurrentDaysProps) => {
   return (
-    <td key={index} className="flex justify-center items-center">
+    <td key={index} className="flex justify-center w-[50px] h-[50px]">
       <button
         className={className}
         onClick={() => {
