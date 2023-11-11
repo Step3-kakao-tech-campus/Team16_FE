@@ -49,6 +49,7 @@ const HomeVideoSlider = (props: HomeVideoSliderProps) => {
 
   return (
     <Swiper
+      className="h-[85vh]"
       modules={[A11y, Autoplay, Mousewheel, Keyboard]}
       spaceBetween={10}
       grabCursor={true}
@@ -56,7 +57,6 @@ const HomeVideoSlider = (props: HomeVideoSliderProps) => {
         sensitivity: 100,
         thresholdDelta: 30,
       }}
-      autoHeight={true}
       direction={'vertical'}
       keyboard={{ enabled: true, pageUpDown: true, onlyInViewport: true }}
     >
@@ -69,6 +69,7 @@ const HomeVideoSlider = (props: HomeVideoSliderProps) => {
                   <div ref={nextPageRef}></div>
 
                   <Swiper
+                    className="h-[70vh]"
                     modules={[A11y]}
                     grabCursor={true}
                     autoHeight={true}

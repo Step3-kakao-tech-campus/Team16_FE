@@ -26,7 +26,7 @@ const FileInput = (props: FileInputProps) => {
           <>
             <img
               src="/assets/images/check.png"
-              alt=""
+              alt="파일 업로드"
               className="w-12 h-12 mb-5"
             />
             <span className="font-bold">
@@ -43,7 +43,7 @@ const FileInput = (props: FileInputProps) => {
           <>
             <img
               src="/assets/images/upload.png"
-              alt=""
+              alt="파일 업로드 완료"
               className="w-12 h-12 mb-5"
             />
             <label
