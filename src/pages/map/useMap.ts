@@ -30,7 +30,6 @@ function useMap<T>(
       }).then((res) => res.json()),
     {
       onSuccess: (data) => {
-        setLoading(false);
         if (data.success === false) {
           throw new Error(data.error.message);
         }
@@ -46,6 +45,7 @@ function useMap<T>(
 
     const onLoadKakaoMap = () => {
       if (!containerRef.current || !kakao) return;
+      setLoading(false);
       window.kakao.maps.load(() => {
         setMap(
           new window.kakao.maps.Map(containerRef.current, {

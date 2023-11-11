@@ -14,3 +14,9 @@ export interface SearchedPlace {
   isRegistered: boolean;
   shelterId: number;
 }
+
+export interface LoaderProps {
+  loading: boolean;
+  longLoading: boolean;
+  loadingButApiIsOkay: boolean;
+}

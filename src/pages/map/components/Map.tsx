@@ -10,6 +10,8 @@
 import { useState, useEffect, useRef } from 'react';
 import MapList from './MapList';
 import useMap from '../useMap';
+import Loader from './Loader';
+import { LoaderProps } from '../mapType';
 
 declare global {
   interface Window {
@@ -20,6 +22,7 @@ declare global {
 const Map = () => {
   const mapRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState(true);
+  const [longLoading, setLongLoading] = useState(false);
   const { map, displayMarkerByInfo, searchedPlace, mutate, mutateData } =
     useMap(mapRef, setLoading);
   useEffect(() => {
@@ -40,14 +43,25 @@ const Map = () => {
     });
   });
 
+  setTimeout(() => {
+    setLongLoading(true);
+  }, 3000);
+
+  const loaderProps: LoaderProps = {
+    loading,
+    longLoading,
+    loadingButApiIsOkay:
+      longLoading && mutateData?.response?.length === 0 && !loading,
+  };
+
   return (
-    <div className="Map flex flex-col md:flex-row items-center justify-center gap-8">
-      {loading && (
-        <div className="loader bg-black absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
-      )}
-      <div ref={mapRef} className={`w-96 h-96`} />
-      <MapList searchedPlace={searchedPlace} map={map} loading={loading} />
-    </div>
+    <>
+      <Loader {...loaderProps} />
+      <div className="Map flex flex-col md:flex-row items-center justify-center gap-8">
+        <div ref={mapRef} className={`w-96 h-96`} />
+        <MapList searchedPlace={searchedPlace} map={map} loading={loading} />
+      </div>
+    </>
   );
 };
 
