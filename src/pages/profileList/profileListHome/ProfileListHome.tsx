@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import useFetch from 'commons/apis/useFetch';
 import { Profiles } from '../profileListType';
 import VProfileListHome from './VProfileListHome';
-import ProfileList from '../components/ProfileList';
+import ProfileListSkeleton from '../components/ProfileListSkeleton';
 
 const ProfileListHome = () => {
   const [profileListProps, setProfileListProps] = useState<Profiles | null>(
@@ -31,7 +31,7 @@ const ProfileListHome = () => {
   }, [data, isLoading, isError]);
 
   if (isLoading) {
-    return <ProfileList prop="home" />;
+    return <ProfileListSkeleton prop="home" />;
   }
 
   if (isError) {
