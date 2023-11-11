@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import useFetch from 'commons/apis/useFetch';
 import VShelterInfo from './VShelterInfo';
-import ShelterInfoSkeleton from './ShelterInfoSkeleton';
 import { ShelterInfoPageProps } from '../shelterInfoType';
 
 const ShelterInfo = () => {
@@ -17,6 +16,8 @@ const ShelterInfo = () => {
   const { data, isLoading, isError } = useQuery({
     queryKey: ['page', currentPage],
     queryFn: () => useFetch(`/shelter/${shelterId}?page=${currentPage}`),
+    suspense: true,
+    refetchOnMount: true,
   });
 
   useEffect(() => {
@@ -48,10 +49,6 @@ const ShelterInfo = () => {
       setProfiles(props);
     }
   }, [data, isLoading, isError]);
-
-  if (isLoading) {
-    return <ShelterInfoSkeleton />;
-  }
 
   if (isError) {
     return <div>Error: {isError}</div>;
