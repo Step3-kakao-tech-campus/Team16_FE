@@ -6,7 +6,7 @@ import { SearchedPlace } from './mapType';
 
 function useMap<T>(
   containerRef: RefObject<T extends HTMLElement ? T : HTMLElement>,
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+  setLoading: React.Dispatch<React.SetStateAction<string>>,
 ) {
   const { kakao } = window;
   const [map, setMap] = useState<any>();
@@ -45,7 +45,7 @@ function useMap<T>(
 
     const onLoadKakaoMap = () => {
       if (!containerRef.current || !kakao) return;
-      setLoading(false);
+      setLoading('근처 보호소 검색');
       window.kakao.maps.load(() => {
         setMap(
           new window.kakao.maps.Map(containerRef.current, {
@@ -55,6 +55,7 @@ function useMap<T>(
         );
 
         function placesSearchCB(data: any[], status: any) {
+          setLoading('');
           if (status === kakao.maps.services.Status.OK) {
             const bounds = new kakao.maps.LatLngBounds();
 

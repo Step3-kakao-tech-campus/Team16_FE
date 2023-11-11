@@ -21,7 +21,7 @@ declare global {
 
 const Map = () => {
   const mapRef = useRef<HTMLDivElement>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState('지도 로딩');
   const [longLoading, setLongLoading] = useState(false);
   const { map, displayMarkerByInfo, searchedPlace, mutate, mutateData } =
     useMap(mapRef, setLoading);
@@ -45,7 +45,7 @@ const Map = () => {
 
   setTimeout(() => {
     setLongLoading(true);
-  }, 3000);
+  }, 5000);
 
   const loaderProps: LoaderProps = {
     loading,
@@ -59,7 +59,7 @@ const Map = () => {
       <Loader {...loaderProps} />
       <div className="Map flex flex-col md:flex-row items-center justify-center gap-8">
         <div ref={mapRef} className={`w-96 h-96`} />
-        <MapList searchedPlace={searchedPlace} map={map} loading={loading} />
+        <MapList searchedPlace={searchedPlace} map={map} />
       </div>
     </>
   );

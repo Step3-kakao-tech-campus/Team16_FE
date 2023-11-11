@@ -16,7 +16,7 @@ export interface SearchedPlace {
 }
 
 export interface LoaderProps {
-  loading: boolean;
+  loading: string;
   longLoading: boolean;
   loadingButApiIsOkay: boolean;
 }
