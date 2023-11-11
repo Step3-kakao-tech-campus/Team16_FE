@@ -5,7 +5,7 @@ COPY . .
 RUN npm ci
 RUN npm install -g serve
 
-ENV REACT_APP_URI "https://k4b619f06d4c1a.user-app.krampoline.com/api"
+ENV REACT_APP_URI "https://k6958d08a6ee5a.user-app.krampoline.com/api"
 ENV REACT_APP_KAKAO_KEY "415e174a89b3ef7ce97cb74dabe90a4d"
 
 ENV NODE_OPTIONS "--max_old_space_size=4096"
