@@ -137,17 +137,8 @@ const RegisterModal = ({
               X
             </button>
           </div>
-<<<<<<< HEAD
           <span className="text-2xl text-center mx-4 text-brand-color">
             {confirmText}
-=======
-          <span className="text-2xl flex flex-col items-center justify-center text-brand-color">
-            <div>{confirmText}</div>
-            <div className=" text-sm  text-red-400">
-              {' '}
-              (파일 용량을 확인해주세요)
-            </div>
->>>>>>> d67f17287d8563deaa959f9cb3af81a690d6228e
           </span>
           <div className="flex w-2/3 justify-around items-center mt-8 gap-6">
             {confirmTextArray.map((text: string, index: number) => {
