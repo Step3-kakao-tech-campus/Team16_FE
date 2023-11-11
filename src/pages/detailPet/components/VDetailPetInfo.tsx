@@ -6,7 +6,7 @@ const VDetailPetInfo = (data: DetailPetInfoProps) => {
     <div className="flex flex-col items-center">
       <h2 className="text-3xl w-full mb-10">{data.name}</h2>
       <div className="flex flex-col items-center text-sm md:text-base">
-        <div className="flex h-14 justify-around">
+        <div className="flex py-7 justify-around">
           <div className="flex">
             <span className="w-16 block font-bold">나이</span>
             <span className="w-20 block">{data.age}</span>
@@ -41,7 +41,7 @@ const VDetailPetInfo = (data: DetailPetInfoProps) => {
           </div>
         </div>
 
-        <div className="flex h-14 justify-around">
+        <div className="flex py-7 justify-around">
           <div className="flex">
             <span className="w-16 block font-bold">백신접종</span>
             <span className="w-20 block">{data.vaccinationStatus}</span>
@@ -52,7 +52,7 @@ const VDetailPetInfo = (data: DetailPetInfoProps) => {
           </div>
         </div>
 
-        <div className="flex h-14 justify-around">
+        <div className="flex py-7 justify-around">
           <div className="flex">
             <span className="w-16 block font-bold">입양 여부</span>
             <span className="w-20 block">{data.adoptionStatus}</span>
@@ -63,10 +63,14 @@ const VDetailPetInfo = (data: DetailPetInfoProps) => {
           </div>
         </div>
 
-        <div className="hidden md:flex w-full h-10 mb-10">
+        <div className="hidden py-7 md:flex justify-around">
           <div className="flex">
             <span className="w-16 block font-bold">연락처</span>
             <span className="w-36 block">{data.shelterInfo.contact}</span>
+          </div>
+          <div className="flex">
+            <span className="w-20 block font-bold"></span>
+            <span className="w-20 block"></span>
           </div>
         </div>
 
