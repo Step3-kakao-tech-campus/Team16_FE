@@ -5,17 +5,13 @@ import ProfileListHome from './ProfileListHome';
 
 const ProfileListPage = () => {
   return (
-    <Suspense
-      fallback={
-        <div className="w-screen h-screen flex items-center justify-center">
-          <ClipLoader color="black" loading={true} size={50} />
-        </div>
-      }
-    >
-      <ErrorBoundary>
+    <ErrorBoundary>
+      <Suspense
+        fallback={<ClipLoader className="absolute top-[50%] left-{50%}" />}
+      >
         <ProfileListHome />
-      </ErrorBoundary>
-    </Suspense>
+      </Suspense>
+    </ErrorBoundary>
   );
 };
 
