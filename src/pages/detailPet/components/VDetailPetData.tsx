@@ -14,9 +14,9 @@ const VDetailPetData = ({
   imageUrl,
 }: VDetailPetDataProps) => {
   return (
-    <div className="flex min-w-[375px] items-center flex-col justify-center md:flex-row">
+    <div className="flex min-w-[375px] p-3 items-center flex-col justify-center md:flex-row">
       <img
-        className="relative w-96 cursor-pointer lg:mr-20 lg:ml-20 lg:w-1/2"
+        className="relative w-96 cursor-pointer p-3 sm:p-10 lg:mr-20 lg:ml-20 lg:w-2/5"
         src={detailPetInfoProps.profileImageUrl}
         alt="유기동물 프로필 사진"
         onClick={handleModalImageClick}

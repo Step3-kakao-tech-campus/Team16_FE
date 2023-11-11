@@ -73,11 +73,13 @@ const Home = () => {
   const categoryAvailable = region !== '전국' || species !== '전체';
 
   return (
-    <div className=" bg-white h-[85vh]">
+    <div className="overflow-auto bg-white h-[85vh]">
       {categoryAvailable && <CategoryBar {...categoryBarProps} />}
       {noData && <HomeNoData species={species} />}
       <VideoMuteIcon muted={muted} opacity={opacity} />
-      <HomeVideoSlider {...homeVideoSliderProps} />
+      <div className="h-[70vh]">
+        <HomeVideoSlider {...homeVideoSliderProps} />
+      </div>
     </div>
   );
 };
