@@ -13,7 +13,9 @@ const VDetailPetInfo = (data: DetailPetInfoProps) => {
           </div>
           <div className="flex">
             <span className="w-20 block font-bold">성별</span>
-            <span className="w-36 block">{data.sex}</span>
+            <span className="w-36 block">
+              {data.sex === 'MALE' ? '수컷' : '암컷'}
+            </span>
           </div>
         </div>
 
