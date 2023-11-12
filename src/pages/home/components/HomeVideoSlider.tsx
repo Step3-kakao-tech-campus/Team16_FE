@@ -49,6 +49,7 @@ const HomeVideoSlider = (props: HomeVideoSliderProps) => {
 
   return (
     <Swiper
+      loop
       className="h-[85vh]"
       modules={[A11y, Autoplay, Mousewheel, Keyboard]}
       spaceBetween={10}
@@ -69,6 +70,7 @@ const HomeVideoSlider = (props: HomeVideoSliderProps) => {
                   <div ref={nextPageRef}></div>
 
                   <Swiper
+                    loop
                     className="h-[70vh]"
                     modules={[A11y]}
                     grabCursor={true}
@@ -113,6 +115,7 @@ const HomeVideoSlider = (props: HomeVideoSliderProps) => {
                 className="flex justify-center items-centerr"
               >
                 <Swiper
+                  loop
                   className="bg-black"
                   modules={[A11y]}
                   grabCursor={true}
